@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CHASUJI Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Pretendard',sans-serif;
+background:#fff;
+color:#111;
+overflow-x:hidden;
+}
+
+section{
+padding:120px 8%;
+}
+
+nav{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+padding:25px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(255,255,255,.8);
+backdrop-filter:blur(20px);
+z-index:1000;
+}
+
+.logo{
+font-size:20px;
+font-weight:700;
+letter-spacing:1px;
+}
+
+.menu{
+display:flex;
+gap:30px;
+}
+
+.menu a{
+text-decoration:none;
+color:#111;
+font-size:14px;
+}
+
+.hero{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+overflow:hidden;
+}
+
+.bg-number{
+position:absolute;
+font-size:28vw;
+font-weight:700;
+color:#f5f5f5;
+pointer-events:none;
+animation:float 12s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-40px);}
+100%{transform:translateY(0);}
+}
+
+.hero-content{
+position:relative;
+z-index:10;
+text-align:center;
+}
+
+.hero-content h1{
+font-size:clamp(50px,8vw,130px);
+font-family:'Space Grotesk';
+line-height:1;
+}
+
+.changing-text{
+height:60px;
+overflow:hidden;
+margin-top:20px;
+}
+
+.changing-text span{
+display:block;
+font-size:28px;
+font-weight:500;
+animation:textslide 9s infinite;
+}
+
+@keyframes textslide{
+0%,20%{
+transform:translateY(0);
+}
+33%,53%{
+transform:translateY(-60px);
+}
+66%,86%{
+transform:translateY(-120px);
+}
+100%{
+transform:translateY(0);
+}
+}
+
+.about{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:80px;
+align-items:center;
+}
+
+.about-img{
+height:600px;
+border-radius:30px;
+overflow:hidden;
+}
+
+.about-img img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
+.about p{
+font-size:18px;
+line-height:1.8;
+color:#555;
+}
+
+.skills{
+display:flex;
+flex-wrap:wrap;
+gap:15px;
+margin-top:30px;
+}
+
+.skill{
+padding:12px 22px;
+background:#111;
+color:#fff;
+border-radius:999px;
+}
+
+.project-title{
+font-size:80px;
+margin-bottom:60px;
+}
+
+.project-list{
+display:grid;
+gap:25px;
+}
+
+.project{
+padding:50px;
+border:1px solid #eee;
+border-radius:30px;
+transition:.4s;
+cursor:pointer;
+}
+
+.project:hover{
+transform:translateY(-10px);
+box-shadow:0 20px 50px rgba(0,0,0,.08);
+}
+
+.project h3{
+font-size:40px;
+margin-bottom:10px;
+}
+
+.project p{
+color:#777;
+}
+
+.gallery{
+columns:3;
+gap:20px;
+}
+
+.gallery img{
+width:100%;
+margin-bottom:20px;
+border-radius:20px;
+}
+
+.contact{
+text-align:center;
+padding:180px 8%;
+}
+
+.contact h2{
+font-size:clamp(60px,10vw,150px);
+line-height:1;
+}
+
+.contact button{
+margin-top:40px;
+padding:18px 40px;
+background:#111;
+color:#fff;
+border:none;
+border-radius:999px;
+cursor:pointer;
+font-size:16px;
+}
+
+@media(max-width:900px){
+
+.about{
+grid-template-columns:1fr;
+}
+
+.gallery{
+columns:1;
+}
+
+.project-title{
+font-size:50px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+<div class="logo">Portfolio</div>
+
+<div class="menu">
+<a href="#">ABOUT</a>
+<a href="#">PROJECT</a>
+<a href="#">WORKS</a>
+<a href="#">CONTACT</a>
+</div>
+</nav>
+
+<section class="hero">
+
+<div class="bg-number">Portfolio</div>
+
+<div class="hero-content">
+
+<h1>SJ*5</h1>
+
+<div class="changing-text">
+<span>웹 디자이너</span>
+<span>UI / UX 디자이너</span>
+<span>디자이너 차수지입니다.</span>
+</div>
+
+</div>
+
+</section>
+
+<section class="about">
+
+<div class="/images/profile.jpg"></div>
+
+<div>
+
+<h2>ABOUT</h2>
+
+<p>
+안녕하세요.
+사용자 경험을 중요하게 생각하는
+웹 디자이너 차수지입니다.
+</p>
+
+<div class="skills">
+<div class="skill">FIGMA</div>
+<div class="skill">PHOTOSHOP</div>
+<div class="skill">ILLUSTRATOR</div>
+<div class="skill">HTML</div>
+<div class="skill">CSS</div>
+<div class="skill">JAVASCRIPT</div>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="project-title">
+SELECTED PROJECTS
+</h2>
+
+<div class="project-list">
+
+<div class="project">
+<h3>01 LUNE</h3>
+<p>Jewelry Shopping Mall Redesign</p>
+</div>
+
+<div class="project">
+<h3>02 COSMETIC</h3>
+<p>Brand Experience Design</p>
+</div>
+
+<div class="project">
+<h3>03 FASHION</h3>
+<p>Editorial Commerce UI</p>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="project-title">
+WORKS
+</h2>
+
+<div class="gallery">
+
+<img src="https://picsum.photos/600/800?1">
+<img src="https://picsum.photos/600/1000?2">
+<img src="https://picsum.photos/600/700?3">
+<img src="https://picsum.photos/600/900?4">
+<img src="https://picsum.photos/600/750?5">
+
+</div>
+
+</section>
+
+<section class="contact">
+
+<h2>
+LET'S WORK<br>
+TOGETHER
+</h2>
+
+<button>
+CONTACT ME
+</button>
+
+</section>
+
+</body>
+</html>
+
+메인만 텍스트들다 없애고 파티클 효과를 적용하고 싶 어
