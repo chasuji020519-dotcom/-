@@ -3,10 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Hero Section</title>
+<title>Portfolio</title>
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+    background:#fff;
+    font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;
+    color:#111;
+    overflow:hidden;
+}
+
 .nav{
     position:fixed;
     top:0;
@@ -36,59 +44,35 @@
     font-size:12px;
     font-weight:500;
     letter-spacing:.08em;
-    transition:.3s;
-}
-
-.menu a:hover{
-    opacity:.35;
-}
-
-@media(max-width:768px){
-
-    .nav{
-        padding:24px;
-    }
-
-    .menu{
-        gap:18px;
-    }
-
-    .menu a{
-        font-size:11px;
-    }
-}
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    background:#fff;
-    font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;
 }
 
 .hero{
     width:100%;
     height:100vh;
-
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-
-    padding:0 40px;
+    padding:90px 0 38px;
     overflow:hidden;
+}
+
+.hero-content{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    padding:0 40px;
 }
 
 .title{
     width:min(1500px,100%);
-
     display:grid;
     grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
     align-items:center;
-
-    font-size:clamp(80px,8vw,140px);
+    font-size:clamp(70px,7.5vw,130px);
     font-weight:700;
     letter-spacing:-0.08em;
     line-height:1;
@@ -129,105 +113,179 @@ body{
 }
 
 .subtitle{
-    margin-top:34px;
-    font-size:20px;
+    margin-top:30px;
+    font-size:18px;
     color:#8a8a8a;
     letter-spacing:-0.02em;
 }
 
 @keyframes slideText{
+    0%,16%{transform:translateY(0)}
+    22%,38%{transform:translateY(-1.1em)}
+    44%,60%{transform:translateY(-2.2em)}
+    66%,82%{transform:translateY(-3.3em)}
+    88%,100%{transform:translateY(-4.4em)}
+}
 
-    0%,16%{
-        transform:translateY(0);
-    }
+.image-marquee{
+    width:100%;
+    overflow:hidden;
+    padding-bottom:6px;
+}
 
-    22%,38%{
-        transform:translateY(-1.1em);
-    }
+.marquee-track{
+    display:flex;
+    gap:18px;
+    width:max-content;
+    animation:marquee 38s linear infinite;
+}
 
-    44%,60%{
-        transform:translateY(-2.2em);
-    }
+.project{
+    position:relative;
+    flex-shrink:0;
+}
 
-    66%,82%{
-        transform:translateY(-3.3em);
-    }
+.project img{
+    width:260px;
+    height:150px;
+    object-fit:cover;
+    border-radius:20px;
+    display:block;
+}
 
-    88%,100%{
-        transform:translateY(-4.4em);
-    }
+.project span{
+    position:absolute;
+    left:14px;
+    bottom:14px;
+    color:#fff;
+    font-size:12px;
+    font-weight:600;
+    background:rgba(0,0,0,.25);
+    backdrop-filter:blur(18px);
+    padding:7px 11px;
+    border-radius:999px;
+}
 
+@keyframes marquee{
+    from{transform:translateX(0)}
+    to{transform:translateX(-50%)}
 }
 
 @media(max-width:768px){
 
+    body{
+        overflow:hidden;
+    }
+
+    .nav{
+        padding:24px;
+    }
+
+    .menu{
+        gap:15px;
+    }
+
+    .menu a{
+        font-size:10px;
+    }
+
     .hero{
+        padding:80px 0 26px;
+    }
+
+    .hero-content{
         padding:0 24px;
     }
 
     .title{
-        font-size:clamp(48px,11vw,82px);
+        font-size:clamp(44px,11vw,76px);
     }
 
     .subtitle{
-        font-size:16px;
+        font-size:15px;
+        text-align:center;
+        margin-top:24px;
     }
 
-}
+    .project img{
+        width:190px;
+        height:112px;
+        border-radius:16px;
+    }
 
+    .project span{
+        font-size:10px;
+        left:10px;
+        bottom:10px;
+    }
+}
 </style>
 </head>
 
 <body>
+
 <nav class="nav">
     <div class="logo">Portfolio</div>
 
     <div class="menu">
-        <a href="#about">ABOUT</a>
-        <a href="#works">WORKS</a>
-        <a href="#archive">ARCHIVE</a>
-        <a href="#contact">CONTACT</a>
+        <a href="#">ABOUT</a>
+        <a href="#">WORKS</a>
+        <a href="#">ARCHIVE</a>
+        <a href="#">CONTACT</a>
     </div>
 </nav>
+
 <section class="hero">
 
-    <h1 class="title">
+    <div class="hero-content">
+        <h1 class="title">
 
-        <div class="box left">
-            <div class="slider">
-
-                <div class="word">감각을</div>
-                <div class="word">가치를</div>
-                <div class="word">경험을</div>
-                <div class="word">생각을</div>
-
-                <!-- 첫 문구 복제 -->
-                <div class="word">감각을</div>
-
+            <div class="box left">
+                <div class="slider">
+                    <div class="word">감각을</div>
+                    <div class="word">가치를</div>
+                    <div class="word">경험을</div>
+                    <div class="word">생각을</div>
+                    <div class="word">감각을</div>
+                </div>
             </div>
-        </div>
 
-        <span class="fixed">담은</span>
+            <span class="fixed">담은</span>
 
-        <div class="box right">
-            <div class="slider">
-
-                <div class="word">디자인</div>
-                <div class="word">퀄리티</div>
-                <div class="word">임팩트</div>
-                <div class="word">디테일</div>
-
-                <!-- 첫 문구 복제 -->
-                <div class="word">디자인</div>
-
+            <div class="box right">
+                <div class="slider">
+                    <div class="word">디자인</div>
+                    <div class="word">퀄리티</div>
+                    <div class="word">임팩트</div>
+                    <div class="word">디테일</div>
+                    <div class="word">디자인</div>
+                </div>
             </div>
+
+        </h1>
+
+        <p class="subtitle">
+            단 한줄로 나의 브랜드를 현실로 만들어보세요
+        </p>
+    </div>
+
+    <div class="image-marquee">
+        <div class="marquee-track">
+
+            <div class="project"><img src="image1.jpg"><span>Brand Design</span></div>
+            <div class="project"><img src="image2.jpg"><span>Web Design</span></div>
+            <div class="project"><img src="image3.jpg"><span>Editorial</span></div>
+            <div class="project"><img src="image4.jpg"><span>Visual Identity</span></div>
+            <div class="project"><img src="image5.jpg"><span>Creative Work</span></div>
+
+            <div class="project"><img src="image1.jpg"><span>Brand Design</span></div>
+            <div class="project"><img src="image2.jpg"><span>Web Design</span></div>
+            <div class="project"><img src="image3.jpg"><span>Editorial</span></div>
+            <div class="project"><img src="image4.jpg"><span>Visual Identity</span></div>
+            <div class="project"><img src="image5.jpg"><span>Creative Work</span></div>
+
         </div>
-
-    </h1>
-
-    <p class="subtitle">
-        단 한줄로 나의 브랜드를 현실로 만들어보세요
-    </p>
+    </div>
 
 </section>
 
