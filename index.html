@@ -3,427 +3,255 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>CHA SUJI PORTFOLIO</title>
+<title>CHA SUJI Portfolio</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-  font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;
-  background:#fff;
-  color:#111;
-  overflow-x:hidden;
+html {
+  scroll-behavior: smooth;
 }
 
-a{
-  text-decoration:none;
-  color:inherit;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", sans-serif;
+  background: #fff;
+  color: #111;
+  overflow-x: hidden;
 }
 
-.page{
-  width:100%;
-  min-height:100vh;
-  padding:18px 4vw 80px;
+.hero {
+  height: 100vh;
+  padding: 36px 6vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
 }
 
-/* TOP BANNER */
-.top-banner{
-  width:100%;
-  height:92px;
-  background:#11161d;
-  border-radius:22px;
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-  overflow:hidden;
-  margin-bottom:26px;
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 78px;
+  padding: 0 6vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(18px);
 }
 
-.banner-icon{
-  position:absolute;
-  font-size:54px;
-  opacity:.95;
+.logo {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
 }
 
-.banner-icon.left{
-  left:27%;
-  transform:rotate(-12deg);
+.menu {
+  display: flex;
+  gap: 26px;
+  font-size: 13px;
+  color: #555;
 }
 
-.banner-icon.heart{
-  left:31%;
-  top:10px;
-  font-size:42px;
+.hero-inner {
+  max-width: 1200px;
+  width: 100%;
 }
 
-.banner-icon.right{
-  right:16%;
-  opacity:.18;
+.label {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 22px;
 }
 
-.banner-text{
-  text-align:center;
-  line-height:1.4;
+.title {
+  font-size: clamp(58px, 12vw, 170px);
+  line-height: 0.88;
+  letter-spacing: -0.08em;
+  font-weight: 800;
 }
 
-.banner-text p{
-  font-size:17px;
-  color:#9ca3af;
-  margin-bottom:4px;
+.text-roller {
+  height: 1em;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: top;
 }
 
-.banner-text h3{
-  font-size:26px;
-  font-weight:800;
+.text-roller span {
+  display: block;
+  animation: rollText 8s infinite;
 }
 
-/* NAV */
-nav{
-  width:100%;
-  height:76px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 24px;
+@keyframes rollText {
+  0%, 18% { transform: translateY(0); }
+  25%, 43% { transform: translateY(-100%); }
+  50%, 68% { transform: translateY(-200%); }
+  75%, 93% { transform: translateY(-300%); }
+  100% { transform: translateY(0); }
 }
 
-.logo{
-  font-size:32px;
-  font-weight:900;
-  letter-spacing:-1.5px;
+.subtitle {
+  margin-top: 30px;
+  max-width: 560px;
+  font-size: clamp(18px, 2vw, 28px);
+  line-height: 1.5;
+  letter-spacing: -0.04em;
+  color: #9a9a9a;
 }
 
-.logo span{
-  display:inline-block;
-  margin-left:6px;
-  font-size:20px;
-  background:#111;
-  color:white;
-  padding:5px 9px;
-  border-radius:999px;
-  transform:rotate(-8deg);
+.scroll-hint {
+  position: absolute;
+  bottom: 38px;
+  left: 6vw;
+  font-size: 13px;
+  color: #777;
 }
 
-.menu{
-  display:flex;
-  gap:42px;
-  font-size:18px;
-  font-weight:600;
+.pad-section {
+  position: relative;
+  padding: 0 4vw 14vh;
 }
 
-.nav-btns{
-  display:flex;
-  gap:14px;
+.pad {
+  position: sticky;
+  top: 92px;
+  min-height: calc(100vh - 120px);
+  margin-bottom: 16vh;
+  border-radius: 42px;
+  padding: clamp(32px, 6vw, 82px);
+  background: rgba(245,245,245,0.62);
+  border: 1px solid rgba(0,0,0,0.08);
+  backdrop-filter: blur(28px);
+  box-shadow:
+    0 40px 120px rgba(0,0,0,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.nav-btns button{
-  border:1px solid #d8dde6;
-  background:white;
-  padding:15px 22px;
-  border-radius:10px;
-  font-size:16px;
-  font-weight:700;
-  cursor:pointer;
+.pad:nth-child(1) { z-index: 1; }
+.pad:nth-child(2) { z-index: 2; }
+.pad:nth-child(3) { z-index: 3; }
+.pad:nth-child(4) { z-index: 4; }
+
+.pad-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
 }
 
-.nav-btns button.dark{
-  background:#11161d;
-  color:white;
-  border:none;
+.pad-number {
+  font-size: 14px;
+  color: #999;
 }
 
-/* HERO */
-.hero{
-  position:relative;
-  min-height:720px;
-  padding-top:45px;
-  text-align:center;
+.pad h2 {
+  font-size: clamp(42px, 8vw, 120px);
+  line-height: 0.9;
+  letter-spacing: -0.08em;
+  font-weight: 800;
 }
 
-.hero h1{
-  font-size:86px;
-  line-height:1.05;
-  letter-spacing:-5px;
-  font-weight:900;
-  margin-bottom:34px;
+.pad p {
+  margin-top: 26px;
+  max-width: 620px;
+  font-size: clamp(17px, 2vw, 25px);
+  line-height: 1.55;
+  color: #777;
+  letter-spacing: -0.04em;
 }
 
-.hero p{
-  font-size:24px;
-  color:#68707d;
-  font-weight:500;
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 40px;
 }
 
-/* CENTER CARD */
-.prompt-card{
-  width:min(880px,82vw);
-  height:230px;
-  background:white;
-  border:3px solid #747d8c;
-  border-radius:22px;
-  margin:80px auto 0;
-  text-align:left;
-  padding:28px;
-  position:relative;
-  z-index:5;
-  box-shadow:0 30px 70px rgba(0,0,0,.12);
+.tag {
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(0,0,0,0.08);
+  font-size: 14px;
+  color: #333;
 }
 
-.prompt-title{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-size:19px;
-  font-weight:800;
-  margin-bottom:26px;
+.work-grid {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
 }
 
-.prompt-title .mark{
-  width:28px;
-  height:28px;
-  border-radius:9px;
-  background:#111;
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:14px;
-  transform:rotate(-8deg);
+.work-card {
+  min-height: 210px;
+  padding: 24px;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.prompt-card textarea{
-  width:100%;
-  height:95px;
-  border:none;
-  outline:none;
-  resize:none;
-  font-size:22px;
-  color:#8a93a3;
-  line-height:1.55;
-  font-family:inherit;
+.work-card strong {
+  font-size: 22px;
+  letter-spacing: -0.05em;
 }
 
-.prompt-bottom{
-  position:absolute;
-  right:24px;
-  bottom:22px;
-  color:#747d8c;
-  font-size:17px;
+.work-card small {
+  color: #888;
+  line-height: 1.5;
 }
 
-.send{
-  display:inline-flex;
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  background:#f1f3f6;
-  align-items:center;
-  justify-content:center;
-  margin-left:8px;
+.contact {
+  font-size: clamp(32px, 6vw, 88px);
+  letter-spacing: -0.07em;
+  line-height: 1.05;
+  font-weight: 800;
 }
 
-/* SIDE PREVIEW */
-.preview{
-  position:absolute;
-  width:270px;
-  height:190px;
-  border-radius:14px;
-  background:#f4f4f4;
-  box-shadow:0 20px 40px rgba(0,0,0,.12);
-  overflow:hidden;
-  top:390px;
-  opacity:.88;
+.footer {
+  padding: 80px 6vw;
+  color: #999;
+  font-size: 13px;
 }
 
-.preview.left{
-  left:-70px;
-  transform:rotate(2deg);
-}
-
-.preview.right{
-  right:-60px;
-  transform:rotate(-2deg);
-}
-
-.preview-inner{
-  width:100%;
-  height:100%;
-  padding:18px;
-}
-
-.pixel-title{
-  font-size:42px;
-  font-weight:900;
-  line-height:.9;
-  color:#ff3da4;
-  background:repeating-linear-gradient(
-    0deg,
-    #154b13 0 28px,
-    #fff 28px 34px
-  );
-  padding:18px;
-  height:100%;
-}
-
-.clean-preview{
-  background:linear-gradient(135deg,#fff,#eceff3);
-  height:100%;
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:14px;
-  letter-spacing:7px;
-  color:#333;
-}
-
-/* FEATURES */
-.features{
-  display:flex;
-  justify-content:center;
-  gap:60px;
-  margin-top:42px;
-  color:#77808e;
-  font-size:16px;
-  font-weight:600;
-}
-
-.features span{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.features b{
-  font-size:22px;
-}
-
-/* SECTIONS */
-.section{
-  padding:120px 8vw;
-}
-
-.section-title{
-  font-size:52px;
-  letter-spacing:-2px;
-  margin-bottom:20px;
-}
-
-.section-desc{
-  font-size:19px;
-  color:#6b7280;
-  margin-bottom:50px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:24px;
-}
-
-.card{
-  min-height:260px;
-  border-radius:24px;
-  background:#f6f7f9;
-  padding:30px;
-  transition:.35s;
-}
-
-.card:hover{
-  transform:translateY(-10px);
-  box-shadow:0 25px 50px rgba(0,0,0,.1);
-}
-
-.card h3{
-  font-size:26px;
-  margin-bottom:14px;
-}
-
-.card p{
-  color:#6b7280;
-  line-height:1.7;
-}
-
-/* FLOAT BUTTON */
-.chat{
-  position:fixed;
-  right:34px;
-  bottom:34px;
-  width:72px;
-  height:72px;
-  border-radius:50%;
-  background:#f3c4ff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:34px;
-  box-shadow:0 15px 35px rgba(0,0,0,.18);
-  z-index:50;
-}
-
-/* MOBILE */
-@media(max-width:900px){
-  .menu{
-    display:none;
+@media (max-width: 768px) {
+  .menu {
+    display: none;
   }
 
-  nav{
-    padding:0 4px;
+  .hero {
+    padding: 30px 5vw;
   }
 
-  .nav-btns button:first-child{
-    display:none;
+  .pad-section {
+    padding: 0 3vw 10vh;
   }
 
-  .hero h1{
-    font-size:52px;
-    letter-spacing:-3px;
+  .pad {
+    top: 84px;
+    border-radius: 30px;
+    min-height: calc(100vh - 105px);
   }
 
-  .hero p{
-    font-size:18px;
+  .pad-top {
+    flex-direction: column;
   }
 
-  .prompt-card{
-    width:94vw;
-    height:220px;
-    padding:22px;
-  }
-
-  .prompt-card textarea{
-    font-size:18px;
-  }
-
-  .preview{
-    display:none;
-  }
-
-  .features{
-    flex-direction:column;
-    gap:18px;
-    align-items:center;
-  }
-
-  .grid{
-    grid-template-columns:1fr;
-  }
-
-  .top-banner{
-    height:78px;
-  }
-
-  .banner-text h3{
-    font-size:19px;
-  }
-
-  .banner-text p{
-    font-size:14px;
+  .work-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>
@@ -431,147 +259,144 @@ nav{
 
 <body>
 
-<div class="page">
+<nav class="nav">
+  <div class="logo">CHA SUJI</div>
+  <div class="menu">
+    <span>ABOUT</span>
+    <span>SKILLS</span>
+    <span>WORK</span>
+    <span>CONTACT</span>
+  </div>
+</nav>
 
-  <div class="top-banner">
-    <div class="banner-icon left">🎁</div>
-    <div class="banner-icon heart">💗</div>
-    <div class="banner-icon right">›</div>
-    <div class="banner-text">
-      <p>나만의 감각을 담은 웹 포트폴리오</p>
-      <h3>깔끔하지만 기억에 남는 디자인</h3>
-    </div>
+<section class="hero">
+  <div class="hero-inner">
+    <div class="label">PORTFOLIO / WEB DESIGN / VISUAL</div>
+
+    <h1 class="title">
+      CHA SUJI<br>
+      <span class="text-roller">
+        <span>
+          PORTFOLIO<br>
+          WEB DESIGN<br>
+          VISUAL WORK<br>
+          CREATIVE
+        </span>
+      </span>
+    </h1>
+
+    <p class="subtitle">
+      깔끔하지만 기억에 남는 화면을 디자인합니다.
+      사용자가 보기 편하고, 브랜드의 분위기가 느껴지는 웹을 만듭니다.
+    </p>
   </div>
 
-  <nav>
-    <div class="logo">suji<span>portfolio</span></div>
+  <div class="scroll-hint">Scroll to explore ↓</div>
+</section>
 
-    <div class="menu">
-      <a href="#about">소개</a>
-      <a href="#work">작업</a>
-      <a href="#skill">스킬</a>
-      <a href="#contact">연락</a>
+<section class="pad-section">
+
+  <article class="pad">
+    <div>
+      <div class="pad-top">
+        <span class="pad-number">01 / ABOUT ME</span>
+        <span class="pad-number">CHA SUJI PORTFOLIO</span>
+      </div>
+
+      <h2>ABOUT<br>ME</h2>
+      <p>
+        저는 감각적인 비주얼과 정리된 구조를 좋아하는 디자이너입니다.
+        단순히 예쁜 화면보다, 보는 사람이 쉽게 이해하고 오래 기억하는 디자인을 목표로 합니다.
+      </p>
     </div>
 
-    <div class="nav-btns">
-      <button>Resume</button>
-      <button class="dark">Contact</button>
+    <div class="tags">
+      <span class="tag">Clean Design</span>
+      <span class="tag">Web Design</span>
+      <span class="tag">Visual Direction</span>
+      <span class="tag">Portfolio</span>
     </div>
-  </nav>
+  </article>
 
-  <section class="hero">
-    <h1>디자인이 쉬운<br>포트폴리오</h1>
-    <p>한눈에 보이는 소개, 작업물, 감각적인 첫인상</p>
+  <article class="pad">
+    <div>
+      <div class="pad-top">
+        <span class="pad-number">02 / SKILLS</span>
+        <span class="pad-number">DESIGN TOOLKIT</span>
+      </div>
 
-    <div class="preview left">
-      <div class="preview-inner">
-        <div class="pixel-title">
-          CRE<br>ATIVE<br>WORK
+      <h2>SKILLS</h2>
+      <p>
+        포트폴리오 작업에 필요한 화면 구성, 이미지 보정, 상세페이지 디자인,
+        웹 레이아웃 기획을 중심으로 작업합니다.
+      </p>
+    </div>
+
+    <div class="tags">
+      <span class="tag">Photoshop</span>
+      <span class="tag">Figma</span>
+      <span class="tag">HTML</span>
+      <span class="tag">CSS</span>
+      <span class="tag">Brand Mood</span>
+    </div>
+  </article>
+
+  <article class="pad">
+    <div>
+      <div class="pad-top">
+        <span class="pad-number">03 / PORTFOLIO</span>
+        <span class="pad-number">SELECTED WORK</span>
+      </div>
+
+      <h2>WORK</h2>
+      <p>
+        작업물은 카테고리별로 정리할 수 있습니다.
+        쇼핑몰 리디자인, 상세페이지, 배너, 개인 프로젝트를 담아보세요.
+      </p>
+
+      <div class="work-grid">
+        <div class="work-card">
+          <strong>Shopping Mall</strong>
+          <small>주얼리 쇼핑몰 리디자인 / 메인페이지 / 상세페이지</small>
+        </div>
+
+        <div class="work-card">
+          <strong>Banner Design</strong>
+          <small>프로모션 배너 / SNS 콘텐츠 / 이벤트 디자인</small>
+        </div>
+
+        <div class="work-card">
+          <strong>Web Concept</strong>
+          <small>브랜드형 웹사이트 / 포트폴리오 메인 디자인</small>
         </div>
       </div>
     </div>
+  </article>
 
-    <div class="preview right">
-      <div class="preview-inner">
-        <div class="clean-preview">PROJECT</div>
-      </div>
-    </div>
-
-    <div class="prompt-card">
-      <div class="prompt-title">
-        <div class="mark">S</div>
-        CHA SUJI PORTFOLIO
+  <article class="pad">
+    <div>
+      <div class="pad-top">
+        <span class="pad-number">04 / CONTACT</span>
+        <span class="pad-number">LET'S CONNECT</span>
       </div>
 
-      <textarea readonly>감각적인 웹디자인과 브랜드 무드를 시각적으로 표현합니다.
-포트폴리오, 상세페이지, 콘텐츠 디자인을 중심으로 작업합니다.</textarea>
-
-      <div class="prompt-bottom">
-        2026 portfolio
-        <span class="send">↑</span>
-      </div>
+      <h2>CONTACT</h2>
+      <p>
+        함께 작업하고 싶은 프로젝트가 있다면 편하게 연락 주세요.
+      </p>
     </div>
 
-    <div class="features">
-      <span><b>✦</b> 심플한 레이아웃</span>
-      <span><b>⏱</b> 빠르게 보는 작업물</span>
-      <span><b>▣</b> 모바일 반응형 지원</span>
+    <div class="contact">
+      chasuji020519<br>
+      @gmail.com
     </div>
-  </section>
+  </article>
 
-</div>
-
-<section class="section" id="about">
-  <h2 class="section-title">About Me</h2>
-  <p class="section-desc">디자인을 보기 좋게 정리하고, 브랜드 분위기에 맞게 표현하는 것을 좋아합니다.</p>
-
-  <div class="grid">
-    <div class="card">
-      <h3>Brand Mood</h3>
-      <p>깔끔하고 감각적인 무드로 브랜드의 첫인상을 정리합니다.</p>
-    </div>
-    <div class="card">
-      <h3>Web Design</h3>
-      <p>홈페이지, 랜딩페이지, 포트폴리오 화면을 보기 쉽게 구성합니다.</p>
-    </div>
-    <div class="card">
-      <h3>Visual Content</h3>
-      <p>SNS, 상세페이지, 배너 등 시각 콘텐츠를 제작합니다.</p>
-    </div>
-  </div>
 </section>
 
-<section class="section" id="work">
-  <h2 class="section-title">Selected Works</h2>
-  <p class="section-desc">작업물 카테고리를 나눠 포트폴리오처럼 보여줄 수 있어요.</p>
-
-  <div class="grid">
-    <div class="card">
-      <h3>01. Web</h3>
-      <p>포트폴리오 사이트 / 브랜드 사이트 / 랜딩페이지</p>
-    </div>
-    <div class="card">
-      <h3>02. Shopping</h3>
-      <p>쇼핑몰 메인 / 상세페이지 / 제품 배너</p>
-    </div>
-    <div class="card">
-      <h3>03. Graphic</h3>
-      <p>포스터 / SNS 콘텐츠 / 카드뉴스 디자인</p>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="skill">
-  <h2 class="section-title">Skills</h2>
-  <p class="section-desc">디자인부터 간단한 웹 구현까지 연결합니다.</p>
-
-  <div class="grid">
-    <div class="card">
-      <h3>Photoshop</h3>
-      <p>이미지 보정, 누끼, 상세페이지 그래픽 작업</p>
-    </div>
-    <div class="card">
-      <h3>Figma</h3>
-      <p>웹 화면 설계, UI 디자인, 레이아웃 정리</p>
-    </div>
-    <div class="card">
-      <h3>HTML / CSS</h3>
-      <p>간단한 반응형 웹페이지 구현</p>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="contact">
-  <h2 class="section-title">Contact</h2>
-  <p class="section-desc">함께 작업하고 싶은 프로젝트가 있다면 연락 주세요.</p>
-
-  <div class="card">
-    <h3>Email</h3>
-    <p>your-email@example.com</p>
-  </div>
-</section>
-
-<div class="chat">🎧</div>
+<footer class="footer">
+  © 2026 CHA SUJI PORTFOLIO
+</footer>
 
 </body>
 </html>
