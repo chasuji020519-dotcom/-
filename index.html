@@ -17,6 +17,7 @@
 body{
     background:#fff;
     font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;
+    overflow:hidden;
 }
 
 .hero{
@@ -28,20 +29,20 @@ body{
     justify-content:center;
     align-items:center;
 
-    padding:0 24px;
+    padding:0 32px;
 }
 
 .title{
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:18px;
+    gap:24px;
 
-    .title{
-    font-size:clamp(60px,8vw,140px);
+    font-size:clamp(72px,8vw,140px);
     font-weight:700;
-    letter-spacing:-0.06em;
+    letter-spacing:-0.08em;
     color:#111;
+    line-height:1;
 }
 
 .fixed{
@@ -49,12 +50,12 @@ body{
 }
 
 .box{
-    height:1.15em;
+    height:1.1em;
     overflow:hidden;
 }
 
 .left{
-    width:5em;
+    width:5.2em;
 }
 
 .right{
@@ -64,12 +65,12 @@ body{
 .slider{
     display:flex;
     flex-direction:column;
-    animation:slideText 8s infinite;
+    animation:slideText 8s infinite cubic-bezier(.76,0,.24,1);
 }
 
 .word{
-    height:1.15em;
-    line-height:1.15em;
+    height:1.1em;
+    line-height:1.1em;
     white-space:nowrap;
 }
 
@@ -82,14 +83,13 @@ body{
 }
 
 .subtitle{
-    margin-top:28px;
+    margin-top:32px;
 
     font-size:24px;
-    color:#8f8f8f;
-
     font-weight:400;
-    letter-spacing:-0.02em;
 
+    color:#8a8a8a;
+    letter-spacing:-0.03em;
     text-align:center;
 }
 
@@ -100,15 +100,15 @@ body{
     }
 
     25%,45%{
-        transform:translateY(-1.15em);
+        transform:translateY(-1.1em);
     }
 
     50%,70%{
-        transform:translateY(-2.3em);
+        transform:translateY(-2.2em);
     }
 
     75%,95%{
-        transform:translateY(-3.45em);
+        transform:translateY(-3.3em);
     }
 
     100%{
@@ -120,12 +120,12 @@ body{
 @media(max-width:768px){
 
     .title{
-        gap:10px;
-        font-size:clamp(28px,8vw,48px);
+        font-size:clamp(42px,10vw,72px);
+        gap:12px;
     }
 
     .left{
-        width:4.8em;
+        width:5em;
     }
 
     .right{
@@ -133,7 +133,8 @@ body{
     }
 
     .subtitle{
-        font-size:15px;
+        font-size:18px;
+        margin-top:20px;
     }
 
 }
