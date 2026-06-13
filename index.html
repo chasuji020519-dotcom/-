@@ -12,405 +12,418 @@
   box-sizing:border-box;
 }
 
-html{
-  scroll-behavior:smooth;
-}
-
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;
-  background:#f7f7f4;
+  background:#fff;
   color:#111;
   overflow-x:hidden;
 }
 
 a{
-  color:inherit;
   text-decoration:none;
+  color:inherit;
 }
 
-nav{
-  position:fixed;
-  top:0;
-  left:0;
+.page{
   width:100%;
-  padding:28px 6vw;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  z-index:999;
-  font-size:12px;
-  letter-spacing:.16em;
-  mix-blend-mode:difference;
+  min-height:100vh;
+  padding:18px 4vw 80px;
+}
+
+/* TOP BANNER */
+.top-banner{
+  width:100%;
+  height:92px;
+  background:#11161d;
+  border-radius:22px;
   color:white;
-}
-
-.nav-menu{
   display:flex;
-  gap:28px;
-}
-
-.hero{
-  height:100vh;
-  padding:0 6vw;
-  display:flex;
-  flex-direction:column;
+  align-items:center;
   justify-content:center;
   position:relative;
+  overflow:hidden;
+  margin-bottom:26px;
 }
 
-.hero-top{
+.banner-icon{
+  position:absolute;
+  font-size:54px;
+  opacity:.95;
+}
+
+.banner-icon.left{
+  left:27%;
+  transform:rotate(-12deg);
+}
+
+.banner-icon.heart{
+  left:31%;
+  top:10px;
+  font-size:42px;
+}
+
+.banner-icon.right{
+  right:16%;
+  opacity:.18;
+}
+
+.banner-text{
+  text-align:center;
+  line-height:1.4;
+}
+
+.banner-text p{
+  font-size:17px;
+  color:#9ca3af;
+  margin-bottom:4px;
+}
+
+.banner-text h3{
+  font-size:26px;
+  font-weight:800;
+}
+
+/* NAV */
+nav{
+  width:100%;
+  height:76px;
   display:flex;
+  align-items:center;
   justify-content:space-between;
-  align-items:flex-start;
-  margin-bottom:40px;
+  padding:0 24px;
 }
 
-.hero-name{
-  font-size:14px;
-  letter-spacing:.18em;
+.logo{
+  font-size:32px;
+  font-weight:900;
+  letter-spacing:-1.5px;
 }
 
-.hero-year{
-  font-size:14px;
+.logo span{
+  display:inline-block;
+  margin-left:6px;
+  font-size:20px;
+  background:#111;
+  color:white;
+  padding:5px 9px;
+  border-radius:999px;
+  transform:rotate(-8deg);
+}
+
+.menu{
+  display:flex;
+  gap:42px;
+  font-size:18px;
+  font-weight:600;
+}
+
+.nav-btns{
+  display:flex;
+  gap:14px;
+}
+
+.nav-btns button{
+  border:1px solid #d8dde6;
+  background:white;
+  padding:15px 22px;
+  border-radius:10px;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.nav-btns button.dark{
+  background:#11161d;
+  color:white;
+  border:none;
+}
+
+/* HERO */
+.hero{
+  position:relative;
+  min-height:720px;
+  padding-top:45px;
+  text-align:center;
 }
 
 .hero h1{
-  font-size:clamp(64px,13vw,190px);
-  line-height:.78;
-  letter-spacing:-.09em;
-  font-weight:700;
+  font-size:86px;
+  line-height:1.05;
+  letter-spacing:-5px;
+  font-weight:900;
+  margin-bottom:34px;
 }
 
-.hero-bottom{
-  position:absolute;
-  bottom:42px;
-  left:6vw;
-  right:6vw;
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  font-size:13px;
-  color:#555;
+.hero p{
+  font-size:24px;
+  color:#68707d;
+  font-weight:500;
 }
 
-.hero-desc{
-  max-width:330px;
-  line-height:1.6;
-}
-
-.scroll{
-  letter-spacing:.16em;
-}
-
-/* STACK AREA */
-.stack{
+/* CENTER CARD */
+.prompt-card{
+  width:min(880px,82vw);
+  height:230px;
+  background:white;
+  border:3px solid #747d8c;
+  border-radius:22px;
+  margin:80px auto 0;
+  text-align:left;
+  padding:28px;
   position:relative;
-  height:360vh;
+  z-index:5;
+  box-shadow:0 30px 70px rgba(0,0,0,.12);
 }
 
-.panel{
-  position:sticky;
-  top:0;
-  height:100vh;
-  padding:8vh 6vw;
+.prompt-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:19px;
+  font-weight:800;
+  margin-bottom:26px;
+}
+
+.prompt-title .mark{
+  width:28px;
+  height:28px;
+  border-radius:9px;
+  background:#111;
+  color:white;
   display:flex;
   align-items:center;
   justify-content:center;
+  font-size:14px;
+  transform:rotate(-8deg);
 }
 
-.pad{
+.prompt-card textarea{
   width:100%;
-  height:84vh;
-  border-radius:42px;
-  overflow:hidden;
-  background:#111;
-  color:white;
-  box-shadow:0 30px 80px rgba(0,0,0,.22);
-  transform:scale(.94) translateY(120px);
-  opacity:.4;
-  transition:.8s ease;
-  position:relative;
+  height:95px;
+  border:none;
+  outline:none;
+  resize:none;
+  font-size:22px;
+  color:#8a93a3;
+  line-height:1.55;
+  font-family:inherit;
 }
 
-.panel.active .pad{
-  transform:scale(1) translateY(0);
-  opacity:1;
-}
-
-.panel:nth-child(1){z-index:1;}
-.panel:nth-child(2){z-index:2;}
-.panel:nth-child(3){z-index:3;}
-
-.pad.white{
-  background:#fff;
-  color:#111;
-}
-
-.pad.gray{
-  background:#e9e9e3;
-  color:#111;
-}
-
-.pad-inner{
-  height:100%;
-  padding:clamp(28px,5vw,70px);
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-}
-
-.pad-label{
-  display:flex;
-  justify-content:space-between;
-  font-size:12px;
-  letter-spacing:.16em;
-  color:inherit;
-  opacity:.65;
-}
-
-.pad-title{
-  font-size:clamp(48px,8vw,120px);
-  line-height:.85;
-  letter-spacing:-.08em;
-  font-weight:700;
-}
-
-.pad-text{
-  max-width:560px;
-  font-size:18px;
-  line-height:1.75;
-  word-break:keep-all;
-  opacity:.8;
-}
-
-.info-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
-  margin-top:40px;
-}
-
-.info{
-  border-top:1px solid rgba(255,255,255,.25);
-  padding-top:18px;
-}
-
-.white .info,
-.gray .info{
-  border-top:1px solid rgba(0,0,0,.18);
-}
-
-.info b{
-  display:block;
-  font-size:12px;
-  letter-spacing:.14em;
-  margin-bottom:12px;
-}
-
-.info span{
-  font-size:15px;
-  opacity:.65;
-}
-
-/* WORK */
-.work-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  gap:30px;
-  margin-bottom:36px;
-}
-
-.filter{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-}
-
-.filter button{
-  border:1px solid rgba(0,0,0,.18);
-  background:transparent;
-  padding:10px 18px;
-  border-radius:999px;
-  cursor:pointer;
-  font-size:12px;
-}
-
-.filter button.active{
-  background:#111;
-  color:#fff;
-}
-
-.work-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-
-.work-card{
-  cursor:pointer;
-}
-
-.work-img{
-  height:260px;
-  border-radius:26px;
-  background:#111;
-  overflow:hidden;
-  position:relative;
-}
-
-.work-img::after{
-  content:"";
+.prompt-bottom{
   position:absolute;
-  inset:0;
-  background:
-    linear-gradient(135deg,#111,#444),
-    radial-gradient(circle at 70% 30%,rgba(255,255,255,.25),transparent 30%);
-  transition:.5s ease;
+  right:24px;
+  bottom:22px;
+  color:#747d8c;
+  font-size:17px;
 }
 
-.work-card:hover .work-img::after{
-  transform:scale(1.08);
+.send{
+  display:inline-flex;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#f1f3f6;
+  align-items:center;
+  justify-content:center;
+  margin-left:8px;
 }
 
-.work-card h3{
-  margin-top:16px;
-  font-size:20px;
-  letter-spacing:-.04em;
+/* SIDE PREVIEW */
+.preview{
+  position:absolute;
+  width:270px;
+  height:190px;
+  border-radius:14px;
+  background:#f4f4f4;
+  box-shadow:0 20px 40px rgba(0,0,0,.12);
+  overflow:hidden;
+  top:390px;
+  opacity:.88;
 }
 
-.work-card p{
-  margin-top:6px;
+.preview.left{
+  left:-70px;
+  transform:rotate(2deg);
+}
+
+.preview.right{
+  right:-60px;
+  transform:rotate(-2deg);
+}
+
+.preview-inner{
+  width:100%;
+  height:100%;
+  padding:18px;
+}
+
+.pixel-title{
+  font-size:42px;
+  font-weight:900;
+  line-height:.9;
+  color:#ff3da4;
+  background:repeating-linear-gradient(
+    0deg,
+    #154b13 0 28px,
+    #fff 28px 34px
+  );
+  padding:18px;
+  height:100%;
+}
+
+.clean-preview{
+  background:linear-gradient(135deg,#fff,#eceff3);
+  height:100%;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   font-size:14px;
-  color:#666;
+  letter-spacing:7px;
+  color:#333;
 }
 
-/* CONTACT */
-.contact{
-  min-height:100vh;
-  padding:120px 6vw 50px;
+/* FEATURES */
+.features{
   display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  background:#111;
-  color:white;
+  justify-content:center;
+  gap:60px;
+  margin-top:42px;
+  color:#77808e;
+  font-size:16px;
+  font-weight:600;
 }
 
-.contact h2{
-  font-size:clamp(58px,12vw,180px);
-  line-height:.82;
-  letter-spacing:-.09em;
-}
-
-.contact-bottom{
+.features span{
   display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  gap:40px;
-  margin-top:80px;
+  align-items:center;
+  gap:10px;
 }
 
-.contact-text{
-  max-width:420px;
+.features b{
+  font-size:22px;
+}
+
+/* SECTIONS */
+.section{
+  padding:120px 8vw;
+}
+
+.section-title{
+  font-size:52px;
+  letter-spacing:-2px;
+  margin-bottom:20px;
+}
+
+.section-desc{
+  font-size:19px;
+  color:#6b7280;
+  margin-bottom:50px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+
+.card{
+  min-height:260px;
+  border-radius:24px;
+  background:#f6f7f9;
+  padding:30px;
+  transition:.35s;
+}
+
+.card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 25px 50px rgba(0,0,0,.1);
+}
+
+.card h3{
+  font-size:26px;
+  margin-bottom:14px;
+}
+
+.card p{
+  color:#6b7280;
   line-height:1.7;
-  color:#aaa;
 }
 
-.links{
+/* FLOAT BUTTON */
+.chat{
+  position:fixed;
+  right:34px;
+  bottom:34px;
+  width:72px;
+  height:72px;
+  border-radius:50%;
+  background:#f3c4ff;
   display:flex;
-  gap:18px;
-  flex-wrap:wrap;
-}
-
-.links a{
-  border:1px solid rgba(255,255,255,.25);
-  border-radius:999px;
-  padding:13px 22px;
-  font-size:14px;
-}
-
-footer{
-  margin-top:80px;
-  display:flex;
-  justify-content:space-between;
-  color:#777;
-  font-size:12px;
+  align-items:center;
+  justify-content:center;
+  font-size:34px;
+  box-shadow:0 15px 35px rgba(0,0,0,.18);
+  z-index:50;
 }
 
 /* MOBILE */
-@media(max-width:800px){
+@media(max-width:900px){
+  .menu{
+    display:none;
+  }
+
   nav{
-    padding:22px;
+    padding:0 4px;
   }
 
-  .nav-menu{
-    gap:14px;
-  }
-
-  .hero{
-    padding:0 22px;
+  .nav-btns button:first-child{
+    display:none;
   }
 
   .hero h1{
-    font-size:18vw;
+    font-size:52px;
+    letter-spacing:-3px;
   }
 
-  .hero-bottom{
-    left:22px;
-    right:22px;
+  .hero p{
+    font-size:18px;
+  }
+
+  .prompt-card{
+    width:94vw;
+    height:220px;
+    padding:22px;
+  }
+
+  .prompt-card textarea{
+    font-size:18px;
+  }
+
+  .preview{
+    display:none;
+  }
+
+  .features{
     flex-direction:column;
-    align-items:flex-start;
-    gap:24px;
+    gap:18px;
+    align-items:center;
   }
 
-  .stack{
-    height:auto;
-  }
-
-  .panel{
-    position:relative;
-    height:auto;
-    padding:30px 16px;
-  }
-
-  .pad{
-    height:auto;
-    min-height:82vh;
-    border-radius:30px;
-    transform:none;
-    opacity:1;
-  }
-
-  .pad-inner{
-    min-height:82vh;
-    padding:30px;
-  }
-
-  .info-grid{
+  .grid{
     grid-template-columns:1fr;
   }
 
-  .work-head{
-    flex-direction:column;
-    align-items:flex-start;
+  .top-banner{
+    height:78px;
   }
 
-  .work-grid{
-    grid-template-columns:1fr;
+  .banner-text h3{
+    font-size:19px;
   }
 
-  .contact{
-    padding:90px 22px 36px;
-  }
-
-  .contact-bottom{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  footer{
-    flex-direction:column;
-    gap:10px;
+  .banner-text p{
+    font-size:14px;
   }
 }
 </style>
@@ -418,223 +431,147 @@ footer{
 
 <body>
 
-<nav>
-  <a href="#">CHA SUJI</a>
-  <div class="nav-menu">
-    <a href="#about">ABOUT</a>
-    <a href="#work">WORK</a>
-    <a href="#contact">CONTACT</a>
-  </div>
-</nav>
+<div class="page">
 
-<section class="hero">
-  <div class="hero-top">
-    <div class="hero-name">WEB DESIGNER</div>
-    <div class="hero-year">2026</div>
+  <div class="top-banner">
+    <div class="banner-icon left">🎁</div>
+    <div class="banner-icon heart">💗</div>
+    <div class="banner-icon right">›</div>
+    <div class="banner-text">
+      <p>나만의 감각을 담은 웹 포트폴리오</p>
+      <h3>깔끔하지만 기억에 남는 디자인</h3>
+    </div>
   </div>
 
-  <h1>
-    PORT<br>
-    FOLIO
-  </h1>
+  <nav>
+    <div class="logo">suji<span>portfolio</span></div>
 
-  <div class="hero-bottom">
-    <p class="hero-desc">
-      심플하지만 기억에 남는 화면을 만드는 웹디자인 포트폴리오입니다.
-    </p>
-    <div class="scroll">SCROLL ↓</div>
-  </div>
-</section>
+    <div class="menu">
+      <a href="#about">소개</a>
+      <a href="#work">작업</a>
+      <a href="#skill">스킬</a>
+      <a href="#contact">연락</a>
+    </div>
 
-<section class="stack">
+    <div class="nav-btns">
+      <button>Resume</button>
+      <button class="dark">Contact</button>
+    </div>
+  </nav>
 
-  <div class="panel" id="about">
-    <div class="pad">
-      <div class="pad-inner">
-        <div class="pad-label">
-          <span>01</span>
-          <span>ABOUT ME</span>
-        </div>
+  <section class="hero">
+    <h1>디자인이 쉬운<br>포트폴리오</h1>
+    <p>한눈에 보이는 소개, 작업물, 감각적인 첫인상</p>
 
-        <div>
-          <h2 class="pad-title">
-            Clean<br>
-            but bold.
-          </h2>
-          <p class="pad-text">
-            안녕하세요. 차수지입니다. 깔끔한 레이아웃과 감각적인 분위기를 바탕으로
-            브랜드가 더 선명하게 보이는 웹디자인을 만들고 있습니다.
-          </p>
-
-          <div class="info-grid">
-            <div class="info">
-              <b>NAME</b>
-              <span>CHA SUJI</span>
-            </div>
-            <div class="info">
-              <b>FIELD</b>
-              <span>Web / UI / Visual</span>
-            </div>
-            <div class="info">
-              <b>MOOD</b>
-              <span>Minimal / Modern / Soft</span>
-            </div>
-          </div>
+    <div class="preview left">
+      <div class="preview-inner">
+        <div class="pixel-title">
+          CRE<br>ATIVE<br>WORK
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="panel" id="work">
-    <div class="pad white">
-      <div class="pad-inner">
-        <div class="pad-label">
-          <span>02</span>
-          <span>SELECTED WORK</span>
-        </div>
-
-        <div>
-          <div class="work-head">
-            <h2 class="pad-title">Works</h2>
-
-            <div class="filter">
-              <button class="active" data-filter="all">ALL</button>
-              <button data-filter="web">WEB</button>
-              <button data-filter="brand">BRAND</button>
-              <button data-filter="ui">UI</button>
-            </div>
-          </div>
-
-          <div class="work-grid">
-            <div class="work-card" data-type="web">
-              <div class="work-img"></div>
-              <h3>LUNE Jewelry</h3>
-              <p>Shopping mall redesign</p>
-            </div>
-
-            <div class="work-card" data-type="brand">
-              <div class="work-img"></div>
-              <h3>Brand System</h3>
-              <p>Logo / color / layout</p>
-            </div>
-
-            <div class="work-card" data-type="ui">
-              <div class="work-img"></div>
-              <h3>Mobile Concept</h3>
-              <p>App interface design</p>
-            </div>
-          </div>
-        </div>
+    <div class="preview right">
+      <div class="preview-inner">
+        <div class="clean-preview">PROJECT</div>
       </div>
     </div>
-  </div>
 
-  <div class="panel">
-    <div class="pad gray">
-      <div class="pad-inner">
-        <div class="pad-label">
-          <span>03</span>
-          <span>DIRECTION</span>
-        </div>
+    <div class="prompt-card">
+      <div class="prompt-title">
+        <div class="mark">S</div>
+        CHA SUJI PORTFOLIO
+      </div>
 
-        <div>
-          <h2 class="pad-title">
-            Simple<br>
-            detail.
-          </h2>
-          <p class="pad-text">
-            불필요한 장식보다 여백, 타이포, 이미지의 비율을 중요하게 생각합니다.
-            사용자가 보기 편하고 브랜드의 첫인상이 좋아지는 디자인을 목표로 합니다.
-          </p>
+      <textarea readonly>감각적인 웹디자인과 브랜드 무드를 시각적으로 표현합니다.
+포트폴리오, 상세페이지, 콘텐츠 디자인을 중심으로 작업합니다.</textarea>
 
-          <div class="info-grid">
-            <div class="info">
-              <b>01</b>
-              <span>Clear layout</span>
-            </div>
-            <div class="info">
-              <b>02</b>
-              <span>Soft interaction</span>
-            </div>
-            <div class="info">
-              <b>03</b>
-              <span>Portfolio ready</span>
-            </div>
-          </div>
-        </div>
+      <div class="prompt-bottom">
+        2026 portfolio
+        <span class="send">↑</span>
       </div>
     </div>
-  </div>
 
-</section>
+    <div class="features">
+      <span><b>✦</b> 심플한 레이아웃</span>
+      <span><b>⏱</b> 빠르게 보는 작업물</span>
+      <span><b>▣</b> 모바일 반응형 지원</span>
+    </div>
+  </section>
 
-<section class="contact" id="contact">
-  <div>
-    <h2>
-      LET’S<br>
-      WORK.
-    </h2>
-  </div>
+</div>
 
-  <div class="contact-bottom">
-    <p class="contact-text">
-      포트폴리오를 봐주셔서 감사합니다.
-      더 좋은 디자인과 감각적인 결과물로 성장하겠습니다.
-    </p>
+<section class="section" id="about">
+  <h2 class="section-title">About Me</h2>
+  <p class="section-desc">디자인을 보기 좋게 정리하고, 브랜드 분위기에 맞게 표현하는 것을 좋아합니다.</p>
 
-    <div class="links">
-      <a href="mailto:yourmail@email.com">EMAIL</a>
-      <a href="#">INSTAGRAM</a>
-      <a href="#">NOTION</a>
+  <div class="grid">
+    <div class="card">
+      <h3>Brand Mood</h3>
+      <p>깔끔하고 감각적인 무드로 브랜드의 첫인상을 정리합니다.</p>
+    </div>
+    <div class="card">
+      <h3>Web Design</h3>
+      <p>홈페이지, 랜딩페이지, 포트폴리오 화면을 보기 쉽게 구성합니다.</p>
+    </div>
+    <div class="card">
+      <h3>Visual Content</h3>
+      <p>SNS, 상세페이지, 배너 등 시각 콘텐츠를 제작합니다.</p>
     </div>
   </div>
-
-  <footer>
-    <span>© 2026 CHA SUJI</span>
-    <span>PORTFOLIO SITE</span>
-  </footer>
 </section>
 
-<script>
-const panels = document.querySelectorAll(".panel");
+<section class="section" id="work">
+  <h2 class="section-title">Selected Works</h2>
+  <p class="section-desc">작업물 카테고리를 나눠 포트폴리오처럼 보여줄 수 있어요.</p>
 
-function checkPanels(){
-  const trigger = window.innerHeight * 0.55;
+  <div class="grid">
+    <div class="card">
+      <h3>01. Web</h3>
+      <p>포트폴리오 사이트 / 브랜드 사이트 / 랜딩페이지</p>
+    </div>
+    <div class="card">
+      <h3>02. Shopping</h3>
+      <p>쇼핑몰 메인 / 상세페이지 / 제품 배너</p>
+    </div>
+    <div class="card">
+      <h3>03. Graphic</h3>
+      <p>포스터 / SNS 콘텐츠 / 카드뉴스 디자인</p>
+    </div>
+  </div>
+</section>
 
-  panels.forEach(panel=>{
-    const rect = panel.getBoundingClientRect();
+<section class="section" id="skill">
+  <h2 class="section-title">Skills</h2>
+  <p class="section-desc">디자인부터 간단한 웹 구현까지 연결합니다.</p>
 
-    if(rect.top < trigger && rect.bottom > trigger){
-      panel.classList.add("active");
-    }else{
-      panel.classList.remove("active");
-    }
-  });
-}
+  <div class="grid">
+    <div class="card">
+      <h3>Photoshop</h3>
+      <p>이미지 보정, 누끼, 상세페이지 그래픽 작업</p>
+    </div>
+    <div class="card">
+      <h3>Figma</h3>
+      <p>웹 화면 설계, UI 디자인, 레이아웃 정리</p>
+    </div>
+    <div class="card">
+      <h3>HTML / CSS</h3>
+      <p>간단한 반응형 웹페이지 구현</p>
+    </div>
+  </div>
+</section>
 
-window.addEventListener("scroll", checkPanels);
-window.addEventListener("load", checkPanels);
+<section class="section" id="contact">
+  <h2 class="section-title">Contact</h2>
+  <p class="section-desc">함께 작업하고 싶은 프로젝트가 있다면 연락 주세요.</p>
 
-const filterBtns = document.querySelectorAll(".filter button");
-const workCards = document.querySelectorAll(".work-card");
+  <div class="card">
+    <h3>Email</h3>
+    <p>your-email@example.com</p>
+  </div>
+</section>
 
-filterBtns.forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    filterBtns.forEach(b=>b.classList.remove("active"));
-    btn.classList.add("active");
-
-    const filter = btn.dataset.filter;
-
-    workCards.forEach(card=>{
-      if(filter === "all" || card.dataset.type === filter){
-        card.style.display = "block";
-      }else{
-        card.style.display = "none";
-      }
-    });
-  });
-});
-</script>
+<div class="chat">🎧</div>
 
 </body>
 </html>
