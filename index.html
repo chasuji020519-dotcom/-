@@ -6,413 +6,411 @@
 <title>CHA SUJI PORTFOLIO</title>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-html {
-  scroll-behavior: smooth;
+html{
+  scroll-behavior:smooth;
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", sans-serif;
-  background: #fff;
-  color: #050505;
-  overflow-x: hidden;
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;
+  background:#fff;
+  color:#111;
+  overflow-x:hidden;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+::-webkit-scrollbar{
+  width:0;
 }
 
 /* NAV */
-.nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 84px;
-  padding: 0 9.5vw;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(255,255,255,0.82);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-  z-index: 100;
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  padding:24px 7vw;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:100;
+  mix-blend-mode:difference;
+  color:white;
 }
 
-.logo {
-  font-size: 25px;
-  font-weight: 900;
-  letter-spacing: -1.4px;
+.logo{
+  font-size:13px;
+  letter-spacing:.16em;
+  font-weight:600;
 }
 
-.menu {
-  display: flex;
-  gap: 42px;
-  font-size: 16px;
-  font-weight: 700;
+.menu{
+  display:flex;
+  gap:28px;
+  font-size:12px;
+  letter-spacing:.12em;
 }
 
-.menu a {
-  opacity: 0.78;
+/* BACKGROUND GLOW */
+.glow{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(207,226,255,.8), transparent 28%),
+    radial-gradient(circle at 80% 15%, rgba(255,220,245,.65), transparent 25%),
+    radial-gradient(circle at 50% 90%, rgba(220,255,244,.7), transparent 30%),
+    #fff;
 }
 
-.menu a:hover {
-  opacity: 1;
+.orb{
+  position:absolute;
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  filter:blur(50px);
+  opacity:.7;
+  animation:float 10s infinite alternate ease-in-out;
 }
 
-/* MAIN */
-.hero {
-  width: 100%;
-  min-height: 100vh;
-  padding: 160px 9.5vw 90px;
-  display: flex;
-  align-items: center;
-  position: relative;
+.orb.one{
+  background:#d7e8ff;
+  top:12%;
+  left:8%;
 }
 
-.hero-inner {
-  width: 100%;
+.orb.two{
+  background:#ffe0f4;
+  top:18%;
+  right:10%;
+  animation-delay:2s;
 }
 
-.label {
-  display: inline-flex;
-  padding: 9px 16px;
-  border: 1px solid #111;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 800;
-  margin-bottom: 26px;
+.orb.three{
+  background:#e3fff5;
+  bottom:8%;
+  left:38%;
+  animation-delay:4s;
 }
 
-.hero-title {
-  font-size: clamp(68px, 12vw, 180px);
-  line-height: 0.88;
-  letter-spacing: -8px;
-  font-weight: 950;
+@keyframes float{
+  from{
+    transform:translateY(0) translateX(0) scale(1);
+  }
+  to{
+    transform:translateY(-40px) translateX(35px) scale(1.08);
+  }
 }
 
-.hero-bottom {
-  margin-top: 54px;
-  display: flex;
-  justify-content: space-between;
-  gap: 30px;
-  max-width: 1100px;
+/* HERO */
+.hero{
+  min-height:100vh;
+  padding:0 7vw;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
 }
 
-.hero-desc {
-  max-width: 620px;
-  font-size: 20px;
-  line-height: 1.8;
-  font-weight: 600;
-  color: #333;
+.hero-inner{
+  width:100%;
+  max-width:1200px;
 }
 
-.scroll-text {
-  font-size: 14px;
-  font-weight: 800;
-  writing-mode: vertical-rl;
-  letter-spacing: 2px;
+.small-title{
+  font-size:13px;
+  letter-spacing:.22em;
+  margin-bottom:28px;
+  color:#555;
 }
 
-/* STACK SECTION */
-.stack-section {
-  position: relative;
-  padding: 0 9.5vw 120px;
+.main-title{
+  font-size:clamp(56px,11vw,160px);
+  line-height:.88;
+  letter-spacing:-.08em;
+  font-weight:700;
 }
 
-.stack-title {
-  position: sticky;
-  top: 110px;
-  padding: 40px 0 20px;
-  font-size: clamp(58px, 9vw, 130px);
-  line-height: 0.92;
-  letter-spacing: -6px;
-  font-weight: 950;
-  z-index: 1;
+.rotating{
+  height:42px;
+  margin-top:32px;
+  overflow:hidden;
+  font-size:clamp(18px,3vw,34px);
+  letter-spacing:-.04em;
+  color:#222;
 }
 
-.pad-wrap {
-  position: relative;
-  margin-top: 40px;
+.rotating span{
+  display:block;
+  height:42px;
+  animation:slideText 8s infinite;
 }
 
-.pad {
-  position: sticky;
-  top: 160px;
-  min-height: 520px;
-  margin-bottom: 120px;
-  border-radius: 44px;
-  background: #f5f5f5;
-  border: 1px solid rgba(0,0,0,0.08);
-  box-shadow: 0 30px 80px rgba(0,0,0,0.08);
-  padding: 54px;
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 50px;
-  overflow: hidden;
+@keyframes slideText{
+  0%,20%{transform:translateY(0);}
+  25%,45%{transform:translateY(-42px);}
+  50%,70%{transform:translateY(-84px);}
+  75%,95%{transform:translateY(-126px);}
+  100%{transform:translateY(0);}
 }
 
-.pad:nth-child(1) {
-  z-index: 2;
+.scroll-mark{
+  position:absolute;
+  bottom:34px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:11px;
+  letter-spacing:.18em;
+  color:#555;
 }
 
-.pad:nth-child(2) {
-  z-index: 3;
-  background: #eeeeee;
+/* STACK SECTIONS */
+.stack-wrap{
+  position:relative;
 }
 
-.pad:nth-child(3) {
-  z-index: 4;
-  background: #111;
-  color: #fff;
+.panel{
+  min-height:100vh;
+  position:sticky;
+  top:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:80px 7vw;
 }
 
-.pad:nth-child(4) {
-  z-index: 5;
-  background: #f7f7f7;
+.card{
+  width:100%;
+  max-width:1180px;
+  min-height:72vh;
+  background:rgba(255,255,255,.76);
+  backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:38px;
+  box-shadow:0 30px 90px rgba(0,0,0,.08);
+  padding:clamp(34px,6vw,80px);
+  transform:translateY(80px);
+  opacity:0;
+  transition:1s ease;
 }
 
-.pad-number {
-  font-size: 14px;
-  font-weight: 900;
-  opacity: 0.48;
-  margin-bottom: 22px;
+.panel.show .card{
+  transform:translateY(0);
+  opacity:1;
 }
 
-.pad h2 {
-  font-size: clamp(42px, 5vw, 82px);
-  line-height: 0.95;
-  letter-spacing: -4px;
-  font-weight: 950;
-  margin-bottom: 32px;
+.panel:nth-child(2){
+  z-index:2;
 }
 
-.pad p {
-  font-size: 18px;
-  line-height: 1.9;
-  font-weight: 600;
-  color: #444;
-  max-width: 680px;
+.panel:nth-child(3){
+  z-index:3;
 }
 
-.pad:nth-child(3) p {
-  color: rgba(255,255,255,0.72);
+.panel:nth-child(4){
+  z-index:4;
 }
 
-.pad-side {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 18px;
+.card-label{
+  font-size:12px;
+  letter-spacing:.22em;
+  color:#777;
+  margin-bottom:38px;
 }
 
-.info-box {
-  padding: 28px;
-  border-radius: 28px;
-  background: rgba(255,255,255,0.74);
-  border: 1px solid rgba(0,0,0,0.06);
+.card-title{
+  font-size:clamp(40px,7vw,96px);
+  line-height:.95;
+  letter-spacing:-.07em;
+  margin-bottom:36px;
 }
 
-.pad:nth-child(3) .info-box {
-  background: rgba(255,255,255,0.08);
-  border-color: rgba(255,255,255,0.16);
+.card-text{
+  max-width:620px;
+  font-size:18px;
+  line-height:1.8;
+  color:#333;
+  word-break:keep-all;
 }
 
-.info-box strong {
-  display: block;
-  font-size: 22px;
-  margin-bottom: 10px;
+/* ABOUT GRID */
+.about-grid{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:60px;
 }
 
-.info-box span {
-  font-size: 15px;
-  line-height: 1.7;
-  color: #555;
-  font-weight: 600;
+.info-list{
+  display:grid;
+  gap:18px;
+  align-content:end;
 }
 
-.pad:nth-child(3) .info-box span {
-  color: rgba(255,255,255,0.6);
+.info-item{
+  border-top:1px solid #ddd;
+  padding-top:18px;
 }
 
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 28px;
+.info-item b{
+  display:block;
+  font-size:13px;
+  letter-spacing:.12em;
+  margin-bottom:8px;
 }
 
-.tag {
-  padding: 12px 18px;
-  border-radius: 999px;
-  background: #111;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 900;
-}
-
-.pad:nth-child(3) .tag {
-  background: #fff;
-  color: #111;
+.info-item span{
+  color:#555;
+  font-size:15px;
 }
 
 /* WORK */
-.work-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 22px;
-  margin-top: 30px;
+.category{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:34px;
 }
 
-.work-card {
-  aspect-ratio: 1 / 0.72;
-  border-radius: 28px;
-  background: linear-gradient(135deg, #fff, #e9e9e9);
-  border: 1px solid rgba(0,0,0,0.08);
-  padding: 26px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.category button{
+  border:1px solid #ddd;
+  background:white;
+  padding:10px 18px;
+  border-radius:999px;
+  font-size:13px;
+  cursor:pointer;
+  transition:.3s;
 }
 
-.work-card b {
-  font-size: 24px;
-  letter-spacing: -1px;
+.category button.active,
+.category button:hover{
+  background:#111;
+  color:white;
 }
 
-.work-card span {
-  font-size: 14px;
-  font-weight: 700;
-  color: #666;
+.work-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+
+.work{
+  cursor:pointer;
+}
+
+.thumb{
+  height:280px;
+  border-radius:24px;
+  overflow:hidden;
+  background:#eee;
+  position:relative;
+}
+
+.thumb::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.9), transparent),
+    radial-gradient(circle at 70% 30%, rgba(210,230,255,.9), transparent 34%),
+    radial-gradient(circle at 30% 80%, rgba(255,220,240,.8), transparent 30%);
+  transition:.5s;
+}
+
+.work:hover .thumb::before{
+  transform:scale(1.08);
+}
+
+.work h3{
+  margin-top:16px;
+  font-size:20px;
+  letter-spacing:-.04em;
+}
+
+.work p{
+  margin-top:6px;
+  font-size:14px;
+  color:#666;
 }
 
 /* CONTACT */
-.contact {
-  padding: 120px 9.5vw 160px;
-  min-height: 80vh;
+.contact-box{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:40px;
+  flex-wrap:wrap;
 }
 
-.contact h2 {
-  font-size: clamp(60px, 10vw, 150px);
-  line-height: 0.9;
-  letter-spacing: -7px;
-  font-weight: 950;
+.contact-links{
+  display:grid;
+  gap:12px;
+  font-size:18px;
 }
 
-.contact-box {
-  margin-top: 50px;
-  padding: 44px;
-  border-radius: 38px;
-  background: #f5f5f5;
-  border: 1px solid rgba(0,0,0,0.08);
-  display: flex;
-  justify-content: space-between;
-  gap: 30px;
+.contact-links a{
+  border-bottom:1px solid #111;
+  padding-bottom:6px;
 }
 
-.contact-box p {
-  font-size: 20px;
-  line-height: 1.8;
-  font-weight: 600;
-  color: #333;
-}
-
-.contact-link {
-  align-self: flex-end;
-  padding: 16px 24px;
-  border-radius: 999px;
-  background: #111;
-  color: #fff;
-  font-weight: 900;
-}
-
-/* ANIMATION */
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: 0.9s ease;
-}
-
-.reveal.on {
-  opacity: 1;
-  transform: translateY(0);
+/* FOOTER */
+footer{
+  padding:40px 7vw;
+  font-size:12px;
+  color:#777;
+  display:flex;
+  justify-content:space-between;
 }
 
 /* MOBILE */
-@media (max-width: 900px) {
-  .nav {
-    height: 72px;
-    padding: 0 24px;
+@media(max-width:800px){
+  nav{
+    padding:22px 24px;
   }
 
-  .menu {
-    gap: 20px;
-    font-size: 14px;
+  .menu{
+    gap:16px;
   }
 
-  .hero {
-    padding: 130px 24px 70px;
+  .hero{
+    padding:0 24px;
   }
 
-  .hero-title {
-    letter-spacing: -4px;
+  .panel{
+    padding:70px 20px;
   }
 
-  .hero-bottom {
-    flex-direction: column;
+  .card{
+    border-radius:28px;
+    min-height:76vh;
   }
 
-  .scroll-text {
-    writing-mode: initial;
+  .about-grid{
+    grid-template-columns:1fr;
+    gap:40px;
   }
 
-  .stack-section {
-    padding: 0 24px 90px;
+  .work-grid{
+    grid-template-columns:1fr;
   }
 
-  .stack-title {
-    top: 86px;
-    letter-spacing: -3px;
+  .thumb{
+    height:240px;
   }
 
-  .pad {
-    top: 110px;
-    min-height: 620px;
-    margin-bottom: 90px;
-    padding: 34px;
-    border-radius: 34px;
-    grid-template-columns: 1fr;
-  }
-
-  .pad h2 {
-    letter-spacing: -2.5px;
-  }
-
-  .work-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .contact {
-    padding: 90px 24px 120px;
-  }
-
-  .contact h2 {
-    letter-spacing: -4px;
-  }
-
-  .contact-box {
-    flex-direction: column;
-    padding: 32px;
-  }
-
-  .contact-link {
-    align-self: flex-start;
+  footer{
+    padding:34px 24px;
+    flex-direction:column;
+    gap:10px;
   }
 }
 </style>
@@ -420,193 +418,169 @@ a {
 
 <body>
 
-<header class="nav">
-  <a href="#main" class="logo">CHA SUJI</a>
-  <nav class="menu">
-    <a href="#about">About</a>
-    <a href="#work">Work</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
+<div class="glow">
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+</div>
 
-<section class="hero" id="main">
+<nav>
+  <div class="logo">CHA SUJI</div>
+  <div class="menu">
+    <a href="#about">ABOUT</a>
+    <a href="#work">WORK</a>
+    <a href="#contact">CONTACT</a>
+  </div>
+</nav>
+
+<section class="hero">
   <div class="hero-inner">
-    <div class="label reveal">WEB DESIGN PORTFOLIO</div>
-
-    <h1 class="hero-title reveal">
-      CHA SUJI<br>
+    <div class="small-title">WEB DESIGN PORTFOLIO</div>
+    <h1 class="main-title">
+      SIMPLE<br>
+      AURORA<br>
       PORTFOLIO
     </h1>
 
-    <div class="hero-bottom reveal">
-      <p class="hero-desc">
-        심플하지만 눈에 남는 웹디자인을 좋아합니다.
-        브랜드의 분위기를 화면 안에서 자연스럽게 보여주고,
-        사용자가 보기 편한 구조를 만드는 디자이너를 목표로 합니다.
-      </p>
-
-      <div class="scroll-text">SCROLL DOWN</div>
+    <div class="rotating">
+      <span>WEB DESIGNER</span>
+      <span>UI/UX DESIGNER</span>
+      <span>VISUAL CREATOR</span>
+      <span>CHA SUJI</span>
     </div>
   </div>
+
+  <div class="scroll-mark">SCROLL</div>
 </section>
 
-<section class="stack-section" id="about">
-  <h1 class="stack-title">
-    About<br>
-    Designer
-  </h1>
+<div class="stack-wrap">
 
-  <div class="pad-wrap">
-
-    <article class="pad reveal">
-      <div>
-        <div class="pad-number">01 / ABOUT</div>
-        <h2>안녕하세요,<br>차수지입니다.</h2>
-        <p>
-          저는 웹디자인, 상세페이지, 브랜드 리디자인 작업에 관심이 많습니다.
-          단순히 예쁜 화면보다 브랜드가 가진 분위기를 자연스럽게 보여주고,
-          사용자가 편하게 볼 수 있는 디자인을 만드는 것을 중요하게 생각합니다.
-        </p>
-      </div>
-
-      <div class="pad-side">
-        <div class="info-box">
-          <strong>Design Mood</strong>
-          <span>Clean, Bold, Minimal, Trendy</span>
+  <section class="panel" id="about">
+    <div class="card">
+      <div class="about-grid">
+        <div>
+          <div class="card-label">ABOUT ME</div>
+          <h2 class="card-title">A clean visual<br>for better mood.</h2>
+          <p class="card-text">
+            안녕하세요. 감각적인 무드와 깔끔한 구조를 중심으로 웹디자인을 만들어가는 차수지입니다.
+            사용자가 편하게 보고, 브랜드가 더 예뻐 보이는 화면을 만드는 것을 목표로 합니다.
+          </p>
         </div>
 
-        <div class="info-box">
-          <strong>Goal</strong>
-          <span>취업용 포트폴리오 완성과 웹디자인 실무 역량 쌓기</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="pad reveal">
-      <div>
-        <div class="pad-number">02 / SKILLS</div>
-        <h2>Skills<br>& Tools</h2>
-        <p>
-          Photoshop, Figma, HTML, CSS를 중심으로 포트폴리오를 준비하고 있습니다.
-          웹페이지 구조, 레이아웃, 타이포그래피, 브랜드 분위기 표현을 계속 연습하고 있습니다.
-        </p>
-
-        <div class="tags">
-          <span class="tag">Photoshop</span>
-          <span class="tag">Figma</span>
-          <span class="tag">HTML</span>
-          <span class="tag">CSS</span>
-          <span class="tag">Web Design</span>
+        <div class="info-list">
+          <div class="info-item">
+            <b>NAME</b>
+            <span>CHA SUJI</span>
+          </div>
+          <div class="info-item">
+            <b>FIELD</b>
+            <span>Web Design / UI Design / Branding</span>
+          </div>
+          <div class="info-item">
+            <b>STYLE</b>
+            <span>Simple, Modern, Soft, Emotional</span>
+          </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="pad-side">
-        <div class="info-box">
-          <strong>Focus</strong>
-          <span>상세페이지 / 브랜드 페이지 / 개인 포트폴리오 사이트</span>
-        </div>
+  <section class="panel" id="work">
+    <div class="card">
+      <div class="card-label">SELECTED WORK</div>
+      <h2 class="card-title">Projects</h2>
 
-        <div class="info-box">
-          <strong>Style</strong>
-          <span>여백이 깔끔하고, 큰 타이포가 포인트 되는 디자인</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="pad reveal" id="work">
-      <div>
-        <div class="pad-number">03 / WORK</div>
-        <h2>Selected<br>Works</h2>
-        <p>
-          아직 완성된 작업물이 많지 않아도 괜찮습니다.
-          포트폴리오는 완성작뿐 아니라 리디자인 과정, 문제 해결 방식,
-          분위기 기획까지 보여줄 수 있습니다.
-        </p>
+      <div class="category">
+        <button class="active" data-filter="all">ALL</button>
+        <button data-filter="web">WEB</button>
+        <button data-filter="brand">BRANDING</button>
+        <button data-filter="ui">UI/UX</button>
       </div>
 
       <div class="work-grid">
-        <div class="work-card">
-          <b>LUNE Jewelry</b>
-          <span>Shopping Mall Redesign</span>
+        <div class="work" data-type="web">
+          <div class="thumb"></div>
+          <h3>LUNE Jewelry</h3>
+          <p>Shopping mall redesign · 2026</p>
         </div>
 
-        <div class="work-card">
-          <b>Cosmetic Page</b>
-          <span>Product Detail Design</span>
+        <div class="work" data-type="brand">
+          <div class="thumb"></div>
+          <h3>Minimal Brand</h3>
+          <p>Logo & visual system · 2026</p>
         </div>
 
-        <div class="work-card">
-          <b>Brand Landing</b>
-          <span>Web Main Design</span>
-        </div>
-
-        <div class="work-card">
-          <b>Personal Site</b>
-          <span>Portfolio Website</span>
+        <div class="work" data-type="ui">
+          <div class="thumb"></div>
+          <h3>Mobile UI</h3>
+          <p>App concept design · 2026</p>
         </div>
       </div>
-    </article>
+    </div>
+  </section>
 
-    <article class="pad reveal">
-      <div>
-        <div class="pad-number">04 / DIRECTION</div>
-        <h2>Design<br>Direction</h2>
-        <p>
-          앞으로는 단순한 이미지 작업보다 실제 웹사이트처럼 보여지는 포트폴리오를 만들고 싶습니다.
-          화면의 첫인상, 스크롤 흐름, 카드 구성, 모바일 반응형까지 함께 고려하는 디자이너가 되고 싶습니다.
-        </p>
-      </div>
-
-      <div class="pad-side">
-        <div class="info-box">
-          <strong>Portfolio Plan</strong>
-          <span>브랜드 리디자인 1개, 상세페이지 1개, 개인 웹사이트 1개 구성</span>
+  <section class="panel" id="contact">
+    <div class="card">
+      <div class="contact-box">
+        <div>
+          <div class="card-label">CONTACT</div>
+          <h2 class="card-title">Let’s create<br>something soft.</h2>
+          <p class="card-text">
+            포트폴리오를 봐주셔서 감사합니다.
+            더 좋은 디자인으로 성장하는 디자이너가 되겠습니다.
+          </p>
         </div>
 
-        <div class="info-box">
-          <strong>Keyword</strong>
-          <span>깔끔함 / 감각적 / 실무형 / 취업 포트폴리오</span>
+        <div class="contact-links">
+          <a href="mailto:yourmail@email.com">Email</a>
+          <a href="#">Instagram</a>
+          <a href="#">Notion</a>
         </div>
       </div>
-    </article>
+    </div>
+  </section>
 
-  </div>
-</section>
+</div>
 
-<section class="contact" id="contact">
-  <h2 class="reveal">
-    Let’s<br>
-    Connect
-  </h2>
-
-  <div class="contact-box reveal">
-    <p>
-      포트폴리오를 통해 저의 디자인 방향과 성장 과정을 보여드리고 싶습니다.
-      깔끔하지만 기억에 남는 웹디자인을 만들어가겠습니다.
-    </p>
-
-    <a href="mailto:chasuji020519@gmail.com" class="contact-link">
-      Contact Me
-    </a>
-  </div>
-</section>
+<footer>
+  <span>© 2026 CHA SUJI PORTFOLIO</span>
+  <span>Designed with simple aurora mood</span>
+</footer>
 
 <script>
-const reveals = document.querySelectorAll(".reveal");
+const panels = document.querySelectorAll(".panel");
 
-function revealMotion() {
-  reveals.forEach((el) => {
-    const top = el.getBoundingClientRect().top;
-    const windowHeight = window.innerHeight;
-
-    if (top < windowHeight - 80) {
-      el.classList.add("on");
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
     }
   });
-}
+},{
+  threshold:0.35
+});
 
-window.addEventListener("scroll", revealMotion);
-window.addEventListener("load", revealMotion);
+panels.forEach(panel=>observer.observe(panel));
+
+const buttons = document.querySelectorAll(".category button");
+const works = document.querySelectorAll(".work");
+
+buttons.forEach(button=>{
+  button.addEventListener("click",()=>{
+    buttons.forEach(btn=>btn.classList.remove("active"));
+    button.classList.add("active");
+
+    const filter = button.dataset.filter;
+
+    works.forEach(work=>{
+      if(filter === "all" || work.dataset.type === filter){
+        work.style.display = "block";
+      }else{
+        work.style.display = "none";
+      }
+    });
+  });
+});
 </script>
 
 </body>
