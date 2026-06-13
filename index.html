@@ -72,14 +72,12 @@ canvas{
   height:100%;
 }
 
-/* 전체 패널 영역 */
 .stack-wrap{
   position:relative;
   z-index:10;
   background:transparent;
 }
 
-/* 한 장씩 전체 화면으로 올라오는 패널 */
 .panel{
   position:sticky;
   top:0;
@@ -99,17 +97,9 @@ canvas{
   width:100%;
 }
 
-.panel:nth-child(1){
-  z-index:20;
-}
-
-.panel:nth-child(2){
-  z-index:30;
-}
-
-.panel:nth-child(3){
-  z-index:40;
-}
+.panel:nth-child(1){z-index:20;}
+.panel:nth-child(2){z-index:30;}
+.panel:nth-child(3){z-index:40;}
 
 .title{
   font-size:clamp(54px,8vw,120px);
@@ -389,13 +379,13 @@ function createTextPoints(){
   temp.width = window.innerWidth;
   temp.height = window.innerHeight;
 
- const sidePadding = temp.width * 0.07;
-const availableWidth = temp.width - sidePadding * 2;
+  const sidePadding = temp.width * 0.07;
+  const availableWidth = temp.width - sidePadding * 2;
 
-const fontSize = Math.min(
-  availableWidth / 8.2,
-  230
-);
+  const fontSize = Math.min(
+    availableWidth / 8.15,
+    230
+  );
 
   tctx.fillStyle = "#111";
   tctx.font = `900 ${fontSize}px Arial, sans-serif`;
@@ -403,16 +393,14 @@ const fontSize = Math.min(
   tctx.textBaseline = "middle";
 
   tctx.fillText(
-  text,
-  temp.width / 2,
-  temp.height / 2,
-  availableWidth
-);
+    text,
+    temp.width / 2,
+    temp.height / 2,
+    availableWidth
+  );
 
   const imageData = tctx.getImageData(0,0,temp.width,temp.height).data;
-
-  /* 점은 크게 유지하되 너무 뭉개지지 않게 */
-  const gap = window.innerWidth < 700 ? 8 : 7;
+  const gap = 6;
 
   for(let y = 0; y < temp.height; y += gap){
     for(let x = 0; x < temp.width; x += gap){
