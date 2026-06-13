@@ -1,88 +1,145 @@
-<div class="hero-title">
-
-    <div class="left-wrap">
-        <div class="left-slider">
-            <span>매출내기</span>
-            <span>운영하기</span>
-            <span>성장하기</span>
-            <span>디자인하기</span>
-        </div>
-    </div>
-
-    <span class="easy">쉬운</span>
-
-    <div class="right-wrap">
-        <div class="right-slider">
-            <span>브랜드</span>
-            <span>쇼핑몰</span>
-            <span>브랜드</span>
-            <span>자사몰</span>
-        </div>
-    </div>
-
-</div>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
 body{
-    background:#fff;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#fff;
+  font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;
+  color:#111;
 }
 
-.hero-title{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:20px;
-    font-size:clamp(42px,6vw,88px);
-    font-weight:700;
-    height:120px;
+.title{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  font-size:clamp(38px,6vw,86px);
+  font-weight:700;
+  letter-spacing:-0.06em;
+  line-height:1;
 }
 
-.easy{
-    flex-shrink:0;
+.word-box{
+  position:relative;
+  height:1.1em;
+  overflow:hidden;
 }
 
-.left-wrap,
-.right-wrap{
-    height:1.2em;
-    overflow:hidden;
+.left{
+  width:4.8em;
+  text-align:right;
 }
 
-.left-slider,
-.right-slider{
-    display:flex;
-    flex-direction:column;
-    animation:slide 8s infinite;
+.right{
+  width:3.4em;
+  text-align:left;
 }
 
-.left-slider span,
-.right-slider span{
-    height:1.2em;
-    display:flex;
-    align-items:center;
+.word{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  opacity:0;
+  transform:translateY(-110%);
+  animation:dropText 8s infinite;
 }
 
-@keyframes slide{
+.left .word{
+  justify-content:flex-end;
+}
 
-    0%,20%{
-        transform:translateY(0);
-    }
+.right .word{
+  justify-content:flex-start;
+}
 
-    25%,45%{
-        transform:translateY(-1.2em);
-    }
+.word:nth-child(1){ animation-delay:0s; }
+.word:nth-child(2){ animation-delay:2s; }
+.word:nth-child(3){ animation-delay:4s; }
+.word:nth-child(4){ animation-delay:6s; }
 
-    50%,70%{
-        transform:translateY(-2.4em);
-    }
+.fixed{
+  flex-shrink:0;
+}
 
-    75%,95%{
-        transform:translateY(-3.6em);
-    }
+@keyframes dropText{
+  0%{
+    opacity:0;
+    transform:translateY(-110%);
+  }
 
-    100%{
-        transform:translateY(0);
-    }
+  8%{
+    opacity:1;
+    transform:translateY(0);
+  }
 
+  28%{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  36%{
+    opacity:0;
+    transform:translateY(110%);
+  }
+
+  100%{
+    opacity:0;
+    transform:translateY(110%);
+  }
+}
+
+@media(max-width:768px){
+  .title{
+    gap:10px;
+    font-size:clamp(30px,10vw,48px);
+  }
+
+  .left{
+    width:4.9em;
+  }
+
+  .right{
+    width:3.5em;
+  }
 }
 </style>
+</head>
+
+<body>
+
+<h1 class="title">
+
+  <span class="word-box left">
+    <span class="word">매출내기</span>
+    <span class="word">운영하기</span>
+    <span class="word">성장하기</span>
+    <span class="word">디자인하기</span>
+  </span>
+
+  <span class="fixed">쉬운</span>
+
+  <span class="word-box right">
+    <span class="word">브랜드</span>
+    <span class="word">쇼핑몰</span>
+    <span class="word">브랜드</span>
+    <span class="word">자사몰</span>
+  </span>
+
+</h1>
+
+</body>
+</html>
