@@ -32,13 +32,12 @@ body{
 }
 
 .title{
-    display:flex;
+    display:grid;
+    grid-template-columns:5.5em auto 5.5em;
     align-items:center;
     justify-content:center;
-    gap:16px;
 
     font-size:clamp(56px,6vw,96px);
-
     font-weight:700;
     letter-spacing:-0.07em;
     color:#111;
@@ -46,20 +45,14 @@ body{
 }
 
 .fixed{
-    flex-shrink:0;
+    text-align:center;
+    padding:0 .2em;
 }
 
 .box{
+    width:5.5em;
     height:1.1em;
     overflow:hidden;
-}
-
-.left{
-    width:5.2em;
-}
-
-.right{
-    width:4em;
 }
 
 .slider{
@@ -83,7 +76,7 @@ body{
 }
 
 .subtitle{
-    margin-top:28px;
+    margin-top:32px;
 
     font-size:20px;
     font-weight:400;
@@ -121,16 +114,12 @@ body{
 @media(max-width:768px){
 
     .title{
+        grid-template-columns:5em auto 5em;
         font-size:clamp(38px,9vw,64px);
-        gap:10px;
     }
 
-    .left{
+    .box{
         width:5em;
-    }
-
-    .right{
-        width:3.8em;
     }
 
     .subtitle{
@@ -172,7 +161,7 @@ body{
     </h1>
 
     <p class="subtitle">
-        나의 브랜드를 현실로 만들어보세요
+        DESIGN PORTFOLIO · CHA SUJI
     </p>
 
 </section>
