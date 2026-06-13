@@ -1,121 +1,88 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
+<div class="hero-title">
 
-<style>
-body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#fff;
-    font-family:Pretendard,sans-serif;
-}
-
-.title{
-    position:relative;
-    width:900px;
-    height:120px;
-    overflow:hidden;
-}
-
-.item{
-    position:absolute;
-    inset:0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:14px;
-    font-size:72px;
-    font-weight:700;
-    opacity:0;
-    transform:translateY(-60px);
-}
-
-.item:nth-child(1){
-    animation:textChange 8s infinite;
-}
-
-.item:nth-child(2){
-    animation:textChange 8s infinite 2s;
-}
-
-.item:nth-child(3){
-    animation:textChange 8s infinite 4s;
-}
-
-.item:nth-child(4){
-    animation:textChange 8s infinite 6s;
-}
-
-.easy{
-    color:#111;
-}
-
-.sub{
-    color:#111;
-}
-
-@keyframes textChange{
-
-    0%{
-        opacity:0;
-        transform:translateY(-60px);
-    }
-
-    10%{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-    40%{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-    50%{
-        opacity:0;
-        transform:translateY(60px);
-    }
-
-    100%{
-        opacity:0;
-        transform:translateY(60px);
-    }
-}
-</style>
-</head>
-<body>
-
-<div class="title">
-
-    <div class="item">
-        <span>매출내기</span>
-        <span class="easy">쉬운</span>
-        <span class="sub">브랜드</span>
+    <div class="left-wrap">
+        <div class="left-slider">
+            <span>매출내기</span>
+            <span>운영하기</span>
+            <span>성장하기</span>
+            <span>디자인하기</span>
+        </div>
     </div>
 
-    <div class="item">
-        <span>운영하기</span>
-        <span class="easy">쉬운</span>
-        <span class="sub">쇼핑몰</span>
-    </div>
+    <span class="easy">쉬운</span>
 
-    <div class="item">
-        <span>성장하기</span>
-        <span class="easy">쉬운</span>
-        <span class="sub">브랜드</span>
-    </div>
-
-    <div class="item">
-        <span>디자인하기</span>
-        <span class="easy">쉬운</span>
-        <span class="sub">자사몰</span>
+    <div class="right-wrap">
+        <div class="right-slider">
+            <span>브랜드</span>
+            <span>쇼핑몰</span>
+            <span>브랜드</span>
+            <span>자사몰</span>
+        </div>
     </div>
 
 </div>
 
-</body>
-</html>
+<style>
+
+body{
+    background:#fff;
+}
+
+.hero-title{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:20px;
+    font-size:clamp(42px,6vw,88px);
+    font-weight:700;
+    height:120px;
+}
+
+.easy{
+    flex-shrink:0;
+}
+
+.left-wrap,
+.right-wrap{
+    height:1.2em;
+    overflow:hidden;
+}
+
+.left-slider,
+.right-slider{
+    display:flex;
+    flex-direction:column;
+    animation:slide 8s infinite;
+}
+
+.left-slider span,
+.right-slider span{
+    height:1.2em;
+    display:flex;
+    align-items:center;
+}
+
+@keyframes slide{
+
+    0%,20%{
+        transform:translateY(0);
+    }
+
+    25%,45%{
+        transform:translateY(-1.2em);
+    }
+
+    50%,70%{
+        transform:translateY(-2.4em);
+    }
+
+    75%,95%{
+        transform:translateY(-3.6em);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+
+}
+</style>
