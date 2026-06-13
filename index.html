@@ -19,8 +19,19 @@ body{
     overflow-x:hidden;
 }
 
-.nav{
+/* 고정 메인 */
+.main-fixed{
     position:fixed;
+    inset:0;
+    width:100%;
+    height:100vh;
+    z-index:1;
+    background:#fff;
+    overflow:hidden;
+}
+
+.nav{
+    position:absolute;
     top:0;
     left:0;
     width:100%;
@@ -28,7 +39,7 @@ body{
     justify-content:space-between;
     align-items:center;
     padding:32px 40px;
-    z-index:999;
+    z-index:10;
 }
 
 .logo{
@@ -58,7 +69,6 @@ body{
     justify-content:center;
     align-items:center;
     padding:90px 0 0;
-    overflow:hidden;
 }
 
 .hero-content{
@@ -175,32 +185,23 @@ body{
     to{transform:translateX(-50%)}
 }
 
-/* 전체 유리 패널 */
-.panel-section{
+/* 스크롤 공간 */
+.scroll-area{
     position:relative;
-    width:100%;
-    min-height:100vh;
-    margin-top:-1px;
-    background:
-        linear-gradient(to bottom, rgba(255,255,255,0), #f3f3f3 38%),
-        url("https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg") center/cover no-repeat;
+    z-index:5;
+    margin-top:100vh;
 }
 
-.panel{
-    position:sticky;
-    top:0;
+/* 올라오는 유리 패널 */
+.about-panel{
     width:100%;
     min-height:100vh;
-    padding:120px 40px 70px;
+    padding:110px 40px 80px;
     background:rgba(255,255,255,.48);
-    backdrop-filter:blur(28px);
-    -webkit-backdrop-filter:blur(28px);
-    border-top:1px solid rgba(255,255,255,.55);
-    box-shadow:0 -40px 100px rgba(0,0,0,.12);
-}
-
-.panel-inner{
-    width:100%;
+    backdrop-filter:blur(30px);
+    -webkit-backdrop-filter:blur(30px);
+    border-top:1px solid rgba(255,255,255,.7);
+    box-shadow:0 -40px 100px rgba(0,0,0,.16);
 }
 
 .panel-top{
@@ -238,8 +239,8 @@ body{
     min-height:230px;
     padding:32px;
     border-radius:30px;
-    background:rgba(255,255,255,.34);
-    border:1px solid rgba(255,255,255,.55);
+    background:rgba(255,255,255,.36);
+    border:1px solid rgba(255,255,255,.65);
     backdrop-filter:blur(22px);
     -webkit-backdrop-filter:blur(22px);
     box-shadow:0 20px 60px rgba(0,0,0,.08);
@@ -248,7 +249,7 @@ body{
 
 .card:hover{
     transform:translateY(-8px);
-    background:rgba(255,255,255,.48);
+    background:rgba(255,255,255,.55);
 }
 
 .card span{
@@ -311,8 +312,8 @@ body{
         height:130px;
     }
 
-    .panel{
-        padding:110px 24px 60px;
+    .about-panel{
+        padding:100px 24px 70px;
     }
 
     .panel-top{
@@ -347,123 +348,125 @@ body{
 
 <body>
 
-<nav class="nav">
-    <div class="logo">Portfolio</div>
+<div class="main-fixed">
 
-    <div class="menu">
-        <a href="#">ABOUT</a>
-        <a href="#">WORKS</a>
-        <a href="#">ARCHIVE</a>
-        <a href="#">CONTACT</a>
-    </div>
-</nav>
+    <nav class="nav">
+        <div class="logo">Portfolio</div>
 
-<section class="hero">
-
-    <div class="hero-content">
-        <h1 class="title">
-
-            <div class="box left">
-                <div class="slider">
-                    <div class="word">감각을</div>
-                    <div class="word">가치를</div>
-                    <div class="word">경험을</div>
-                    <div class="word">생각을</div>
-                    <div class="word">감각을</div>
-                </div>
-            </div>
-
-            <span class="fixed">담은</span>
-
-            <div class="box right">
-                <div class="slider">
-                    <div class="word">디자인</div>
-                    <div class="word">퀄리티</div>
-                    <div class="word">임팩트</div>
-                    <div class="word">디테일</div>
-                    <div class="word">디자인</div>
-                </div>
-            </div>
-
-        </h1>
-
-        <p class="subtitle">
-            단 한줄로 나의 브랜드를 현실로 만들어보세요
-        </p>
-    </div>
-
-    <div class="image-marquee">
-        <div class="marquee-track">
-
-            <div class="project"><img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg"></div>
-            <div class="project"><img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg"></div>
-            <div class="project"><img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg"></div>
-            <div class="project"><img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg"></div>
-            <div class="project"><img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg"></div>
-
-            <div class="project"><img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg"></div>
-            <div class="project"><img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg"></div>
-            <div class="project"><img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg"></div>
-            <div class="project"><img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg"></div>
-            <div class="project"><img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg"></div>
-
+        <div class="menu">
+            <a href="#">ABOUT</a>
+            <a href="#">WORKS</a>
+            <a href="#">ARCHIVE</a>
+            <a href="#">CONTACT</a>
         </div>
-    </div>
+    </nav>
 
-</section>
+    <section class="hero">
 
-<section class="panel-section">
-    <div class="panel">
+        <div class="hero-content">
+            <h1 class="title">
 
-        <div class="panel-inner">
+                <div class="box left">
+                    <div class="slider">
+                        <div class="word">감각을</div>
+                        <div class="word">가치를</div>
+                        <div class="word">경험을</div>
+                        <div class="word">생각을</div>
+                        <div class="word">감각을</div>
+                    </div>
+                </div>
 
-            <div class="panel-top">
-                <span>ABOUT PORTFOLIO</span>
-                <span>SCROLL 01</span>
-            </div>
+                <span class="fixed">담은</span>
 
-            <h2 class="panel-title">
-                Visual stories<br>
-                with clear detail
-            </h2>
+                <div class="box right">
+                    <div class="slider">
+                        <div class="word">디자인</div>
+                        <div class="word">퀄리티</div>
+                        <div class="word">임팩트</div>
+                        <div class="word">디테일</div>
+                        <div class="word">디자인</div>
+                    </div>
+                </div>
 
-            <p class="panel-desc">
-                감각적인 비주얼과 섬세한 디테일을 바탕으로 브랜드의 분위기를 정리하고,
-                보는 사람이 오래 기억할 수 있는 디자인을 만듭니다.
+            </h1>
+
+            <p class="subtitle">
+                단 한줄로 나의 브랜드를 현실로 만들어보세요
             </p>
+        </div>
 
-            <div class="panel-cards">
+        <div class="image-marquee">
+            <div class="marquee-track">
 
-                <div class="card">
-                    <span>01</span>
-                    <h3>Brand Design</h3>
-                    <p>
-                        브랜드의 방향성과 분위기를 시각적으로 정리하는 작업입니다.
-                    </p>
-                </div>
+                <div class="project"><img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg"></div>
+                <div class="project"><img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg"></div>
+                <div class="project"><img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg"></div>
+                <div class="project"><img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg"></div>
+                <div class="project"><img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg"></div>
 
-                <div class="card">
-                    <span>02</span>
-                    <h3>Graphic Design</h3>
-                    <p>
-                        포스터, 콘텐츠, 편집 디자인 등 인상적인 비주얼을 만듭니다.
-                    </p>
-                </div>
+                <div class="project"><img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg"></div>
+                <div class="project"><img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg"></div>
+                <div class="project"><img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg"></div>
+                <div class="project"><img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg"></div>
+                <div class="project"><img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg"></div>
 
-                <div class="card">
-                    <span>03</span>
-                    <h3>UI Concept</h3>
-                    <p>
-                        웹과 모바일 화면에서 보기 좋은 구조와 흐름을 설계합니다.
-                    </p>
-                </div>
+            </div>
+        </div>
 
+    </section>
+
+</div>
+
+<div class="scroll-area">
+
+    <section class="about-panel">
+
+        <div class="panel-top">
+            <span>ABOUT ME</span>
+            <span>SCROLL 01</span>
+        </div>
+
+        <h2 class="panel-title">
+            Visual stories<br>
+            with clear detail
+        </h2>
+
+        <p class="panel-desc">
+            감각적인 비주얼과 섬세한 디테일을 바탕으로 브랜드의 분위기를 정리하고,
+            보는 사람이 오래 기억할 수 있는 디자인을 만듭니다.
+        </p>
+
+        <div class="panel-cards">
+
+            <div class="card">
+                <span>01</span>
+                <h3>Brand Design</h3>
+                <p>
+                    브랜드의 방향성과 분위기를 시각적으로 정리하는 작업입니다.
+                </p>
+            </div>
+
+            <div class="card">
+                <span>02</span>
+                <h3>Graphic Design</h3>
+                <p>
+                    포스터, 콘텐츠, 편집 디자인 등 인상적인 비주얼을 만듭니다.
+                </p>
+            </div>
+
+            <div class="card">
+                <span>03</span>
+                <h3>UI Concept</h3>
+                <p>
+                    웹과 모바일 화면에서 보기 좋은 구조와 흐름을 설계합니다.
+                </p>
             </div>
 
         </div>
 
-    </div>
-</section>
+    </section>
+
+</div>
 
 </body>
 </html>
