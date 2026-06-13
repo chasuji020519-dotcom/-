@@ -4,140 +4,150 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Text Motion</title>
+
 <style>
+
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 body{
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:#fff;
-  font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;
-  color:#111;
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#fff;
+    overflow:hidden;
+    font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;
 }
 
-.title{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:18px;
-  font-size:clamp(38px,6vw,86px);
-  font-weight:700;
-  letter-spacing:-0.06em;
-  line-height:1;
+.hero-title{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:20px;
+
+    font-size:clamp(36px,6vw,90px);
+    font-weight:700;
+    letter-spacing:-0.06em;
+    color:#111;
 }
 
-.word-box{
-  position:relative;
-  height:1.1em;
-  overflow:hidden;
+.fixed{
+    flex-shrink:0;
+}
+
+.slot{
+    position:relative;
+    height:1.1em;
+    overflow:hidden;
 }
 
 .left{
-  width:4.8em;
-  text-align:right;
+    width:5em;
+    text-align:right;
 }
 
 .right{
-  width:3.4em;
-  text-align:left;
+    width:4em;
+    text-align:left;
 }
 
-.word{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  opacity:0;
-  transform:translateY(-110%);
-  animation:dropText 8s infinite;
-}
+.item{
+    position:absolute;
+    inset:0;
 
-.left .word{
-  justify-content:flex-end;
-}
+    display:flex;
+    align-items:center;
 
-.right .word{
-  justify-content:flex-start;
-}
-
-.word:nth-child(1){ animation-delay:0s; }
-.word:nth-child(2){ animation-delay:2s; }
-.word:nth-child(3){ animation-delay:4s; }
-.word:nth-child(4){ animation-delay:6s; }
-
-.fixed{
-  flex-shrink:0;
-}
-
-@keyframes dropText{
-  0%{
     opacity:0;
-    transform:translateY(-110%);
-  }
+    transform:translateY(-120%);
 
-  8%{
-    opacity:1;
-    transform:translateY(0);
-  }
-
-  28%{
-    opacity:1;
-    transform:translateY(0);
-  }
-
-  36%{
-    opacity:0;
-    transform:translateY(110%);
-  }
-
-  100%{
-    opacity:0;
-    transform:translateY(110%);
-  }
+    animation:wordMotion 8s infinite;
 }
 
-@media(max-width:768px){
-  .title{
-    gap:10px;
-    font-size:clamp(30px,10vw,48px);
-  }
-
-  .left{
-    width:4.9em;
-  }
-
-  .right{
-    width:3.5em;
-  }
+.left .item{
+    justify-content:flex-end;
 }
+
+.right .item{
+    justify-content:flex-start;
+}
+
+.delay1{
+    animation-delay:0s;
+}
+
+.delay2{
+    animation-delay:2s;
+}
+
+.delay3{
+    animation-delay:4s;
+}
+
+.delay4{
+    animation-delay:6s;
+}
+
+@keyframes wordMotion{
+
+    0%{
+        opacity:0;
+        transform:translateY(-120%);
+    }
+
+    8%{
+        opacity:1;
+        transform:translateY(0%);
+    }
+
+    32%{
+        opacity:1;
+        transform:translateY(0%);
+    }
+
+    40%{
+        opacity:0;
+        transform:translateY(120%);
+    }
+
+    100%{
+        opacity:0;
+        transform:translateY(120%);
+    }
+
+}
+
 </style>
 </head>
-
 <body>
 
-<h1 class="title">
+<h1 class="hero-title">
 
-  <span class="word-box left">
-    <span class="word">매출내기</span>
-    <span class="word">운영하기</span>
-    <span class="word">성장하기</span>
-    <span class="word">디자인하기</span>
-  </span>
+    <div class="slot left">
 
-  <span class="fixed">쉬운</span>
+        <span class="item delay1">매출내기</span>
+        <span class="item delay2">운영하기</span>
+        <span class="item delay3">성장하기</span>
+        <span class="item delay4">디자인하기</span>
 
-  <span class="word-box right">
-    <span class="word">브랜드</span>
-    <span class="word">쇼핑몰</span>
-    <span class="word">브랜드</span>
-    <span class="word">자사몰</span>
-  </span>
+    </div>
+
+    <span class="fixed">쉬운</span>
+
+    <div class="slot right">
+
+        <span class="item delay1">브랜드</span>
+        <span class="item delay2">쇼핑몰</span>
+        <span class="item delay3">브랜드</span>
+        <span class="item delay4">자사몰</span>
+
+    </div>
 
 </h1>
 
