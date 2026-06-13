@@ -1,370 +1,173 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CHASUJI Portfolio</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Particle Logo</title>
 
 <style>
-
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
 }
 
-html{
-scroll-behavior:smooth;
-}
-
 body{
-font-family:'Pretendard',sans-serif;
 background:#fff;
-color:#111;
-overflow-x:hidden;
+overflow:hidden;
 }
 
-section{
-padding:120px 8%;
-}
-
-nav{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-padding:25px 8%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:rgba(255,255,255,.8);
-backdrop-filter:blur(20px);
-z-index:1000;
-}
-
-.logo{
-font-size:20px;
-font-weight:700;
-letter-spacing:1px;
-}
-
-.menu{
-display:flex;
-gap:30px;
-}
-
-.menu a{
-text-decoration:none;
-color:#111;
-font-size:14px;
-}
-
-.hero{
+canvas{
+display:block;
+width:100vw;
 height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-position:relative;
-overflow:hidden;
 }
-
-.bg-number{
-position:absolute;
-font-size:28vw;
-font-weight:700;
-color:#f5f5f5;
-pointer-events:none;
-animation:float 12s linear infinite;
-}
-
-@keyframes float{
-0%{transform:translateY(0);}
-50%{transform:translateY(-40px);}
-100%{transform:translateY(0);}
-}
-
-.hero-content{
-position:relative;
-z-index:10;
-text-align:center;
-}
-
-.hero-content h1{
-font-size:clamp(50px,8vw,130px);
-font-family:'Space Grotesk';
-line-height:1;
-}
-
-.changing-text{
-height:60px;
-overflow:hidden;
-margin-top:20px;
-}
-
-.changing-text span{
-display:block;
-font-size:28px;
-font-weight:500;
-animation:textslide 9s infinite;
-}
-
-@keyframes textslide{
-0%,20%{
-transform:translateY(0);
-}
-33%,53%{
-transform:translateY(-60px);
-}
-66%,86%{
-transform:translateY(-120px);
-}
-100%{
-transform:translateY(0);
-}
-}
-
-.about{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:80px;
-align-items:center;
-}
-
-.about-img{
-height:600px;
-border-radius:30px;
-overflow:hidden;
-}
-
-.about-img img{
-width:100%;
-height:100%;
-object-fit:cover;
-display:block;
-}
-
-.about p{
-font-size:18px;
-line-height:1.8;
-color:#555;
-}
-
-.skills{
-display:flex;
-flex-wrap:wrap;
-gap:15px;
-margin-top:30px;
-}
-
-.skill{
-padding:12px 22px;
-background:#111;
-color:#fff;
-border-radius:999px;
-}
-
-.project-title{
-font-size:80px;
-margin-bottom:60px;
-}
-
-.project-list{
-display:grid;
-gap:25px;
-}
-
-.project{
-padding:50px;
-border:1px solid #eee;
-border-radius:30px;
-transition:.4s;
-cursor:pointer;
-}
-
-.project:hover{
-transform:translateY(-10px);
-box-shadow:0 20px 50px rgba(0,0,0,.08);
-}
-
-.project h3{
-font-size:40px;
-margin-bottom:10px;
-}
-
-.project p{
-color:#777;
-}
-
-.gallery{
-columns:3;
-gap:20px;
-}
-
-.gallery img{
-width:100%;
-margin-bottom:20px;
-border-radius:20px;
-}
-
-.contact{
-text-align:center;
-padding:180px 8%;
-}
-
-.contact h2{
-font-size:clamp(60px,10vw,150px);
-line-height:1;
-}
-
-.contact button{
-margin-top:40px;
-padding:18px 40px;
-background:#111;
-color:#fff;
-border:none;
-border-radius:999px;
-cursor:pointer;
-font-size:16px;
-}
-
-@media(max-width:900px){
-
-.about{
-grid-template-columns:1fr;
-}
-
-.gallery{
-columns:1;
-}
-
-.project-title{
-font-size:50px;
-}
-
-}
-
 </style>
 </head>
 <body>
 
-<nav>
-<div class="logo">Portfolio</div>
+<canvas id="canvas"></canvas>
 
-<div class="menu">
-<a href="#">ABOUT</a>
-<a href="#">PROJECT</a>
-<a href="#">WORKS</a>
-<a href="#">CONTACT</a>
-</div>
-</nav>
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
 
-<section class="hero">
+let particles = [];
+let mouse = {
+x:null,
+y:null,
+radius:120
+};
 
-<div class="bg-number">Portfolio</div>
+function resize(){
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+createText();
+}
 
-<div class="hero-content">
+window.addEventListener("resize", resize);
 
-<h1>SJ*5</h1>
+window.addEventListener("mousemove", e=>{
+mouse.x = e.x;
+mouse.y = e.y;
+});
 
-<div class="changing-text">
-<span>웹 디자이너</span>
-<span>UI / UX 디자이너</span>
-<span>디자이너 차수지입니다.</span>
-</div>
+window.addEventListener("mouseleave", ()=>{
+mouse.x = null;
+mouse.y = null;
+});
 
-</div>
+class Particle{
+constructor(x,y){
+this.x = Math.random()*canvas.width;
+this.y = Math.random()*canvas.height;
 
-</section>
+this.baseX = x;
+this.baseY = y;
 
-<section class="about">
+this.size = 1.6;
 
-<div class="/images/profile.jpg"></div>
+this.density = Math.random()*20+5;
+}
 
-<div>
+draw(){
+ctx.fillStyle="#111";
+ctx.beginPath();
+ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+ctx.fill();
+}
 
-<h2>ABOUT</h2>
+update(){
 
-<p>
-안녕하세요.
-사용자 경험을 중요하게 생각하는
-웹 디자이너 차수지입니다.
-</p>
+let dx = mouse.x - this.x;
+let dy = mouse.y - this.y;
+let distance = Math.sqrt(dx*dx+dy*dy);
 
-<div class="skills">
-<div class="skill">FIGMA</div>
-<div class="skill">PHOTOSHOP</div>
-<div class="skill">ILLUSTRATOR</div>
-<div class="skill">HTML</div>
-<div class="skill">CSS</div>
-<div class="skill">JAVASCRIPT</div>
-</div>
+if(distance < mouse.radius){
 
-</div>
+let force = (mouse.radius-distance)/mouse.radius;
 
-</section>
+let dirX = dx/distance;
+let dirY = dy/distance;
 
-<section>
+this.x -= dirX*force*8;
+this.y -= dirY*force*8;
 
-<h2 class="project-title">
-SELECTED PROJECTS
-</h2>
+}else{
 
-<div class="project-list">
+this.x += (this.baseX-this.x)*0.08;
+this.y += (this.baseY-this.y)*0.08;
 
-<div class="project">
-<h3>01 LUNE</h3>
-<p>Jewelry Shopping Mall Redesign</p>
-</div>
+}
 
-<div class="project">
-<h3>02 COSMETIC</h3>
-<p>Brand Experience Design</p>
-</div>
+this.draw();
+}
+}
 
-<div class="project">
-<h3>03 FASHION</h3>
-<p>Editorial Commerce UI</p>
-</div>
+function createText(){
 
-</div>
+particles=[];
 
-</section>
+ctx.clearRect(0,0,canvas.width,canvas.height);
 
-<section>
+const text = "CHASUJI";
 
-<h2 class="project-title">
-WORKS
-</h2>
+const fontSize = Math.min(canvas.width*0.12,180);
 
-<div class="gallery">
+ctx.fillStyle="#000";
+ctx.textAlign="center";
+ctx.textBaseline="middle";
+ctx.font=`900 ${fontSize}px Arial Black`;
 
-<img src="https://picsum.photos/600/800?1">
-<img src="https://picsum.photos/600/1000?2">
-<img src="https://picsum.photos/600/700?3">
-<img src="https://picsum.photos/600/900?4">
-<img src="https://picsum.photos/600/750?5">
+ctx.fillText(
+text,
+canvas.width/2,
+canvas.height/2
+);
 
-</div>
+const data = ctx.getImageData(
+0,
+0,
+canvas.width,
+canvas.height
+);
 
-</section>
+ctx.clearRect(0,0,canvas.width,canvas.height);
 
-<section class="contact">
+for(let y=0;y<data.height;y+=4){
 
-<h2>
-LET'S WORK<br>
-TOGETHER
-</h2>
+for(let x=0;x<data.width;x+=4){
 
-<button>
-CONTACT ME
-</button>
+const index=(y*4*data.width)+(x*4);
 
-</section>
+if(data.data[index+3]>128){
+
+particles.push(
+new Particle(x,y)
+);
+
+}
+
+}
+}
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+for(let i=0;i<particles.length;i++){
+particles[i].update();
+}
+
+requestAnimationFrame(animate);
+}
+
+resize();
+animate();
+
+</script>
 
 </body>
 </html>
-
-메인만 텍스트들다 없애고 파티클 효과를 적용하고 싶 어
