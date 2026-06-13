@@ -7,7 +7,6 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-
 html{scroll-behavior:smooth}
 
 body{
@@ -17,7 +16,6 @@ body{
     overflow-x:hidden;
 }
 
-/* 고정 메인 */
 .main-fixed{
     position:fixed;
     inset:0;
@@ -168,11 +166,14 @@ body{
 
 .project{
     flex-shrink:0;
+    width:300px;
+    height:180px;
+    overflow:hidden;
 }
 
 .project img{
-    width:300px;
-    height:180px;
+    width:100%;
+    height:100%;
     object-fit:cover;
     display:block;
     filter:saturate(.9) contrast(1.05);
@@ -183,20 +184,15 @@ body{
     to{transform:translateX(-50%)}
 }
 
-/* 스크롤 공간 */
 .scroll-area{
     position:relative;
     z-index:5;
     margin-top:100vh;
 }
 
-/* 심플 유리 패널 */
 .about-panel{
     width:100%;
-
-    min-height:auto;
-
-    padding:60px 40px;
+    padding:42px 40px 48px;
     background:rgba(255,255,255,.58);
     backdrop-filter:blur(32px);
     -webkit-backdrop-filter:blur(32px);
@@ -205,42 +201,30 @@ body{
 }
 
 .panel-inner{
-    max-width:1280px;
+    max-width:1180px;
     margin:0 auto;
-}
-
-.panel-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:40px;
-    font-size:13px;
-    letter-spacing:.14em;
-    color:rgba(0,0,0,.42);
 }
 
 .about-layout{
     display:grid;
-    grid-template-columns:380px 1fr;
-    gap:70px;
+    grid-template-columns:300px 1fr;
+    gap:48px;
     align-items:start;
 }
 
-/* 사진 넣는 곳 */
 .profile-card{
-    position:sticky;
-    top:110px;
-    border-radius:34px;
+    border-radius:28px;
     overflow:hidden;
     background:rgba(255,255,255,.45);
     border:1px solid rgba(255,255,255,.75);
-    box-shadow:0 24px 70px rgba(0,0,0,.08);
+    box-shadow:0 18px 50px rgba(0,0,0,.08);
 }
 
 .profile-img{
     width:100%;
-    aspect-ratio:3/4;
+    height:360px;
     background:#eee;
+    overflow:hidden;
 }
 
 .profile-img img{
@@ -251,104 +235,100 @@ body{
 }
 
 .profile-info{
-    padding:26px;
+    padding:22px;
 }
 
 .profile-info h3{
-    font-size:24px;
+    font-size:22px;
     letter-spacing:-.04em;
     margin-bottom:8px;
 }
 
 .profile-info p{
-    font-size:14px;
-    line-height:1.7;
+    font-size:13px;
+    line-height:1.65;
     color:rgba(0,0,0,.55);
 }
 
-/* 오른쪽 내용 */
 .panel-title{
-    font-size:clamp(48px,7vw,110px);
+    font-size:clamp(42px,5.6vw,84px);
     line-height:.95;
     letter-spacing:-.075em;
-    margin-bottom:20px;
+    margin-bottom:16px;
 }
 
 .panel-desc{
-    max-width:680px;
-    font-size:18px;
-    line-height:1.85;
+    max-width:650px;
+    font-size:16px;
+    line-height:1.75;
     color:rgba(0,0,0,.58);
 }
 
 .keyword-row{
     display:flex;
     flex-wrap:wrap;
-    gap:10px;
-    margin-top:34px;
+    gap:8px;
+    margin-top:24px;
 }
 
 .keyword{
-    padding:10px 16px;
+    padding:8px 14px;
     border-radius:999px;
     background:rgba(255,255,255,.48);
     border:1px solid rgba(0,0,0,.08);
-    font-size:13px;
+    font-size:12px;
     color:rgba(0,0,0,.62);
 }
 
 .panel-cards{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:14px;
-    margin-top:40px;
+    gap:12px;
+    margin-top:28px;
 }
 
 .card{
-    min-height:190px;
-    padding:28px;
-    border-radius:28px;
+    min-height:145px;
+    padding:22px;
+    border-radius:24px;
     background:rgba(255,255,255,.42);
     border:1px solid rgba(255,255,255,.7);
-    box-shadow:0 18px 50px rgba(0,0,0,.06);
+    box-shadow:0 14px 40px rgba(0,0,0,.06);
     transition:.35s ease;
 }
 
 .card:hover{
-    transform:translateY(-6px);
+    transform:translateY(-5px);
     background:rgba(255,255,255,.62);
 }
 
 .card span{
     display:block;
-    font-size:12px;
+    font-size:11px;
     color:rgba(0,0,0,.38);
-    margin-bottom:28px;
+    margin-bottom:22px;
 }
 
 .card h3{
-    font-size:24px;
+    font-size:21px;
     letter-spacing:-.04em;
-    margin-bottom:12px;
+    margin-bottom:10px;
 }
 
 .card p{
-    font-size:14px;
-    line-height:1.7;
+    font-size:13px;
+    line-height:1.6;
     color:rgba(0,0,0,.52);
 }
 
 @media(max-width:900px){
-
     .about-layout{
         grid-template-columns:1fr;
-        gap:44px;
+        gap:34px;
     }
 
     .profile-card{
-        position:relative;
-        top:0;
-        max-width:420px;
+        max-width:360px;
     }
 
     .panel-cards{
@@ -357,7 +337,6 @@ body{
 }
 
 @media(max-width:768px){
-
     .nav{
         padding:28px 24px;
     }
@@ -392,39 +371,38 @@ body{
         margin-top:24px;
     }
 
-    .project img{
+    .project{
         width:180px;
         height:130px;
     }
 
     .about-panel{
-        padding:96px 24px 70px;
-    }
-
-    .panel-top{
-        margin-bottom:52px;
-        font-size:11px;
+        padding:42px 24px 48px;
     }
 
     .panel-title{
-        font-size:clamp(44px,13vw,74px);
+        font-size:clamp(42px,12vw,68px);
     }
 
     .panel-desc{
         font-size:15px;
     }
 
+    .profile-img{
+        height:390px;
+    }
+
     .profile-info{
-        padding:22px;
+        padding:20px;
     }
 
     .card{
-        min-height:160px;
-        padding:24px;
+        min-height:140px;
+        padding:22px;
     }
 
     .card h3{
-        font-size:22px;
+        font-size:21px;
     }
 }
 </style>
@@ -505,13 +483,11 @@ body{
 
         <div class="panel-inner">
 
-            </div>
-
             <div class="about-layout">
 
                 <div class="profile-card">
-                    <div class="https://i.pinimg.com/736x/a8/2a/b8/a82ab85a6bffcd9ee4798979c43ea406.jpg">
-                        <img src="https://i.pinimg.com/736x/a8/2a/b8/a82ab85a6bffcd9ee4798979c43ea406.jpg" alt="https://i.pinimg.com/736x/a8/2a/b8/a82ab85a6bffcd9ee4798979c43ea406.jpg">
+                    <div class="profile-img">
+                        <img src="https://i.pinimg.com/736x/a8/2a/b8/a82ab85a6bffcd9ee4798979c43ea406.jpg" alt="profile image">
                     </div>
 
                     <div class="profile-info">
@@ -526,7 +502,7 @@ body{
                 <div class="about-content">
 
                     <h2 class="panel-title">
-                        ABOUT<br>
+                        ABOUT
                     </h2>
 
                     <p class="panel-desc">
@@ -535,7 +511,7 @@ body{
                     </p>
 
                     <div class="keyword-row">
-                        <span class="keyword">불꽃겉운 열정으로 꽃 파우는,</span>
+                        <span class="keyword">불꽃같은 열정으로 꽃피우는</span>
                         <span class="keyword">디자이너 차수지입니다.</span>
                         <span class="keyword">Detail</span>
                         <span class="keyword">Layout</span>
