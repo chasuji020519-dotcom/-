@@ -1,402 +1,98 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>CHA SUJI Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-html {
-  scroll-behavior: smooth;
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#fff;
+    font-family:"Pretendard",sans-serif;
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", sans-serif;
-  background: #fff;
-  color: #111;
-  overflow-x: hidden;
+.hero-title{
+    font-size:clamp(42px,6vw,88px);
+    font-weight:700;
+    line-height:1.2;
+    color:#111;
+    display:flex;
+    align-items:center;
+    gap:16px;
 }
 
-.hero {
-  height: 100vh;
-  padding: 36px 6vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
+.word-wrap{
+    position:relative;
+    height:1.2em;
+    overflow:hidden;
 }
 
-.nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 78px;
-  padding: 0 6vw;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
-  background: rgba(255,255,255,0.72);
-  backdrop-filter: blur(18px);
+.word-slider{
+    display:flex;
+    flex-direction:column;
+    animation:slide 8s infinite;
 }
 
-.logo {
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: -0.04em;
+.word{
+    height:1.2em;
+    display:flex;
+    align-items:center;
+    white-space:nowrap;
 }
 
-.menu {
-  display: flex;
-  gap: 26px;
-  font-size: 13px;
-  color: #555;
+.fixed{
+    color:#111;
 }
 
-.hero-inner {
-  max-width: 1200px;
-  width: 100%;
-}
+@keyframes slide{
 
-.label {
-  font-size: 13px;
-  color: #777;
-  margin-bottom: 22px;
-}
+    0%,20%{
+        transform:translateY(0%);
+    }
 
-.title {
-  font-size: clamp(58px, 12vw, 170px);
-  line-height: 0.88;
-  letter-spacing: -0.08em;
-  font-weight: 800;
-}
+    25%,45%{
+        transform:translateY(-25%);
+    }
 
-.text-roller {
-  height: 1em;
-  overflow: hidden;
-  display: inline-block;
-  vertical-align: top;
-}
+    50%,70%{
+        transform:translateY(-50%);
+    }
 
-.text-roller span {
-  display: block;
-  animation: rollText 8s infinite;
-}
+    75%,95%{
+        transform:translateY(-75%);
+    }
 
-@keyframes rollText {
-  0%, 18% { transform: translateY(0); }
-  25%, 43% { transform: translateY(-100%); }
-  50%, 68% { transform: translateY(-200%); }
-  75%, 93% { transform: translateY(-300%); }
-  100% { transform: translateY(0); }
-}
-
-.subtitle {
-  margin-top: 30px;
-  max-width: 560px;
-  font-size: clamp(18px, 2vw, 28px);
-  line-height: 1.5;
-  letter-spacing: -0.04em;
-  color: #9a9a9a;
-}
-
-.scroll-hint {
-  position: absolute;
-  bottom: 38px;
-  left: 6vw;
-  font-size: 13px;
-  color: #777;
-}
-
-.pad-section {
-  position: relative;
-  padding: 0 4vw 14vh;
-}
-
-.pad {
-  position: sticky;
-  top: 92px;
-  min-height: calc(100vh - 120px);
-  margin-bottom: 16vh;
-  border-radius: 42px;
-  padding: clamp(32px, 6vw, 82px);
-  background: rgba(245,245,245,0.62);
-  border: 1px solid rgba(0,0,0,0.08);
-  backdrop-filter: blur(28px);
-  box-shadow:
-    0 40px 120px rgba(0,0,0,0.08),
-    inset 0 1px 0 rgba(255,255,255,0.7);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.pad:nth-child(1) { z-index: 1; }
-.pad:nth-child(2) { z-index: 2; }
-.pad:nth-child(3) { z-index: 3; }
-.pad:nth-child(4) { z-index: 4; }
-
-.pad-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 30px;
-}
-
-.pad-number {
-  font-size: 14px;
-  color: #999;
-}
-
-.pad h2 {
-  font-size: clamp(42px, 8vw, 120px);
-  line-height: 0.9;
-  letter-spacing: -0.08em;
-  font-weight: 800;
-}
-
-.pad p {
-  margin-top: 26px;
-  max-width: 620px;
-  font-size: clamp(17px, 2vw, 25px);
-  line-height: 1.55;
-  color: #777;
-  letter-spacing: -0.04em;
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 40px;
-}
-
-.tag {
-  padding: 12px 18px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.72);
-  border: 1px solid rgba(0,0,0,0.08);
-  font-size: 14px;
-  color: #333;
-}
-
-.work-grid {
-  margin-top: 50px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-
-.work-card {
-  min-height: 210px;
-  padding: 24px;
-  border-radius: 28px;
-  background: rgba(255,255,255,0.72);
-  border: 1px solid rgba(0,0,0,0.08);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.work-card strong {
-  font-size: 22px;
-  letter-spacing: -0.05em;
-}
-
-.work-card small {
-  color: #888;
-  line-height: 1.5;
-}
-
-.contact {
-  font-size: clamp(32px, 6vw, 88px);
-  letter-spacing: -0.07em;
-  line-height: 1.05;
-  font-weight: 800;
-}
-
-.footer {
-  padding: 80px 6vw;
-  color: #999;
-  font-size: 13px;
-}
-
-@media (max-width: 768px) {
-  .menu {
-    display: none;
-  }
-
-  .hero {
-    padding: 30px 5vw;
-  }
-
-  .pad-section {
-    padding: 0 3vw 10vh;
-  }
-
-  .pad {
-    top: 84px;
-    border-radius: 30px;
-    min-height: calc(100vh - 105px);
-  }
-
-  .pad-top {
-    flex-direction: column;
-  }
-
-  .work-grid {
-    grid-template-columns: 1fr;
-  }
+    100%{
+        transform:translateY(0%);
+    }
 }
 </style>
 </head>
-
 <body>
 
-<nav class="nav">
-  <div class="logo">CHA SUJI</div>
-  <div class="menu">
-    <span>ABOUT</span>
-    <span>SKILLS</span>
-    <span>WORK</span>
-    <span>CONTACT</span>
-  </div>
-</nav>
+<h1 class="hero-title">
 
-<section class="hero">
-  <div class="hero-inner">
-    <div class="label">PORTFOLIO / WEB DESIGN / VISUAL</div>
-
-    <h1 class="title">
-      CHA SUJI<br>
-      <span class="text-roller">
-        <span>
-          PORTFOLIO<br>
-          WEB DESIGN<br>
-          VISUAL WORK<br>
-          CREATIVE
-        </span>
-      </span>
-    </h1>
-
-    <p class="subtitle">
-      깔끔하지만 기억에 남는 화면을 디자인합니다.
-      사용자가 보기 편하고, 브랜드의 분위기가 느껴지는 웹을 만듭니다.
-    </p>
-  </div>
-
-  <div class="scroll-hint">Scroll to explore ↓</div>
-</section>
-
-<section class="pad-section">
-
-  <article class="pad">
-    <div>
-      <div class="pad-top">
-        <span class="pad-number">01 / ABOUT ME</span>
-        <span class="pad-number">CHA SUJI PORTFOLIO</span>
-      </div>
-
-      <h2>ABOUT<br>ME</h2>
-      <p>
-        저는 감각적인 비주얼과 정리된 구조를 좋아하는 디자이너입니다.
-        단순히 예쁜 화면보다, 보는 사람이 쉽게 이해하고 오래 기억하는 디자인을 목표로 합니다.
-      </p>
-    </div>
-
-    <div class="tags">
-      <span class="tag">Clean Design</span>
-      <span class="tag">Web Design</span>
-      <span class="tag">Visual Direction</span>
-      <span class="tag">Portfolio</span>
-    </div>
-  </article>
-
-  <article class="pad">
-    <div>
-      <div class="pad-top">
-        <span class="pad-number">02 / SKILLS</span>
-        <span class="pad-number">DESIGN TOOLKIT</span>
-      </div>
-
-      <h2>SKILLS</h2>
-      <p>
-        포트폴리오 작업에 필요한 화면 구성, 이미지 보정, 상세페이지 디자인,
-        웹 레이아웃 기획을 중심으로 작업합니다.
-      </p>
-    </div>
-
-    <div class="tags">
-      <span class="tag">Photoshop</span>
-      <span class="tag">Figma</span>
-      <span class="tag">HTML</span>
-      <span class="tag">CSS</span>
-      <span class="tag">Brand Mood</span>
-    </div>
-  </article>
-
-  <article class="pad">
-    <div>
-      <div class="pad-top">
-        <span class="pad-number">03 / PORTFOLIO</span>
-        <span class="pad-number">SELECTED WORK</span>
-      </div>
-
-      <h2>WORK</h2>
-      <p>
-        작업물은 카테고리별로 정리할 수 있습니다.
-        쇼핑몰 리디자인, 상세페이지, 배너, 개인 프로젝트를 담아보세요.
-      </p>
-
-      <div class="work-grid">
-        <div class="work-card">
-          <strong>Shopping Mall</strong>
-          <small>주얼리 쇼핑몰 리디자인 / 메인페이지 / 상세페이지</small>
+    <div class="word-wrap">
+        <div class="word-slider">
+            <div class="word">매출내기</div>
+            <div class="word">운영하기</div>
+            <div class="word">성장하기</div>
+            <div class="word">디자인하기</div>
         </div>
-
-        <div class="work-card">
-          <strong>Banner Design</strong>
-          <small>프로모션 배너 / SNS 콘텐츠 / 이벤트 디자인</small>
-        </div>
-
-        <div class="work-card">
-          <strong>Web Concept</strong>
-          <small>브랜드형 웹사이트 / 포트폴리오 메인 디자인</small>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <article class="pad">
-    <div>
-      <div class="pad-top">
-        <span class="pad-number">04 / CONTACT</span>
-        <span class="pad-number">LET'S CONNECT</span>
-      </div>
-
-      <h2>CONTACT</h2>
-      <p>
-        함께 작업하고 싶은 프로젝트가 있다면 편하게 연락 주세요.
-      </p>
     </div>
 
-    <div class="contact">
-      chasuji020519<br>
-      @gmail.com
-    </div>
-  </article>
+    <span class="fixed">쉬운</span>
 
-</section>
-
-<footer class="footer">
-  © 2026 CHA SUJI PORTFOLIO
-</footer>
+</h1>
 
 </body>
 </html>
