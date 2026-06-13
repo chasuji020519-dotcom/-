@@ -33,41 +33,39 @@ nav{
   top:0;
   left:0;
   width:100%;
-  padding:28px 7%;
+  padding:30px 7%;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  z-index:10;
-  background:rgba(255,255,255,.72);
+  z-index:100;
+  background:rgba(255,255,255,.65);
   backdrop-filter:blur(18px);
 }
 
 .logo{
   font-weight:800;
   letter-spacing:-1px;
-  font-size:22px;
+  font-size:24px;
 }
 
 .menu{
   display:flex;
-  gap:36px;
-  font-size:17px;
+  gap:40px;
+  font-size:18px;
   font-weight:500;
-  color:#444;
-}
-
-.menu a:hover{
-  color:#000;
+  color:#333;
 }
 
 .hero{
   height:100vh;
-  position:relative;
+  position:sticky;
+  top:0;
   display:flex;
   justify-content:center;
   align-items:center;
-  overflow:hidden;
   background:#fff;
+  overflow:hidden;
+  z-index:1;
 }
 
 canvas{
@@ -77,16 +75,44 @@ canvas{
   height:100%;
 }
 
-section{
-  padding:120px 7%;
-  background:#fff;
+.glass-section{
+  position:relative;
+  z-index:5;
+  min-height:100vh;
+  padding:12vh 7% 120px;
+  background:linear-gradient(
+    to bottom,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,.45) 12%,
+    rgba(255,255,255,.95) 100%
+  );
+}
+
+.glass-panel{
+  max-width:1200px;
+  margin:0 auto;
+  padding:70px;
+  border-radius:46px;
+  background:rgba(255,255,255,.38);
+  backdrop-filter:blur(28px);
+  -webkit-backdrop-filter:blur(28px);
+  border:1px solid rgba(255,255,255,.7);
+  box-shadow:0 40px 120px rgba(0,0,0,.12);
+  transform:translateY(120px);
+  opacity:0;
+  transition:1s ease;
+}
+
+.glass-panel.active{
+  transform:translateY(0);
+  opacity:1;
 }
 
 .title{
-  font-size:clamp(42px,7vw,96px);
-  line-height:.95;
-  letter-spacing:-5px;
-  margin-bottom:50px;
+  font-size:clamp(52px,8vw,118px);
+  line-height:.9;
+  letter-spacing:-6px;
+  margin-bottom:60px;
 }
 
 .about-grid{
@@ -96,36 +122,41 @@ section{
 }
 
 .card{
-  background:#fff;
-  border:1px solid rgba(0,0,0,.1);
-  border-radius:34px;
-  padding:42px;
+  background:rgba(255,255,255,.5);
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:32px;
+  padding:38px;
+  backdrop-filter:blur(18px);
 }
 
 .card h3{
-  font-size:26px;
+  font-size:28px;
   margin-bottom:20px;
 }
 
 .card p{
-  font-size:16px;
+  font-size:17px;
   line-height:1.8;
-  color:#555;
+  color:#444;
 }
 
 .skills{
   display:flex;
   flex-wrap:wrap;
   gap:10px;
-  margin-top:24px;
+  margin-top:26px;
 }
 
 .skills span{
-  padding:10px 15px;
+  padding:11px 16px;
   background:#111;
   color:#fff;
   border-radius:999px;
-  font-size:13px;
+  font-size:14px;
+}
+
+.work-panel{
+  margin-top:34px;
 }
 
 .projects{
@@ -135,10 +166,10 @@ section{
 }
 
 .project{
-  height:430px;
-  background:#fff;
-  border:1px solid rgba(0,0,0,.08);
-  border-radius:34px;
+  height:400px;
+  background:rgba(255,255,255,.55);
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:32px;
   padding:28px;
   display:flex;
   flex-direction:column;
@@ -153,7 +184,7 @@ section{
 
 .num{
   font-size:14px;
-  color:#999;
+  color:#888;
 }
 
 .project h3{
@@ -163,35 +194,32 @@ section{
 }
 
 .project p{
-  color:#666;
+  color:#555;
   line-height:1.6;
 }
 
-.contact{
-  min-height:70vh;
-}
-
 .contact-box{
+  margin-top:34px;
   background:#111;
   color:#fff;
-  border-radius:44px;
-  padding:70px;
+  border-radius:38px;
+  padding:60px;
 }
 
 .contact-box h2{
-  font-size:clamp(46px,8vw,112px);
+  font-size:clamp(46px,7vw,100px);
   line-height:.9;
   letter-spacing:-5px;
 }
 
 .contact-box p{
-  margin-top:28px;
+  margin-top:26px;
   color:#bbb;
 }
 
 .btn{
   display:inline-block;
-  margin-top:34px;
+  margin-top:32px;
   padding:16px 24px;
   border:1px solid #fff;
   border-radius:999px;
@@ -202,28 +230,30 @@ section{
   color:#111;
 }
 
-.reveal{
-  opacity:0;
-  transform:translateY(50px);
-  transition:1s ease;
-}
-
-.reveal.active{
-  opacity:1;
-  transform:translateY(0);
-}
-
 @media(max-width:900px){
   nav{
     padding:24px 6%;
   }
 
   .logo{
-    font-size:19px;
+    font-size:20px;
   }
 
   .menu{
     display:none;
+  }
+
+  .glass-section{
+    padding:10vh 5% 90px;
+  }
+
+  .glass-panel{
+    padding:38px 24px;
+    border-radius:34px;
+  }
+
+  .title{
+    letter-spacing:-3px;
   }
 
   .about-grid,
@@ -231,16 +261,12 @@ section{
     grid-template-columns:1fr;
   }
 
-  section{
-    padding:90px 6%;
-  }
-
-  .title{
-    letter-spacing:-3px;
+  .project{
+    height:340px;
   }
 
   .contact-box{
-    padding:42px 28px;
+    padding:40px 26px;
   }
 }
 </style>
@@ -261,69 +287,73 @@ section{
   <canvas id="particleCanvas"></canvas>
 </header>
 
-<section id="about" class="reveal">
-  <h2 class="title">About<br>Designer</h2>
+<main class="glass-section">
 
-  <div class="about-grid">
-    <div class="card">
-      <h3>안녕하세요, 차수지입니다.</h3>
-      <p>
-        심플하지만 눈에 남는 웹디자인을 좋아합니다.
-        브랜드의 분위기를 살리고, 사용자가 보기 편한 화면을 만드는 것을 목표로 합니다.
-      </p>
-    </div>
+  <section id="about" class="glass-panel">
+    <h2 class="title">About<br>Designer</h2>
 
-    <div class="card">
-      <h3>Skills</h3>
-      <p>
-        웹디자인, 상세페이지, 브랜드 리디자인, 기본 HTML/CSS 작업을 중심으로
-        포트폴리오를 준비하고 있습니다.
-      </p>
+    <div class="about-grid">
+      <div class="card">
+        <h3>안녕하세요, 차수지입니다.</h3>
+        <p>
+          심플하지만 눈에 남는 웹디자인을 좋아합니다.
+          브랜드의 분위기를 살리고, 사용자가 보기 편한 화면을 만드는 것을 목표로 합니다.
+        </p>
+      </div>
 
-      <div class="skills">
-        <span>Photoshop</span>
-        <span>Figma</span>
-        <span>HTML</span>
-        <span>CSS</span>
-        <span>Web Design</span>
+      <div class="card">
+        <h3>Skills</h3>
+        <p>
+          웹디자인, 상세페이지, 브랜드 리디자인, 기본 HTML/CSS 작업을 중심으로
+          포트폴리오를 준비하고 있습니다.
+        </p>
+
+        <div class="skills">
+          <span>Photoshop</span>
+          <span>Figma</span>
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>Web Design</span>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="work" class="reveal">
-  <h2 class="title">Selected<br>Works</h2>
+  <section id="work" class="glass-panel work-panel">
+    <h2 class="title">Selected<br>Works</h2>
 
-  <div class="projects">
-    <div class="project">
-      <div class="num">01</div>
-      <h3>Jewelry<br>Redesign</h3>
-      <p>주얼리 브랜드의 고급스럽고 깔끔한 웹사이트 리디자인.</p>
+    <div class="projects">
+      <div class="project">
+        <div class="num">01</div>
+        <h3>Jewelry<br>Redesign</h3>
+        <p>주얼리 브랜드의 고급스럽고 깔끔한 웹사이트 리디자인.</p>
+      </div>
+
+      <div class="project">
+        <div class="num">02</div>
+        <h3>Cosmetic<br>Landing</h3>
+        <p>20대 타겟의 트렌디한 화장품 랜딩페이지 디자인.</p>
+      </div>
+
+      <div class="project">
+        <div class="num">03</div>
+        <h3>Fashion<br>Editorial</h3>
+        <p>에디토리얼 무드를 활용한 패션 쇼핑몰 메인 페이지.</p>
+      </div>
     </div>
+  </section>
 
-    <div class="project">
-      <div class="num">02</div>
-      <h3>Cosmetic<br>Landing</h3>
-      <p>20대 타겟의 트렌디한 화장품 랜딩페이지 디자인.</p>
+  <section id="contact" class="glass-panel work-panel">
+    <div class="contact-box">
+      <h2>Let’s Create<br>Something New.</h2>
+      <p>포트폴리오 문의 또는 연락은 아래 이메일로 부탁드립니다.</p>
+      <a class="btn" href="mailto:chasuji020519@gmail.com">
+        chasuji020519@gmail.com
+      </a>
     </div>
+  </section>
 
-    <div class="project">
-      <div class="num">03</div>
-      <h3>Fashion<br>Editorial</h3>
-      <p>에디토리얼 무드를 활용한 패션 쇼핑몰 메인 페이지.</p>
-    </div>
-  </div>
-</section>
-
-<section id="contact" class="contact reveal">
-  <div class="contact-box">
-    <h2>Let’s Create<br>Something New.</h2>
-    <p>포트폴리오 문의 또는 연락은 아래 이메일로 부탁드립니다.</p>
-    <a class="btn" href="mailto:chasuji020519@gmail.com">
-      chasuji020519@gmail.com
-    </a>
-  </div>
-</section>
+</main>
 
 <script>
 const canvas = document.getElementById("particleCanvas");
@@ -359,17 +389,16 @@ function createTextPoints(){
   temp.width = window.innerWidth;
   temp.height = window.innerHeight;
 
-  const fontSize = Math.min(window.innerWidth / 6.6, 300);
+  const fontSize = Math.min(window.innerWidth / 4.2, 350);
 
   tctx.fillStyle = "#111";
   tctx.font = `900 ${fontSize}px Arial, sans-serif`;
   tctx.textAlign = "center";
   tctx.textBaseline = "middle";
-
   tctx.fillText(text, temp.width / 2, temp.height / 2);
 
   const imageData = tctx.getImageData(0,0,temp.width,temp.height).data;
-  const gap = window.innerWidth < 700 ? 8 : 7;
+  const gap = window.innerWidth < 700 ? 7 : 6;
 
   for(let y = 0; y < temp.height; y += gap){
     for(let x = 0; x < temp.width; x += gap){
@@ -395,7 +424,7 @@ function createParticles(){
       ty: point.y,
       vx: 0,
       vy: 0,
-      r: 2.5
+      r: 3.2
     });
   }
 }
@@ -415,14 +444,14 @@ function animate(){
     const mdx = p.x - mouse.x;
     const mdy = p.y - mouse.y;
     const dist = Math.sqrt(mdx * mdx + mdy * mdy);
-    const forceRadius = 105;
+    const forceRadius = 110;
 
     if(dist < forceRadius){
       const force = (forceRadius - dist) / forceRadius;
       const angle = Math.atan2(mdy, mdx);
 
-      p.vx += Math.cos(angle) * force * 5.2;
-      p.vy += Math.sin(angle) * force * 5.2;
+      p.vx += Math.cos(angle) * force * 5.5;
+      p.vy += Math.sin(angle) * force * 5.5;
     }
 
     p.vx *= .86;
@@ -461,20 +490,20 @@ window.addEventListener("resize", resize);
 resize();
 animate();
 
-const reveals = document.querySelectorAll(".reveal");
+const panels = document.querySelectorAll(".glass-panel");
 
-function revealOnScroll(){
-  reveals.forEach(el=>{
-    const top = el.getBoundingClientRect().top;
+function panelReveal(){
+  panels.forEach(panel=>{
+    const top = panel.getBoundingClientRect().top;
 
-    if(top < window.innerHeight - 100){
-      el.classList.add("active");
+    if(top < window.innerHeight - 120){
+      panel.classList.add("active");
     }
   });
 }
 
-window.addEventListener("scroll", revealOnScroll);
-window.addEventListener("load", revealOnScroll);
+window.addEventListener("scroll", panelReveal);
+window.addEventListener("load", panelReveal);
 </script>
 
 </body>
