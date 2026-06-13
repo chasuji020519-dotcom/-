@@ -1,83 +1,472 @@
-<div class="about-wrap">
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
 
-    <div class="about-left">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
 
-        <div class="profile-image">
-            <img src="images/profile.jpg" alt="">
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#fff;
+    font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;
+    color:#111;
+    overflow-x:hidden;
+}
+
+/* 고정 메인 */
+.main-fixed{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100vh;
+    z-index:1;
+    background:#fff;
+    overflow:hidden;
+}
+
+.nav{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:32px 40px;
+    z-index:10;
+}
+
+.logo{
+    font-size:18px;
+    font-weight:700;
+    letter-spacing:.12em;
+}
+
+.menu{
+    display:flex;
+    gap:36px;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#111;
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:.08em;
+}
+
+.hero{
+    width:100%;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:90px 0 0;
+}
+
+.hero-content{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    padding:0 40px;
+}
+
+.title{
+    width:min(1500px,100%);
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+    align-items:center;
+    font-size:clamp(70px,7.5vw,130px);
+    font-weight:700;
+    letter-spacing:-0.08em;
+    line-height:1;
+}
+
+.fixed{
+    white-space:nowrap;
+    text-align:center;
+    padding:0 .2em;
+}
+
+.box{
+    width:100%;
+    height:1.1em;
+    overflow:hidden;
+}
+
+.slider{
+    display:flex;
+    flex-direction:column;
+    animation:slideText 14s infinite ease-in-out;
+}
+
+.word{
+    height:1.1em;
+    line-height:1.1em;
+    white-space:nowrap;
+}
+
+.left .word{
+    text-align:right;
+    padding-right:.08em;
+}
+
+.right .word{
+    text-align:left;
+    padding-left:.08em;
+}
+
+.subtitle{
+    margin-top:30px;
+    font-size:18px;
+    color:#8a8a8a;
+    letter-spacing:-0.02em;
+}
+
+@keyframes slideText{
+    0%,16%{transform:translateY(0)}
+    22%,38%{transform:translateY(-1.1em)}
+    44%,60%{transform:translateY(-2.2em)}
+    66%,82%{transform:translateY(-3.3em)}
+    88%,100%{transform:translateY(-4.4em)}
+}
+
+.image-marquee{
+    position:relative;
+    width:100%;
+    overflow:hidden;
+}
+
+.image-marquee::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:2;
+    pointer-events:none;
+    background:linear-gradient(
+        to bottom,
+        rgba(255,255,255,1) 0%,
+        rgba(255,255,255,.65) 18%,
+        rgba(255,255,255,.12) 42%,
+        rgba(0,0,0,.18) 100%
+    );
+}
+
+.marquee-track{
+    display:flex;
+    width:max-content;
+    animation:marquee 38s linear infinite;
+}
+
+.project{
+    flex-shrink:0;
+}
+
+.project img{
+    width:300px;
+    height:180px;
+    object-fit:cover;
+    display:block;
+    filter:saturate(.9) contrast(1.05);
+}
+
+@keyframes marquee{
+    from{transform:translateX(0)}
+    to{transform:translateX(-50%)}
+}
+
+/* 스크롤 공간 */
+.scroll-area{
+    position:relative;
+    z-index:5;
+    margin-top:100vh;
+}
+
+/* 올라오는 유리 패널 */
+.about-panel{
+    width:100%;
+    min-height:100vh;
+    padding:110px 40px 80px;
+    background:rgba(255,255,255,.48);
+    backdrop-filter:blur(30px);
+    -webkit-backdrop-filter:blur(30px);
+    border-top:1px solid rgba(255,255,255,.7);
+    box-shadow:0 -40px 100px rgba(0,0,0,.16);
+}
+
+.panel-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:90px;
+    font-size:14px;
+    letter-spacing:.12em;
+    color:rgba(0,0,0,.45);
+}
+
+.panel-title{
+    font-size:clamp(54px,8vw,130px);
+    line-height:.92;
+    letter-spacing:-.08em;
+    margin-bottom:45px;
+}
+
+.panel-desc{
+    max-width:620px;
+    font-size:18px;
+    line-height:1.8;
+    color:rgba(0,0,0,.58);
+}
+
+.panel-cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-top:80px;
+}
+
+.card{
+    min-height:230px;
+    padding:32px;
+    border-radius:30px;
+    background:rgba(255,255,255,.36);
+    border:1px solid rgba(255,255,255,.65);
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+    box-shadow:0 20px 60px rgba(0,0,0,.08);
+    transition:.35s ease;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    background:rgba(255,255,255,.55);
+}
+
+.card span{
+    display:block;
+    font-size:13px;
+    color:rgba(0,0,0,.4);
+    margin-bottom:30px;
+}
+
+.card h3{
+    font-size:28px;
+    letter-spacing:-.04em;
+    margin-bottom:15px;
+}
+
+.card p{
+    font-size:15px;
+    line-height:1.7;
+    color:rgba(0,0,0,.55);
+}
+
+@media(max-width:768px){
+
+    .nav{
+        padding:28px 24px;
+    }
+
+    .logo{
+        font-size:15px;
+    }
+
+    .menu{
+        gap:15px;
+    }
+
+    .menu a{
+        font-size:10px;
+    }
+
+    .hero{
+        padding:80px 0 0;
+    }
+
+    .hero-content{
+        padding:0 24px;
+    }
+
+    .title{
+        font-size:clamp(44px,11vw,76px);
+    }
+
+    .subtitle{
+        font-size:15px;
+        text-align:center;
+        margin-top:24px;
+    }
+
+    .project img{
+        width:210px;
+        height:130px;
+    }
+
+    .about-panel{
+        padding:100px 24px 70px;
+    }
+
+    .panel-top{
+        margin-bottom:60px;
+        font-size:11px;
+    }
+
+    .panel-title{
+        font-size:clamp(46px,13vw,76px);
+    }
+
+    .panel-desc{
+        font-size:15px;
+    }
+
+    .panel-cards{
+        grid-template-columns:1fr;
+        margin-top:48px;
+    }
+
+    .card{
+        min-height:170px;
+        padding:24px;
+    }
+
+    .card h3{
+        font-size:23px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="main-fixed">
+
+    <nav class="nav">
+        <div class="logo">Portfolio</div>
+
+        <div class="menu">
+            <a href="#">ABOUT</a>
+            <a href="#">WORKS</a>
+            <a href="#">ARCHIVE</a>
+            <a href="#">CONTACT</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+
+        <div class="hero-content">
+            <h1 class="title">
+
+                <div class="box left">
+                    <div class="slider">
+                        <div class="word">감각을</div>
+                        <div class="word">가치를</div>
+                        <div class="word">경험을</div>
+                        <div class="word">생각을</div>
+                        <div class="word">감각을</div>
+                    </div>
+                </div>
+
+                <span class="fixed">담은</span>
+
+                <div class="box right">
+                    <div class="slider">
+                        <div class="word">디자인</div>
+                        <div class="word">퀄리티</div>
+                        <div class="word">임팩트</div>
+                        <div class="word">디테일</div>
+                        <div class="word">디자인</div>
+                    </div>
+                </div>
+
+            </h1>
+
+            <p class="subtitle">
+                단 한줄로 나의 브랜드를 현실로 만들어보세요
+            </p>
         </div>
 
-        <div class="profile-info">
+        <div class="image-marquee">
+            <div class="marquee-track">
 
-            <h3>CHA SUJI</h3>
+                <div class="project"><img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg"></div>
+                <div class="project"><img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg"></div>
+                <div class="project"><img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg"></div>
+                <div class="project"><img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg"></div>
+                <div class="project"><img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg"></div>
 
-            <span class="job">
-                Visual Designer
-            </span>
+                <div class="project"><img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg"></div>
+                <div class="project"><img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg"></div>
+                <div class="project"><img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg"></div>
+                <div class="project"><img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg"></div>
+                <div class="project"><img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg"></div>
 
-            <div class="info-list">
-                <p>Based in Korea</p>
-                <p>Brand & Graphic Design</p>
-                <p>Portfolio 2026</p>
             </div>
-
         </div>
 
-    </div>
-
-    <div class="about-right">
-
-        <span class="about-label">
-            ABOUT ME
-        </span>
-
-        <h2>
-            브랜드와 사람 사이를<br>
-            연결하는 디자인을 만듭니다.
-        </h2>
-
-        <p class="about-desc">
-            단순히 보기 좋은 디자인보다
-            기억에 남는 경험을 만드는 것을 중요하게 생각합니다.
-            브랜드가 가진 분위기와 가치를 시각적으로 정리하며
-            사용자가 자연스럽게 공감할 수 있는 결과물을 만듭니다.
-        </p>
-
-        <div class="about-grid">
-
-            <div class="meta-box">
-                <span>Focus</span>
-                <strong>
-                    Branding<br>
-                    Graphic Design
-                </strong>
-            </div>
-
-            <div class="meta-box">
-                <span>Tools</span>
-                <strong>
-                    Photoshop<br>
-                    Illustrator · Figma
-                </strong>
-            </div>
-
-            <div class="meta-box">
-                <span>Keyword</span>
-                <strong>
-                    Detail<br>
-                    Impact · Experience
-                </strong>
-            </div>
-
-            <div class="meta-box">
-                <span>Goal</span>
-                <strong>
-                    Create Meaningful<br>
-                    Visual Stories
-                </strong>
-            </div>
-
-        </div>
-
-    </div>
+    </section>
 
 </div>
+
+<div class="scroll-area">
+
+    <section class="about-panel">
+
+        <div class="panel-top">
+            <span>ABOUT ME</span>
+            <span>SCROLL 01</span>
+        </div>
+
+        <h2 class="panel-title">
+            Visual stories<br>
+            with clear detail
+        </h2>
+
+        <p class="panel-desc">
+            감각적인 비주얼과 섬세한 디테일을 바탕으로 브랜드의 분위기를 정리하고,
+            보는 사람이 오래 기억할 수 있는 디자인을 만듭니다.
+        </p>
+
+        <div class="panel-cards">
+
+            <div class="card">
+                <span>01</span>
+                <h3>Brand Design</h3>
+                <p>
+                    브랜드의 방향성과 분위기를 시각적으로 정리하는 작업입니다.
+                </p>
+            </div>
+
+            <div class="card">
+                <span>02</span>
+                <h3>Graphic Design</h3>
+                <p>
+                    포스터, 콘텐츠, 편집 디자인 등 인상적인 비주얼을 만듭니다.
+                </p>
+            </div>
+
+            <div class="card">
+                <span>03</span>
+                <h3>UI Concept</h3>
+                <p>
+                    웹과 모바일 화면에서 보기 좋은 구조와 흐름을 설계합니다.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+</body>
+</html>
