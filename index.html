@@ -1,645 +1,614 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CHASUJI Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>SJ*5 PORTFOLIO</title>
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-html,body{
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;
-  color:#111;
-}
+    :root {
+      --bg: #ececec;
+      --text: #111111;
+      --sub-text: #666666;
+      --button-bg: rgba(255,255,255,0.92);
+      --button-border: rgba(0,0,0,0.08);
+      --menu-hover: rgba(0,0,0,0.06);
+      --shadow: 0 8px 24px rgba(0,0,0,0.05);
+    }
 
-body{
-  background:#f1f1ef;
-}
+    body.dark-mode {
+      --bg: #111111;
+      --text: #f5f5f5;
+      --sub-text: #cfcfcf;
+      --button-bg: rgba(255,255,255,0.08);
+      --button-border: rgba(255,255,255,0.12);
+      --menu-hover: rgba(255,255,255,0.08);
+      --shadow: 0 8px 24px rgba(0,0,0,0.28);
+    }
 
-.app{
-  width:100vw;
-  height:100vh;
-  position:relative;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 15% 15%, rgba(255,255,255,.9), transparent 24%),
-    radial-gradient(circle at 85% 25%, rgba(0,0,0,.08), transparent 26%),
-    radial-gradient(circle at 50% 90%, rgba(0,0,0,.12), transparent 34%),
-    linear-gradient(140deg,#f8f8f5,#dfdfdc);
-}
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      overflow-x: hidden;
+      overscroll-behavior: none;
+    }
 
-/* 배경 장식 */
-.orbit{
-  position:absolute;
-  width:520px;
-  height:520px;
-  border:1px solid rgba(0,0,0,.12);
-  border-radius:50%;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-}
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.25s ease, color 0.25s ease;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+    }
 
-.orbit:before,
-.orbit:after{
-  content:"";
-  position:absolute;
-  border-radius:50%;
-  border:1px solid rgba(0,0,0,.08);
-}
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-.orbit:before{
-  width:720px;
-  height:720px;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-}
+    button {
+      border: 0;
+      background: none;
+      cursor: pointer;
+      font: inherit;
+      color: inherit;
+    }
 
-.orbit:after{
-  width:320px;
-  height:320px;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-}
+    .site-wrap {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
 
-/* 메인 로고 */
-.hero{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  z-index:2;
-  transition:.8s ease;
-}
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 24px 46px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: transparent;
+      z-index: 100;
+    }
 
-.logo{
-  font-size:clamp(52px,12vw,150px);
-  font-weight:900;
-  letter-spacing:-8px;
-  line-height:.85;
-}
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.25s ease;
+    }
 
-.logo em{
-  font-style:normal;
-  color:transparent;
-  -webkit-text-stroke:1.5px #111;
-}
+    .logo:hover {
+      transform: scale(1.05);
+    }
 
-.hero-text{
-  margin-top:20px;
-  display:flex;
-  gap:10px;
-  align-items:center;
-  font-size:13px;
-  letter-spacing:3px;
-  color:#555;
-}
+    .sj-logo {
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing: -0.07em;
+      color: var(--text);
+      line-height: 1;
+    }
 
-.hero-text:before,
-.hero-text:after{
-  content:"";
-  width:34px;
-  height:1px;
-  background:#555;
-}
+    .gnb-area {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      margin-left: auto;
+      padding-right: 28px;
+    }
 
-.scroll-guide{
-  position:absolute;
-  bottom:34px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:12px;
-  color:#777;
-  letter-spacing:2px;
-}
+    .gnb {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      width: auto;
+    }
 
-.scroll-guide span{
-  display:block;
-  width:1px;
-  height:44px;
-  background:#999;
-  margin:12px auto 0;
-  animation:lineMove 1.4s infinite;
-}
+    .gnb a {
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-size: 21px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      white-space: nowrap;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.25s ease;
+    }
 
-@keyframes lineMove{
-  0%{transform:scaleY(.2);transform-origin:top}
-  50%{transform:scaleY(1);transform-origin:top}
-  100%{transform:scaleY(.2);transform-origin:bottom}
-}
+    .gnb a:hover {
+      background: var(--menu-hover);
+      transform: translateY(-2px);
+    }
 
-/* 올라오는 유리창 */
-.sheet{
-  position:absolute;
-  left:50%;
-  bottom:-110%;
-  transform:translateX(-50%);
-  width:min(94vw,1120px);
-  height:82vh;
-  padding:34px;
-  z-index:10;
-  border-radius:46px 46px 0 0;
-  background:rgba(255,255,255,.36);
-  backdrop-filter:blur(34px);
-  -webkit-backdrop-filter:blur(34px);
-  border:1px solid rgba(255,255,255,.65);
-  box-shadow:0 -24px 90px rgba(0,0,0,.18);
-  transition:bottom .9s cubic-bezier(.19,1,.22,1), transform .9s cubic-bezier(.19,1,.22,1);
-}
+    .header-tools {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 70px;
+      justify-content: flex-end;
+      flex-shrink: 0;
+    }
 
-.sheet.active{
-  bottom:0;
-}
+    .icon-btn,
+    .menu-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background: var(--button-bg);
+      border: 1px solid var(--button-border);
+      box-shadow: var(--shadow);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: transform 0.2s ease, background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+    }
 
-.sheet.up{
-  bottom:100%;
-}
+    .icon-btn:hover,
+    .menu-btn:hover {
+      transform: translateY(-2px);
+    }
 
-.handle{
-  width:58px;
-  height:5px;
-  border-radius:999px;
-  background:rgba(0,0,0,.22);
-  margin:0 auto 30px;
-}
+    .menu-btn {
+      display: none;
+      font-size: 24px;
+    }
 
-.content{
-  height:calc(100% - 35px);
-  display:grid;
-  grid-template-columns:.95fr 1.05fr;
-  gap:34px;
-}
+    .theme-icon {
+      position: absolute;
+      font-size: 20px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
 
-.big-title{
-  font-size:clamp(48px,8vw,96px);
-  line-height:.86;
-  letter-spacing:-5px;
-  font-weight:900;
-}
+    .theme-icon.sun {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
 
-.tag{
-  display:inline-flex;
-  padding:9px 15px;
-  border:1px solid rgba(0,0,0,.18);
-  border-radius:999px;
-  font-size:13px;
-  margin-bottom:24px;
-}
+    .theme-icon.moon {
+      opacity: 0;
+      transform: rotate(-90deg) scale(0.5);
+    }
 
-.desc{
-  margin-top:28px;
-  max-width:520px;
-  font-size:17px;
-  line-height:1.8;
-  color:#333;
-}
+    body.dark-mode .theme-icon.sun {
+      opacity: 0;
+      transform: rotate(90deg) scale(0.5);
+    }
 
-.profile-card{
-  align-self:end;
-  padding:28px;
-  border-radius:32px;
-  background:rgba(255,255,255,.42);
-  border:1px solid rgba(255,255,255,.65);
-}
+    body.dark-mode .theme-icon.moon {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
 
-.profile-card h3{
-  font-size:24px;
-  margin-bottom:18px;
-}
+    .hero {
+      min-height: 100vh;
+      padding: 120px 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.list{
-  display:grid;
-  gap:12px;
-}
+    .hero-inner {
+      width: 100%;
+      max-width: 1520px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transform: translateY(8px);
+    }
 
-.item{
-  display:flex;
-  justify-content:space-between;
-  gap:20px;
-  padding-bottom:12px;
-  border-bottom:1px solid rgba(0,0,0,.1);
-  font-size:14px;
-}
+    .logo-canvas-wrap {
+      position: relative;
+      width: min(1380px, 94vw);
+      height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      touch-action: none;
+      overscroll-behavior: none;
+    }
 
-.item b{
-  color:#111;
-}
+    #logoParticleCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      touch-action: none;
+    }
 
-.item span{
-  color:#555;
-  text-align:right;
-}
+    .hidden-logo-source {
+      position: absolute;
+      width: 0;
+      height: 0;
+      opacity: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
 
-/* 카테고리 */
-.category-wrap{
-  height:calc(100% - 35px);
-  display:flex;
-  flex-direction:column;
-}
+    @media (max-width: 1200px) {
+      .site-header {
+        padding: 20px 24px;
+      }
 
-.category-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:30px;
-  margin-bottom:26px;
-}
+      .sj-logo {
+        font-size: 31px;
+      }
 
-.category-head h2{
-  font-size:clamp(42px,7vw,88px);
-  line-height:.9;
-  letter-spacing:-4px;
-}
+      .gnb-area {
+        padding-right: 18px;
+      }
 
-.category-head p{
-  max-width:360px;
-  line-height:1.7;
-  color:#444;
-  font-size:15px;
-}
+      .gnb a {
+        font-size: 18px;
+        padding: 10px 12px;
+      }
 
-.cards{
-  flex:1;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-}
+      .logo-canvas-wrap {
+        height: 300px;
+      }
+    }
 
-.card{
-  position:relative;
-  overflow:hidden;
-  border-radius:34px;
-  padding:24px;
-  background:rgba(255,255,255,.42);
-  border:1px solid rgba(255,255,255,.66);
-  cursor:pointer;
-  transition:.35s ease;
-}
+    @media (max-width: 980px) {
+      .site-header {
+        padding: 18px 16px;
+      }
 
-.card:hover{
-  transform:translateY(-12px) scale(1.01);
-  background:rgba(255,255,255,.72);
-}
+      .menu-btn {
+        display: inline-flex;
+      }
 
-.card:after{
-  content:"";
-  position:absolute;
-  width:180px;
-  height:180px;
-  border-radius:50%;
-  background:rgba(0,0,0,.06);
-  right:-70px;
-  bottom:-70px;
-}
+      .gnb-area {
+        flex: 0;
+        padding-right: 0;
+      }
 
-.card-num{
-  font-size:13px;
-  color:#777;
-}
+      .gnb {
+        display: none;
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 16px;
+        right: 16px;
+        padding: 18px;
+        border-radius: 22px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        background: var(--bg);
+        border: 1px solid var(--button-border);
+        box-shadow: var(--shadow);
+      }
 
-.card h3{
-  position:absolute;
-  left:24px;
-  bottom:70px;
-  font-size:25px;
-  letter-spacing:-1px;
-}
+      .gnb.open {
+        display: flex;
+      }
 
-.card p{
-  position:absolute;
-  left:24px;
-  right:24px;
-  bottom:24px;
-  font-size:14px;
-  line-height:1.5;
-  color:#555;
-}
+      .gnb a {
+        width: 100%;
+        padding: 14px 16px;
+        border-radius: 14px;
+        font-size: 18px;
+        transform: none !important;
+      }
 
-/* 하단 네비 */
-.nav{
-  position:absolute;
-  right:26px;
-  top:50%;
-  transform:translateY(-50%);
-  z-index:30;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
+      .gnb a:hover {
+        transform: none;
+      }
 
-.nav button{
-  width:9px;
-  height:9px;
-  border:0;
-  border-radius:999px;
-  background:rgba(0,0,0,.3);
-  cursor:pointer;
-  transition:.3s;
-}
+      .hero {
+        padding: 110px 14px 40px;
+      }
 
-.nav button.active{
-  height:34px;
-  background:#111;
-}
+      .logo-canvas-wrap {
+        width: 100%;
+        height: 220px;
+      }
+    }
 
-/* 페이지 숫자 */
-.page-count{
-  position:absolute;
-  left:28px;
-  bottom:26px;
-  z-index:30;
-  font-size:13px;
-  color:#666;
-  letter-spacing:2px;
-}
+    @media (max-width: 560px) {
+      .sj-logo {
+        font-size: 28px;
+      }
 
-/* 모바일 */
-@media(max-width:850px){
-  .logo{
-    letter-spacing:-4px;
-  }
+      .icon-btn,
+      .menu-btn {
+        width: 42px;
+        height: 42px;
+      }
 
-  .sheet{
-    width:100vw;
-    height:84vh;
-    padding:24px 20px;
-    border-radius:34px 34px 0 0;
-  }
+      .theme-icon {
+        font-size: 18px;
+      }
 
-  .content{
-    grid-template-columns:1fr;
-    gap:20px;
-  }
-
-  .profile-card{
-    align-self:auto;
-  }
-
-  .category-head{
-    flex-direction:column;
-  }
-
-  .cards{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .card{
-    min-height:190px;
-  }
-
-  .nav{
-    right:13px;
-  }
-}
-
-@media(max-width:480px){
-  .cards{
-    grid-template-columns:1fr;
-    overflow-y:auto;
-    padding-bottom:20px;
-  }
-
-  .card{
-    min-height:170px;
-  }
-}
-</style>
+      .logo-canvas-wrap {
+        height: 170px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="site-wrap">
+    <header class="site-header">
+      <a href="/" class="logo sj-logo" aria-label="SJ*5 홈">
+        SJ*5
+      </a>
 
-<div class="app">
+      <div class="gnb-area">
+        <nav class="gnb" id="gnb">
+          <a href="/about.html">ABOUT</a>
+          <a href="/order.html">ORDER</a>
+          <a href="/manual.html">MANUAL</a>
+          <a href="/qa.html">Q&amp;A</a>
+          <a href="/portfolio.html">PORTFOLIO</a>
+          <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+          <a href="/member/login.html">LOGIN</a>
+        </nav>
+      </div>
 
-  <div class="orbit"></div>
+      <div class="header-tools">
+        <button type="button" class="menu-btn" id="menuBtn" aria-label="메뉴 열기">☰</button>
+        <button type="button" class="icon-btn" id="themeToggle" aria-label="다크모드 전환">
+          <span class="theme-icon sun">☀</span>
+          <span class="theme-icon moon">☾</span>
+        </button>
+      </div>
+    </header>
 
-  <main class="hero">
-    <div class="logo">CHA<em>SUJI</em></div>
-    <div class="hero-text">PORTFOLIO 2026</div>
-    <div class="scroll-guide">
-      SWIPE UP
-      <span></span>
+    <main class="hero">
+      <div class="hero-inner">
+        <div class="logo-canvas-wrap" id="canvasWrap">
+          <canvas id="logoParticleCanvas"></canvas>
+        </div>
+      </div>
+    </main>
+
+    <div class="hidden-logo-source">
+      <canvas id="textSource"></canvas>
     </div>
-  </main>
-
-  <!-- 첫 번째 팝업 -->
-  <section class="sheet" id="sheet1">
-    <div class="handle"></div>
-
-    <div class="content">
-      <div>
-        <div class="tag">ABOUT ME</div>
-        <h1 class="big-title">Design<br>with<br>mood.</h1>
-        <p class="desc">
-          안녕하세요. 감각적인 분위기와 깔끔한 레이아웃을 좋아하는
-          웹디자이너 차수지입니다. 단순히 예쁜 화면보다 브랜드의 첫인상이
-          오래 남는 디자인을 만들고 싶습니다.
-        </p>
-      </div>
-
-      <div class="profile-card">
-        <h3>Profile</h3>
-
-        <div class="list">
-          <div class="item">
-            <b>Name</b>
-            <span>CHASUJI</span>
-          </div>
-          <div class="item">
-            <b>Field</b>
-            <span>Web Design / Visual Design</span>
-          </div>
-          <div class="item">
-            <b>Style</b>
-            <span>Minimal, Trendy, Editorial</span>
-          </div>
-          <div class="item">
-            <b>Tools</b>
-            <span>Photoshop, Figma, HTML, CSS</span>
-          </div>
-          <div class="item">
-            <b>Goal</b>
-            <span>감각적인 포트폴리오 완성하기</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 두 번째 팝업 -->
-  <section class="sheet" id="sheet2">
-    <div class="handle"></div>
-
-    <div class="category-wrap">
-      <div class="category-head">
-        <h2>Portfolio<br>Category</h2>
-        <p>
-          포트폴리오에 넣을 작업을 분야별로 정리했습니다.
-          각 카테고리는 추후 실제 작업물 이미지와 설명으로 교체하면 됩니다.
-        </p>
-      </div>
-
-      <div class="cards">
-        <div class="card">
-          <span class="card-num">01</span>
-          <h3>Web Design</h3>
-          <p>브랜드 사이트, 쇼핑몰, 개인 포트폴리오 디자인</p>
-        </div>
-
-        <div class="card">
-          <span class="card-num">02</span>
-          <h3>Branding</h3>
-          <p>로고, 컬러 시스템, 브랜드 무드보드 제작</p>
-        </div>
-
-        <div class="card">
-          <span class="card-num">03</span>
-          <h3>Graphic</h3>
-          <p>포스터, 배너, 상세페이지, SNS 비주얼</p>
-        </div>
-
-        <div class="card">
-          <span class="card-num">04</span>
-          <h3>UI / UX</h3>
-          <p>사용자 흐름을 고려한 모바일 화면 구성</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="nav">
-    <button class="active" data-page="0"></button>
-    <button data-page="1"></button>
-    <button data-page="2"></button>
   </div>
 
-  <div class="page-count">01 / 03</div>
+  <script>
+    const body = document.body;
+    const themeToggle = document.getElementById('themeToggle');
+    const menuBtn = document.getElementById('menuBtn');
+    const gnb = document.getElementById('gnb');
 
-</div>
+    const savedTheme = localStorage.getItem('agitTheme');
 
-<script>
-const sheets = document.querySelectorAll(".sheet");
-const navBtns = document.querySelectorAll(".nav button");
-const pageCount = document.querySelector(".page-count");
-const hero = document.querySelector(".hero");
-
-let currentPage = 0;
-let locked = false;
-let touchStartY = 0;
-let wheelAmount = 0;
-
-function goPage(page){
-  if(page < 0 || page > 2) return;
-
-  currentPage = page;
-
-  sheets.forEach((sheet,index)=>{
-    sheet.classList.remove("active","up");
-
-    if(currentPage === 0){
-      return;
+    if (savedTheme === 'dark') {
+      body.classList.add('dark-mode');
     }
 
-    if(index < currentPage - 1){
-      sheet.classList.add("up");
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+
+      localStorage.setItem(
+        'agitTheme',
+        body.classList.contains('dark-mode') ? 'dark' : 'light'
+      );
+
+      setTimeout(buildLogoParticles, 30);
+    });
+
+    if (menuBtn && gnb) {
+      menuBtn.addEventListener('click', () => {
+        gnb.classList.toggle('open');
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 980) {
+          gnb.classList.remove('open');
+        }
+      });
     }
 
-    if(index === currentPage - 1){
-      sheet.classList.add("active");
-    }
-  });
+    const canvas = document.getElementById('logoParticleCanvas');
+    const wrap = document.getElementById('canvasWrap');
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
-  hero.style.opacity = currentPage === 0 ? "1" : ".18";
-  hero.style.transform = currentPage === 0 ? "scale(1)" : "scale(.92)";
+    const pointer = {
+      x: -9999,
+      y: -9999,
+      active: false,
+      radius: 95
+    };
 
-  navBtns.forEach((btn,index)=>{
-    btn.classList.toggle("active",index === currentPage);
-  });
+    let particles = [];
+    let animationId = null;
+    let introPlayed = false;
+    let introFrame = 0;
 
-  pageCount.textContent = `0${currentPage + 1} / 03`;
-}
+    function resizeCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      const rect = wrap.getBoundingClientRect();
 
-function move(direction){
-  if(locked) return;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
 
-  if(direction === "down" && currentPage < 2){
-    locked = true;
-    goPage(currentPage + 1);
-  }
+      canvas.style.width = rect.width + 'px';
+      canvas.style.height = rect.height + 'px';
 
-  if(direction === "up" && currentPage > 0){
-    locked = true;
-    goPage(currentPage - 1);
-  }
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
 
-  setTimeout(()=>{
-    locked = false;
-  },1000);
-}
-
-/* 트랙패드 자동 넘어감 방지 */
-window.addEventListener("wheel",(e)=>{
-  wheelAmount += e.deltaY;
-
-  if(Math.abs(wheelAmount) > 260){
-    if(wheelAmount > 0){
-      move("down");
-    }else{
-      move("up");
+      buildLogoParticles();
     }
 
-    wheelAmount = 0;
-  }
+    function buildLogoParticles() {
+      particles = [];
 
-  clearTimeout(window.wheelTimer);
-  window.wheelTimer = setTimeout(()=>{
-    wheelAmount = 0;
-  },260);
-},{passive:true});
+      const width = wrap.clientWidth;
+      const height = wrap.clientHeight;
 
-/* 모바일 스와이프 */
-window.addEventListener("touchstart",(e)=>{
-  touchStartY = e.touches[0].clientY;
-});
+      const off = document.createElement('canvas');
+      const offCtx = off.getContext('2d', { willReadFrequently: true });
 
-window.addEventListener("touchend",(e)=>{
-  const touchEndY = e.changedTouches[0].clientY;
-  const diff = touchStartY - touchEndY;
+      off.width = width;
+      off.height = height;
 
-  if(Math.abs(diff) > 70){
-    if(diff > 0){
-      move("down");
-    }else{
-      move("up");
+      offCtx.clearRect(0, 0, width, height);
+
+      const fontSize = Math.min(width * 0.165, height * 0.78);
+
+      offCtx.fillStyle = '#000';
+      offCtx.font = `900 ${fontSize}px Arial, Helvetica, sans-serif`;
+      offCtx.textAlign = 'center';
+      offCtx.textBaseline = 'middle';
+
+      offCtx.fillText('PORTFOLIO', width / 2, height / 2);
+
+      const imageData = offCtx.getImageData(0, 0, width, height).data;
+      const gap = width < 560 ? 4 : width < 980 ? 5 : 6;
+
+      for (let y = 0; y < height; y += gap) {
+        for (let x = 0; x < width; x += gap) {
+          const index = (y * width + x) * 4;
+          const alpha = imageData[index + 3];
+
+          if (alpha > 50) {
+            particles.push({
+              baseX: x,
+              baseY: y,
+              x: Math.random() * width,
+              y: Math.random() * height,
+              vx: (Math.random() - 0.5) * 12,
+              vy: (Math.random() - 0.5) * 12,
+              size: width < 980 ? 1.6 : 2,
+              delay: Math.random() * 40
+            });
+          }
+        }
+      }
     }
-  }
-});
 
-/* 오른쪽 점 클릭 */
-navBtns.forEach((btn)=>{
-  btn.addEventListener("click",()=>{
-    const page = Number(btn.dataset.page);
-    goPage(page);
-  });
-});
+    function getDotColor() {
+      return getComputedStyle(document.body).getPropertyValue('--text').trim() || '#111111';
+    }
 
-/* 키보드 */
-window.addEventListener("keydown",(e)=>{
-  if(e.key === "ArrowDown") move("down");
-  if(e.key === "ArrowUp") move("up");
-});
-</script>
+    function animate() {
+      const width = wrap.clientWidth;
+      const height = wrap.clientHeight;
 
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = getDotColor();
+
+      if (!introPlayed) {
+        introFrame++;
+
+        if (introFrame > 70) {
+          introPlayed = true;
+        }
+      }
+
+      for (const p of particles) {
+        const dx = p.x - pointer.x;
+        const dy = p.y - pointer.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (!introPlayed) {
+          if (introFrame > p.delay) {
+            p.vx += (p.baseX - p.x) * 0.045;
+            p.vy += (p.baseY - p.y) * 0.045;
+          }
+        } else {
+          if (pointer.active && dist < pointer.radius) {
+            const force = (pointer.radius - dist) / pointer.radius;
+            const angle = Math.atan2(dy, dx);
+            const push = force * 8.5;
+
+            p.vx += Math.cos(angle) * push;
+            p.vy += Math.sin(angle) * push;
+          }
+
+          p.vx += (p.baseX - p.x) * 0.09;
+          p.vy += (p.baseY - p.y) * 0.09;
+        }
+
+        p.vx *= 0.93;
+        p.vy *= 0.93;
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      animationId = requestAnimationFrame(animate);
+    }
+
+    function updatePointer(clientX, clientY) {
+      const rect = wrap.getBoundingClientRect();
+
+      pointer.x = clientX - rect.left;
+      pointer.y = clientY - rect.top;
+      pointer.active = true;
+    }
+
+    function clearPointer() {
+      pointer.active = false;
+      pointer.x = -9999;
+      pointer.y = -9999;
+    }
+
+    wrap.addEventListener('mousemove', (e) => {
+      updatePointer(e.clientX, e.clientY);
+    });
+
+    wrap.addEventListener('mouseleave', clearPointer);
+
+    wrap.addEventListener('touchstart', (e) => {
+      const touch = e.touches[0];
+
+      if (!touch) return;
+
+      updatePointer(touch.clientX, touch.clientY);
+      e.preventDefault();
+    }, { passive: false });
+
+    wrap.addEventListener('touchmove', (e) => {
+      const touch = e.touches[0];
+
+      if (!touch) return;
+
+      updatePointer(touch.clientX, touch.clientY);
+      e.preventDefault();
+    }, { passive: false });
+
+    wrap.addEventListener('touchend', clearPointer, { passive: true });
+    wrap.addEventListener('touchcancel', clearPointer, { passive: true });
+
+    function initCanvas() {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+
+      pointer.radius = window.innerWidth <= 980 ? 70 : 100;
+      introPlayed = false;
+      introFrame = 0;
+
+      resizeCanvas();
+      animate();
+    }
+
+    initCanvas();
+
+    window.addEventListener('resize', initCanvas);
+  </script>
 </body>
 </html>
