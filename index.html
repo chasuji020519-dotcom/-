@@ -32,7 +32,7 @@ a{
   --side:7%;
   --black:#111;
   --gray:#666;
-  --light:#f5f5f5;
+  --light:#f6f6f6;
   --line:rgba(0,0,0,.08);
 }
 
@@ -42,20 +42,20 @@ nav{
   top:0;
   left:0;
   width:100%;
-  padding:28px var(--side);
+  padding:26px var(--side);
   display:flex;
   justify-content:space-between;
   align-items:center;
-  z-index:999;
-  background:rgba(255,255,255,.72);
-  backdrop-filter:blur(20px);
+  z-index:1000;
+  background:rgba(255,255,255,.7);
+  backdrop-filter:blur(18px);
   border-bottom:1px solid rgba(0,0,0,.04);
 }
 
 .logo{
   font-size:22px;
-  font-weight:800;
-  letter-spacing:-.8px;
+  font-weight:900;
+  letter-spacing:-1px;
 }
 
 .menu{
@@ -66,80 +66,219 @@ nav{
   color:#333;
 }
 
-.menu a{
-  position:relative;
-}
-
-.menu a::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:-6px;
-  width:0;
-  height:1px;
-  background:#111;
-  transition:.3s;
-}
-
-.menu a:hover::after{
-  width:100%;
-}
-
 /* HERO */
 .hero{
-  height:100vh;
-  position:sticky;
-  top:0;
-  background:#fff;
-  overflow:hidden;
-  z-index:1;
-}
-
-canvas{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-}
-
-/* STACK */
-.stack-wrap{
-  position:relative;
-  z-index:10;
-}
-
-.panel{
-  position:sticky;
-  top:0;
   min-height:100vh;
+  padding:150px var(--side) 90px;
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:60px;
+  align-items:center;
+}
+
+.hero-left{
+  max-width:780px;
+}
+
+.label{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:9px 14px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  font-size:14px;
+  font-weight:600;
+  color:#555;
+  margin-bottom:28px;
+}
+
+.label::before{
+  content:"";
+  width:7px;
+  height:7px;
+  background:#111;
+  border-radius:50%;
+}
+
+.hero h1{
+  font-size:clamp(58px,8vw,126px);
+  line-height:.88;
+  letter-spacing:-6px;
+  font-weight:950;
+}
+
+.hero-desc{
+  margin-top:32px;
+  font-size:19px;
+  line-height:1.7;
+  color:#555;
+  word-break:keep-all;
+  max-width:560px;
+}
+
+/* SEARCH BOX */
+.search-box{
+  margin-top:42px;
   width:100%;
-  padding:120px var(--side);
+  max-width:620px;
+  background:#111;
+  color:#fff;
+  border-radius:28px;
+  padding:18px;
+  box-shadow:0 28px 80px rgba(0,0,0,.18);
+}
+
+.search-top{
   display:flex;
   align-items:center;
-  background:rgba(255,255,255,.72);
-  backdrop-filter:blur(34px);
-  -webkit-backdrop-filter:blur(34px);
-  border-top:1px solid rgba(255,255,255,.9);
-  box-shadow:0 -34px 90px rgba(0,0,0,.08);
+  justify-content:space-between;
+  margin-bottom:16px;
+  color:#aaa;
+  font-size:13px;
 }
 
-.panel-inner{
-  width:100%;
-  max-width:1500px;
-  margin:0 auto;
+.dots{
+  display:flex;
+  gap:6px;
 }
 
-.panel:nth-child(1){z-index:20;}
-.panel:nth-child(2){z-index:30;}
-.panel:nth-child(3){z-index:40;}
+.dots span{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#555;
+}
 
-/* TITLE */
-.title{
+.typing{
+  background:#fff;
+  color:#111;
+  border-radius:18px;
+  padding:22px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.typing-text{
+  font-size:20px;
+  font-weight:700;
+  letter-spacing:-.5px;
+}
+
+.cursor{
+  width:10px;
+  height:24px;
+  background:#111;
+  animation:blink .8s infinite;
+}
+
+@keyframes blink{
+  0%,50%{opacity:1;}
+  51%,100%{opacity:0;}
+}
+
+.keywords{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:14px;
+}
+
+.keywords a{
+  padding:9px 13px;
+  border-radius:999px;
+  background:rgba(255,255,255,.1);
+  color:#ddd;
+  font-size:13px;
+}
+
+/* HERO RIGHT */
+.hero-right{
+  position:relative;
+  height:620px;
+}
+
+.preview-card{
+  position:absolute;
+  width:72%;
+  min-height:360px;
+  border-radius:36px;
+  padding:30px;
+  background:#f5f5f5;
+  border:1px solid rgba(0,0,0,.07);
+  box-shadow:0 30px 90px rgba(0,0,0,.1);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition:.4s ease;
+}
+
+.preview-card:hover{
+  transform:translateY(-10px) rotate(0deg) !important;
+}
+
+.preview-card:nth-child(1){
+  top:20px;
+  right:40px;
+  z-index:3;
+  background:#111;
+  color:#fff;
+  transform:rotate(4deg);
+}
+
+.preview-card:nth-child(2){
+  top:160px;
+  left:0;
+  z-index:2;
+  transform:rotate(-5deg);
+}
+
+.preview-card:nth-child(3){
+  bottom:20px;
+  right:0;
+  z-index:1;
+  background:#fafafa;
+  transform:rotate(3deg);
+}
+
+.card-num{
+  font-size:13px;
+  color:#999;
+}
+
+.preview-card:nth-child(1) .card-num{
+  color:#aaa;
+}
+
+.preview-card h3{
+  font-size:42px;
+  line-height:1;
+  letter-spacing:-2.5px;
+}
+
+.preview-card p{
+  font-size:15px;
+  line-height:1.6;
+  color:#666;
+  word-break:keep-all;
+}
+
+.preview-card:nth-child(1) p{
+  color:#bbb;
+}
+
+/* SECTION COMMON */
+section{
+  padding:130px var(--side);
+}
+
+.section-title{
   font-size:clamp(48px,7vw,104px);
-  line-height:.92;
+  line-height:.9;
   letter-spacing:-4px;
   margin-bottom:54px;
-  font-weight:900;
 }
 
 /* ABOUT */
@@ -149,25 +288,23 @@ canvas{
   gap:22px;
 }
 
-.card{
-  min-height:300px;
-  background:rgba(255,255,255,.68);
+.info-card{
+  background:#f6f6f6;
   border:1px solid rgba(0,0,0,.07);
-  border-radius:30px;
+  border-radius:34px;
   padding:42px;
-  box-shadow:0 20px 60px rgba(0,0,0,.05);
 }
 
-.card h3{
-  font-size:26px;
+.info-card h3{
+  font-size:28px;
   letter-spacing:-1px;
-  margin-bottom:22px;
+  margin-bottom:20px;
 }
 
-.card p{
+.info-card p{
+  color:#444;
   font-size:16px;
   line-height:1.8;
-  color:#444;
   word-break:keep-all;
 }
 
@@ -175,20 +312,29 @@ canvas{
   display:flex;
   flex-wrap:wrap;
   gap:10px;
-  margin-top:28px;
+  margin-top:26px;
 }
 
 .skills span{
   padding:10px 15px;
+  border-radius:999px;
   background:#111;
   color:#fff;
-  border-radius:999px;
   font-size:13px;
   font-weight:600;
 }
 
-/* PROJECT */
-.projects{
+/* WORK */
+.work{
+  background:#111;
+  color:#fff;
+}
+
+.work .section-title{
+  color:#fff;
+}
+
+.project-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:22px;
@@ -196,79 +342,71 @@ canvas{
 
 .project{
   min-height:420px;
-  background:rgba(255,255,255,.72);
-  border:1px solid rgba(0,0,0,.07);
-  border-radius:30px;
-  padding:30px;
+  border-radius:34px;
+  padding:32px;
+  background:#fff;
+  color:#111;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
-  box-shadow:0 20px 60px rgba(0,0,0,.05);
   transition:.35s ease;
 }
 
 .project:hover{
-  transform:translateY(-10px);
-  box-shadow:0 34px 80px rgba(0,0,0,.12);
+  transform:translateY(-12px);
 }
 
-.num{
+.project .num{
   font-size:13px;
   color:#888;
-  font-weight:600;
+  font-weight:700;
 }
 
 .project h3{
-  font-size:34px;
+  font-size:36px;
   line-height:1;
   letter-spacing:-2px;
 }
 
 .project p{
   color:#555;
-  line-height:1.65;
   font-size:15px;
+  line-height:1.6;
   word-break:keep-all;
 }
 
 /* CONTACT */
 .contact-box{
-  background:#111;
-  color:#fff;
-  border-radius:42px;
+  background:#f5f5f5;
+  border-radius:44px;
   padding:70px;
-  min-height:520px;
   display:flex;
-  flex-direction:column;
-  justify-content:center;
+  justify-content:space-between;
+  gap:40px;
+  align-items:flex-end;
 }
 
 .contact-box h2{
-  font-size:clamp(46px,7vw,104px);
-  line-height:.92;
+  font-size:clamp(46px,7vw,100px);
+  line-height:.9;
   letter-spacing:-4px;
 }
 
 .contact-box p{
-  margin-top:28px;
-  color:#bbb;
-  font-size:16px;
+  margin-top:24px;
+  color:#555;
+  line-height:1.7;
 }
 
 .btn{
   display:inline-block;
-  width:max-content;
-  margin-top:34px;
-  padding:15px 23px;
-  border:1px solid rgba(255,255,255,.7);
+  padding:16px 24px;
+  background:#111;
+  color:#fff;
   border-radius:999px;
   font-size:14px;
-  transition:.3s;
-}
-
-.btn:hover{
-  background:#fff;
-  color:#111;
+  font-weight:700;
+  white-space:nowrap;
 }
 
 /* MOBILE */
@@ -281,51 +419,70 @@ canvas{
     padding:22px var(--side);
   }
 
-  .logo{
-    font-size:19px;
-  }
-
   .menu{
     display:none;
   }
 
-  .panel{
+  .hero{
+    grid-template-columns:1fr;
+    padding-top:130px;
+    gap:50px;
+  }
+
+  .hero h1{
+    letter-spacing:-3px;
+  }
+
+  .hero-desc{
+    font-size:16px;
+  }
+
+  .search-box{
+    border-radius:24px;
+  }
+
+  .typing-text{
+    font-size:17px;
+  }
+
+  .hero-right{
+    height:500px;
+  }
+
+  .preview-card{
+    width:82%;
+    min-height:280px;
+    border-radius:28px;
+  }
+
+  .preview-card h3{
+    font-size:32px;
+  }
+
+  section{
     padding:100px var(--side);
   }
 
-  .title{
-    font-size:clamp(44px,13vw,76px);
+  .section-title{
     letter-spacing:-2.5px;
-    margin-bottom:38px;
   }
 
   .about-grid,
-  .projects{
+  .project-grid{
     grid-template-columns:1fr;
   }
 
-  .card{
-    padding:30px;
-    border-radius:24px;
-  }
-
+  .info-card,
   .project{
-    min-height:310px;
-    border-radius:24px;
-  }
-
-  .project h3{
-    font-size:30px;
+    border-radius:28px;
+    padding:30px;
   }
 
   .contact-box{
-    padding:44px 28px;
-    border-radius:28px;
-    min-height:430px;
-  }
-
-  .contact-box h2{
-    letter-spacing:-2.5px;
+    padding:42px 28px;
+    border-radius:30px;
+    flex-direction:column;
+    align-items:flex-start;
   }
 }
 </style>
@@ -343,230 +500,157 @@ canvas{
 </nav>
 
 <header class="hero">
-  <canvas id="particleCanvas"></canvas>
+  <div class="hero-left">
+    <div class="label">Web Design Portfolio</div>
+
+    <h1>
+      Designing<br>
+      Clean Digital<br>
+      Experiences.
+    </h1>
+
+    <p class="hero-desc">
+      안녕하세요. 웹디자이너를 준비하고 있는 차수지입니다.
+      브랜드의 분위기를 살리고, 사용자가 보기 편한 화면을 만드는 디자인을 지향합니다.
+    </p>
+
+    <div class="search-box">
+      <div class="search-top">
+        <span>What are you looking for?</span>
+        <div class="dots">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <div class="typing">
+        <div class="typing-text" id="typingText">브랜드 리디자인</div>
+        <div class="cursor"></div>
+      </div>
+
+      <div class="keywords">
+        <a href="#work">Web Design</a>
+        <a href="#work">Landing Page</a>
+        <a href="#work">Brand Redesign</a>
+        <a href="#work">Detail Page</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="preview-card">
+      <div class="card-num">01 / SELECTED WORK</div>
+      <h3>Jewelry<br>Redesign</h3>
+      <p>고급스럽고 깔끔한 무드의 주얼리 브랜드 웹사이트 리디자인.</p>
+    </div>
+
+    <div class="preview-card">
+      <div class="card-num">02 / LANDING PAGE</div>
+      <h3>Cosmetic<br>Landing</h3>
+      <p>20대 타겟을 위한 감각적인 화장품 랜딩페이지 디자인.</p>
+    </div>
+
+    <div class="preview-card">
+      <div class="card-num">03 / EDITORIAL</div>
+      <h3>Fashion<br>Editorial</h3>
+      <p>에디토리얼 무드를 활용한 패션 쇼핑몰 메인 페이지.</p>
+    </div>
+  </div>
 </header>
 
-<main class="stack-wrap">
+<section id="about">
+  <h2 class="section-title">About<br>Designer</h2>
 
-  <section id="about" class="panel">
-    <div class="panel-inner">
-      <h2 class="title">About<br>Designer</h2>
+  <div class="about-grid">
+    <div class="info-card">
+      <h3>안녕하세요, 차수지입니다.</h3>
+      <p>
+        심플하지만 눈에 남는 웹디자인을 좋아합니다.
+        브랜드가 가진 분위기를 화면 안에서 자연스럽게 보여주고,
+        사용자가 보기 편한 구조를 만드는 것을 중요하게 생각합니다.
+      </p>
+    </div>
 
-      <div class="about-grid">
-        <div class="card">
-          <h3>안녕하세요, 차수지입니다.</h3>
-          <p>
-            심플하지만 눈에 남는 웹디자인을 좋아합니다.
-            브랜드의 분위기를 살리고, 사용자가 보기 편한 화면을 만드는 것을 목표로 합니다.
-            깔끔한 레이아웃과 감각적인 무드를 중심으로 포트폴리오를 만들어가고 있습니다.
-          </p>
-        </div>
+    <div class="info-card">
+      <h3>Skills</h3>
+      <p>
+        웹디자인, 상세페이지, 브랜드 리디자인, HTML/CSS 작업을 중심으로
+        포트폴리오를 준비하고 있습니다.
+      </p>
 
-        <div class="card">
-          <h3>Skills</h3>
-          <p>
-            웹디자인, 상세페이지, 브랜드 리디자인, HTML/CSS 작업을 중심으로
-            실무에 가까운 결과물을 준비하고 있습니다.
-          </p>
-
-          <div class="skills">
-            <span>Photoshop</span>
-            <span>Figma</span>
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>Web Design</span>
-          </div>
-        </div>
+      <div class="skills">
+        <span>Photoshop</span>
+        <span>Figma</span>
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>Web Design</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="work" class="panel">
-    <div class="panel-inner">
-      <h2 class="title">Selected<br>Works</h2>
+<section id="work" class="work">
+  <h2 class="section-title">Selected<br>Works</h2>
 
-      <div class="projects">
-        <div class="project">
-          <div class="num">01</div>
-          <h3>Jewelry<br>Redesign</h3>
-          <p>주얼리 브랜드의 고급스럽고 깔끔한 웹사이트 리디자인.</p>
-        </div>
-
-        <div class="project">
-          <div class="num">02</div>
-          <h3>Cosmetic<br>Landing</h3>
-          <p>20대 타겟의 트렌디한 화장품 랜딩페이지 디자인.</p>
-        </div>
-
-        <div class="project">
-          <div class="num">03</div>
-          <h3>Fashion<br>Editorial</h3>
-          <p>에디토리얼 무드를 활용한 패션 쇼핑몰 메인 페이지.</p>
-        </div>
-      </div>
+  <div class="project-grid">
+    <div class="project">
+      <div class="num">01</div>
+      <h3>Jewelry<br>Redesign</h3>
+      <p>주얼리 브랜드의 고급스럽고 깔끔한 웹사이트 리디자인.</p>
     </div>
-  </section>
 
-  <section id="contact" class="panel">
-    <div class="panel-inner">
-      <div class="contact-box">
-        <h2>Let’s Create<br>Something New.</h2>
-        <p>포트폴리오 문의 또는 연락은 아래 이메일로 부탁드립니다.</p>
-        <a class="btn" href="mailto:chasuji020519@gmail.com">
-          chasuji020519@gmail.com
-        </a>
-      </div>
+    <div class="project">
+      <div class="num">02</div>
+      <h3>Cosmetic<br>Landing</h3>
+      <p>20대 타겟의 트렌디한 화장품 랜딩페이지 디자인.</p>
     </div>
-  </section>
 
-</main>
+    <div class="project">
+      <div class="num">03</div>
+      <h3>Fashion<br>Editorial</h3>
+      <p>에디토리얼 무드를 활용한 패션 쇼핑몰 메인 페이지.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-box">
+    <div>
+      <h2>Let’s Create<br>Something New.</h2>
+      <p>포트폴리오 문의 또는 연락은 아래 이메일로 부탁드립니다.</p>
+    </div>
+
+    <a class="btn" href="mailto:chasuji020519@gmail.com">
+      Contact Me
+    </a>
+  </div>
+</section>
 
 <script>
-const canvas = document.getElementById("particleCanvas");
-const ctx = canvas.getContext("2d");
+const words = [
+  "브랜드 리디자인",
+  "웹사이트 디자인",
+  "상세페이지 디자인",
+  "랜딩페이지 디자인",
+  "UI 포트폴리오"
+];
 
-let particles = [];
-let targetPoints = [];
-let mouse = { x:-9999, y:-9999 };
+const typingText = document.getElementById("typingText");
 
-const text = "PORTFOLIO";
+let wordIndex = 0;
 
-function resize(){
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+setInterval(()=>{
+  wordIndex = (wordIndex + 1) % words.length;
+  typingText.style.opacity = "0";
+  typingText.style.transform = "translateY(8px)";
 
-  canvas.width = window.innerWidth * dpr;
-  canvas.height = window.innerHeight * dpr;
+  setTimeout(()=>{
+    typingText.textContent = words[wordIndex];
+    typingText.style.opacity = "1";
+    typingText.style.transform = "translateY(0)";
+  },250);
+},1800);
 
-  canvas.style.width = window.innerWidth + "px";
-  canvas.style.height = window.innerHeight + "px";
-
-  ctx.setTransform(dpr,0,0,dpr,0,0);
-
-  createTextPoints();
-  createParticles();
-}
-
-function createTextPoints(){
-  targetPoints = [];
-
-  const temp = document.createElement("canvas");
-  const tctx = temp.getContext("2d");
-
-  temp.width = window.innerWidth;
-  temp.height = window.innerHeight;
-
-  const sidePadding = temp.width * 0.07;
-  const availableWidth = temp.width - sidePadding * 2;
-
-  const fontSize = Math.min(
-    availableWidth / 8.85,
-    185
-  );
-
-  tctx.fillStyle = "#111";
-  tctx.font = `900 ${fontSize}px Arial, sans-serif`;
-  tctx.textAlign = "center";
-  tctx.textBaseline = "middle";
-
-  tctx.fillText(
-    text,
-    temp.width / 2,
-    temp.height / 2,
-    availableWidth
-  );
-
-  const imageData = tctx.getImageData(0,0,temp.width,temp.height).data;
-  const gap = window.innerWidth < 700 ? 7 : 6;
-
-  for(let y = 0; y < temp.height; y += gap){
-    for(let x = 0; x < temp.width; x += gap){
-      const index = (y * temp.width + x) * 4;
-
-      if(imageData[index + 3] > 128){
-        targetPoints.push({x,y});
-      }
-    }
-  }
-}
-
-function createParticles(){
-  particles = [];
-
-  for(let i = 0; i < targetPoints.length; i++){
-    const point = targetPoints[i];
-
-    particles.push({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      tx: point.x,
-      ty: point.y,
-      vx: 0,
-      vy: 0,
-      r: window.innerWidth < 700 ? 2.4 : 2.8
-    });
-  }
-}
-
-function animate(){
-  ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
-
-  for(let i = 0; i < particles.length; i++){
-    const p = particles[i];
-
-    const dx = p.tx - p.x;
-    const dy = p.ty - p.y;
-
-    p.vx += dx * 0.018;
-    p.vy += dy * 0.018;
-
-    const mdx = p.x - mouse.x;
-    const mdy = p.y - mouse.y;
-    const dist = Math.sqrt(mdx * mdx + mdy * mdy);
-    const forceRadius = 115;
-
-    if(dist < forceRadius){
-      const force = (forceRadius - dist) / forceRadius;
-      const angle = Math.atan2(mdy, mdx);
-
-      p.vx += Math.cos(angle) * force * 5.3;
-      p.vy += Math.sin(angle) * force * 5.3;
-    }
-
-    p.vx *= .86;
-    p.vy *= .86;
-
-    p.x += p.vx;
-    p.y += p.vy;
-
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = "#111";
-    ctx.fill();
-  }
-
-  requestAnimationFrame(animate);
-}
-
-window.addEventListener("mousemove", e=>{
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
-});
-
-window.addEventListener("mouseleave", ()=>{
-  mouse.x = -9999;
-  mouse.y = -9999;
-});
-
-window.addEventListener("touchmove", e=>{
-  const t = e.touches[0];
-  mouse.x = t.clientX;
-  mouse.y = t.clientY;
-},{passive:true});
-
-window.addEventListener("resize", resize);
-
-resize();
-animate();
+typingText.style.transition = ".25s ease";
 </script>
 
 </body>
