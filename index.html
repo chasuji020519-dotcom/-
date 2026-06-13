@@ -17,234 +17,402 @@ html,body{
   height:100%;
   overflow:hidden;
   font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;
-  background:#eee;
   color:#111;
 }
 
 body{
-  background:
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,.9), transparent 28%),
-    radial-gradient(circle at 80% 10%, rgba(190,190,190,.35), transparent 30%),
-    linear-gradient(135deg,#f7f7f7,#dcdcdc);
+  background:#f1f1ef;
 }
 
-/* 전체 화면 */
-.wrapper{
+.app{
   width:100vw;
   height:100vh;
   position:relative;
   overflow:hidden;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(255,255,255,.9), transparent 24%),
+    radial-gradient(circle at 85% 25%, rgba(0,0,0,.08), transparent 26%),
+    radial-gradient(circle at 50% 90%, rgba(0,0,0,.12), transparent 34%),
+    linear-gradient(140deg,#f8f8f5,#dfdfdc);
 }
 
-/* 중앙 로고 */
-.logo-area{
+/* 배경 장식 */
+.orbit{
+  position:absolute;
+  width:520px;
+  height:520px;
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:50%;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+
+.orbit:before,
+.orbit:after{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  border:1px solid rgba(0,0,0,.08);
+}
+
+.orbit:before{
+  width:720px;
+  height:720px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+}
+
+.orbit:after{
+  width:320px;
+  height:320px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+}
+
+/* 메인 로고 */
+.hero{
   position:absolute;
   inset:0;
   display:flex;
   align-items:center;
   justify-content:center;
   flex-direction:column;
-  z-index:1;
+  z-index:2;
+  transition:.8s ease;
 }
 
 .logo{
-  font-size:clamp(46px,10vw,110px);
-  font-weight:800;
-  letter-spacing:-5px;
+  font-size:clamp(52px,12vw,150px);
+  font-weight:900;
+  letter-spacing:-8px;
+  line-height:.85;
 }
 
-.logo span{
-  font-style:italic;
+.logo em{
+  font-style:normal;
+  color:transparent;
+  -webkit-text-stroke:1.5px #111;
 }
 
-.sub{
-  margin-top:14px;
+.hero-text{
+  margin-top:20px;
+  display:flex;
+  gap:10px;
+  align-items:center;
   font-size:13px;
-  letter-spacing:4px;
+  letter-spacing:3px;
   color:#555;
 }
 
-.hint{
+.hero-text:before,
+.hero-text:after{
+  content:"";
+  width:34px;
+  height:1px;
+  background:#555;
+}
+
+.scroll-guide{
   position:absolute;
-  bottom:38px;
-  font-size:13px;
+  bottom:34px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:12px;
   color:#777;
-  animation:updown 1.4s infinite;
+  letter-spacing:2px;
 }
 
-@keyframes updown{
-  0%,100%{transform:translateY(0);opacity:.5}
-  50%{transform:translateY(-10px);opacity:1}
+.scroll-guide span{
+  display:block;
+  width:1px;
+  height:44px;
+  background:#999;
+  margin:12px auto 0;
+  animation:lineMove 1.4s infinite;
 }
 
-/* 카드 공통 */
-.panel{
+@keyframes lineMove{
+  0%{transform:scaleY(.2);transform-origin:top}
+  50%{transform:scaleY(1);transform-origin:top}
+  100%{transform:scaleY(.2);transform-origin:bottom}
+}
+
+/* 올라오는 유리창 */
+.sheet{
   position:absolute;
   left:50%;
-  bottom:-100%;
+  bottom:-110%;
   transform:translateX(-50%);
-  width:min(92%,980px);
-  min-height:72vh;
-  padding:42px;
-  border-radius:36px 36px 0 0;
-  background:rgba(255,255,255,.42);
-  backdrop-filter:blur(26px);
-  -webkit-backdrop-filter:blur(26px);
-  border:1px solid rgba(255,255,255,.55);
-  box-shadow:0 -30px 80px rgba(0,0,0,.16);
-  z-index:5;
-  transition:bottom .9s cubic-bezier(.16,1,.3,1);
+  width:min(94vw,1120px);
+  height:82vh;
+  padding:34px;
+  z-index:10;
+  border-radius:46px 46px 0 0;
+  background:rgba(255,255,255,.36);
+  backdrop-filter:blur(34px);
+  -webkit-backdrop-filter:blur(34px);
+  border:1px solid rgba(255,255,255,.65);
+  box-shadow:0 -24px 90px rgba(0,0,0,.18);
+  transition:bottom .9s cubic-bezier(.19,1,.22,1), transform .9s cubic-bezier(.19,1,.22,1);
 }
 
-.panel.active{
+.sheet.active{
   bottom:0;
 }
 
-.panel.hide-up{
+.sheet.up{
   bottom:100%;
 }
 
-.panel h2{
-  font-size:clamp(34px,6vw,72px);
-  letter-spacing:-3px;
-  margin-bottom:22px;
+.handle{
+  width:58px;
+  height:5px;
+  border-radius:999px;
+  background:rgba(0,0,0,.22);
+  margin:0 auto 30px;
 }
 
-.panel p{
-  max-width:620px;
+.content{
+  height:calc(100% - 35px);
+  display:grid;
+  grid-template-columns:.95fr 1.05fr;
+  gap:34px;
+}
+
+.big-title{
+  font-size:clamp(48px,8vw,96px);
+  line-height:.86;
+  letter-spacing:-5px;
+  font-weight:900;
+}
+
+.tag{
+  display:inline-flex;
+  padding:9px 15px;
+  border:1px solid rgba(0,0,0,.18);
+  border-radius:999px;
+  font-size:13px;
+  margin-bottom:24px;
+}
+
+.desc{
+  margin-top:28px;
+  max-width:520px;
   font-size:17px;
   line-height:1.8;
   color:#333;
 }
 
-.label{
-  display:inline-block;
-  padding:8px 14px;
-  border:1px solid rgba(0,0,0,.18);
-  border-radius:999px;
-  font-size:13px;
-  margin-bottom:26px;
+.profile-card{
+  align-self:end;
+  padding:28px;
+  border-radius:32px;
+  background:rgba(255,255,255,.42);
+  border:1px solid rgba(255,255,255,.65);
 }
 
-/* 소개 */
-.info-grid{
+.profile-card h3{
+  font-size:24px;
+  margin-bottom:18px;
+}
+
+.list{
   display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:30px;
-  margin-top:40px;
+  gap:12px;
 }
 
-.info-box{
-  padding:24px;
-  border-radius:24px;
-  background:rgba(255,255,255,.38);
-  border:1px solid rgba(255,255,255,.5);
-}
-
-.info-box b{
-  display:block;
-  margin-bottom:10px;
-  font-size:15px;
-}
-
-.info-box span{
+.item{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  padding-bottom:12px;
+  border-bottom:1px solid rgba(0,0,0,.1);
   font-size:14px;
+}
+
+.item b{
+  color:#111;
+}
+
+.item span{
   color:#555;
-  line-height:1.7;
+  text-align:right;
 }
 
 /* 카테고리 */
-.category-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-  margin-top:34px;
-}
-
-.category{
-  min-height:210px;
-  padding:22px;
-  border-radius:28px;
-  background:rgba(255,255,255,.44);
-  border:1px solid rgba(255,255,255,.6);
-  cursor:pointer;
-  transition:.35s;
+.category-wrap{
+  height:calc(100% - 35px);
   display:flex;
   flex-direction:column;
+}
+
+.category-head{
+  display:flex;
   justify-content:space-between;
+  align-items:flex-start;
+  gap:30px;
+  margin-bottom:26px;
 }
 
-.category:hover{
-  transform:translateY(-10px);
-  background:rgba(255,255,255,.7);
+.category-head h2{
+  font-size:clamp(42px,7vw,88px);
+  line-height:.9;
+  letter-spacing:-4px;
 }
 
-.category h3{
-  font-size:24px;
+.category-head p{
+  max-width:360px;
+  line-height:1.7;
+  color:#444;
+  font-size:15px;
+}
+
+.cards{
+  flex:1;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+
+.card{
+  position:relative;
+  overflow:hidden;
+  border-radius:34px;
+  padding:24px;
+  background:rgba(255,255,255,.42);
+  border:1px solid rgba(255,255,255,.66);
+  cursor:pointer;
+  transition:.35s ease;
+}
+
+.card:hover{
+  transform:translateY(-12px) scale(1.01);
+  background:rgba(255,255,255,.72);
+}
+
+.card:after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  background:rgba(0,0,0,.06);
+  right:-70px;
+  bottom:-70px;
+}
+
+.card-num{
+  font-size:13px;
+  color:#777;
+}
+
+.card h3{
+  position:absolute;
+  left:24px;
+  bottom:70px;
+  font-size:25px;
   letter-spacing:-1px;
 }
 
-.category p{
+.card p{
+  position:absolute;
+  left:24px;
+  right:24px;
+  bottom:24px;
   font-size:14px;
-  line-height:1.6;
+  line-height:1.5;
   color:#555;
 }
 
-.num{
-  font-size:13px;
-  color:#888;
-}
-
-/* 인디케이터 */
-.dots{
+/* 하단 네비 */
+.nav{
   position:absolute;
-  right:28px;
+  right:26px;
   top:50%;
   transform:translateY(-50%);
-  z-index:20;
+  z-index:30;
   display:flex;
   flex-direction:column;
   gap:10px;
 }
 
-.dot{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#aaa;
-  opacity:.5;
+.nav button{
+  width:9px;
+  height:9px;
+  border:0;
+  border-radius:999px;
+  background:rgba(0,0,0,.3);
+  cursor:pointer;
+  transition:.3s;
 }
 
-.dot.active{
-  height:28px;
-  border-radius:999px;
+.nav button.active{
+  height:34px;
   background:#111;
-  opacity:1;
+}
+
+/* 페이지 숫자 */
+.page-count{
+  position:absolute;
+  left:28px;
+  bottom:26px;
+  z-index:30;
+  font-size:13px;
+  color:#666;
+  letter-spacing:2px;
 }
 
 /* 모바일 */
-@media(max-width:768px){
-  .panel{
-    width:100%;
-    min-height:76vh;
-    padding:32px 22px;
-    border-radius:30px 30px 0 0;
+@media(max-width:850px){
+  .logo{
+    letter-spacing:-4px;
   }
 
-  .info-grid{
+  .sheet{
+    width:100vw;
+    height:84vh;
+    padding:24px 20px;
+    border-radius:34px 34px 0 0;
+  }
+
+  .content{
     grid-template-columns:1fr;
+    gap:20px;
   }
 
-  .category-grid{
+  .profile-card{
+    align-self:auto;
+  }
+
+  .category-head{
+    flex-direction:column;
+  }
+
+  .cards{
     grid-template-columns:1fr 1fr;
   }
 
-  .category{
-    min-height:160px;
+  .card{
+    min-height:190px;
   }
 
-  .dots{
-    right:14px;
+  .nav{
+    right:13px;
+  }
+}
+
+@media(max-width:480px){
+  .cards{
+    grid-template-columns:1fr;
+    overflow-y:auto;
+    padding-bottom:20px;
+  }
+
+  .card{
+    min-height:170px;
   }
 }
 </style>
@@ -252,164 +420,224 @@ body{
 
 <body>
 
-<div class="wrapper">
+<div class="app">
 
-  <div class="logo-area">
-    <div class="logo">CHA<span>SUJI</span></div>
-    <div class="sub">WEB DESIGN PORTFOLIO</div>
-    <div class="hint">SWIPE UP</div>
-  </div>
+  <div class="orbit"></div>
 
-  <section class="panel" id="panel1">
-    <div class="label">ABOUT ME</div>
-    <h2>Creative<br>Web Designer</h2>
-    <p>
-      안녕하세요. 감각적인 비주얼과 사용자가 보기 편한 흐름을 고민하는
-      웹디자이너 차수지입니다. 깔끔하지만 기억에 남는 디자인,
-      트렌디하지만 오래 봐도 질리지 않는 포트폴리오를 만들어가고 있습니다.
-    </p>
+  <main class="hero">
+    <div class="logo">CHA<em>SUJI</em></div>
+    <div class="hero-text">PORTFOLIO 2026</div>
+    <div class="scroll-guide">
+      SWIPE UP
+      <span></span>
+    </div>
+  </main>
 
-    <div class="info-grid">
-      <div class="info-box">
-        <b>DESIGN STYLE</b>
-        <span>Minimal / Trendy / Editorial / Glassmorphism / Modern Layout</span>
+  <!-- 첫 번째 팝업 -->
+  <section class="sheet" id="sheet1">
+    <div class="handle"></div>
+
+    <div class="content">
+      <div>
+        <div class="tag">ABOUT ME</div>
+        <h1 class="big-title">Design<br>with<br>mood.</h1>
+        <p class="desc">
+          안녕하세요. 감각적인 분위기와 깔끔한 레이아웃을 좋아하는
+          웹디자이너 차수지입니다. 단순히 예쁜 화면보다 브랜드의 첫인상이
+          오래 남는 디자인을 만들고 싶습니다.
+        </p>
       </div>
-      <div class="info-box">
-        <b>TOOLS</b>
-        <span>Photoshop / Illustrator / Figma / HTML / CSS / JavaScript</span>
-      </div>
-      <div class="info-box">
-        <b>GOAL</b>
-        <span>브랜드의 분위기를 정확하게 보여주는 웹사이트 제작</span>
-      </div>
-      <div class="info-box">
-        <b>CONTACT</b>
-        <span>Email · Instagram · Portfolio Link</span>
+
+      <div class="profile-card">
+        <h3>Profile</h3>
+
+        <div class="list">
+          <div class="item">
+            <b>Name</b>
+            <span>CHASUJI</span>
+          </div>
+          <div class="item">
+            <b>Field</b>
+            <span>Web Design / Visual Design</span>
+          </div>
+          <div class="item">
+            <b>Style</b>
+            <span>Minimal, Trendy, Editorial</span>
+          </div>
+          <div class="item">
+            <b>Tools</b>
+            <span>Photoshop, Figma, HTML, CSS</span>
+          </div>
+          <div class="item">
+            <b>Goal</b>
+            <span>감각적인 포트폴리오 완성하기</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="panel" id="panel2">
-    <div class="label">PORTFOLIO CATEGORY</div>
-    <h2>Selected<br>Works</h2>
+  <!-- 두 번째 팝업 -->
+  <section class="sheet" id="sheet2">
+    <div class="handle"></div>
 
-    <div class="category-grid">
-      <div class="category">
-        <span class="num">01</span>
-        <h3>Web Design</h3>
-        <p>쇼핑몰, 브랜드, 개인 포트폴리오 웹 디자인</p>
+    <div class="category-wrap">
+      <div class="category-head">
+        <h2>Portfolio<br>Category</h2>
+        <p>
+          포트폴리오에 넣을 작업을 분야별로 정리했습니다.
+          각 카테고리는 추후 실제 작업물 이미지와 설명으로 교체하면 됩니다.
+        </p>
       </div>
 
-      <div class="category">
-        <span class="num">02</span>
-        <h3>Branding</h3>
-        <p>로고, 컬러, 무드보드, 브랜드 아이덴티티</p>
-      </div>
+      <div class="cards">
+        <div class="card">
+          <span class="card-num">01</span>
+          <h3>Web Design</h3>
+          <p>브랜드 사이트, 쇼핑몰, 개인 포트폴리오 디자인</p>
+        </div>
 
-      <div class="category">
-        <span class="num">03</span>
-        <h3>Visual</h3>
-        <p>포스터, 배너, 상세페이지, 그래픽 작업</p>
-      </div>
+        <div class="card">
+          <span class="card-num">02</span>
+          <h3>Branding</h3>
+          <p>로고, 컬러 시스템, 브랜드 무드보드 제작</p>
+        </div>
 
-      <div class="category">
-        <span class="num">04</span>
-        <h3>UI / UX</h3>
-        <p>사용자 흐름을 고려한 모바일 / 웹 인터페이스</p>
+        <div class="card">
+          <span class="card-num">03</span>
+          <h3>Graphic</h3>
+          <p>포스터, 배너, 상세페이지, SNS 비주얼</p>
+        </div>
+
+        <div class="card">
+          <span class="card-num">04</span>
+          <h3>UI / UX</h3>
+          <p>사용자 흐름을 고려한 모바일 화면 구성</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <div class="dots">
-    <div class="dot active"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
+  <div class="nav">
+    <button class="active" data-page="0"></button>
+    <button data-page="1"></button>
+    <button data-page="2"></button>
   </div>
+
+  <div class="page-count">01 / 03</div>
 
 </div>
 
 <script>
-const panels = document.querySelectorAll(".panel");
-const dots = document.querySelectorAll(".dot");
+const sheets = document.querySelectorAll(".sheet");
+const navBtns = document.querySelectorAll(".nav button");
+const pageCount = document.querySelector(".page-count");
+const hero = document.querySelector(".hero");
 
-let page = 0;
-let isMoving = false;
-let startY = 0;
+let currentPage = 0;
+let locked = false;
+let touchStartY = 0;
+let wheelAmount = 0;
 
-function updatePage(){
-  panels.forEach((panel,index)=>{
-    panel.classList.remove("active","hide-up");
+function goPage(page){
+  if(page < 0 || page > 2) return;
 
-    if(page === 0){
+  currentPage = page;
+
+  sheets.forEach((sheet,index)=>{
+    sheet.classList.remove("active","up");
+
+    if(currentPage === 0){
       return;
     }
 
-    if(index < page - 1){
-      panel.classList.add("hide-up");
+    if(index < currentPage - 1){
+      sheet.classList.add("up");
     }
 
-    if(index === page - 1){
-      panel.classList.add("active");
+    if(index === currentPage - 1){
+      sheet.classList.add("active");
     }
   });
 
-  dots.forEach((dot,index)=>{
-    dot.classList.toggle("active",index === page);
+  hero.style.opacity = currentPage === 0 ? "1" : ".18";
+  hero.style.transform = currentPage === 0 ? "scale(1)" : "scale(.92)";
+
+  navBtns.forEach((btn,index)=>{
+    btn.classList.toggle("active",index === currentPage);
   });
+
+  pageCount.textContent = `0${currentPage + 1} / 03`;
 }
 
-function movePage(direction){
-  if(isMoving) return;
+function move(direction){
+  if(locked) return;
 
-  if(direction === "down" && page < 2){
-    page++;
-  }else if(direction === "up" && page > 0){
-    page--;
-  }else{
-    return;
+  if(direction === "down" && currentPage < 2){
+    locked = true;
+    goPage(currentPage + 1);
   }
 
-  isMoving = true;
-  updatePage();
+  if(direction === "up" && currentPage > 0){
+    locked = true;
+    goPage(currentPage - 1);
+  }
 
   setTimeout(()=>{
-    isMoving = false;
-  },900);
+    locked = false;
+  },1000);
 }
 
+/* 트랙패드 자동 넘어감 방지 */
 window.addEventListener("wheel",(e)=>{
-  if(e.deltaY > 0){
-    movePage("down");
-  }else{
-    movePage("up");
-  }
-});
+  wheelAmount += e.deltaY;
 
+  if(Math.abs(wheelAmount) > 260){
+    if(wheelAmount > 0){
+      move("down");
+    }else{
+      move("up");
+    }
+
+    wheelAmount = 0;
+  }
+
+  clearTimeout(window.wheelTimer);
+  window.wheelTimer = setTimeout(()=>{
+    wheelAmount = 0;
+  },260);
+},{passive:true});
+
+/* 모바일 스와이프 */
 window.addEventListener("touchstart",(e)=>{
-  startY = e.touches[0].clientY;
+  touchStartY = e.touches[0].clientY;
 });
 
 window.addEventListener("touchend",(e)=>{
-  const endY = e.changedTouches[0].clientY;
-  const diff = startY - endY;
+  const touchEndY = e.changedTouches[0].clientY;
+  const diff = touchStartY - touchEndY;
 
-  if(Math.abs(diff) > 50){
+  if(Math.abs(diff) > 70){
     if(diff > 0){
-      movePage("down");
+      move("down");
     }else{
-      movePage("up");
+      move("up");
     }
   }
 });
 
-window.addEventListener("keydown",(e)=>{
-  if(e.key === "ArrowDown"){
-    movePage("down");
-  }
+/* 오른쪽 점 클릭 */
+navBtns.forEach((btn)=>{
+  btn.addEventListener("click",()=>{
+    const page = Number(btn.dataset.page);
+    goPage(page);
+  });
+});
 
-  if(e.key === "ArrowUp"){
-    movePage("up");
-  }
+/* 키보드 */
+window.addEventListener("keydown",(e)=>{
+  if(e.key === "ArrowDown") move("down");
+  if(e.key === "ArrowUp") move("up");
 });
 </script>
 
