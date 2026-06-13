@@ -236,6 +236,69 @@ body{
         bottom:10px;
     }
 }
+    .panel{
+    width:100%;
+    background:#111;
+    color:#fff;
+    padding:80px 40px;
+}
+
+.panel-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:40px;
+    font-size:14px;
+    letter-spacing:.08em;
+    opacity:.7;
+}
+
+.panel-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+}
+
+.card{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(20px);
+    border-radius:24px;
+    padding:32px;
+    transition:.35s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    background:rgba(255,255,255,.08);
+}
+
+.card h3{
+    font-size:28px;
+    margin-bottom:14px;
+    letter-spacing:-0.04em;
+}
+
+.card p{
+    font-size:15px;
+    color:rgba(255,255,255,.65);
+    line-height:1.7;
+}
+
+@media(max-width:768px){
+
+    .panel{
+        padding:60px 24px;
+    }
+
+    .panel-grid{
+        grid-template-columns:1fr;
+    }
+
+    .card h3{
+        font-size:22px;
+    }
+}
 </style>
 </head>
 
@@ -304,6 +367,44 @@ body{
         </div>
     </div>
 
+
+    <!-- PANEL -->
+<div class="panel">
+
+    <div class="panel-header">
+        <span>Selected Works</span>
+        <span>2026</span>
+    </div>
+
+    <div class="panel-grid">
+
+        <div class="card">
+            <h3>Brand Design</h3>
+            <p>
+                브랜드 아이덴티티 구축 및
+                비주얼 시스템 디자인
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>UI / UX</h3>
+            <p>
+                사용자 경험 중심의
+                인터페이스 설계
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Graphic</h3>
+            <p>
+                포스터 · 편집 · 콘텐츠
+                디자인 프로젝트
+            </p>
+        </div>
+
+    </div>
+
+</div>
 </section>
 
 </body>
