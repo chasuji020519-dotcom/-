@@ -17,7 +17,7 @@
 html,
 body{
     width:100%;
-    min-height:100%;
+    height:100%;
 }
 
 body{
@@ -35,30 +35,31 @@ body{
     justify-content:center;
     align-items:center;
 
-    padding:0 24px;
+    padding:0 40px;
     overflow:hidden;
 }
 
 .title{
+    width:min(1600px,100%);
+
     display:grid;
-    grid-template-columns:5.5em auto 5.5em;
+    grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
     align-items:center;
-    justify-content:center;
 
     font-size:clamp(72px,8vw,130px);
     font-weight:700;
     letter-spacing:-0.075em;
-    color:#111;
     line-height:1;
 }
 
 .fixed{
+    white-space:nowrap;
     text-align:center;
     padding:0 .22em;
 }
 
 .box{
-    width:5.5em;
+    width:100%;
     height:1.1em;
     overflow:hidden;
 }
@@ -78,10 +79,12 @@ body{
 
 .left .word{
     text-align:right;
+    padding-right:.08em;
 }
 
 .right .word{
     text-align:left;
+    padding-left:.08em;
 }
 
 .subtitle{
@@ -92,7 +95,6 @@ body{
 
     color:#8a8a8a;
     letter-spacing:-0.02em;
-
     text-align:center;
 }
 
@@ -122,40 +124,35 @@ body{
 
 @media(max-width:768px){
 
-    .title{
-        grid-template-columns:5em auto 5em;
-        font-size:clamp(48px,10vw,82px);
-        letter-spacing:-0.07em;
-    }
-
-    .box{
-        width:5em;
-    }
-
-    .subtitle{
-        font-size:16px;
-        margin-top:22px;
-    }
-
-}
-
-@media(max-width:480px){
-
     .hero{
-        padding:0 16px;
+        padding:0 24px;
     }
 
     .title{
-        grid-template-columns:4.6em auto 4.6em;
-        font-size:clamp(40px,11vw,60px);
+        grid-template-columns:1fr;
+        gap:4px;
+
+        font-size:clamp(50px,12vw,82px);
+        text-align:center;
     }
 
     .box{
-        width:4.6em;
+        width:100%;
+    }
+
+    .left .word,
+    .right .word{
+        text-align:center;
+        padding:0;
     }
 
     .fixed{
-        padding:0 .15em;
+        padding:0;
+    }
+
+    .subtitle{
+        margin-top:24px;
+        font-size:16px;
     }
 
 }
@@ -171,10 +168,10 @@ body{
 
         <div class="box left">
             <div class="slider">
-                <div class="word">생각을</div>
-                <div class="word">경험을</div>
+                <div class="word">감각을</div>
                 <div class="word">가치를</div>
-                <div class="word">브랜드</div>
+                <div class="word">경험을</div>
+                <div class="word">생각을</div>
             </div>
         </div>
 
@@ -183,16 +180,16 @@ body{
         <div class="box right">
             <div class="slider">
                 <div class="word">디자인</div>
-                <div class="word">만들다</div>
-                <div class="word">전하다</div>
-                <div class="word">그리다</div>
+                <div class="word">퀄리티</div>
+                <div class="word">임팩트</div>
+                <div class="word">디테일</div>
             </div>
         </div>
 
     </h1>
 
     <p class="subtitle">
-        웹디자이너 차수지입니다.
+        Visual Designer · UI/UX · Branding
     </p>
 
 </section>
