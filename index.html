@@ -57,7 +57,7 @@ nav{
 }
 
 .hero{
-  height:100vh;
+  height:92vh;
   position:sticky;
   top:0;
   background:#fff;
@@ -389,15 +389,25 @@ function createTextPoints(){
   temp.width = window.innerWidth;
   temp.height = window.innerHeight;
 
-  /* 글자가 양옆에 너무 꽉 차지 않게 조정 */
-  const fontSize = Math.min(window.innerWidth / 8.2, 190);
+ const sidePadding = temp.width * 0.07;
+const availableWidth = temp.width - sidePadding * 2;
+
+const fontSize = Math.min(
+  availableWidth / 8.2,
+  230
+);
 
   tctx.fillStyle = "#111";
   tctx.font = `900 ${fontSize}px Arial, sans-serif`;
   tctx.textAlign = "center";
   tctx.textBaseline = "middle";
 
-  tctx.fillText(text, temp.width / 2, temp.height / 2);
+  tctx.fillText(
+  text,
+  temp.width / 2,
+  temp.height / 2,
+  availableWidth
+);
 
   const imageData = tctx.getImageData(0,0,temp.width,temp.height).data;
 
