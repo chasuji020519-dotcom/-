@@ -2,97 +2,120 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
 body{
+    margin:0;
     height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
     background:#fff;
-    font-family:"Pretendard",sans-serif;
+    font-family:Pretendard,sans-serif;
 }
 
-.hero-title{
-    font-size:clamp(42px,6vw,88px);
-    font-weight:700;
-    line-height:1.2;
-    color:#111;
-    display:flex;
-    align-items:center;
-    gap:16px;
-}
-
-.word-wrap{
+.title{
     position:relative;
-    height:1.2em;
+    width:900px;
+    height:120px;
     overflow:hidden;
 }
 
-.word-slider{
+.item{
+    position:absolute;
+    inset:0;
     display:flex;
-    flex-direction:column;
-    animation:slide 8s infinite;
-}
-
-.word{
-    height:1.2em;
-    display:flex;
+    justify-content:center;
     align-items:center;
-    white-space:nowrap;
+    gap:14px;
+    font-size:72px;
+    font-weight:700;
+    opacity:0;
+    transform:translateY(-60px);
 }
 
-.fixed{
+.item:nth-child(1){
+    animation:textChange 8s infinite;
+}
+
+.item:nth-child(2){
+    animation:textChange 8s infinite 2s;
+}
+
+.item:nth-child(3){
+    animation:textChange 8s infinite 4s;
+}
+
+.item:nth-child(4){
+    animation:textChange 8s infinite 6s;
+}
+
+.easy{
     color:#111;
 }
 
-@keyframes slide{
+.sub{
+    color:#111;
+}
 
-    0%,20%{
-        transform:translateY(0%);
+@keyframes textChange{
+
+    0%{
+        opacity:0;
+        transform:translateY(-60px);
     }
 
-    25%,45%{
-        transform:translateY(-25%);
+    10%{
+        opacity:1;
+        transform:translateY(0);
     }
 
-    50%,70%{
-        transform:translateY(-50%);
+    40%{
+        opacity:1;
+        transform:translateY(0);
     }
 
-    75%,95%{
-        transform:translateY(-75%);
+    50%{
+        opacity:0;
+        transform:translateY(60px);
     }
 
     100%{
-        transform:translateY(0%);
+        opacity:0;
+        transform:translateY(60px);
     }
 }
 </style>
 </head>
 <body>
 
-<h1 class="hero-title">
+<div class="title">
 
-    <div class="word-wrap">
-        <div class="word-slider">
-            <div class="word">매출내기</div>
-            <div class="word">운영하기</div>
-            <div class="word">성장하기</div>
-            <div class="word">디자인하기</div>
-        </div>
+    <div class="item">
+        <span>매출내기</span>
+        <span class="easy">쉬운</span>
+        <span class="sub">브랜드</span>
     </div>
 
-    <span class="fixed">쉬운</span>
+    <div class="item">
+        <span>운영하기</span>
+        <span class="easy">쉬운</span>
+        <span class="sub">쇼핑몰</span>
+    </div>
 
-</h1>
+    <div class="item">
+        <span>성장하기</span>
+        <span class="easy">쉬운</span>
+        <span class="sub">브랜드</span>
+    </div>
+
+    <div class="item">
+        <span>디자인하기</span>
+        <span class="easy">쉬운</span>
+        <span class="sub">자사몰</span>
+    </div>
+
+</div>
 
 </body>
 </html>
