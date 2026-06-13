@@ -52,7 +52,7 @@ body{
 
 .hero{
     width:100%;
-    min-height:100vh;
+    height:100vh;
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -175,103 +175,99 @@ body{
     to{transform:translateX(-50%)}
 }
 
-/* 패널 영역 */
+/* 전체 유리 패널 */
 .panel-section{
-    background:#fff;
-    padding:0 40px 120px;
+    position:relative;
+    width:100%;
+    min-height:100vh;
+    margin-top:-1px;
+    background:
+        linear-gradient(to bottom, rgba(255,255,255,0), #f3f3f3 38%),
+        url("https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg") center/cover no-repeat;
 }
 
 .panel{
-    position:relative;
-    margin-top:-30px;
+    position:sticky;
+    top:0;
     width:100%;
-    min-height:520px;
-    background:rgba(18,18,18,.92);
-    color:#fff;
-    border-radius:42px 42px 0 0;
-    padding:70px 60px;
-    backdrop-filter:blur(24px);
-    box-shadow:0 -30px 80px rgba(0,0,0,.16);
-    overflow:hidden;
+    min-height:100vh;
+    padding:120px 40px 70px;
+    background:rgba(255,255,255,.48);
+    backdrop-filter:blur(28px);
+    -webkit-backdrop-filter:blur(28px);
+    border-top:1px solid rgba(255,255,255,.55);
+    box-shadow:0 -40px 100px rgba(0,0,0,.12);
 }
 
-.panel::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:
-        radial-gradient(circle at 20% 20%,rgba(255,255,255,.16),transparent 30%),
-        radial-gradient(circle at 80% 0%,rgba(255,255,255,.12),transparent 32%);
-    pointer-events:none;
+.panel-inner{
+    width:100%;
 }
 
 .panel-top{
-    position:relative;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:80px;
+    margin-bottom:90px;
     font-size:14px;
     letter-spacing:.12em;
-    color:rgba(255,255,255,.58);
+    color:rgba(0,0,0,.45);
 }
 
 .panel-title{
-    position:relative;
-    font-size:clamp(46px,7vw,110px);
-    line-height:.95;
+    font-size:clamp(54px,8vw,130px);
+    line-height:.92;
     letter-spacing:-.08em;
-    margin-bottom:50px;
+    margin-bottom:45px;
 }
 
 .panel-desc{
-    position:relative;
-    max-width:520px;
-    font-size:17px;
+    max-width:620px;
+    font-size:18px;
     line-height:1.8;
-    color:rgba(255,255,255,.65);
+    color:rgba(0,0,0,.58);
 }
 
 .panel-cards{
-    position:relative;
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:18px;
-    margin-top:70px;
+    margin-top:80px;
 }
 
 .card{
-    min-height:210px;
-    padding:30px;
-    border-radius:28px;
-    background:rgba(255,255,255,.07);
-    border:1px solid rgba(255,255,255,.1);
-    backdrop-filter:blur(18px);
+    min-height:230px;
+    padding:32px;
+    border-radius:30px;
+    background:rgba(255,255,255,.34);
+    border:1px solid rgba(255,255,255,.55);
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+    box-shadow:0 20px 60px rgba(0,0,0,.08);
     transition:.35s ease;
 }
 
 .card:hover{
     transform:translateY(-8px);
-    background:rgba(255,255,255,.12);
+    background:rgba(255,255,255,.48);
 }
 
 .card span{
     display:block;
     font-size:13px;
-    color:rgba(255,255,255,.45);
-    margin-bottom:28px;
+    color:rgba(0,0,0,.4);
+    margin-bottom:30px;
 }
 
 .card h3{
-    font-size:27px;
+    font-size:28px;
     letter-spacing:-.04em;
     margin-bottom:15px;
 }
 
 .card p{
-    font-size:14px;
+    font-size:15px;
     line-height:1.7;
-    color:rgba(255,255,255,.58);
+    color:rgba(0,0,0,.55);
 }
 
 @media(max-width:768px){
@@ -315,19 +311,17 @@ body{
         height:130px;
     }
 
-    .panel-section{
-        padding:0 18px 80px;
-    }
-
     .panel{
-        margin-top:-20px;
-        border-radius:30px 30px 0 0;
-        padding:45px 24px;
+        padding:110px 24px 60px;
     }
 
     .panel-top{
-        margin-bottom:55px;
+        margin-bottom:60px;
         font-size:11px;
+    }
+
+    .panel-title{
+        font-size:clamp(46px,13vw,76px);
     }
 
     .panel-desc{
@@ -336,7 +330,7 @@ body{
 
     .panel-cards{
         grid-template-columns:1fr;
-        margin-top:45px;
+        margin-top:48px;
     }
 
     .card{
@@ -421,45 +415,49 @@ body{
 <section class="panel-section">
     <div class="panel">
 
-        <div class="panel-top">
-            <span>ABOUT PORTFOLIO</span>
-            <span>SCROLL 01</span>
-        </div>
+        <div class="panel-inner">
 
-        <h2 class="panel-title">
-            Visual stories<br>
-            with clear detail
-        </h2>
-
-        <p class="panel-desc">
-            감각적인 비주얼과 섬세한 디테일을 바탕으로 브랜드의 분위기를 정리하고,
-            보는 사람이 오래 기억할 수 있는 디자인을 만듭니다.
-        </p>
-
-        <div class="panel-cards">
-
-            <div class="card">
-                <span>01</span>
-                <h3>Brand Design</h3>
-                <p>
-                    브랜드의 방향성과 분위기를 시각적으로 정리하는 작업입니다.
-                </p>
+            <div class="panel-top">
+                <span>ABOUT PORTFOLIO</span>
+                <span>SCROLL 01</span>
             </div>
 
-            <div class="card">
-                <span>02</span>
-                <h3>Graphic Design</h3>
-                <p>
-                    포스터, 콘텐츠, 편집 디자인 등 인상적인 비주얼을 만듭니다.
-                </p>
-            </div>
+            <h2 class="panel-title">
+                Visual stories<br>
+                with clear detail
+            </h2>
 
-            <div class="card">
-                <span>03</span>
-                <h3>UI Concept</h3>
-                <p>
-                    웹과 모바일 화면에서 보기 좋은 구조와 흐름을 설계합니다.
-                </p>
+            <p class="panel-desc">
+                감각적인 비주얼과 섬세한 디테일을 바탕으로 브랜드의 분위기를 정리하고,
+                보는 사람이 오래 기억할 수 있는 디자인을 만듭니다.
+            </p>
+
+            <div class="panel-cards">
+
+                <div class="card">
+                    <span>01</span>
+                    <h3>Brand Design</h3>
+                    <p>
+                        브랜드의 방향성과 분위기를 시각적으로 정리하는 작업입니다.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <span>02</span>
+                    <h3>Graphic Design</h3>
+                    <p>
+                        포스터, 콘텐츠, 편집 디자인 등 인상적인 비주얼을 만듭니다.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <span>03</span>
+                    <h3>UI Concept</h3>
+                    <p>
+                        웹과 모바일 화면에서 보기 좋은 구조와 흐름을 설계합니다.
+                    </p>
+                </div>
+
             </div>
 
         </div>
