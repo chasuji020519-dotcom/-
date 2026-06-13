@@ -44,8 +44,8 @@ body{
 </section>
 
 <script>
-const canvas=document.getElementById("magnetSandCanvas");
-const ctx=canvas.getContext("2d");
+const canvas = document.getElementById("magnetSandCanvas");
+const ctx = canvas.getContext("2d");
 
 let w,h,dpr;
 let particles=[];
@@ -63,6 +63,7 @@ let mouse={
 const TEXT=["PORTFOLIO"];
 
 function resize(){
+
   dpr=Math.min(window.devicePixelRatio||1,2);
 
   w=window.innerWidth;
@@ -90,7 +91,7 @@ function makePoints(){
   off.width=w;
   off.height=h;
 
-  const fontSize=Math.min(w*0.18,h*0.22);
+  const fontSize=Math.min(w*0.28,h*0.32);
 
   octx.clearRect(0,0,w,h);
 
@@ -103,18 +104,20 @@ function makePoints(){
 
   const img=octx.getImageData(0,0,w,h).data;
 
-  const gap=window.innerWidth<560 ? 4 : 3;
+  const gap=1;
 
   for(let y=0;y<h;y+=gap){
     for(let x=0;x<w;x+=gap){
 
       const a=img[(y*w+x)*4+3];
 
-      if(a>120 && Math.random()>0.1){
+      if(a>120 && Math.random()>0.02){
+
         points.push({
-          x:x+(Math.random()-0.5)*1.5,
-          y:y+(Math.random()-0.5)*1.5
+          x:x+(Math.random()-0.5)*0.25,
+          y:y+(Math.random()-0.5)*0.25
         });
+
       }
     }
   }
@@ -123,23 +126,34 @@ function makePoints(){
 function makeParticles(){
 
   particles=points.map(p=>({
+
     x:w/2+(Math.random()-0.5)*w,
     y:h/2+(Math.random()-0.5)*h,
+
     tx:p.x,
     ty:p.y,
+
     vx:0,
     vy:0,
-    r:Math.random()*1.8+1.2,
-    a:Math.random()*0.3+0.8,
+
+    r:Math.random()*2+1.8,
+    a:Math.random()*0.15+0.85,
+
     noise:Math.random()*0.08+0.015,
+
     magnet:Math.random()*0.7+0.8,
+
     tear:0
+
   }));
 }
 
 function animate(){
 
   ctx.clearRect(0,0,w,h);
+
+  ctx.shadowBlur=3;
+  ctx.shadowColor="rgba(0,0,0,0.18)";
 
   const speed=Math.sqrt(
     mouse.vx*mouse.vx+
@@ -202,10 +216,28 @@ function animate(){
     p.x+=p.vx;
     p.y+=p.vy;
 
+    ctx.fillStyle=`rgba(0,0,0,${p.a})`;
+
     ctx.beginPath();
-    ctx.fillStyle=`rgba(17,17,17,${p.a})`;
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.arc(
+      p.x,
+      p.y,
+      p.r*1.5,
+      0,
+      Math.PI*2
+    );
     ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(
+      p.x+(Math.random()-0.5)*0.8,
+      p.y+(Math.random()-0.5)*0.8,
+      p.r,
+      0,
+      Math.PI*2
+    );
+    ctx.fill();
+
   }
 
   requestAnimationFrame(animate);
@@ -233,10 +265,13 @@ window.addEventListener("touchmove",e=>{
 },{passive:true});
 
 window.addEventListener("mouseleave",()=>{
+
   mouse.x=-9999;
   mouse.y=-9999;
+
   mouse.vx=0;
   mouse.vy=0;
+
 });
 
 window.addEventListener("resize",resize);
