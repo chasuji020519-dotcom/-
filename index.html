@@ -7,7 +7,56 @@
 <title>Hero Section</title>
 
 <style>
+.nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:32px 40px;
+    z-index:999;
+}
 
+.logo{
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:.12em;
+}
+
+.menu{
+    display:flex;
+    gap:36px;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#111;
+    font-size:12px;
+    font-weight:500;
+    letter-spacing:.08em;
+    transition:.3s;
+}
+
+.menu a:hover{
+    opacity:.35;
+}
+
+@media(max-width:768px){
+
+    .nav{
+        padding:24px;
+    }
+
+    .menu{
+        gap:18px;
+    }
+
+    .menu a{
+        font-size:11px;
+    }
+}
 *{
     margin:0;
     padding:0;
@@ -130,7 +179,16 @@ body{
 </head>
 
 <body>
+<nav class="nav">
+    <div class="logo">CSJ.</div>
 
+    <div class="menu">
+        <a href="#about">ABOUT</a>
+        <a href="#works">WORKS</a>
+        <a href="#archive">ARCHIVE</a>
+        <a href="#contact">CONTACT</a>
+    </div>
+</nav>
 <section class="hero">
 
     <h1 class="title">
