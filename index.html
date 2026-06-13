@@ -8,11 +8,15 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     background:#fff;
     font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;
     color:#111;
-    overflow:hidden;
+    overflow-x:hidden;
 }
 
 .nav{
@@ -48,7 +52,7 @@ body{
 
 .hero{
     width:100%;
-    height:100vh;
+    min-height:100vh;
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -127,13 +131,10 @@ body{
     88%,100%{transform:translateY(-4.4em)}
 }
 
-/* 하단 이미지 영역 */
 .image-marquee{
     position:relative;
     width:100%;
     overflow:hidden;
-    margin:0;
-    padding:0;
 }
 
 .image-marquee::before{
@@ -153,39 +154,20 @@ body{
 
 .marquee-track{
     display:flex;
-    gap:0;
     width:max-content;
     animation:marquee 38s linear infinite;
 }
 
 .project{
-    position:relative;
     flex-shrink:0;
-    margin:0;
-    padding:0;
 }
 
 .project img{
     width:300px;
     height:180px;
     object-fit:cover;
-    border-radius:0;
     display:block;
     filter:saturate(.9) contrast(1.05);
-}
-
-.project span{
-    position:absolute;
-    left:16px;
-    bottom:16px;
-    z-index:3;
-    color:#fff;
-    font-size:12px;
-    font-weight:600;
-    background:rgba(0,0,0,.28);
-    backdrop-filter:blur(14px);
-    padding:7px 11px;
-    border-radius:999px;
 }
 
 @keyframes marquee{
@@ -193,10 +175,113 @@ body{
     to{transform:translateX(-50%)}
 }
 
+/* 패널 영역 */
+.panel-section{
+    background:#fff;
+    padding:0 40px 120px;
+}
+
+.panel{
+    position:relative;
+    margin-top:-30px;
+    width:100%;
+    min-height:520px;
+    background:rgba(18,18,18,.92);
+    color:#fff;
+    border-radius:42px 42px 0 0;
+    padding:70px 60px;
+    backdrop-filter:blur(24px);
+    box-shadow:0 -30px 80px rgba(0,0,0,.16);
+    overflow:hidden;
+}
+
+.panel::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(circle at 20% 20%,rgba(255,255,255,.16),transparent 30%),
+        radial-gradient(circle at 80% 0%,rgba(255,255,255,.12),transparent 32%);
+    pointer-events:none;
+}
+
+.panel-top{
+    position:relative;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:80px;
+    font-size:14px;
+    letter-spacing:.12em;
+    color:rgba(255,255,255,.58);
+}
+
+.panel-title{
+    position:relative;
+    font-size:clamp(46px,7vw,110px);
+    line-height:.95;
+    letter-spacing:-.08em;
+    margin-bottom:50px;
+}
+
+.panel-desc{
+    position:relative;
+    max-width:520px;
+    font-size:17px;
+    line-height:1.8;
+    color:rgba(255,255,255,.65);
+}
+
+.panel-cards{
+    position:relative;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-top:70px;
+}
+
+.card{
+    min-height:210px;
+    padding:30px;
+    border-radius:28px;
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.1);
+    backdrop-filter:blur(18px);
+    transition:.35s ease;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    background:rgba(255,255,255,.12);
+}
+
+.card span{
+    display:block;
+    font-size:13px;
+    color:rgba(255,255,255,.45);
+    margin-bottom:28px;
+}
+
+.card h3{
+    font-size:27px;
+    letter-spacing:-.04em;
+    margin-bottom:15px;
+}
+
+.card p{
+    font-size:14px;
+    line-height:1.7;
+    color:rgba(255,255,255,.58);
+}
+
 @media(max-width:768px){
 
     .nav{
-        padding:38px50px;
+        padding:28px 24px;
+    }
+
+    .logo{
+        font-size:15px;
     }
 
     .menu{
@@ -230,73 +315,37 @@ body{
         height:130px;
     }
 
-    .project span{
-        font-size:10px;
-        left:10px;
-        bottom:10px;
-    }
-}
-    .panel{
-    width:100%;
-    background:#111;
-    color:#fff;
-    padding:80px 40px;
-}
-
-.panel-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:40px;
-    font-size:14px;
-    letter-spacing:.08em;
-    opacity:.7;
-}
-
-.panel-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:24px;
-}
-
-.card{
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.08);
-    backdrop-filter:blur(20px);
-    border-radius:24px;
-    padding:32px;
-    transition:.35s;
-}
-
-.card:hover{
-    transform:translateY(-6px);
-    background:rgba(255,255,255,.08);
-}
-
-.card h3{
-    font-size:28px;
-    margin-bottom:14px;
-    letter-spacing:-0.04em;
-}
-
-.card p{
-    font-size:15px;
-    color:rgba(255,255,255,.65);
-    line-height:1.7;
-}
-
-@media(max-width:768px){
-
-    .panel{
-        padding:60px 24px;
+    .panel-section{
+        padding:0 18px 80px;
     }
 
-    .panel-grid{
+    .panel{
+        margin-top:-20px;
+        border-radius:30px 30px 0 0;
+        padding:45px 24px;
+    }
+
+    .panel-top{
+        margin-bottom:55px;
+        font-size:11px;
+    }
+
+    .panel-desc{
+        font-size:15px;
+    }
+
+    .panel-cards{
         grid-template-columns:1fr;
+        margin-top:45px;
+    }
+
+    .card{
+        min-height:170px;
+        padding:24px;
     }
 
     .card h3{
-        font-size:22px;
+        font-size:23px;
     }
 }
 </style>
@@ -367,44 +416,55 @@ body{
         </div>
     </div>
 
+</section>
 
-    <!-- PANEL -->
-<div class="panel">
+<section class="panel-section">
+    <div class="panel">
 
-    <div class="panel-header">
-        <span>Selected Works</span>
-        <span>2026</span>
+        <div class="panel-top">
+            <span>ABOUT PORTFOLIO</span>
+            <span>SCROLL 01</span>
+        </div>
+
+        <h2 class="panel-title">
+            Visual stories<br>
+            with clear detail
+        </h2>
+
+        <p class="panel-desc">
+            감각적인 비주얼과 섬세한 디테일을 바탕으로 브랜드의 분위기를 정리하고,
+            보는 사람이 오래 기억할 수 있는 디자인을 만듭니다.
+        </p>
+
+        <div class="panel-cards">
+
+            <div class="card">
+                <span>01</span>
+                <h3>Brand Design</h3>
+                <p>
+                    브랜드의 방향성과 분위기를 시각적으로 정리하는 작업입니다.
+                </p>
+            </div>
+
+            <div class="card">
+                <span>02</span>
+                <h3>Graphic Design</h3>
+                <p>
+                    포스터, 콘텐츠, 편집 디자인 등 인상적인 비주얼을 만듭니다.
+                </p>
+            </div>
+
+            <div class="card">
+                <span>03</span>
+                <h3>UI Concept</h3>
+                <p>
+                    웹과 모바일 화면에서 보기 좋은 구조와 흐름을 설계합니다.
+                </p>
+            </div>
+
+        </div>
+
     </div>
-
-    <div class="panel-grid">
-
-        <div class="card">
-            <h3>Brand Design</h3>
-            <p>
-                브랜드 아이덴티티 구축 및
-                비주얼 시스템 디자인
-            </p>
-        </div>
-
-        <div class="card">
-            <h3>UI / UX</h3>
-            <p>
-                사용자 경험 중심의
-                인터페이스 설계
-            </p>
-        </div>
-
-        <div class="card">
-            <h3>Graphic</h3>
-            <p>
-                포스터 · 편집 · 콘텐츠
-                디자인 프로젝트
-            </p>
-        </div>
-
-    </div>
-
-</div>
 </section>
 
 </body>
