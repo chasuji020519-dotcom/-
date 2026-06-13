@@ -14,9 +14,16 @@
     box-sizing:border-box;
 }
 
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
 body{
     background:#fff;
     font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;
+    color:#111;
 }
 
 .hero{
@@ -29,6 +36,7 @@ body{
     align-items:center;
 
     padding:0 24px;
+    overflow:hidden;
 }
 
 .title{
@@ -37,16 +45,16 @@ body{
     align-items:center;
     justify-content:center;
 
-    font-size:clamp(56px,6vw,96px);
+    font-size:clamp(72px,8vw,130px);
     font-weight:700;
-    letter-spacing:-0.07em;
+    letter-spacing:-0.075em;
     color:#111;
     line-height:1;
 }
 
 .fixed{
     text-align:center;
-    padding:0 .2em;
+    padding:0 .22em;
 }
 
 .box{
@@ -58,7 +66,8 @@ body{
 .slider{
     display:flex;
     flex-direction:column;
-    animation:slideText 8s infinite cubic-bezier(.76,0,.24,1);
+    animation:slideText 12s infinite ease-in-out;
+    will-change:transform;
 }
 
 .word{
@@ -76,7 +85,7 @@ body{
 }
 
 .subtitle{
-    margin-top:32px;
+    margin-top:34px;
 
     font-size:20px;
     font-weight:400;
@@ -89,19 +98,19 @@ body{
 
 @keyframes slideText{
 
-    0%,20%{
+    0%,18%{
         transform:translateY(0);
     }
 
-    25%,45%{
+    25%,43%{
         transform:translateY(-1.1em);
     }
 
-    50%,70%{
+    50%,68%{
         transform:translateY(-2.2em);
     }
 
-    75%,95%{
+    75%,93%{
         transform:translateY(-3.3em);
     }
 
@@ -115,7 +124,8 @@ body{
 
     .title{
         grid-template-columns:5em auto 5em;
-        font-size:clamp(38px,9vw,64px);
+        font-size:clamp(48px,10vw,82px);
+        letter-spacing:-0.07em;
     }
 
     .box{
@@ -124,7 +134,28 @@ body{
 
     .subtitle{
         font-size:16px;
-        margin-top:20px;
+        margin-top:22px;
+    }
+
+}
+
+@media(max-width:480px){
+
+    .hero{
+        padding:0 16px;
+    }
+
+    .title{
+        grid-template-columns:4.6em auto 4.6em;
+        font-size:clamp(40px,11vw,60px);
+    }
+
+    .box{
+        width:4.6em;
+    }
+
+    .fixed{
+        padding:0 .15em;
     }
 
 }
@@ -140,28 +171,28 @@ body{
 
         <div class="box left">
             <div class="slider">
-                <div class="word">감각을</div>
-                <div class="word">가치를</div>
-                <div class="word">경험을</div>
                 <div class="word">생각을</div>
+                <div class="word">경험을</div>
+                <div class="word">가치를</div>
+                <div class="word">브랜드를</div>
             </div>
         </div>
 
-        <span class="fixed">담은</span>
+        <span class="fixed">담다</span>
 
         <div class="box right">
             <div class="slider">
                 <div class="word">디자인</div>
-                <div class="word">퀄리티</div>
-                <div class="word">임팩트</div>
-                <div class="word">디테일</div>
+                <div class="word">만들다</div>
+                <div class="word">전하다</div>
+                <div class="word">그리다</div>
             </div>
         </div>
 
     </h1>
 
     <p class="subtitle">
-        DESIGN PORTFOLIO · CHA SUJI
+        Visual Designer · UI/UX · Branding
     </p>
 
 </section>
