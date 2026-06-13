@@ -1,614 +1,453 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>SJ*5 PORTFOLIO</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SUJI Portfolio</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    :root {
-      --bg: #ececec;
-      --text: #111111;
-      --sub-text: #666666;
-      --button-bg: rgba(255,255,255,0.92);
-      --button-border: rgba(0,0,0,0.08);
-      --menu-hover: rgba(0,0,0,0.06);
-      --shadow: 0 8px 24px rgba(0,0,0,0.05);
-    }
+html{
+  scroll-behavior:smooth;
+}
 
-    body.dark-mode {
-      --bg: #111111;
-      --text: #f5f5f5;
-      --sub-text: #cfcfcf;
-      --button-bg: rgba(255,255,255,0.08);
-      --button-border: rgba(255,255,255,0.12);
-      --menu-hover: rgba(255,255,255,0.08);
-      --shadow: 0 8px 24px rgba(0,0,0,0.28);
-    }
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;
+  background:#f7f7f4;
+  color:#111;
+  overflow-x:hidden;
+}
 
-    html,
-    body {
-      width: 100%;
-      min-height: 100%;
-      overflow-x: hidden;
-      overscroll-behavior: none;
-    }
+a{
+  color:inherit;
+  text-decoration:none;
+}
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      transition: background 0.25s ease, color 0.25s ease;
-      -webkit-user-select: none;
-      user-select: none;
-      -webkit-touch-callout: none;
-    }
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  padding:22px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:100;
+  backdrop-filter:blur(18px);
+  background:rgba(247,247,244,.75);
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+.logo{
+  font-size:18px;
+  font-weight:700;
+  letter-spacing:-.5px;
+}
 
-    button {
-      border: 0;
-      background: none;
-      cursor: pointer;
-      font: inherit;
-      color: inherit;
-    }
+.menu{
+  display:flex;
+  gap:28px;
+  font-size:14px;
+  color:#555;
+}
 
-    .site-wrap {
-      min-height: 100vh;
-      position: relative;
-      overflow: hidden;
-    }
+.menu a:hover{
+  color:#000;
+}
 
-    .site-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 24px 46px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: transparent;
-      z-index: 100;
-    }
+section{
+  padding:120px 7%;
+}
 
-    .logo {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: transform 0.25s ease;
-    }
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  position:relative;
+}
 
-    .logo:hover {
-      transform: scale(1.05);
-    }
+.badge{
+  width:max-content;
+  padding:9px 15px;
+  border:1px solid #111;
+  border-radius:999px;
+  font-size:13px;
+  margin-bottom:30px;
+  animation:fadeUp .8s ease forwards;
+}
 
-    .sj-logo {
-      font-size: 34px;
-      font-weight: 900;
-      letter-spacing: -0.07em;
-      color: var(--text);
-      line-height: 1;
-    }
+.hero h1{
+  font-size:clamp(58px,12vw,160px);
+  line-height:.9;
+  letter-spacing:-7px;
+  font-weight:800;
+  max-width:1100px;
+  animation:fadeUp 1s ease forwards;
+}
 
-    .gnb-area {
-      flex: 1;
-      display: flex;
-      justify-content: flex-end;
-      margin-left: auto;
-      padding-right: 28px;
-    }
+.hero p{
+  margin-top:35px;
+  max-width:560px;
+  font-size:18px;
+  line-height:1.7;
+  color:#555;
+  animation:fadeUp 1.2s ease forwards;
+}
 
-    .gnb {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 10px;
-      width: auto;
-    }
+.scroll-text{
+  position:absolute;
+  right:7%;
+  bottom:50px;
+  font-size:13px;
+  color:#777;
+  writing-mode:vertical-rl;
+}
 
-    .gnb a {
-      padding: 12px 16px;
-      border-radius: 999px;
-      font-size: 21px;
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      white-space: nowrap;
-      transition: transform 0.2s ease, background 0.2s ease, color 0.25s ease;
-    }
+.marquee{
+  width:100%;
+  overflow:hidden;
+  border-top:1px solid #111;
+  border-bottom:1px solid #111;
+  background:#111;
+  color:#fff;
+  padding:18px 0;
+}
 
-    .gnb a:hover {
-      background: var(--menu-hover);
-      transform: translateY(-2px);
-    }
+.marquee div{
+  white-space:nowrap;
+  animation:marquee 18s linear infinite;
+  font-size:22px;
+  font-weight:700;
+}
 
-    .header-tools {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 70px;
-      justify-content: flex-end;
-      flex-shrink: 0;
-    }
+.title{
+  font-size:clamp(38px,7vw,92px);
+  letter-spacing:-4px;
+  line-height:1;
+  margin-bottom:50px;
+}
 
-    .icon-btn,
-    .menu-btn {
-      width: 46px;
-      height: 46px;
-      border-radius: 14px;
-      background: var(--button-bg);
-      border: 1px solid var(--button-border);
-      box-shadow: var(--shadow);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      transition: transform 0.2s ease, background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
-    }
+.about-wrap{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:30px;
+}
 
-    .icon-btn:hover,
-    .menu-btn:hover {
-      transform: translateY(-2px);
-    }
+.about-card{
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:30px;
+  padding:38px;
+  background:rgba(255,255,255,.55);
+  backdrop-filter:blur(20px);
+}
 
-    .menu-btn {
-      display: none;
-      font-size: 24px;
-    }
+.about-card h3{
+  font-size:24px;
+  margin-bottom:20px;
+}
 
-    .theme-icon {
-      position: absolute;
-      font-size: 20px;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
+.about-card p{
+  color:#555;
+  line-height:1.8;
+  font-size:16px;
+}
 
-    .theme-icon.sun {
-      opacity: 1;
-      transform: rotate(0deg) scale(1);
-    }
+.skill-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:25px;
+}
 
-    .theme-icon.moon {
-      opacity: 0;
-      transform: rotate(-90deg) scale(0.5);
-    }
+.skill-list span{
+  padding:10px 14px;
+  border-radius:999px;
+  background:#111;
+  color:#fff;
+  font-size:13px;
+}
 
-    body.dark-mode .theme-icon.sun {
-      opacity: 0;
-      transform: rotate(90deg) scale(0.5);
-    }
+.projects{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
 
-    body.dark-mode .theme-icon.moon {
-      opacity: 1;
-      transform: rotate(0deg) scale(1);
-    }
+.project-card{
+  min-height:420px;
+  border-radius:34px;
+  padding:28px;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.08);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition:.35s ease;
+  overflow:hidden;
+}
 
-    .hero {
-      min-height: 100vh;
-      padding: 120px 20px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+.project-card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 30px 70px rgba(0,0,0,.12);
+}
 
-    .hero-inner {
-      width: 100%;
-      max-width: 1520px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transform: translateY(8px);
-    }
+.thumb{
+  height:220px;
+  border-radius:24px;
+  background:
+    radial-gradient(circle at 30% 20%, #dcdcdc, transparent 30%),
+    linear-gradient(135deg,#111,#777);
+  margin-bottom:25px;
+}
 
-    .logo-canvas-wrap {
-      position: relative;
-      width: min(1380px, 94vw);
-      height: 380px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      touch-action: none;
-      overscroll-behavior: none;
-    }
+.project-card:nth-child(2) .thumb{
+  background:
+    radial-gradient(circle at 70% 30%, #111, transparent 25%),
+    linear-gradient(135deg,#eee,#bbb);
+}
 
-    #logoParticleCanvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-      touch-action: none;
-    }
+.project-card:nth-child(3) .thumb{
+  background:
+    linear-gradient(135deg,#f2f2f2 0%,#f2f2f2 40%,#111 40%,#111 100%);
+}
 
-    .hidden-logo-source {
-      position: absolute;
-      width: 0;
-      height: 0;
-      opacity: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
+.project-card h3{
+  font-size:24px;
+  letter-spacing:-1px;
+}
 
-    @media (max-width: 1200px) {
-      .site-header {
-        padding: 20px 24px;
-      }
+.project-card p{
+  margin-top:10px;
+  color:#666;
+  line-height:1.6;
+}
 
-      .sj-logo {
-        font-size: 31px;
-      }
+.tag{
+  margin-top:20px;
+  font-size:13px;
+  color:#999;
+}
 
-      .gnb-area {
-        padding-right: 18px;
-      }
+.contact{
+  min-height:70vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
 
-      .gnb a {
-        font-size: 18px;
-        padding: 10px 12px;
-      }
+.contact-box{
+  border-radius:40px;
+  background:#111;
+  color:#fff;
+  padding:60px;
+}
 
-      .logo-canvas-wrap {
-        height: 300px;
-      }
-    }
+.contact-box h2{
+  font-size:clamp(42px,8vw,100px);
+  letter-spacing:-4px;
+  line-height:1;
+}
 
-    @media (max-width: 980px) {
-      .site-header {
-        padding: 18px 16px;
-      }
+.contact-box p{
+  margin-top:25px;
+  color:#bbb;
+  font-size:17px;
+}
 
-      .menu-btn {
-        display: inline-flex;
-      }
+.contact-btn{
+  display:inline-block;
+  margin-top:35px;
+  padding:16px 24px;
+  border:1px solid #fff;
+  border-radius:999px;
+  transition:.3s;
+}
 
-      .gnb-area {
-        flex: 0;
-        padding-right: 0;
-      }
+.contact-btn:hover{
+  background:#fff;
+  color:#111;
+}
 
-      .gnb {
-        display: none;
-        position: absolute;
-        top: calc(100% + 10px);
-        left: 16px;
-        right: 16px;
-        padding: 18px;
-        border-radius: 22px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-        background: var(--bg);
-        border: 1px solid var(--button-border);
-        box-shadow: var(--shadow);
-      }
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s ease;
+}
 
-      .gnb.open {
-        display: flex;
-      }
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
 
-      .gnb a {
-        width: 100%;
-        padding: 14px 16px;
-        border-radius: 14px;
-        font-size: 18px;
-        transform: none !important;
-      }
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(35px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
 
-      .gnb a:hover {
-        transform: none;
-      }
+@keyframes marquee{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
 
-      .hero {
-        padding: 110px 14px 40px;
-      }
+@media(max-width:900px){
+  .menu{
+    display:none;
+  }
 
-      .logo-canvas-wrap {
-        width: 100%;
-        height: 220px;
-      }
-    }
+  .hero h1{
+    letter-spacing:-4px;
+  }
 
-    @media (max-width: 560px) {
-      .sj-logo {
-        font-size: 28px;
-      }
+  .about-wrap,
+  .projects{
+    grid-template-columns:1fr;
+  }
 
-      .icon-btn,
-      .menu-btn {
-        width: 42px;
-        height: 42px;
-      }
+  section{
+    padding:90px 6%;
+  }
 
-      .theme-icon {
-        font-size: 18px;
-      }
-
-      .logo-canvas-wrap {
-        height: 170px;
-      }
-    }
-  </style>
+  .contact-box{
+    padding:40px 28px;
+  }
+}
+</style>
 </head>
 
 <body>
-  <div class="site-wrap">
-    <header class="site-header">
-      <a href="/" class="logo sj-logo" aria-label="SJ*5 홈">
-        SJ*5
-      </a>
 
-      <div class="gnb-area">
-        <nav class="gnb" id="gnb">
-          <a href="/about.html">ABOUT</a>
-          <a href="/order.html">ORDER</a>
-          <a href="/manual.html">MANUAL</a>
-          <a href="/qa.html">Q&amp;A</a>
-          <a href="/portfolio.html">PORTFOLIO</a>
-          <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
-          <a href="/member/login.html">LOGIN</a>
-        </nav>
+<nav>
+  <div class="logo">SUJI.PORTFOLIO</div>
+  <div class="menu">
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="badge">WEB DESIGN PORTFOLIO</div>
+  <h1>
+    Simple,<br>
+    Trendy,<br>
+    Visual.
+  </h1>
+  <p>
+    감각적인 웹디자인과 깔끔한 레이아웃을 중심으로 작업하는
+    차수지의 포트폴리오입니다. 브랜드의 분위기를 살리고,
+    보기 쉬운 디자인을 만드는 것을 목표로 합니다.
+  </p>
+  <div class="scroll-text">SCROLL DOWN</div>
+</section>
+
+<div class="marquee">
+  <div>
+    PORTFOLIO · WEB DESIGN · BRANDING · DETAIL PAGE · UI DESIGN · PORTFOLIO · WEB DESIGN · BRANDING · DETAIL PAGE · UI DESIGN ·
+  </div>
+</div>
+
+<section id="about" class="reveal">
+  <h2 class="title">About Me</h2>
+
+  <div class="about-wrap">
+    <div class="about-card">
+      <h3>안녕하세요, 차수지입니다.</h3>
+      <p>
+        저는 심플하지만 눈에 남는 디자인을 좋아합니다.
+        브랜드의 첫인상을 정리하고, 사용자가 보기 편한 화면을
+        만드는 웹디자인 포트폴리오를 준비하고 있습니다.
+      </p>
+    </div>
+
+    <div class="about-card">
+      <h3>Tools & Skills</h3>
+      <p>
+        디자인 감각, 레이아웃 구성, 상세페이지 제작,
+        웹페이지 기획과 기본 HTML/CSS 작업을 중심으로 성장 중입니다.
+      </p>
+      <div class="skill-list">
+        <span>Photoshop</span>
+        <span>Figma</span>
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>Web Design</span>
       </div>
-
-      <div class="header-tools">
-        <button type="button" class="menu-btn" id="menuBtn" aria-label="메뉴 열기">☰</button>
-        <button type="button" class="icon-btn" id="themeToggle" aria-label="다크모드 전환">
-          <span class="theme-icon sun">☀</span>
-          <span class="theme-icon moon">☾</span>
-        </button>
-      </div>
-    </header>
-
-    <main class="hero">
-      <div class="hero-inner">
-        <div class="logo-canvas-wrap" id="canvasWrap">
-          <canvas id="logoParticleCanvas"></canvas>
-        </div>
-      </div>
-    </main>
-
-    <div class="hidden-logo-source">
-      <canvas id="textSource"></canvas>
     </div>
   </div>
+</section>
 
-  <script>
-    const body = document.body;
-    const themeToggle = document.getElementById('themeToggle');
-    const menuBtn = document.getElementById('menuBtn');
-    const gnb = document.getElementById('gnb');
+<section id="work" class="reveal">
+  <h2 class="title">Selected Work</h2>
 
-    const savedTheme = localStorage.getItem('agitTheme');
+  <div class="projects">
+    <div class="project-card">
+      <div class="thumb"></div>
+      <div>
+        <h3>Jewelry Brand Redesign</h3>
+        <p>주얼리 브랜드의 고급스럽고 깔끔한 무드를 살린 웹사이트 리디자인.</p>
+        <div class="tag">#Web Design #Branding</div>
+      </div>
+    </div>
 
-    if (savedTheme === 'dark') {
-      body.classList.add('dark-mode');
+    <div class="project-card">
+      <div class="thumb"></div>
+      <div>
+        <h3>Cosmetic Landing Page</h3>
+        <p>20대 타겟의 트렌디한 화장품 랜딩페이지 디자인.</p>
+        <div class="tag">#Landing Page #Beauty</div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="thumb"></div>
+      <div>
+        <h3>Fashion Editorial Shop</h3>
+        <p>에디토리얼 무드를 활용한 패션 쇼핑몰 메인 페이지.</p>
+        <div class="tag">#E-commerce #Editorial</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact reveal">
+  <div class="contact-box">
+    <h2>Let’s Work<br>Together.</h2>
+    <p>포트폴리오 문의 또는 연락은 아래 이메일로 부탁드립니다.</p>
+    <a class="contact-btn" href="mailto:chasuji020519@gmail.com">
+      chasuji020519@gmail.com
+    </a>
+  </div>
+</section>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+
+function revealOnScroll(){
+  reveals.forEach((el)=>{
+    const top = el.getBoundingClientRect().top;
+    const windowHeight = window.innerHeight;
+
+    if(top < windowHeight - 100){
+      el.classList.add('active');
     }
+  });
+}
 
-    themeToggle.addEventListener('click', () => {
-      body.classList.toggle('dark-mode');
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
+</script>
 
-      localStorage.setItem(
-        'agitTheme',
-        body.classList.contains('dark-mode') ? 'dark' : 'light'
-      );
-
-      setTimeout(buildLogoParticles, 30);
-    });
-
-    if (menuBtn && gnb) {
-      menuBtn.addEventListener('click', () => {
-        gnb.classList.toggle('open');
-      });
-
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 980) {
-          gnb.classList.remove('open');
-        }
-      });
-    }
-
-    const canvas = document.getElementById('logoParticleCanvas');
-    const wrap = document.getElementById('canvasWrap');
-    const ctx = canvas.getContext('2d', { willReadFrequently: true });
-
-    const pointer = {
-      x: -9999,
-      y: -9999,
-      active: false,
-      radius: 95
-    };
-
-    let particles = [];
-    let animationId = null;
-    let introPlayed = false;
-    let introFrame = 0;
-
-    function resizeCanvas() {
-      const dpr = window.devicePixelRatio || 1;
-      const rect = wrap.getBoundingClientRect();
-
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-
-      canvas.style.width = rect.width + 'px';
-      canvas.style.height = rect.height + 'px';
-
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.scale(dpr, dpr);
-
-      buildLogoParticles();
-    }
-
-    function buildLogoParticles() {
-      particles = [];
-
-      const width = wrap.clientWidth;
-      const height = wrap.clientHeight;
-
-      const off = document.createElement('canvas');
-      const offCtx = off.getContext('2d', { willReadFrequently: true });
-
-      off.width = width;
-      off.height = height;
-
-      offCtx.clearRect(0, 0, width, height);
-
-      const fontSize = Math.min(width * 0.165, height * 0.78);
-
-      offCtx.fillStyle = '#000';
-      offCtx.font = `900 ${fontSize}px Arial, Helvetica, sans-serif`;
-      offCtx.textAlign = 'center';
-      offCtx.textBaseline = 'middle';
-
-      offCtx.fillText('PORTFOLIO', width / 2, height / 2);
-
-      const imageData = offCtx.getImageData(0, 0, width, height).data;
-      const gap = width < 560 ? 4 : width < 980 ? 5 : 6;
-
-      for (let y = 0; y < height; y += gap) {
-        for (let x = 0; x < width; x += gap) {
-          const index = (y * width + x) * 4;
-          const alpha = imageData[index + 3];
-
-          if (alpha > 50) {
-            particles.push({
-              baseX: x,
-              baseY: y,
-              x: Math.random() * width,
-              y: Math.random() * height,
-              vx: (Math.random() - 0.5) * 12,
-              vy: (Math.random() - 0.5) * 12,
-              size: width < 980 ? 1.6 : 2,
-              delay: Math.random() * 40
-            });
-          }
-        }
-      }
-    }
-
-    function getDotColor() {
-      return getComputedStyle(document.body).getPropertyValue('--text').trim() || '#111111';
-    }
-
-    function animate() {
-      const width = wrap.clientWidth;
-      const height = wrap.clientHeight;
-
-      ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = getDotColor();
-
-      if (!introPlayed) {
-        introFrame++;
-
-        if (introFrame > 70) {
-          introPlayed = true;
-        }
-      }
-
-      for (const p of particles) {
-        const dx = p.x - pointer.x;
-        const dy = p.y - pointer.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (!introPlayed) {
-          if (introFrame > p.delay) {
-            p.vx += (p.baseX - p.x) * 0.045;
-            p.vy += (p.baseY - p.y) * 0.045;
-          }
-        } else {
-          if (pointer.active && dist < pointer.radius) {
-            const force = (pointer.radius - dist) / pointer.radius;
-            const angle = Math.atan2(dy, dx);
-            const push = force * 8.5;
-
-            p.vx += Math.cos(angle) * push;
-            p.vy += Math.sin(angle) * push;
-          }
-
-          p.vx += (p.baseX - p.x) * 0.09;
-          p.vy += (p.baseY - p.y) * 0.09;
-        }
-
-        p.vx *= 0.93;
-        p.vy *= 0.93;
-
-        p.x += p.vx;
-        p.y += p.vy;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      animationId = requestAnimationFrame(animate);
-    }
-
-    function updatePointer(clientX, clientY) {
-      const rect = wrap.getBoundingClientRect();
-
-      pointer.x = clientX - rect.left;
-      pointer.y = clientY - rect.top;
-      pointer.active = true;
-    }
-
-    function clearPointer() {
-      pointer.active = false;
-      pointer.x = -9999;
-      pointer.y = -9999;
-    }
-
-    wrap.addEventListener('mousemove', (e) => {
-      updatePointer(e.clientX, e.clientY);
-    });
-
-    wrap.addEventListener('mouseleave', clearPointer);
-
-    wrap.addEventListener('touchstart', (e) => {
-      const touch = e.touches[0];
-
-      if (!touch) return;
-
-      updatePointer(touch.clientX, touch.clientY);
-      e.preventDefault();
-    }, { passive: false });
-
-    wrap.addEventListener('touchmove', (e) => {
-      const touch = e.touches[0];
-
-      if (!touch) return;
-
-      updatePointer(touch.clientX, touch.clientY);
-      e.preventDefault();
-    }, { passive: false });
-
-    wrap.addEventListener('touchend', clearPointer, { passive: true });
-    wrap.addEventListener('touchcancel', clearPointer, { passive: true });
-
-    function initCanvas() {
-      if (animationId) {
-        cancelAnimationFrame(animationId);
-      }
-
-      pointer.radius = window.innerWidth <= 980 ? 70 : 100;
-      introPlayed = false;
-      introFrame = 0;
-
-      resizeCanvas();
-      animate();
-    }
-
-    initCanvas();
-
-    window.addEventListener('resize', initCanvas);
-  </script>
 </body>
 </html>
