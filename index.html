@@ -1,173 +1,626 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div data-ez-module="user-defined/1" data-ez-name="USER DEFINED" data-ez-type="plain" data-ez="module-1fhcqxg-1"><meta charset="UTF-8"></div>
+<div data-ez-module="user-defined/1" data-ez-name="USER DEFINED" data-ez-type="plain" data-ez="module-1hc5t9c-1"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"></div>
+<div data-ez-module="user-defined/1" data-ez-name="USER DEFINED" data-ez-type="plain" data-ez="module-1fo15c0-1"><title>AGIT SQUARE</title></div>
 
-<title>Particle Logo</title>
-
+<div data-ez-module="user-defined/1" data-ez-name="USER DEFINED" data-ez-type="plain" data-ez="module-03ygioo-1">
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+:root{
+  --bg:#ececec;
+  --text:#111;
+  --sub-text:#666;
+  --button-bg:rgba(255,255,255,.92);
+  --button-border:rgba(0,0,0,.08);
+  --menu-hover:rgba(0,0,0,.06);
+  --shadow:0 8px 24px rgba(0,0,0,.05);
+}
+
+body.dark-mode{
+  --bg:#000;
+  --text:#fff;
+  --sub-text:#cfcfcf;
+  --button-bg:rgba(255,255,255,.08);
+  --button-border:rgba(255,255,255,.12);
+  --menu-hover:rgba(255,255,255,.08);
+  --shadow:0 8px 24px rgba(0,0,0,.28);
+}
+
+html,body{
+  width:100%;
+  min-height:100%;
+  overflow-x:hidden;
+  overscroll-behavior:none;
 }
 
 body{
-background:#fff;
-overflow:hidden;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  transition:background .25s ease,color .25s ease;
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-touch-callout:none;
 }
 
-canvas{
-display:block;
-width:100vw;
-height:100vh;
+a{text-decoration:none;color:inherit}
+button{border:0;background:none;cursor:pointer;font:inherit;color:inherit}
+img{display:block;max-width:100%;-webkit-user-drag:none}
+ul,li{list-style:none}
+
+.site-wrap{
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+  background:var(--bg);
+}
+
+.site-header{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  padding:24px 46px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:transparent;
+  z-index:100;
+}
+
+.logo{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  transition:transform .25s ease;
+  position:relative;
+  z-index:1002;
+}
+
+.logo:hover{transform:scale(1.03)}
+
+.logo img{
+  width:145px;
+  height:auto;
+  transition:filter .25s ease,opacity .25s ease;
+  pointer-events:none;
+}
+
+body.dark-mode .logo img{
+  filter:brightness(0) invert(1);
+  opacity:.96;
+}
+
+.gnb-area{
+  flex:1;
+  display:flex;
+  justify-content:flex-end;
+  margin-left:auto;
+  padding-right:28px;
+}
+
+.gnb{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:10px;
+  width:auto;
+}
+
+.gnb-list{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
+.gnb-list li{list-style:none;position:relative}
+
+.gnb a,
+.gnb-list a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px 16px;
+  border-radius:999px;
+  font-size:21px;
+  font-weight:700;
+  letter-spacing:-.04em;
+  white-space:nowrap;
+  transition:transform .2s ease,background .2s ease,color .25s ease;
+}
+
+.gnb a:hover,
+.gnb-list a:hover{
+  background:var(--menu-hover);
+  transform:translateY(-2px);
+}
+
+.header-tools{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:70px;
+  justify-content:flex-end;
+  flex-shrink:0;
+  position:relative;
+  z-index:1002;
+}
+
+.icon-btn,
+.menu-btn{
+  width:46px;
+  height:46px;
+  border-radius:14px;
+  background:var(--button-bg);
+  border:1px solid var(--button-border);
+  box-shadow:var(--shadow);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  transition:transform .2s ease,background .25s ease,border-color .25s ease,color .25s ease;
+}
+
+.icon-btn:hover,
+.menu-btn:hover{transform:translateY(-2px)}
+
+.menu-btn{
+  display:none;
+  font-size:24px;
+}
+
+.theme-icon{
+  position:absolute;
+  font-size:20px;
+  transition:transform .3s ease,opacity .3s ease;
+}
+
+.theme-icon.sun{opacity:1;transform:rotate(0deg) scale(1)}
+.theme-icon.moon{opacity:0;transform:rotate(-90deg) scale(.5)}
+
+body.dark-mode .theme-icon.sun{opacity:0;transform:rotate(90deg) scale(.5)}
+body.dark-mode .theme-icon.moon{opacity:1;transform:rotate(0deg) scale(1)}
+
+.hero{
+  width:100vw;
+  height:100vh;
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+  background:var(--bg);
+}
+
+#magnetSandCanvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  touch-action:none;
+}
+
+.down{
+  position:fixed;
+  left:50%;
+  bottom:42px;
+  width:18px;
+  height:18px;
+  border-right:2px solid color-mix(in srgb, var(--text) 25%, transparent);
+  border-bottom:2px solid color-mix(in srgb, var(--text) 25%, transparent);
+  transform:translateX(-50%) rotate(45deg);
+  animation:downMove 1.4s infinite ease-in-out;
+  z-index:5;
+}
+
+@keyframes downMove{
+  0%,100%{transform:translateX(-50%) rotate(45deg) translate(0,0);opacity:.35}
+  50%{transform:translateX(-50%) rotate(45deg) translate(7px,7px);opacity:.8}
+}
+
+.mobile-menu{
+  position:fixed;
+  top:0;
+  left:-100%;
+  width:min(82vw,360px);
+  height:100vh;
+  background:var(--bg);
+  border-right:1px solid var(--button-border);
+  box-shadow:0 10px 30px rgba(0,0,0,.10);
+  z-index:1001;
+  transition:left .3s ease;
+  padding:90px 22px 28px;
+  overflow-y:auto;
+}
+
+.mobile-menu.open{left:0}
+
+.mobile-inner{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.mobile-list{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  margin:0;
+  padding:0;
+}
+
+.mobile-list li{list-style:none}
+
+.mobile-menu a,
+.mobile-list a{
+  display:block;
+  width:100%;
+  padding:14px 14px;
+  border-radius:14px;
+  font-size:18px;
+  font-weight:700;
+  letter-spacing:-.03em;
+  transition:background .2s ease,transform .2s ease;
+}
+
+.mobile-menu a:hover,
+.mobile-list a:hover{background:var(--menu-hover)}
+
+.mobile-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.25);
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .25s ease,visibility .25s ease;
+  z-index:1000;
+}
+
+.mobile-overlay.open{
+  opacity:1;
+  visibility:visible;
+}
+
+.top_category{display:none!important}
+
+@media(max-width:1200px){
+  .site-header{padding:20px 24px}
+  .logo img{width:125px}
+  .gnb-area{padding-right:18px}
+  .gnb a,.gnb-list a{font-size:18px;padding:10px 12px}
+}
+
+@media(max-width:980px){
+  .site-header{padding:18px 16px}
+  .menu-btn{display:inline-flex}
+  .gnb-area{flex:0;padding-right:0}
+  .gnb{display:none}
+}
+
+@media(max-width:560px){
+  .logo img{width:110px}
+  .icon-btn,.menu-btn{width:42px;height:42px}
+  .theme-icon{font-size:18px}
+  .mobile-menu{width:86vw;padding-top:82px}
+  .mobile-menu a,.mobile-list a{font-size:17px;padding:13px 12px}
 }
 </style>
-</head>
-<body>
+</div>
 
-<canvas id="canvas"></canvas>
+<div class="site-wrap" data-ez="module-02q38e2-1" data-ez-module="user-defined/1" data-ez-name="USER DEFINED" data-ez-type="plain">
+  <header class="site-header">
+    <a href="/" class="logo" aria-label="AGIT SQUARE 홈"><img src="/web/upload/NNEditor/20260412/E1848BE185A1E1848CE185B5E18490E185B3E18489E185B3E1848FE185B0E1848BE185A5.png" alt="AGIT SQUARE 로고" crossorigin="anonymous"></a>
 
+    <div class="gnb-area">
+      <nav class="gnb" id="gnb">
+        <ul class="gnb-list" module="Layout_category">
+          <li><a href="{$link_product_list}">{$name}</a></li>
+          <li><a href="{$link_product_list}">{$name}</a></li>
+        </ul>
+        <a href="/layout/basic/about.html">ABOUT</a>
+        <a href="/member/login.html">LOGIN</a>
+      </nav>
+    </div>
+
+    <div class="header-tools">
+      <button type="button" class="menu-btn" id="menuBtn" aria-label="메뉴 열기">☰</button>
+      <button type="button" class="icon-btn" id="themeToggle" aria-label="다크모드 전환">
+        <span class="theme-icon sun">☀</span>
+        <span class="theme-icon moon">☾</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-inner">
+      <ul class="mobile-list" module="Layout_category">
+        <li><a href="{$link_product_list}">{$name}</a></li>
+        <li><a href="{$link_product_list}">{$name}</a></li>
+      </ul>
+      <a href="/layout/basic/about.html">ABOUT</a>
+      <a href="/member/login.html">LOGIN</a>
+    </div>
+  </div>
+
+  <main class="hero">
+    <canvas id="magnetSandCanvas"></canvas>
+    <div class="down"></div>
+  </main>
+</div>
+
+<div data-ez-module="user-defined/1" data-ez-name="USER DEFINED" data-ez-type="plain" data-ez="module-134odh4-1">
 <script>
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+const body=document.body;
+const themeToggle=document.getElementById('themeToggle');
+const menuBtn=document.getElementById('menuBtn');
+const gnb=document.getElementById('gnb');
+const mobileMenu=document.getElementById('mobileMenu');
+const mobileOverlay=document.getElementById('mobileOverlay');
 
-let particles = [];
-let mouse = {
-x:null,
-y:null,
-radius:120
+const savedTheme=localStorage.getItem('agitTheme');
+if(savedTheme==='dark') body.classList.add('dark-mode');
+
+function openMobileMenu(){
+  if(!mobileMenu||!mobileOverlay)return;
+  mobileMenu.classList.add('open');
+  mobileOverlay.classList.add('open');
+  body.style.overflow='hidden';
+}
+
+function closeMobileMenu(){
+  if(!mobileMenu||!mobileOverlay)return;
+  mobileMenu.classList.remove('open');
+  mobileOverlay.classList.remove('open');
+  body.style.overflow='';
+}
+
+if(themeToggle){
+  themeToggle.addEventListener('click',()=>{
+    body.classList.toggle('dark-mode');
+    localStorage.setItem('agitTheme',body.classList.contains('dark-mode')?'dark':'light');
+  });
+}
+
+if(menuBtn){
+  menuBtn.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    if(mobileMenu&&mobileMenu.classList.contains('open')) closeMobileMenu();
+    else openMobileMenu();
+  });
+}
+
+if(mobileOverlay) mobileOverlay.addEventListener('click',closeMobileMenu);
+
+document.addEventListener('click',(e)=>{
+  if(!mobileMenu||!menuBtn)return;
+  if(!mobileMenu.contains(e.target)&&!menuBtn.contains(e.target)) closeMobileMenu();
+});
+
+window.addEventListener('resize',()=>{
+  if(window.innerWidth>980){
+    closeMobileMenu();
+    if(gnb)gnb.classList.remove('open');
+  }
+});
+
+const canvas=document.getElementById("magnetSandCanvas");
+const ctx=canvas.getContext("2d");
+
+let w,h,dpr;
+let particles=[];
+let points=[];
+
+let mouse={
+  x:-9999,
+  y:-9999,
+  px:-9999,
+  py:-9999,
+  vx:0,
+  vy:0
 };
 
+const TEXT=["start","with","mix."];
+
+function getParticleColor(){
+  return body.classList.contains('dark-mode') ? '245,245,245' : '17,17,17';
+}
+
 function resize(){
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-createText();
+  dpr=Math.min(window.devicePixelRatio||1,2);
+  w=window.innerWidth;
+  h=window.innerHeight;
+
+  canvas.width=w*dpr;
+  canvas.height=h*dpr;
+  canvas.style.width=w+"px";
+  canvas.style.height=h+"px";
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+
+  makePoints();
+  makeParticles();
 }
 
-window.addEventListener("resize", resize);
+function makePoints(){
+  points=[];
 
-window.addEventListener("mousemove", e=>{
-mouse.x = e.x;
-mouse.y = e.y;
-});
+  const off=document.createElement("canvas");
+  const octx=off.getContext("2d",{willReadFrequently:true});
 
-window.addEventListener("mouseleave", ()=>{
-mouse.x = null;
-mouse.y = null;
-});
+  off.width=w;
+  off.height=h;
 
-class Particle{
-constructor(x,y){
-this.x = Math.random()*canvas.width;
-this.y = Math.random()*canvas.height;
+  const fontSize=Math.min(w*0.17,h*0.21);
+  const lineHeight=fontSize*0.85;
 
-this.baseX = x;
-this.baseY = y;
+  octx.clearRect(0,0,w,h);
+  octx.fillStyle="#fff";
+  octx.textAlign="center";
+  octx.textBaseline="middle";
+  octx.font=`900 ${fontSize}px Arial Black, Impact, sans-serif`;
 
-this.size = 1.6;
+  const cy=h/2-lineHeight*0.05;
 
-this.density = Math.random()*20+5;
+  TEXT.forEach((t,i)=>{
+    octx.fillText(t,w/2,cy+(i-1)*lineHeight);
+  });
+
+  const img=octx.getImageData(0,0,w,h).data;
+  const gap=window.innerWidth<560 ? 3 : 2;
+
+  for(let y=0;y<h;y+=gap){
+    for(let x=0;x<w;x+=gap){
+      const a=img[(y*w+x)*4+3];
+
+      if(a>120 && Math.random()>0.1){
+        points.push({
+          x:x+(Math.random()-0.5)*1.5,
+          y:y+(Math.random()-0.5)*1.5
+        });
+      }else if(a>30 && Math.random()>0.6){
+        points.push({
+          x:x+(Math.random()-0.5)*4,
+          y:y+(Math.random()-0.5)*4
+        });
+      }
+    }
+  }
 }
 
-draw(){
-ctx.fillStyle="#111";
-ctx.beginPath();
-ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-ctx.fill();
-}
-
-update(){
-
-let dx = mouse.x - this.x;
-let dy = mouse.y - this.y;
-let distance = Math.sqrt(dx*dx+dy*dy);
-
-if(distance < mouse.radius){
-
-let force = (mouse.radius-distance)/mouse.radius;
-
-let dirX = dx/distance;
-let dirY = dy/distance;
-
-this.x -= dirX*force*8;
-this.y -= dirY*force*8;
-
-}else{
-
-this.x += (this.baseX-this.x)*0.08;
-this.y += (this.baseY-this.y)*0.08;
-
-}
-
-this.draw();
-}
-}
-
-function createText(){
-
-particles=[];
-
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-const text = "CHASUJI";
-
-const fontSize = Math.min(canvas.width*0.12,180);
-
-ctx.fillStyle="#000";
-ctx.textAlign="center";
-ctx.textBaseline="middle";
-ctx.font=`900 ${fontSize}px Arial Black`;
-
-ctx.fillText(
-text,
-canvas.width/2,
-canvas.height/2
-);
-
-const data = ctx.getImageData(
-0,
-0,
-canvas.width,
-canvas.height
-);
-
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-for(let y=0;y<data.height;y+=4){
-
-for(let x=0;x<data.width;x+=4){
-
-const index=(y*4*data.width)+(x*4);
-
-if(data.data[index+3]>128){
-
-particles.push(
-new Particle(x,y)
-);
-
-}
-
-}
-}
+function makeParticles(){
+  particles=points.map(p=>({
+    x:w/2+(Math.random()-0.5)*w,
+    y:h/2+(Math.random()-0.5)*h,
+    tx:p.x,
+    ty:p.y,
+    vx:0,
+    vy:0,
+    r:Math.random()*0.6+0.2,
+    a:Math.random()*0.4+0.5,
+    noise:Math.random()*0.08+0.015,
+    magnet:Math.random()*0.7+0.8,
+    tear:0
+  }));
 }
 
 function animate(){
+  ctx.clearRect(0,0,w,h);
 
-ctx.clearRect(0,0,canvas.width,canvas.height);
+  const rgb=getParticleColor();
+  const speed=Math.sqrt(mouse.vx*mouse.vx+mouse.vy*mouse.vy);
+  const dirX=mouse.vx/(speed||1);
+  const dirY=mouse.vy/(speed||1);
 
-for(let i=0;i<particles.length;i++){
-particles[i].update();
+  for(const p of particles){
+    const homeX=p.tx-p.x;
+    const homeY=p.ty-p.y;
+
+    const dx=mouse.x-p.x;
+    const dy=mouse.y-p.y;
+    const dist=Math.sqrt(dx*dx+dy*dy)||1;
+
+    const magnetRange=window.innerWidth<560 ? 120 : 160;
+
+    if(dist<magnetRange){
+      const t=1-dist/magnetRange;
+
+      if(speed>10) p.tear=1;
+
+      const pullPower=t*(7.5+speed*0.12)*p.magnet;
+      p.vx+=(dx/dist)*pullPower;
+      p.vy+=(dy/dist)*pullPower;
+
+      const swirlPower=t*(8.5+speed*0.08);
+      p.vx+=(-dy/dist)*swirlPower;
+      p.vy+=( dx/dist)*swirlPower;
+
+      const followPower=t*(speed*0.16+3);
+      p.vx+=dirX*followPower;
+      p.vy+=dirY*followPower;
+
+      if(speed>18){
+        p.vx+=(Math.random()-0.5)*speed*0.35*t;
+        p.vy+=(Math.random()-0.5)*speed*0.35*t;
+      }
+    }else{
+      const homeForce=p.tear>0 ? 0.004 : 0.018;
+      p.vx+=homeX*homeForce;
+      p.vy+=homeY*homeForce;
+    }
+
+    const weakHome=p.tear>0 ? 0.002 : 0.006;
+    p.vx+=homeX*weakHome;
+    p.vy+=homeY*weakHome;
+
+    p.tear*=0.965;
+
+    p.vx+=(Math.random()-0.5)*p.noise;
+    p.vy+=(Math.random()-0.5)*p.noise;
+
+    p.vx*=0.89;
+    p.vy*=0.89;
+
+    p.x+=p.vx;
+    p.y+=p.vy;
+
+    ctx.beginPath();
+    ctx.fillStyle=`rgba(${rgb},${p.a})`;
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+  }
+
+  requestAnimationFrame(animate);
 }
 
-requestAnimationFrame(animate);
+function movePointer(x,y){
+  mouse.vx=x-mouse.px;
+  mouse.vy=y-mouse.py;
+  mouse.x=x;
+  mouse.y=y;
+  mouse.px=x;
+  mouse.py=y;
 }
+
+window.addEventListener("mousemove",e=>{
+  movePointer(e.clientX,e.clientY);
+});
+
+window.addEventListener("mouseleave",()=>{
+  mouse.x=-9999;
+  mouse.y=-9999;
+  mouse.px=-9999;
+  mouse.py=-9999;
+  mouse.vx=0;
+  mouse.vy=0;
+});
+
+window.addEventListener("touchstart",e=>{
+  const t=e.touches[0];
+  if(!t)return;
+  movePointer(t.clientX,t.clientY);
+},{passive:true});
+
+window.addEventListener("touchmove",e=>{
+  const t=e.touches[0];
+  if(!t)return;
+  movePointer(t.clientX,t.clientY);
+},{passive:true});
+
+window.addEventListener("touchend",()=>{
+  mouse.x=-9999;
+  mouse.y=-9999;
+  mouse.vx=0;
+  mouse.vy=0;
+},{passive:true});
+
+window.addEventListener("resize",resize);
 
 resize();
 animate();
-
 </script>
-
-</body>
-</html>
+</div>
+<!--#ez="1/3"-->
