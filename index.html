@@ -18,7 +18,7 @@ html{
 
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;
-  background:#f4f4f1;
+  background:#fff;
   color:#111;
   overflow-x:hidden;
 }
@@ -38,9 +38,8 @@ nav{
   justify-content:space-between;
   align-items:center;
   z-index:10;
-  background:rgba(244,244,241,.65);
+  background:rgba(255,255,255,.72);
   backdrop-filter:blur(18px);
-  border-bottom:1px solid rgba(0,0,0,.06);
 }
 
 .logo{
@@ -62,6 +61,7 @@ nav{
   justify-content:center;
   align-items:center;
   overflow:hidden;
+  background:#fff;
 }
 
 canvas{
@@ -101,6 +101,7 @@ canvas{
 
 section{
   padding:120px 7%;
+  background:#fff;
 }
 
 .title{
@@ -117,11 +118,10 @@ section{
 }
 
 .card{
-  background:rgba(255,255,255,.62);
+  background:#fff;
   border:1px solid rgba(0,0,0,.1);
   border-radius:34px;
   padding:42px;
-  backdrop-filter:blur(20px);
 }
 
 .card h3{
@@ -296,7 +296,10 @@ section{
 
     <div class="card">
       <h3>Skills</h3>
-      <p>웹디자인, 상세페이지, 브랜드 리디자인, 기본 HTML/CSS 작업을 중심으로 포트폴리오를 준비하고 있습니다.</p>
+      <p>
+        웹디자인, 상세페이지, 브랜드 리디자인, 기본 HTML/CSS 작업을 중심으로
+        포트폴리오를 준비하고 있습니다.
+      </p>
 
       <div class="skills">
         <span>Photoshop</span>
@@ -337,7 +340,9 @@ section{
   <div class="contact-box">
     <h2>Let’s Create<br>Something New.</h2>
     <p>포트폴리오 문의 또는 연락은 아래 이메일로 부탁드립니다.</p>
-    <a class="btn" href="mailto:chasuji020519@gmail.com">chasuji020519@gmail.com</a>
+    <a class="btn" href="mailto:chasuji020519@gmail.com">
+      chasuji020519@gmail.com
+    </a>
   </div>
 </section>
 
@@ -345,7 +350,6 @@ section{
 const canvas = document.getElementById("particleCanvas");
 const ctx = canvas.getContext("2d");
 
-let w, h, dpr;
 let particles = [];
 let targetPoints = [];
 let mouse = { x:-9999, y:-9999 };
@@ -353,9 +357,10 @@ let mouse = { x:-9999, y:-9999 };
 const text = "PORTFOLIO";
 
 function resize(){
-  dpr = Math.min(window.devicePixelRatio || 1, 2);
-  w = canvas.width = window.innerWidth * dpr;
-  h = canvas.height = window.innerHeight * dpr;
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  canvas.width = window.innerWidth * dpr;
+  canvas.height = window.innerHeight * dpr;
 
   canvas.style.width = window.innerWidth + "px";
   canvas.style.height = window.innerHeight + "px";
@@ -375,13 +380,13 @@ function createTextPoints(){
   temp.width = window.innerWidth;
   temp.height = window.innerHeight;
 
-  const fontSize = Math.min(window.innerWidth / 7.2, 150);
+  const fontSize = Math.min(window.innerWidth / 5.7, 210);
 
   tctx.fillStyle = "#111";
-  tctx.font = `900 ${fontSize}px Arial`;
+  tctx.font = `900 ${fontSize}px Arial, sans-serif`;
   tctx.textAlign = "center";
   tctx.textBaseline = "middle";
-  tctx.letterSpacing = "-6px";
+
   tctx.fillText(text, temp.width / 2, temp.height / 2);
 
   const imageData = tctx.getImageData(0,0,temp.width,temp.height).data;
@@ -390,6 +395,7 @@ function createTextPoints(){
   for(let y = 0; y < temp.height; y += gap){
     for(let x = 0; x < temp.width; x += gap){
       const index = (y * temp.width + x) * 4;
+
       if(imageData[index + 3] > 128){
         targetPoints.push({x,y});
       }
@@ -410,7 +416,7 @@ function createParticles(){
       ty: point.y,
       vx: 0,
       vy: 0,
-      r: Math.random() * 1.4 + .6
+      r: 1.15
     });
   }
 }
@@ -430,14 +436,14 @@ function animate(){
     const mdx = p.x - mouse.x;
     const mdy = p.y - mouse.y;
     const dist = Math.sqrt(mdx * mdx + mdy * mdy);
-    const forceRadius = 90;
+    const forceRadius = 95;
 
     if(dist < forceRadius){
       const force = (forceRadius - dist) / forceRadius;
       const angle = Math.atan2(mdy, mdx);
 
-      p.vx += Math.cos(angle) * force * 5;
-      p.vy += Math.sin(angle) * force * 5;
+      p.vx += Math.cos(angle) * force * 4.8;
+      p.vy += Math.sin(angle) * force * 4.8;
     }
 
     p.vx *= .86;
@@ -481,6 +487,7 @@ const reveals = document.querySelectorAll(".reveal");
 function revealOnScroll(){
   reveals.forEach(el=>{
     const top = el.getBoundingClientRect().top;
+
     if(top < window.innerHeight - 100){
       el.classList.add("active");
     }
