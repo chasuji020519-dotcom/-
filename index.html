@@ -8,9 +8,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
-html{
-    scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
     background:#fff;
@@ -192,83 +190,168 @@ body{
     margin-top:100vh;
 }
 
-/* 올라오는 유리 패널 */
+/* 심플 유리 패널 */
 .about-panel{
     width:100%;
     min-height:100vh;
-    padding:110px 40px 80px;
-    background:rgba(255,255,255,.48);
-    backdrop-filter:blur(30px);
-    -webkit-backdrop-filter:blur(30px);
-    border-top:1px solid rgba(255,255,255,.7);
-    box-shadow:0 -40px 100px rgba(0,0,0,.16);
+    padding:110px 40px 90px;
+    background:rgba(255,255,255,.58);
+    backdrop-filter:blur(32px);
+    -webkit-backdrop-filter:blur(32px);
+    border-top:1px solid rgba(255,255,255,.8);
+    box-shadow:0 -30px 90px rgba(0,0,0,.12);
+}
+
+.panel-inner{
+    max-width:1280px;
+    margin:0 auto;
 }
 
 .panel-top{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:90px;
-    font-size:14px;
-    letter-spacing:.12em;
-    color:rgba(0,0,0,.45);
+    margin-bottom:70px;
+    font-size:13px;
+    letter-spacing:.14em;
+    color:rgba(0,0,0,.42);
 }
 
+.about-layout{
+    display:grid;
+    grid-template-columns:380px 1fr;
+    gap:70px;
+    align-items:start;
+}
+
+/* 사진 넣는 곳 */
+.profile-card{
+    position:sticky;
+    top:110px;
+    border-radius:34px;
+    overflow:hidden;
+    background:rgba(255,255,255,.45);
+    border:1px solid rgba(255,255,255,.75);
+    box-shadow:0 24px 70px rgba(0,0,0,.08);
+}
+
+.profile-img{
+    width:100%;
+    aspect-ratio:3/4;
+    background:#eee;
+}
+
+.profile-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.profile-info{
+    padding:26px;
+}
+
+.profile-info h3{
+    font-size:24px;
+    letter-spacing:-.04em;
+    margin-bottom:8px;
+}
+
+.profile-info p{
+    font-size:14px;
+    line-height:1.7;
+    color:rgba(0,0,0,.55);
+}
+
+/* 오른쪽 내용 */
 .panel-title{
-    font-size:clamp(54px,8vw,130px);
-    line-height:.92;
-    letter-spacing:-.08em;
-    margin-bottom:45px;
+    font-size:clamp(48px,7vw,110px);
+    line-height:.95;
+    letter-spacing:-.075em;
+    margin-bottom:36px;
 }
 
 .panel-desc{
-    max-width:620px;
+    max-width:680px;
     font-size:18px;
-    line-height:1.8;
+    line-height:1.85;
     color:rgba(0,0,0,.58);
+}
+
+.keyword-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:34px;
+}
+
+.keyword{
+    padding:10px 16px;
+    border-radius:999px;
+    background:rgba(255,255,255,.48);
+    border:1px solid rgba(0,0,0,.08);
+    font-size:13px;
+    color:rgba(0,0,0,.62);
 }
 
 .panel-cards{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:18px;
-    margin-top:80px;
+    gap:14px;
+    margin-top:70px;
 }
 
 .card{
-    min-height:230px;
-    padding:32px;
-    border-radius:30px;
-    background:rgba(255,255,255,.36);
-    border:1px solid rgba(255,255,255,.65);
-    backdrop-filter:blur(22px);
-    -webkit-backdrop-filter:blur(22px);
-    box-shadow:0 20px 60px rgba(0,0,0,.08);
+    min-height:190px;
+    padding:28px;
+    border-radius:28px;
+    background:rgba(255,255,255,.42);
+    border:1px solid rgba(255,255,255,.7);
+    box-shadow:0 18px 50px rgba(0,0,0,.06);
     transition:.35s ease;
 }
 
 .card:hover{
-    transform:translateY(-8px);
-    background:rgba(255,255,255,.55);
+    transform:translateY(-6px);
+    background:rgba(255,255,255,.62);
 }
 
 .card span{
     display:block;
-    font-size:13px;
-    color:rgba(0,0,0,.4);
-    margin-bottom:30px;
+    font-size:12px;
+    color:rgba(0,0,0,.38);
+    margin-bottom:28px;
 }
 
 .card h3{
-    font-size:28px;
+    font-size:24px;
     letter-spacing:-.04em;
-    margin-bottom:15px;
+    margin-bottom:12px;
 }
 
 .card p{
-    font-size:15px;
+    font-size:14px;
     line-height:1.7;
-    color:rgba(0,0,0,.55);
+    color:rgba(0,0,0,.52);
+}
+
+@media(max-width:900px){
+
+    .about-layout{
+        grid-template-columns:1fr;
+        gap:44px;
+    }
+
+    .profile-card{
+        position:relative;
+        top:0;
+        max-width:420px;
+    }
+
+    .panel-cards{
+        grid-template-columns:1fr;
+    }
 }
 
 @media(max-width:768px){
@@ -313,34 +396,33 @@ body{
     }
 
     .about-panel{
-        padding:100px 24px 70px;
+        padding:96px 24px 70px;
     }
 
     .panel-top{
-        margin-bottom:60px;
+        margin-bottom:52px;
         font-size:11px;
     }
 
     .panel-title{
-        font-size:clamp(46px,13vw,76px);
+        font-size:clamp(44px,13vw,74px);
     }
 
     .panel-desc{
         font-size:15px;
     }
 
-    .panel-cards{
-        grid-template-columns:1fr;
-        margin-top:48px;
+    .profile-info{
+        padding:22px;
     }
 
     .card{
-        min-height:170px;
+        min-height:160px;
         padding:24px;
     }
 
     .card h3{
-        font-size:23px;
+        font-size:22px;
     }
 }
 </style>
@@ -419,45 +501,79 @@ body{
 
     <section class="about-panel">
 
-        <div class="panel-top">
-            <span>ABOUT ME</span>
-            <span>SCROLL 01</span>
-        </div>
+        <div class="panel-inner">
 
-        <h2 class="panel-title">
-            Visual stories<br>
-            with clear detail
-        </h2>
-
-        <p class="panel-desc">
-            감각적인 비주얼과 섬세한 디테일을 바탕으로 브랜드의 분위기를 정리하고,
-            보는 사람이 오래 기억할 수 있는 디자인을 만듭니다.
-        </p>
-
-        <div class="panel-cards">
-
-            <div class="card">
-                <span>01</span>
-                <h3>Brand Design</h3>
-                <p>
-                    브랜드의 방향성과 분위기를 시각적으로 정리하는 작업입니다.
-                </p>
+            <div class="panel-top">
+                <span>ABOUT ME</span>
+                <span>SCROLL 01</span>
             </div>
 
-            <div class="card">
-                <span>02</span>
-                <h3>Graphic Design</h3>
-                <p>
-                    포스터, 콘텐츠, 편집 디자인 등 인상적인 비주얼을 만듭니다.
-                </p>
-            </div>
+            <div class="about-layout">
 
-            <div class="card">
-                <span>03</span>
-                <h3>UI Concept</h3>
-                <p>
-                    웹과 모바일 화면에서 보기 좋은 구조와 흐름을 설계합니다.
-                </p>
+                <div class="profile-card">
+                    <div class="profile-img">
+                        <img src="YOUR_IMAGE_URL_HERE" alt="profile image">
+                    </div>
+
+                    <div class="profile-info">
+                        <h3>CHA SUJI</h3>
+                        <p>
+                            감각적인 분위기와 섬세한 디테일을 좋아하는 디자이너입니다.
+                            나만의 시선으로 오래 기억되는 결과물을 만듭니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="about-content">
+
+                    <h2 class="panel-title">
+                        Visual stories<br>
+                        with clear detail
+                    </h2>
+
+                    <p class="panel-desc">
+                        감각적인 비주얼과 섬세한 디테일을 바탕으로 브랜드의 분위기를 정리하고,
+                        보는 사람이 오래 기억할 수 있는 디자인을 만듭니다.
+                    </p>
+
+                    <div class="keyword-row">
+                        <span class="keyword">Visual Design</span>
+                        <span class="keyword">Brand Mood</span>
+                        <span class="keyword">Detail</span>
+                        <span class="keyword">Layout</span>
+                        <span class="keyword">Portfolio</span>
+                    </div>
+
+                    <div class="panel-cards">
+
+                        <div class="card">
+                            <span>01</span>
+                            <h3>Brand Design</h3>
+                            <p>
+                                브랜드의 방향성과 분위기를 시각적으로 정리하는 작업입니다.
+                            </p>
+                        </div>
+
+                        <div class="card">
+                            <span>02</span>
+                            <h3>Graphic Design</h3>
+                            <p>
+                                포스터, 콘텐츠, 편집 디자인 등 인상적인 비주얼을 만듭니다.
+                            </p>
+                        </div>
+
+                        <div class="card">
+                            <span>03</span>
+                            <h3>UI Concept</h3>
+                            <p>
+                                웹과 모바일 화면에서 보기 좋은 구조와 흐름을 설계합니다.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
