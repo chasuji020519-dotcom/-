@@ -103,7 +103,7 @@ function makePoints(){
 
   const img=octx.getImageData(0,0,w,h).data;
 
-  const gap=window.innerWidth<560 ? 3 : 2;
+  const gap=window.innerWidth<560 ? 4 : 3;
 
   for(let y=0;y<h;y+=gap){
     for(let x=0;x<w;x+=gap){
@@ -129,8 +129,8 @@ function makeParticles(){
     ty:p.y,
     vx:0,
     vy:0,
-    r:Math.random()*0.6+0.2,
-    a:Math.random()*0.4+0.5,
+    r:Math.random()*1.8+1.2,
+    a:Math.random()*0.3+0.8,
     noise:Math.random()*0.08+0.015,
     magnet:Math.random()*0.7+0.8,
     tear:0
