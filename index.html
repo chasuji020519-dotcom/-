@@ -4,486 +4,245 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CHASUJI Portfolio</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Particle Logo</title>
 
 <style>
-
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-html{
-scroll-behavior:smooth;
-}
-
+html,
 body{
-font-family:'Pretendard',sans-serif;
-background:#fff;
-color:#111;
-overflow-x:hidden;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#ececec;
 }
-
-/* NAV */
-
-nav{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-padding:25px 8%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:rgba(255,255,255,.8);
-backdrop-filter:blur(20px);
-z-index:999;
-border-bottom:1px solid #eee;
-}
-
-.logo{
-font-family:'Space Grotesk';
-font-size:20px;
-font-weight:700;
-letter-spacing:3px;
-}
-
-nav ul{
-display:flex;
-gap:40px;
-list-style:none;
-}
-
-nav a{
-text-decoration:none;
-color:#111;
-font-size:14px;
-}
-
-/* HERO */
 
 .hero{
-height:100vh;
-position:relative;
-display:flex;
-justify-content:center;
-align-items:center;
-overflow:hidden;
+  width:100vw;
+  height:100vh;
+  position:relative;
 }
 
-#particleCanvas{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
+#magnetSandCanvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  touch-action:none;
 }
-
-.hero-content{
-position:relative;
-z-index:10;
-text-align:center;
-}
-
-.hero h1{
-font-size:clamp(60px,10vw,160px);
-font-family:'Space Grotesk';
-font-weight:700;
-letter-spacing:-4px;
-line-height:1;
-}
-
-.hero p{
-margin-top:25px;
-font-size:18px;
-color:#666;
-}
-
-/* SECTION */
-
-section{
-padding:140px 10%;
-}
-
-.section-title{
-font-size:50px;
-font-family:'Space Grotesk';
-margin-bottom:50px;
-}
-
-.about-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:60px;
-align-items:center;
-}
-
-.about-image{
-height:500px;
-background:#f5f5f5;
-border-radius:30px;
-overflow:hidden;
-}
-
-.about-image img{
-width:100%;
-height:100%;
-object-fit:cover;
-}
-
-.about-text{
-font-size:18px;
-line-height:1.8;
-color:#555;
-}
-
-/* WORK */
-
-.work-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
-gap:30px;
-}
-
-.work-card{
-border:1px solid #eee;
-border-radius:25px;
-overflow:hidden;
-transition:.4s;
-cursor:pointer;
-background:#fff;
-}
-
-.work-card:hover{
-transform:translateY(-10px);
-box-shadow:0 20px 50px rgba(0,0,0,.08);
-}
-
-.work-thumb{
-height:280px;
-background:#f5f5f5;
-}
-
-.work-thumb img{
-width:100%;
-height:100%;
-object-fit:cover;
-}
-
-.work-info{
-padding:25px;
-}
-
-.work-info h3{
-margin-bottom:10px;
-}
-
-.work-info p{
-color:#777;
-}
-
-/* CONTACT */
-
-.contact{
-text-align:center;
-}
-
-.contact h2{
-font-size:70px;
-font-family:'Space Grotesk';
-margin-bottom:20px;
-}
-
-.contact p{
-color:#666;
-margin-bottom:40px;
-}
-
-.btn{
-display:inline-block;
-padding:18px 40px;
-border-radius:999px;
-background:#111;
-color:#fff;
-text-decoration:none;
-}
-
-/* MOBILE */
-
-@media(max-width:900px){
-
-.about-grid{
-grid-template-columns:1fr;
-}
-
-.hero h1{
-font-size:70px;
-}
-
-.contact h2{
-font-size:50px;
-}
-
-}
-
 </style>
 </head>
-
 <body>
 
-<nav>
-<div class="logo">CHASUJI</div>
-
-<ul>
-<li><a href="#about">ABOUT</a></li>
-<li><a href="#work">WORK</a></li>
-<li><a href="#contact">CONTACT</a></li>
-</ul>
-</nav>
-
 <section class="hero">
-
-<canvas id="particleCanvas"></canvas>
-
-<div class="hero-content">
-<h1>PORTFOLIO</h1>
-<p>Web Designer · UI/UX · Creative Direction</p>
-</div>
-
-</section>
-
-<section id="about">
-
-<h2 class="section-title">ABOUT</h2>
-
-<div class="about-grid">
-
-<div class="about-image">
-<img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000" alt="">
-</div>
-
-<div class="about-text">
-안녕하세요.
-
-웹디자인과 UI/UX 디자인을 공부하며
-브랜드 경험을 만드는 디자이너 차수지입니다.
-
-깔끔한 레이아웃,
-감각적인 인터랙션,
-사용자 중심의 경험을 중요하게 생각합니다.
-</div>
-
-</div>
-
-</section>
-
-<section id="work">
-
-<h2 class="section-title">PROJECTS</h2>
-
-<div class="work-grid">
-
-<div class="work-card">
-<div class="work-thumb">
-<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200">
-</div>
-<div class="work-info">
-<h3>Jewelry Redesign</h3>
-<p>브랜드 리디자인 프로젝트</p>
-</div>
-</div>
-
-<div class="work-card">
-<div class="work-thumb">
-<img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200">
-</div>
-<div class="work-info">
-<h3>Fashion Campaign</h3>
-<p>패션 플랫폼 디자인</p>
-</div>
-</div>
-
-<div class="work-card">
-<div class="work-thumb">
-<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200">
-</div>
-<div class="work-info">
-<h3>Web Design</h3>
-<p>반응형 웹사이트 구축</p>
-</div>
-</div>
-
-</div>
-
-</section>
-
-<section id="contact" class="contact">
-
-<h2>LET'S TALK</h2>
-
-<p>
-contact@example.com
-</p>
-
-<a href="#" class="btn">CONTACT</a>
-
+  <canvas id="magnetSandCanvas"></canvas>
 </section>
 
 <script>
+const canvas=document.getElementById("magnetSandCanvas");
+const ctx=canvas.getContext("2d");
 
-const canvas = document.getElementById('particleCanvas');
-const ctx = canvas.getContext('2d');
+let w,h,dpr;
+let particles=[];
+let points=[];
 
-let particles = [];
-let mouse = {
-x:null,
-y:null,
-radius:120
+let mouse={
+  x:-9999,
+  y:-9999,
+  px:-9999,
+  py:-9999,
+  vx:0,
+  vy:0
 };
 
-function resizeCanvas(){
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+const TEXT=["PORTFOLIO"];
+
+function resize(){
+  dpr=Math.min(window.devicePixelRatio||1,2);
+
+  w=window.innerWidth;
+  h=window.innerHeight;
+
+  canvas.width=w*dpr;
+  canvas.height=h*dpr;
+
+  canvas.style.width=w+"px";
+  canvas.style.height=h+"px";
+
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+
+  makePoints();
+  makeParticles();
 }
 
-resizeCanvas();
+function makePoints(){
 
-window.addEventListener('resize',resizeCanvas);
+  points=[];
 
-window.addEventListener('mousemove',(e)=>{
-mouse.x = e.x;
-mouse.y = e.y;
-});
+  const off=document.createElement("canvas");
+  const octx=off.getContext("2d",{willReadFrequently:true});
 
-class Particle{
+  off.width=w;
+  off.height=h;
 
-constructor(){
+  const fontSize=Math.min(w*0.18,h*0.22);
 
-this.x=Math.random()*canvas.width;
-this.y=Math.random()*canvas.height;
+  octx.clearRect(0,0,w,h);
 
-this.size=Math.random()*3+1;
+  octx.fillStyle="#fff";
+  octx.textAlign="center";
+  octx.textBaseline="middle";
+  octx.font=`900 ${fontSize}px Arial Black, Impact, sans-serif`;
 
-this.speedX=(Math.random()-0.5)*1;
-this.speedY=(Math.random()-0.5)*1;
+  octx.fillText(TEXT[0],w/2,h/2);
 
+  const img=octx.getImageData(0,0,w,h).data;
+
+  const gap=window.innerWidth<560 ? 3 : 2;
+
+  for(let y=0;y<h;y+=gap){
+    for(let x=0;x<w;x+=gap){
+
+      const a=img[(y*w+x)*4+3];
+
+      if(a>120 && Math.random()>0.1){
+        points.push({
+          x:x+(Math.random()-0.5)*1.5,
+          y:y+(Math.random()-0.5)*1.5
+        });
+      }
+    }
+  }
 }
 
-update(){
+function makeParticles(){
 
-this.x += this.speedX;
-this.y += this.speedY;
-
-if(this.x<0 || this.x>canvas.width){
-this.speedX *= -1;
-}
-
-if(this.y<0 || this.y>canvas.height){
-this.speedY *= -1;
-}
-
-let dx = mouse.x - this.x;
-let dy = mouse.y - this.y;
-
-let distance = Math.sqrt(dx*dx+dy*dy);
-
-if(distance < mouse.radius){
-
-this.x -= dx/30;
-this.y -= dy/30;
-
-}
-
-}
-
-draw(){
-
-ctx.beginPath();
-ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-ctx.fillStyle="rgba(0,0,0,.6)";
-ctx.fill();
-
-}
-
-}
-
-function init(){
-
-particles=[];
-
-for(let i=0;i<180;i++){
-
-particles.push(new Particle());
-
-}
-
-}
-
-function connect(){
-
-for(let a=0;a<particles.length;a++){
-
-for(let b=a;b<particles.length;b++){
-
-let dx = particles[a].x-particles[b].x;
-let dy = particles[a].y-particles[b].y;
-
-let distance = dx*dx+dy*dy;
-
-if(distance<7000){
-
-ctx.strokeStyle="rgba(0,0,0,.08)";
-ctx.lineWidth=1;
-
-ctx.beginPath();
-ctx.moveTo(
-particles[a].x,
-particles[a].y
-);
-
-ctx.lineTo(
-particles[b].x,
-particles[b].y
-);
-
-ctx.stroke();
-
-}
-
-}
-
-}
-
+  particles=points.map(p=>({
+    x:w/2+(Math.random()-0.5)*w,
+    y:h/2+(Math.random()-0.5)*h,
+    tx:p.x,
+    ty:p.y,
+    vx:0,
+    vy:0,
+    r:Math.random()*0.6+0.2,
+    a:Math.random()*0.4+0.5,
+    noise:Math.random()*0.08+0.015,
+    magnet:Math.random()*0.7+0.8,
+    tear:0
+  }));
 }
 
 function animate(){
 
-ctx.clearRect(
-0,
-0,
-canvas.width,
-canvas.height
-);
+  ctx.clearRect(0,0,w,h);
 
-for(let particle of particles){
+  const speed=Math.sqrt(
+    mouse.vx*mouse.vx+
+    mouse.vy*mouse.vy
+  );
 
-particle.update();
-particle.draw();
+  const dirX=mouse.vx/(speed||1);
+  const dirY=mouse.vy/(speed||1);
 
+  for(const p of particles){
+
+    const homeX=p.tx-p.x;
+    const homeY=p.ty-p.y;
+
+    const dx=mouse.x-p.x;
+    const dy=mouse.y-p.y;
+
+    const dist=Math.sqrt(dx*dx+dy*dy)||1;
+
+    if(dist<160){
+
+      const t=1-dist/160;
+
+      if(speed>10) p.tear=1;
+
+      const pullPower=t*(7.5+speed*0.12)*p.magnet;
+
+      p.vx+=(dx/dist)*pullPower;
+      p.vy+=(dy/dist)*pullPower;
+
+      const swirlPower=t*(8.5+speed*0.08);
+
+      p.vx+=(-dy/dist)*swirlPower;
+      p.vy+=( dx/dist)*swirlPower;
+
+      const followPower=t*(speed*0.16+3);
+
+      p.vx+=dirX*followPower;
+      p.vy+=dirY*followPower;
+
+    }else{
+
+      const homeForce=p.tear>0 ? 0.004 : 0.018;
+
+      p.vx+=homeX*homeForce;
+      p.vy+=homeY*homeForce;
+    }
+
+    p.vx+=homeX*0.006;
+    p.vy+=homeY*0.006;
+
+    p.tear*=0.965;
+
+    p.vx+=(Math.random()-0.5)*p.noise;
+    p.vy+=(Math.random()-0.5)*p.noise;
+
+    p.vx*=0.89;
+    p.vy*=0.89;
+
+    p.x+=p.vx;
+    p.y+=p.vy;
+
+    ctx.beginPath();
+    ctx.fillStyle=`rgba(17,17,17,${p.a})`;
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+  }
+
+  requestAnimationFrame(animate);
 }
 
-connect();
+function movePointer(x,y){
 
-requestAnimationFrame(animate);
+  mouse.vx=x-mouse.px;
+  mouse.vy=y-mouse.py;
 
+  mouse.x=x;
+  mouse.y=y;
+
+  mouse.px=x;
+  mouse.py=y;
 }
 
-init();
+window.addEventListener("mousemove",e=>{
+  movePointer(e.clientX,e.clientY);
+});
+
+window.addEventListener("touchmove",e=>{
+  const t=e.touches[0];
+  if(t) movePointer(t.clientX,t.clientY);
+},{passive:true});
+
+window.addEventListener("mouseleave",()=>{
+  mouse.x=-9999;
+  mouse.y=-9999;
+  mouse.vx=0;
+  mouse.vy=0;
+});
+
+window.addEventListener("resize",resize);
+
+resize();
 animate();
-
 </script>
 
 </body>
