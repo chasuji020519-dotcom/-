@@ -33,7 +33,7 @@ nav{
   top:0;
   left:0;
   width:100%;
-  padding:24px 7%;
+  padding:28px 7%;
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -45,13 +45,19 @@ nav{
 .logo{
   font-weight:800;
   letter-spacing:-1px;
+  font-size:22px;
 }
 
 .menu{
   display:flex;
-  gap:28px;
-  font-size:14px;
-  color:#555;
+  gap:36px;
+  font-size:17px;
+  font-weight:500;
+  color:#444;
+}
+
+.menu a:hover{
+  color:#000;
 }
 
 .hero{
@@ -69,34 +75,6 @@ canvas{
   inset:0;
   width:100%;
   height:100%;
-}
-
-.hero-info{
-  position:absolute;
-  bottom:48px;
-  left:7%;
-  z-index:2;
-}
-
-.hero-info p{
-  font-size:13px;
-  color:#666;
-  margin-bottom:8px;
-}
-
-.hero-info h2{
-  font-size:18px;
-  letter-spacing:-.5px;
-}
-
-.scroll{
-  position:absolute;
-  right:7%;
-  bottom:48px;
-  font-size:12px;
-  color:#777;
-  writing-mode:vertical-rl;
-  z-index:2;
 }
 
 section{
@@ -236,6 +214,14 @@ section{
 }
 
 @media(max-width:900px){
+  nav{
+    padding:24px 6%;
+  }
+
+  .logo{
+    font-size:19px;
+  }
+
   .menu{
     display:none;
   }
@@ -273,13 +259,6 @@ section{
 
 <header class="hero">
   <canvas id="particleCanvas"></canvas>
-
-  <div class="hero-info">
-    <p>WEB DESIGN PORTFOLIO</p>
-    <h2>CHA SUJI / 2026</h2>
-  </div>
-
-  <div class="scroll">SCROLL</div>
 </header>
 
 <section id="about" class="reveal">
@@ -380,7 +359,7 @@ function createTextPoints(){
   temp.width = window.innerWidth;
   temp.height = window.innerHeight;
 
-  const fontSize = Math.min(window.innerWidth / 5.7, 210);
+  const fontSize = Math.min(window.innerWidth / 4.6, 300);
 
   tctx.fillStyle = "#111";
   tctx.font = `900 ${fontSize}px Arial, sans-serif`;
@@ -390,7 +369,7 @@ function createTextPoints(){
   tctx.fillText(text, temp.width / 2, temp.height / 2);
 
   const imageData = tctx.getImageData(0,0,temp.width,temp.height).data;
-  const gap = window.innerWidth < 700 ? 6 : 5;
+  const gap = window.innerWidth < 700 ? 8 : 7;
 
   for(let y = 0; y < temp.height; y += gap){
     for(let x = 0; x < temp.width; x += gap){
@@ -416,7 +395,7 @@ function createParticles(){
       ty: point.y,
       vx: 0,
       vy: 0,
-      r: 1.15
+      r: 2.5
     });
   }
 }
@@ -436,14 +415,14 @@ function animate(){
     const mdx = p.x - mouse.x;
     const mdy = p.y - mouse.y;
     const dist = Math.sqrt(mdx * mdx + mdy * mdy);
-    const forceRadius = 95;
+    const forceRadius = 105;
 
     if(dist < forceRadius){
       const force = (forceRadius - dist) / forceRadius;
       const angle = Math.atan2(mdy, mdx);
 
-      p.vx += Math.cos(angle) * force * 4.8;
-      p.vy += Math.sin(angle) * force * 4.8;
+      p.vx += Math.cos(angle) * force * 5.2;
+      p.vy += Math.sin(angle) * force * 5.2;
     }
 
     p.vx *= .86;
