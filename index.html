@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SUJI Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHA SUJI PORTFOLIO</title>
 
 <style>
 *{
@@ -18,7 +18,7 @@ html{
 
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;
-  background:#f7f7f4;
+  background:#f4f4f1;
   color:#111;
   overflow-x:hidden;
 }
@@ -33,20 +33,19 @@ nav{
   top:0;
   left:0;
   width:100%;
-  padding:22px 7%;
+  padding:24px 7%;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  z-index:100;
+  z-index:10;
+  background:rgba(244,244,241,.65);
   backdrop-filter:blur(18px);
-  background:rgba(247,247,244,.75);
   border-bottom:1px solid rgba(0,0,0,.06);
 }
 
 .logo{
-  font-size:18px;
-  font-weight:700;
-  letter-spacing:-.5px;
+  font-weight:800;
+  letter-spacing:-1px;
 }
 
 .menu{
@@ -56,120 +55,98 @@ nav{
   color:#555;
 }
 
-.menu a:hover{
-  color:#000;
+.hero{
+  height:100vh;
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+
+.hero-info{
+  position:absolute;
+  bottom:48px;
+  left:7%;
+  z-index:2;
+}
+
+.hero-info p{
+  font-size:13px;
+  color:#666;
+  margin-bottom:8px;
+}
+
+.hero-info h2{
+  font-size:18px;
+  letter-spacing:-.5px;
+}
+
+.scroll{
+  position:absolute;
+  right:7%;
+  bottom:48px;
+  font-size:12px;
+  color:#777;
+  writing-mode:vertical-rl;
+  z-index:2;
 }
 
 section{
   padding:120px 7%;
 }
 
-.hero{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  position:relative;
-}
-
-.badge{
-  width:max-content;
-  padding:9px 15px;
-  border:1px solid #111;
-  border-radius:999px;
-  font-size:13px;
-  margin-bottom:30px;
-  animation:fadeUp .8s ease forwards;
-}
-
-.hero h1{
-  font-size:clamp(58px,12vw,160px);
-  line-height:.9;
-  letter-spacing:-7px;
-  font-weight:800;
-  max-width:1100px;
-  animation:fadeUp 1s ease forwards;
-}
-
-.hero p{
-  margin-top:35px;
-  max-width:560px;
-  font-size:18px;
-  line-height:1.7;
-  color:#555;
-  animation:fadeUp 1.2s ease forwards;
-}
-
-.scroll-text{
-  position:absolute;
-  right:7%;
-  bottom:50px;
-  font-size:13px;
-  color:#777;
-  writing-mode:vertical-rl;
-}
-
-.marquee{
-  width:100%;
-  overflow:hidden;
-  border-top:1px solid #111;
-  border-bottom:1px solid #111;
-  background:#111;
-  color:#fff;
-  padding:18px 0;
-}
-
-.marquee div{
-  white-space:nowrap;
-  animation:marquee 18s linear infinite;
-  font-size:22px;
-  font-weight:700;
-}
-
 .title{
-  font-size:clamp(38px,7vw,92px);
-  letter-spacing:-4px;
-  line-height:1;
+  font-size:clamp(42px,7vw,96px);
+  line-height:.95;
+  letter-spacing:-5px;
   margin-bottom:50px;
 }
 
-.about-wrap{
+.about-grid{
   display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:30px;
+  grid-template-columns:1.2fr .8fr;
+  gap:24px;
 }
 
-.about-card{
-  border:1px solid rgba(0,0,0,.12);
-  border-radius:30px;
-  padding:38px;
-  background:rgba(255,255,255,.55);
+.card{
+  background:rgba(255,255,255,.62);
+  border:1px solid rgba(0,0,0,.1);
+  border-radius:34px;
+  padding:42px;
   backdrop-filter:blur(20px);
 }
 
-.about-card h3{
-  font-size:24px;
+.card h3{
+  font-size:26px;
   margin-bottom:20px;
 }
 
-.about-card p{
-  color:#555;
-  line-height:1.8;
+.card p{
   font-size:16px;
+  line-height:1.8;
+  color:#555;
 }
 
-.skill-list{
+.skills{
   display:flex;
   flex-wrap:wrap;
   gap:10px;
-  margin-top:25px;
+  margin-top:24px;
 }
 
-.skill-list span{
-  padding:10px 14px;
-  border-radius:999px;
+.skills span{
+  padding:10px 15px;
   background:#111;
   color:#fff;
+  border-radius:999px;
   font-size:13px;
 }
 
@@ -179,104 +156,77 @@ section{
   gap:22px;
 }
 
-.project-card{
-  min-height:420px;
-  border-radius:34px;
-  padding:28px;
+.project{
+  height:430px;
   background:#fff;
   border:1px solid rgba(0,0,0,.08);
+  border-radius:34px;
+  padding:28px;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
   transition:.35s ease;
-  overflow:hidden;
 }
 
-.project-card:hover{
+.project:hover{
   transform:translateY(-10px);
-  box-shadow:0 30px 70px rgba(0,0,0,.12);
+  box-shadow:0 28px 70px rgba(0,0,0,.12);
 }
 
-.thumb{
-  height:220px;
-  border-radius:24px;
-  background:
-    radial-gradient(circle at 30% 20%, #dcdcdc, transparent 30%),
-    linear-gradient(135deg,#111,#777);
-  margin-bottom:25px;
+.num{
+  font-size:14px;
+  color:#999;
 }
 
-.project-card:nth-child(2) .thumb{
-  background:
-    radial-gradient(circle at 70% 30%, #111, transparent 25%),
-    linear-gradient(135deg,#eee,#bbb);
+.project h3{
+  font-size:34px;
+  line-height:1;
+  letter-spacing:-2px;
 }
 
-.project-card:nth-child(3) .thumb{
-  background:
-    linear-gradient(135deg,#f2f2f2 0%,#f2f2f2 40%,#111 40%,#111 100%);
-}
-
-.project-card h3{
-  font-size:24px;
-  letter-spacing:-1px;
-}
-
-.project-card p{
-  margin-top:10px;
+.project p{
   color:#666;
   line-height:1.6;
 }
 
-.tag{
-  margin-top:20px;
-  font-size:13px;
-  color:#999;
-}
-
 .contact{
   min-height:70vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
 }
 
 .contact-box{
-  border-radius:40px;
   background:#111;
   color:#fff;
-  padding:60px;
+  border-radius:44px;
+  padding:70px;
 }
 
 .contact-box h2{
-  font-size:clamp(42px,8vw,100px);
-  letter-spacing:-4px;
-  line-height:1;
+  font-size:clamp(46px,8vw,112px);
+  line-height:.9;
+  letter-spacing:-5px;
 }
 
 .contact-box p{
-  margin-top:25px;
+  margin-top:28px;
   color:#bbb;
-  font-size:17px;
 }
 
-.contact-btn{
+.btn{
   display:inline-block;
-  margin-top:35px;
+  margin-top:34px;
   padding:16px 24px;
   border:1px solid #fff;
   border-radius:999px;
-  transition:.3s;
 }
 
-.contact-btn:hover{
+.btn:hover{
   background:#fff;
   color:#111;
 }
 
 .reveal{
   opacity:0;
-  transform:translateY(40px);
+  transform:translateY(50px);
   transition:1s ease;
 }
 
@@ -285,32 +235,12 @@ section{
   transform:translateY(0);
 }
 
-@keyframes fadeUp{
-  from{
-    opacity:0;
-    transform:translateY(35px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-@keyframes marquee{
-  from{transform:translateX(0);}
-  to{transform:translateX(-50%);}
-}
-
 @media(max-width:900px){
   .menu{
     display:none;
   }
 
-  .hero h1{
-    letter-spacing:-4px;
-  }
-
-  .about-wrap,
+  .about-grid,
   .projects{
     grid-template-columns:1fr;
   }
@@ -319,8 +249,12 @@ section{
     padding:90px 6%;
   }
 
+  .title{
+    letter-spacing:-3px;
+  }
+
   .contact-box{
-    padding:40px 28px;
+    padding:42px 28px;
   }
 }
 </style>
@@ -329,7 +263,7 @@ section{
 <body>
 
 <nav>
-  <div class="logo">SUJI.PORTFOLIO</div>
+  <div class="logo">CHA SUJI</div>
   <div class="menu">
     <a href="#about">About</a>
     <a href="#work">Work</a>
@@ -337,47 +271,34 @@ section{
   </div>
 </nav>
 
-<section class="hero">
-  <div class="badge">WEB DESIGN PORTFOLIO</div>
-  <h1>
-    Simple,<br>
-    Trendy,<br>
-    Visual.
-  </h1>
-  <p>
-    감각적인 웹디자인과 깔끔한 레이아웃을 중심으로 작업하는
-    차수지의 포트폴리오입니다. 브랜드의 분위기를 살리고,
-    보기 쉬운 디자인을 만드는 것을 목표로 합니다.
-  </p>
-  <div class="scroll-text">SCROLL DOWN</div>
-</section>
+<header class="hero">
+  <canvas id="particleCanvas"></canvas>
 
-<div class="marquee">
-  <div>
-    PORTFOLIO · WEB DESIGN · BRANDING · DETAIL PAGE · UI DESIGN · PORTFOLIO · WEB DESIGN · BRANDING · DETAIL PAGE · UI DESIGN ·
+  <div class="hero-info">
+    <p>WEB DESIGN PORTFOLIO</p>
+    <h2>CHA SUJI / 2026</h2>
   </div>
-</div>
+
+  <div class="scroll">SCROLL</div>
+</header>
 
 <section id="about" class="reveal">
-  <h2 class="title">About Me</h2>
+  <h2 class="title">About<br>Designer</h2>
 
-  <div class="about-wrap">
-    <div class="about-card">
+  <div class="about-grid">
+    <div class="card">
       <h3>안녕하세요, 차수지입니다.</h3>
       <p>
-        저는 심플하지만 눈에 남는 디자인을 좋아합니다.
-        브랜드의 첫인상을 정리하고, 사용자가 보기 편한 화면을
-        만드는 웹디자인 포트폴리오를 준비하고 있습니다.
+        심플하지만 눈에 남는 웹디자인을 좋아합니다.
+        브랜드의 분위기를 살리고, 사용자가 보기 편한 화면을 만드는 것을 목표로 합니다.
       </p>
     </div>
 
-    <div class="about-card">
-      <h3>Tools & Skills</h3>
-      <p>
-        디자인 감각, 레이아웃 구성, 상세페이지 제작,
-        웹페이지 기획과 기본 HTML/CSS 작업을 중심으로 성장 중입니다.
-      </p>
-      <div class="skill-list">
+    <div class="card">
+      <h3>Skills</h3>
+      <p>웹디자인, 상세페이지, 브랜드 리디자인, 기본 HTML/CSS 작업을 중심으로 포트폴리오를 준비하고 있습니다.</p>
+
+      <div class="skills">
         <span>Photoshop</span>
         <span>Figma</span>
         <span>HTML</span>
@@ -389,64 +310,185 @@ section{
 </section>
 
 <section id="work" class="reveal">
-  <h2 class="title">Selected Work</h2>
+  <h2 class="title">Selected<br>Works</h2>
 
   <div class="projects">
-    <div class="project-card">
-      <div class="thumb"></div>
-      <div>
-        <h3>Jewelry Brand Redesign</h3>
-        <p>주얼리 브랜드의 고급스럽고 깔끔한 무드를 살린 웹사이트 리디자인.</p>
-        <div class="tag">#Web Design #Branding</div>
-      </div>
+    <div class="project">
+      <div class="num">01</div>
+      <h3>Jewelry<br>Redesign</h3>
+      <p>주얼리 브랜드의 고급스럽고 깔끔한 웹사이트 리디자인.</p>
     </div>
 
-    <div class="project-card">
-      <div class="thumb"></div>
-      <div>
-        <h3>Cosmetic Landing Page</h3>
-        <p>20대 타겟의 트렌디한 화장품 랜딩페이지 디자인.</p>
-        <div class="tag">#Landing Page #Beauty</div>
-      </div>
+    <div class="project">
+      <div class="num">02</div>
+      <h3>Cosmetic<br>Landing</h3>
+      <p>20대 타겟의 트렌디한 화장품 랜딩페이지 디자인.</p>
     </div>
 
-    <div class="project-card">
-      <div class="thumb"></div>
-      <div>
-        <h3>Fashion Editorial Shop</h3>
-        <p>에디토리얼 무드를 활용한 패션 쇼핑몰 메인 페이지.</p>
-        <div class="tag">#E-commerce #Editorial</div>
-      </div>
+    <div class="project">
+      <div class="num">03</div>
+      <h3>Fashion<br>Editorial</h3>
+      <p>에디토리얼 무드를 활용한 패션 쇼핑몰 메인 페이지.</p>
     </div>
   </div>
 </section>
 
 <section id="contact" class="contact reveal">
   <div class="contact-box">
-    <h2>Let’s Work<br>Together.</h2>
+    <h2>Let’s Create<br>Something New.</h2>
     <p>포트폴리오 문의 또는 연락은 아래 이메일로 부탁드립니다.</p>
-    <a class="contact-btn" href="mailto:chasuji020519@gmail.com">
-      chasuji020519@gmail.com
-    </a>
+    <a class="btn" href="mailto:chasuji020519@gmail.com">chasuji020519@gmail.com</a>
   </div>
 </section>
 
 <script>
-const reveals = document.querySelectorAll('.reveal');
+const canvas = document.getElementById("particleCanvas");
+const ctx = canvas.getContext("2d");
+
+let w, h, dpr;
+let particles = [];
+let targetPoints = [];
+let mouse = { x:-9999, y:-9999 };
+
+const text = "PORTFOLIO";
+
+function resize(){
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  w = canvas.width = window.innerWidth * dpr;
+  h = canvas.height = window.innerHeight * dpr;
+
+  canvas.style.width = window.innerWidth + "px";
+  canvas.style.height = window.innerHeight + "px";
+
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+
+  createTextPoints();
+  createParticles();
+}
+
+function createTextPoints(){
+  targetPoints = [];
+
+  const temp = document.createElement("canvas");
+  const tctx = temp.getContext("2d");
+
+  temp.width = window.innerWidth;
+  temp.height = window.innerHeight;
+
+  const fontSize = Math.min(window.innerWidth / 7.2, 150);
+
+  tctx.fillStyle = "#111";
+  tctx.font = `900 ${fontSize}px Arial`;
+  tctx.textAlign = "center";
+  tctx.textBaseline = "middle";
+  tctx.letterSpacing = "-6px";
+  tctx.fillText(text, temp.width / 2, temp.height / 2);
+
+  const imageData = tctx.getImageData(0,0,temp.width,temp.height).data;
+  const gap = window.innerWidth < 700 ? 6 : 5;
+
+  for(let y = 0; y < temp.height; y += gap){
+    for(let x = 0; x < temp.width; x += gap){
+      const index = (y * temp.width + x) * 4;
+      if(imageData[index + 3] > 128){
+        targetPoints.push({x,y});
+      }
+    }
+  }
+}
+
+function createParticles(){
+  particles = [];
+
+  for(let i = 0; i < targetPoints.length; i++){
+    const point = targetPoints[i];
+
+    particles.push({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      tx: point.x,
+      ty: point.y,
+      vx: 0,
+      vy: 0,
+      r: Math.random() * 1.4 + .6
+    });
+  }
+}
+
+function animate(){
+  ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+
+  for(let i = 0; i < particles.length; i++){
+    const p = particles[i];
+
+    const dx = p.tx - p.x;
+    const dy = p.ty - p.y;
+
+    p.vx += dx * 0.018;
+    p.vy += dy * 0.018;
+
+    const mdx = p.x - mouse.x;
+    const mdy = p.y - mouse.y;
+    const dist = Math.sqrt(mdx * mdx + mdy * mdy);
+    const forceRadius = 90;
+
+    if(dist < forceRadius){
+      const force = (forceRadius - dist) / forceRadius;
+      const angle = Math.atan2(mdy, mdx);
+
+      p.vx += Math.cos(angle) * force * 5;
+      p.vy += Math.sin(angle) * force * 5;
+    }
+
+    p.vx *= .86;
+    p.vy *= .86;
+
+    p.x += p.vx;
+    p.y += p.vy;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = "#111";
+    ctx.fill();
+  }
+
+  requestAnimationFrame(animate);
+}
+
+window.addEventListener("mousemove", e=>{
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+});
+
+window.addEventListener("mouseleave", ()=>{
+  mouse.x = -9999;
+  mouse.y = -9999;
+});
+
+window.addEventListener("touchmove", e=>{
+  const t = e.touches[0];
+  mouse.x = t.clientX;
+  mouse.y = t.clientY;
+},{passive:true});
+
+window.addEventListener("resize", resize);
+
+resize();
+animate();
+
+const reveals = document.querySelectorAll(".reveal");
 
 function revealOnScroll(){
-  reveals.forEach((el)=>{
+  reveals.forEach(el=>{
     const top = el.getBoundingClientRect().top;
-    const windowHeight = window.innerHeight;
-
-    if(top < windowHeight - 100){
-      el.classList.add('active');
+    if(top < window.innerHeight - 100){
+      el.classList.add("active");
     }
   });
 }
 
-window.addEventListener('scroll', revealOnScroll);
-window.addEventListener('load', revealOnScroll);
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
 </script>
 
 </body>
