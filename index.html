@@ -190,14 +190,21 @@ body{
     margin-top:100vh;
 }
 
-.about-panel{
+/* ABOUT */
+.about-panel,
+.category-panel{
     width:100%;
-    padding:70px 40px 70px;
+    padding:70px 40px;
     background:rgba(255,255,255,.58);
     backdrop-filter:blur(32px);
     -webkit-backdrop-filter:blur(32px);
     border-top:1px solid rgba(255,255,255,.8);
     box-shadow:0 -30px 90px rgba(0,0,0,.12);
+}
+
+.category-panel{
+    min-height:85vh;
+    background:rgba(255,255,255,.66);
 }
 
 .panel-inner{
@@ -321,6 +328,65 @@ body{
     color:rgba(0,0,0,.52);
 }
 
+/* CATEGORY */
+.category-head{
+    display:flex;
+    justify-content:space-between;
+    gap:30px;
+    align-items:flex-end;
+    margin-bottom:34px;
+}
+
+.category-small{
+    font-size:13px;
+    color:rgba(0,0,0,.45);
+    letter-spacing:.08em;
+}
+
+.category-buttons{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.category-btn{
+    min-height:250px;
+    padding:24px;
+    border-radius:30px;
+    text-decoration:none;
+    color:#111;
+    background:rgba(255,255,255,.44);
+    border:1px solid rgba(255,255,255,.78);
+    box-shadow:0 18px 45px rgba(0,0,0,.07);
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    transition:.35s ease;
+}
+
+.category-btn:hover{
+    transform:translateY(-8px);
+    background:rgba(255,255,255,.75);
+}
+
+.category-btn span{
+    font-size:12px;
+    color:rgba(0,0,0,.38);
+}
+
+.category-btn strong{
+    font-size:25px;
+    letter-spacing:-.055em;
+    line-height:1.05;
+}
+
+.category-btn p{
+    font-size:13px;
+    line-height:1.55;
+    color:rgba(0,0,0,.52);
+}
+
+/* 모바일 */
 @media(max-width:900px){
     .about-layout{
         grid-template-columns:1fr;
@@ -333,6 +399,10 @@ body{
 
     .panel-cards{
         grid-template-columns:1fr;
+    }
+
+    .category-buttons{
+        grid-template-columns:repeat(2,1fr);
     }
 }
 
@@ -376,7 +446,8 @@ body{
         height:180px;
     }
 
-    .about-panel{
+    .about-panel,
+    .category-panel{
         padding:42px 24px 48px;
     }
 
@@ -404,6 +475,22 @@ body{
     .card h3{
         font-size:21px;
     }
+
+    .category-head{
+        display:block;
+    }
+
+    .category-small{
+        margin-top:18px;
+    }
+
+    .category-buttons{
+        grid-template-columns:1fr;
+    }
+
+    .category-btn{
+        min-height:175px;
+    }
 }
 </style>
 </head>
@@ -416,7 +503,8 @@ body{
         <div class="logo">Portfolio</div>
 
         <div class="menu">
-            <a href="#">ABOUT</a>
+            <a href="#about">ABOUT</a>
+            <a href="#category">CATEGORY</a>
             <a href="#">CONTACT</a>
         </div>
     </nav>
@@ -479,7 +567,7 @@ body{
 
 <div class="scroll-area">
 
-    <section class="about-panel">
+    <section class="about-panel" id="about">
 
         <div class="panel-inner">
 
@@ -547,6 +635,53 @@ body{
                     </div>
 
                 </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="category-panel" id="category">
+
+        <div class="panel-inner">
+
+            <div class="category-head">
+                <div>
+                    <h2 class="panel-title">CATEGORY</h2>
+                    <p class="panel-desc">
+                        작업 유형별로 포트폴리오를 볼 수 있도록 정리했습니다.
+                    </p>
+                </div>
+
+                <p class="category-small">SELECT YOUR PROJECT</p>
+            </div>
+
+            <div class="category-buttons">
+
+                <a href="#" class="category-btn">
+                    <span>01</span>
+                    <strong>Brand<br>Design</strong>
+                    <p>브랜드 로고, 무드, 아이덴티티 작업</p>
+                </a>
+
+                <a href="#" class="category-btn">
+                    <span>02</span>
+                    <strong>Graphic<br>Design</strong>
+                    <p>포스터, 배너, 콘텐츠 디자인</p>
+                </a>
+
+                <a href="#" class="category-btn">
+                    <span>03</span>
+                    <strong>UI<br>Concept</strong>
+                    <p>웹사이트, 모바일 화면 구성</p>
+                </a>
+
+                <a href="#" class="category-btn">
+                    <span>04</span>
+                    <strong>Visual<br>Artwork</strong>
+                    <p>분위기 있는 비주얼 이미지 작업</p>
+                </a>
 
             </div>
 
