@@ -16,6 +16,7 @@ body{
     overflow-x:hidden;
 }
 
+/* 메인 고정 */
 .main-fixed{
     position:fixed;
     inset:0;
@@ -137,6 +138,7 @@ body{
     88%,100%{transform:translateY(-4.4em)}
 }
 
+/* 하단 이미지 */
 .image-marquee{
     position:relative;
     width:100%;
@@ -184,16 +186,18 @@ body{
     to{transform:translateX(-50%)}
 }
 
+/* 스크롤 패널 영역 */
 .scroll-area{
     position:relative;
     z-index:5;
     margin-top:100vh;
 }
 
-/* ABOUT */
+/* 패널 공통 */
 .about-panel,
 .category-panel{
     width:100%;
+    min-height:100vh;
     padding:70px 40px;
     background:rgba(255,255,255,.58);
     backdrop-filter:blur(32px);
@@ -202,9 +206,19 @@ body{
     box-shadow:0 -30px 90px rgba(0,0,0,.12);
 }
 
+/* ABOUT 패널 */
+.about-panel{
+    position:sticky;
+    top:0;
+    z-index:1;
+}
+
+/* CATEGORY 패널 - ABOUT 위로 덮음 */
 .category-panel{
-    min-height:85vh;
-    background:rgba(255,255,255,.66);
+    position:relative;
+    z-index:2;
+    margin-top:-120px;
+    background:rgba(255,255,255,.68);
 }
 
 .panel-inner{
@@ -332,8 +346,8 @@ body{
 .category-head{
     display:flex;
     justify-content:space-between;
-    gap:30px;
     align-items:flex-end;
+    gap:30px;
     margin-bottom:34px;
 }
 
@@ -386,7 +400,7 @@ body{
     color:rgba(0,0,0,.52);
 }
 
-/* 모바일 */
+/* 반응형 */
 @media(max-width:900px){
     .about-layout{
         grid-template-columns:1fr;
@@ -448,7 +462,12 @@ body{
 
     .about-panel,
     .category-panel{
+        min-height:100vh;
         padding:42px 24px 48px;
+    }
+
+    .category-panel{
+        margin-top:-80px;
     }
 
     .panel-title{
@@ -589,9 +608,7 @@ body{
 
                 <div class="about-content">
 
-                    <h2 class="panel-title">
-                        ABOUT
-                    </h2>
+                    <h2 class="panel-title">ABOUT</h2>
 
                     <p class="panel-desc">
                         감각적인 비주얼과 섬세한 디테일을 바탕으로 브랜드의 분위기를 정리하고,<br>
@@ -611,25 +628,19 @@ body{
                         <div class="card">
                             <span>01</span>
                             <h3>Brand Design</h3>
-                            <p>
-                                브랜드의 방향성과 분위기를 시각적으로 정리하는 작업입니다.
-                            </p>
+                            <p>브랜드의 방향성과 분위기를 시각적으로 정리하는 작업입니다.</p>
                         </div>
 
                         <div class="card">
                             <span>02</span>
                             <h3>Graphic Design</h3>
-                            <p>
-                                포스터, 콘텐츠, 편집 디자인 등 인상적인 비주얼을 만듭니다.
-                            </p>
+                            <p>포스터, 콘텐츠, 편집 디자인 등 인상적인 비주얼을 만듭니다.</p>
                         </div>
 
                         <div class="card">
                             <span>03</span>
                             <h3>UI Concept</h3>
-                            <p>
-                                웹과 모바일 화면에서 보기 좋은 구조와 흐름을 설계합니다.
-                            </p>
+                            <p>웹과 모바일 화면에서 보기 좋은 구조와 흐름을 설계합니다.</p>
                         </div>
 
                     </div>
