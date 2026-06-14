@@ -211,16 +211,22 @@ body{
 
 /* ABOUT 패널 */
 .about-panel{
+
     position:sticky;
-    top:0;
+
+    bottom:0;
+
+    min-height:88vh;
+
     z-index:1;
+
 }
 
 /* CATEGORY 패널 - ABOUT 위로 덮음 */
 .category-panel{
     position:relative;
     z-index:2;
-    margin-top:-120px;
+    margin-top:-180px;
     background:rgba(255,255,255,.68);
 }
 
@@ -421,6 +427,17 @@ body{
     .category-buttons{
         grid-template-columns:repeat(2,1fr);
     }
+    
+}
+    html{
+    scroll-behavior:smooth;
+    scroll-snap-type:y mandatory;
+}
+
+.about-panel,
+.category-panel{
+    scroll-snap-align:end;
+    scroll-snap-stop:always;
 }
 
 @media(max-width:768px){
