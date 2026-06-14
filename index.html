@@ -191,6 +191,7 @@ body{
     position:relative;
     z-index:5;
     margin-top:100vh;
+        scroll-snap-type:y mandatory;
 }
 
 /* 패널 공통 */
@@ -204,6 +205,8 @@ body{
     -webkit-backdrop-filter:blur(32px);
     border-top:1px solid rgba(255,255,255,.8);
     box-shadow:0 -30px 90px rgba(0,0,0,.12);
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
 }
 
 /* ABOUT 패널 */
