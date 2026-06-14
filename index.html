@@ -191,7 +191,6 @@ body{
     position:relative;
     z-index:5;
     margin-top:100vh;
-        scroll-snap-type:y mandatory;
 }
 
 /* 패널 공통 */
@@ -205,28 +204,20 @@ body{
     -webkit-backdrop-filter:blur(32px);
     border-top:1px solid rgba(255,255,255,.8);
     box-shadow:0 -30px 90px rgba(0,0,0,.12);
-    scroll-snap-align:start;
-    scroll-snap-stop:always;
 }
 
 /* ABOUT 패널 */
 .about-panel{
-
     position:sticky;
-
-    bottom:0;
-
-    min-height:88vh;
-
+    top:0;
     z-index:1;
-
 }
 
 /* CATEGORY 패널 - ABOUT 위로 덮음 */
 .category-panel{
     position:relative;
     z-index:2;
-    margin-top:-180px;
+    margin-top:-120px;
     background:rgba(255,255,255,.68);
 }
 
@@ -427,17 +418,6 @@ body{
     .category-buttons{
         grid-template-columns:repeat(2,1fr);
     }
-    
-}
-    html{
-    scroll-behavior:smooth;
-    scroll-snap-type:y mandatory;
-}
-
-.about-panel,
-.category-panel{
-    scroll-snap-align:end;
-    scroll-snap-stop:always;
 }
 
 @media(max-width:768px){
