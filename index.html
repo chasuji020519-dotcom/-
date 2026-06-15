@@ -226,16 +226,25 @@ body{
     scroll-snap-stop:always;
 }
 
+/* 소개 패널: 상단 여백 있는 카드형 */
 .about-panel{
-    position:relative;
-    z-index:2;
-    min-height:100vh;
+    position:sticky;
+    top:105px;
+    z-index:1;
+    min-height:calc(100vh - 105px);
 }
 
+/* 한 번 스와이프용: 높이 거의 없게 */
+.about-hold{
+    height:1px;
+    scroll-snap-align:none;
+}
+
+/* 카테고리 패널 */
 .category-panel{
     position:relative;
     z-index:3;
-    min-height:100vh;
+    min-height:calc(100vh - 105px);
     background:rgba(255,255,255,.72);
     display:flex;
     align-items:center;
@@ -459,14 +468,19 @@ body{
     pointer-events:auto;
 }
 
+/* 전체 클릭 시 빈 공간 안 생기게 */
 .product-list.all-active{
-    min-height:1260px;
+    min-height:0;
 }
 
 .product-list.all-active .product-group{
     position:relative;
     inset:auto;
     margin-bottom:28px;
+}
+
+.product-list.all-active .product-group:last-child{
+    margin-bottom:0;
 }
 
 .product-item{
@@ -512,8 +526,7 @@ body{
 }
 
 #contact{
-    height:20vh;
-    scroll-snap-align:start;
+    display:none;
 }
 
 @media(max-width:900px){
@@ -540,7 +553,7 @@ body{
     }
 
     .product-list.all-active{
-        min-height:1900px;
+        min-height:0;
     }
 }
 
@@ -589,10 +602,13 @@ body{
     }
 
     .about-panel{
+        top:86px;
+        min-height:calc(100vh - 86px);
         padding:42px 24px 48px;
     }
 
     .category-panel{
+        min-height:calc(100vh - 86px);
         padding:42px 24px 48px;
     }
 
@@ -633,7 +649,7 @@ body{
     }
 
     .product-list.all-active{
-        min-height:4300px;
+        min-height:0;
     }
 
     .product-group{
@@ -789,6 +805,8 @@ body{
         </div>
 
     </section>
+
+    <div class="about-hold"></div>
 
     <section class="category-panel" id="category">
 
