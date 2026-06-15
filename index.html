@@ -690,16 +690,19 @@ body.category-mode .nav{
 .detail-panel{
     width:100%;
     height:88vh;
+    max-height:100vh;
     background:rgba(255,255,255,.94);
     border-radius:38px 38px 0 0;
     overflow-y:auto;
     transform:translateY(100%);
     transition:.7s cubic-bezier(.22,1,.36,1);
     box-shadow:0 -30px 90px rgba(0,0,0,.18);
+    scroll-behavior:smooth;
 }
 
-.detail-overlay.show .detail-panel{
-    transform:translateY(0);
+.detail-overlay.full .detail-panel{
+    height:100vh;
+    border-radius:0;
 }
 
 .detail-close{
@@ -1424,11 +1427,24 @@ document.querySelectorAll(".product-item").forEach(item=>{
 
 detailClose.addEventListener("click",()=>{
     detailOverlay.classList.remove("show");
+    detailOverlay.classList.remove("full");
+    detailPanel.scrollTop = 0;
 });
 
 detailOverlay.addEventListener("click",(e)=>{
     if(e.target === detailOverlay){
         detailOverlay.classList.remove("show");
+        detailOverlay.classList.remove("full");
+        detailPanel.scrollTop = 0;
+    }
+});
+    const detailPanel = document.querySelector(".detail-panel");
+
+detailPanel.addEventListener("scroll",()=>{
+    if(detailPanel.scrollTop > 40){
+        detailOverlay.classList.add("full");
+    }else{
+        detailOverlay.classList.remove("full");
     }
 });
 </script>
