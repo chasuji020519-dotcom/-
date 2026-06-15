@@ -443,48 +443,28 @@ body.category-mode .nav{
     border:none;
     background:transparent;
     cursor:pointer;
-    position:relative;
     flex-shrink:0;
     transition:.3s ease;
-    overflow:visible;
 }
 
 .category-panel.opened .category-back-btn{
-    display:block;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-.category-back-btn::before{
-    content:"";
-    position:absolute;
-    left:18px;
-    top:50%;
-    width:26px;
-    height:3px;
-    background:#111;
-    border-radius:999px;
-    transform:translateY(-50%);
+.category-back-btn svg{
+    width:44px;
+    height:44px;
+    overflow:visible;
 }
 
-.category-back-btn span::before,
-.category-back-btn span::after{
-    content:"";
-    position:absolute;
-    left:18px;
-    width:18px;
-    height:3px;
-    background:#111;
-    border-radius:999px;
-    transform-origin:left center;
-}
-
-.category-back-btn span::before{
-    top:21px;
-    transform:rotate(-45deg);
-}
-
-.category-back-btn span::after{
-    top:35px;
-    transform:rotate(45deg);
+.category-back-btn path{
+    fill:none;
+    stroke:#111;
+    stroke-width:3.2;
+    stroke-linecap:square;
+    stroke-linejoin:miter;
 }
 
 .category-back-btn:hover{
@@ -1034,8 +1014,11 @@ body.category-mode .nav{
                     <h2 class="panel-title">CATEGORY</h2>
 
                     <button class="category-back-btn" aria-label="Back">
-                        <span></span>
-                    </button>
+    <svg viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M28 12 L16 24 L28 36" />
+        <path d="M17 24 H38" />
+    </svg>
+</button>
                 </div>
 
                 <p class="panel-desc">
