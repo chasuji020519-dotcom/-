@@ -227,15 +227,9 @@ body{
 }
 
 .about-panel{
-    position:sticky;
-    top:105px;
-    z-index:1;
-    min-height:calc(100vh - 105px);
-}
-
-.about-hold{
-    height:100vh;
-    scroll-snap-align:start;
+    position:relative;
+    z-index:2;
+    min-height:100vh;
 }
 
 .category-panel{
@@ -243,15 +237,17 @@ body{
     z-index:3;
     min-height:100vh;
     background:rgba(255,255,255,.72);
-
     display:flex;
     align-items:center;
 }
+
 .category-panel.opened{
     align-items:flex-start;
 }
+
 .panel-inner{
     max-width:1180px;
+    width:100%;
     margin:0 auto;
 }
 
@@ -593,8 +589,6 @@ body{
     }
 
     .about-panel{
-        top:86px;
-        min-height:calc(100vh - 86px);
         padding:42px 24px 48px;
     }
 
@@ -795,8 +789,6 @@ body{
         </div>
 
     </section>
-
-    <div class="about-hold"></div>
 
     <section class="category-panel" id="category">
 
