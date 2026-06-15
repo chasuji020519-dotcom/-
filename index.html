@@ -7,7 +7,11 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+
+html{
+    scroll-behavior:smooth;
+    scroll-snap-type:y mandatory;
+}
 
 body{
     background:#fff;
@@ -25,10 +29,11 @@ body{
     z-index:1;
     background:#fff;
     overflow:hidden;
+    scroll-snap-align:start;
 }
 
 .nav{
-    position:absolute;
+    position:fixed;
     top:0;
     left:0;
     width:100%;
@@ -36,7 +41,7 @@ body{
     justify-content:space-between;
     align-items:center;
     padding:32px 40px;
-    z-index:10;
+    z-index:999;
 }
 
 .logo{
@@ -197,28 +202,33 @@ body{
 .about-panel,
 .category-panel{
     width:100%;
-    min-height:calc(100vh - 110px);
+    min-height:calc(100vh - 105px);
     padding:70px 40px;
     background:rgba(255,255,255,.58);
     backdrop-filter:blur(32px);
     -webkit-backdrop-filter:blur(32px);
     border-top:1px solid rgba(255,255,255,.8);
     box-shadow:0 -30px 90px rgba(0,0,0,.12);
+
+    scroll-snap-align:end;
+    scroll-snap-stop:always;
 }
 
-/* ABOUT 패널 - 하단에서 걸리는 느낌 */
+/* 소개패널 */
 .about-panel{
-    position:sticky;
-    top:110px;
+    position:relative;
     z-index:1;
+    margin-top:105px;
 }
 
-/* CATEGORY 패널 - ABOUT 위로 덮음 */
+/* 카테고리패널 */
 .category-panel{
     position:relative;
     z-index:2;
-    margin-top:-120px;
+    margin-top:0;
     background:rgba(255,255,255,.68);
+    scroll-snap-align:start;
+    min-height:100vh;
 }
 
 .panel-inner{
@@ -460,16 +470,15 @@ body{
         height:180px;
     }
 
-    .about-panel,
-    top:86px;
-    }
-    .category-panel{
+    .about-panel{
         min-height:calc(100vh - 86px);
+        margin-top:86px;
         padding:42px 24px 48px;
     }
 
     .category-panel{
-        margin-top:-80px;
+        min-height:100vh;
+        padding:42px 24px 48px;
     }
 
     .panel-title{
