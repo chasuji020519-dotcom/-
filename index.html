@@ -438,14 +438,15 @@ body.category-mode .nav{
 
 .category-back-btn{
     display:none;
-    width:48px;
-    height:48px;
+    width:56px;
+    height:56px;
     border:none;
     background:transparent;
     cursor:pointer;
     position:relative;
     flex-shrink:0;
     transition:.3s ease;
+    overflow:visible;
 }
 
 .category-panel.opened .category-back-btn{
@@ -455,11 +456,12 @@ body.category-mode .nav{
 .category-back-btn::before{
     content:"";
     position:absolute;
-    left:12px;
+    left:18px;
     top:50%;
-    width:24px;
-    height:2px;
+    width:26px;
+    height:3px;
     background:#111;
+    border-radius:999px;
     transform:translateY(-50%);
 }
 
@@ -467,25 +469,26 @@ body.category-mode .nav{
 .category-back-btn span::after{
     content:"";
     position:absolute;
-    left:12px;
-    width:14px;
-    height:2px;
+    left:18px;
+    width:18px;
+    height:3px;
     background:#111;
+    border-radius:999px;
     transform-origin:left center;
 }
 
 .category-back-btn span::before{
-    top:18px;
+    top:21px;
     transform:rotate(-45deg);
 }
 
 .category-back-btn span::after{
-    top:28px;
+    top:35px;
     transform:rotate(45deg);
 }
 
 .category-back-btn:hover{
-    transform:translateX(-6px);
+    transform:translateX(-4px);
 }
 
 .category-head .panel-desc{
