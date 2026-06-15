@@ -7,11 +7,7 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-
-html{
-    scroll-behavior:smooth;
-    scroll-snap-type:y proximity;
-}
+html{scroll-behavior:smooth}
 
 body{
     background:#fff;
@@ -191,7 +187,7 @@ body{
     to{transform:translateX(-50%)}
 }
 
-/* 스크롤 패널 영역 */
+/* 스크롤 영역 */
 .scroll-area{
     position:relative;
     z-index:5;
@@ -208,9 +204,6 @@ body{
     -webkit-backdrop-filter:blur(32px);
     border-top:1px solid rgba(255,255,255,.8);
     box-shadow:0 -30px 90px rgba(0,0,0,.12);
-    scroll-snap-align:start;
-    scroll-snap-stop:always;
-    transition:transform .8s cubic-bezier(.22,1,.36,1);
 }
 
 /* 소개 패널 */
@@ -231,7 +224,7 @@ body{
     position:relative;
     z-index:3;
     min-height:100vh;
-    background:rgba(255,255,255,.68);
+    background:rgba(255,255,255,.72);
 }
 
 .panel-inner{
@@ -328,12 +321,6 @@ body{
     background:rgba(255,255,255,.42);
     border:1px solid rgba(255,255,255,.7);
     box-shadow:0 14px 40px rgba(0,0,0,.06);
-    transition:.35s ease;
-}
-
-.card:hover{
-    transform:translateY(-5px);
-    background:rgba(255,255,255,.62);
 }
 
 .card span{
@@ -358,11 +345,20 @@ body{
 /* CATEGORY */
 .category-head{
     text-align:center;
-    margin-bottom:42px;
+    transition:.5s ease;
+}
+
+.category-panel.opened .category-head{
+    text-align:left;
 }
 
 .category-head .panel-desc{
     margin:0 auto;
+    transition:.5s ease;
+}
+
+.category-panel.opened .category-head .panel-desc{
+    margin:0;
 }
 
 .category-small{
@@ -378,118 +374,103 @@ body{
     align-items:center;
     gap:18px;
     flex-wrap:wrap;
-    margin-top:44px;
+    margin-top:46px;
+    transition:.55s cubic-bezier(.22,1,.36,1);
+}
+
+.category-panel.opened .category-buttons{
+    justify-content:flex-start;
 }
 
 .category-btn{
-    width:250px;
-    height:210px;
-    padding:24px;
-    border-radius:30px;
-    border:1px solid rgba(255,255,255,.78);
-    background:rgba(255,255,255,.44);
-    box-shadow:0 18px 45px rgba(0,0,0,.07);
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    text-align:left;
-    color:#111;
+    border:none;
+    outline:none;
     cursor:pointer;
+    padding:22px 42px;
+    border-radius:999px;
+    background:#f3f3f3;
+    color:#5f5f5f;
+    font-size:24px;
+    font-weight:700;
+    letter-spacing:-.05em;
     transition:.35s ease;
 }
 
-.category-btn:hover,
+.category-btn:hover{
+    background:#ededed;
+    transform:translateY(-3px);
+}
+
 .category-btn.active{
-    transform:translateY(-8px);
-    background:rgba(255,255,255,.82);
-    border-color:rgba(0,0,0,.12);
+    background:#000;
+    color:#fff;
 }
 
-.category-btn span{
-    font-size:12px;
-    color:rgba(0,0,0,.38);
+/* 상품 리스트 */
+.product-list{
+    margin-top:44px;
 }
 
-.category-btn strong{
-    font-size:25px;
-    letter-spacing:-.055em;
-    line-height:1.05;
-}
-
-.category-btn p{
-    font-size:13px;
-    line-height:1.55;
-    color:rgba(0,0,0,.52);
-}
-
-/* 클릭하면 펼쳐지는 작업 영역 */
-.project-list{
-    margin-top:46px;
-}
-
-.project-group{
+.product-group{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:18px;
-
     max-height:0;
     opacity:0;
     overflow:hidden;
-    transform:translateY(20px);
+    transform:translateY(24px);
     transition:
-        max-height .75s cubic-bezier(.22,1,.36,1),
+        max-height .85s cubic-bezier(.22,1,.36,1),
         opacity .45s ease,
         transform .55s cubic-bezier(.22,1,.36,1);
 }
 
-.project-group.active{
-    max-height:900px;
+.product-group.active{
+    max-height:1200px;
     opacity:1;
     transform:translateY(0);
 }
 
-.work-item{
-    height:230px;
-    border-radius:26px;
+.product-item{
+    height:260px;
+    border-radius:28px;
     overflow:hidden;
-    background:rgba(255,255,255,.5);
-    border:1px solid rgba(255,255,255,.78);
-    box-shadow:0 16px 38px rgba(0,0,0,.06);
     position:relative;
+    background:#eee;
+    box-shadow:0 18px 45px rgba(0,0,0,.08);
 }
 
-.work-item img{
+.product-item img{
     width:100%;
     height:100%;
     object-fit:cover;
     display:block;
-    filter:saturate(.9) contrast(1.04);
     transition:.45s ease;
 }
 
-.work-item:hover img{
+.product-item:hover img{
     transform:scale(1.06);
 }
 
-.work-info{
+.product-info{
     position:absolute;
     left:0;
     bottom:0;
     width:100%;
-    padding:18px;
-    background:linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0));
+    padding:22px;
     color:#fff;
+    background:linear-gradient(to top, rgba(0,0,0,.58), transparent);
 }
 
-.work-info h4{
-    font-size:18px;
+.product-info h4{
+    font-size:20px;
     letter-spacing:-.04em;
 }
 
-.work-info p{
+.product-info p{
     margin-top:5px;
-    font-size:12px;
-    opacity:.78;
+    font-size:13px;
+    opacity:.8;
 }
 
 /* 반응형 */
@@ -507,7 +488,7 @@ body{
         grid-template-columns:1fr;
     }
 
-    .project-group{
+    .product-group{
         grid-template-columns:repeat(2,1fr);
     }
 }
@@ -559,7 +540,6 @@ body{
     }
 
     .category-panel{
-        min-height:100vh;
         padding:42px 24px 48px;
     }
 
@@ -575,19 +555,6 @@ body{
         height:390px;
     }
 
-    .profile-info{
-        padding:20px;
-    }
-
-    .card{
-        min-height:140px;
-        padding:22px;
-    }
-
-    .card h3{
-        font-size:21px;
-    }
-
     .category-buttons{
         justify-content:flex-start;
         flex-wrap:nowrap;
@@ -596,17 +563,17 @@ body{
     }
 
     .category-btn{
-        width:220px;
-        height:180px;
         flex:0 0 auto;
+        padding:18px 34px;
+        font-size:20px;
     }
 
-    .project-group{
+    .product-group{
         grid-template-columns:1fr;
     }
 
-    .work-item{
-        height:220px;
+    .product-item{
+        height:240px;
     }
 }
 </style>
@@ -760,132 +727,120 @@ body{
             <div class="category-head">
                 <h2 class="panel-title">CATEGORY</h2>
                 <p class="panel-desc">
-                    작업 유형별로 포트폴리오를 볼 수 있도록 정리했습니다.
+                    고객님이 좋아할 만한 카테고리별 상품
                 </p>
                 <p class="category-small">SELECT YOUR PROJECT</p>
             </div>
 
             <div class="category-buttons">
-
-                <button class="category-btn active" data-tab="brand">
-                    <span>01</span>
-                    <strong>Brand<br>Design</strong>
-                    <p>브랜드 로고, 무드, 아이덴티티 작업</p>
-                </button>
-
-                <button class="category-btn" data-tab="graphic">
-                    <span>02</span>
-                    <strong>Graphic<br>Design</strong>
-                    <p>포스터, 배너, 콘텐츠 디자인</p>
-                </button>
-
-                <button class="category-btn" data-tab="ui">
-                    <span>03</span>
-                    <strong>UI<br>Concept</strong>
-                    <p>웹사이트, 모바일 화면 구성</p>
-                </button>
-
-                <button class="category-btn" data-tab="artwork">
-                    <span>04</span>
-                    <strong>Visual<br>Artwork</strong>
-                    <p>분위기 있는 비주얼 이미지 작업</p>
-                </button>
-
+                <button class="category-btn" data-tab="all">전체</button>
+                <button class="category-btn" data-tab="brand">브랜드</button>
+                <button class="category-btn" data-tab="graphic">그래픽</button>
+                <button class="category-btn" data-tab="ui">UI</button>
+                <button class="category-btn" data-tab="artwork">아트웍</button>
             </div>
 
-            <div class="project-list">
+            <div class="product-list">
 
-                <div class="project-group active" data-category="brand">
-                    <div class="work-item">
+                <div class="product-group" data-category="brand">
+                    <div class="product-item">
                         <img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg">
-                        <div class="work-info">
+                        <div class="product-info">
                             <h4>Brand Project 01</h4>
                             <p>Logo / Identity</p>
                         </div>
                     </div>
-                    <div class="work-item">
+
+                    <div class="product-item">
                         <img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg">
-                        <div class="work-info">
+                        <div class="product-info">
                             <h4>Brand Project 02</h4>
                             <p>Mood / Package</p>
                         </div>
                     </div>
-                    <div class="work-item">
+
+                    <div class="product-item">
                         <img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg">
-                        <div class="work-info">
+                        <div class="product-info">
                             <h4>Brand Project 03</h4>
                             <p>Visual System</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-group" data-category="graphic">
-                    <div class="work-item">
+                <div class="product-group" data-category="graphic">
+                    <div class="product-item">
                         <img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg">
-                        <div class="work-info">
-                            <h4>Poster Design</h4>
-                            <p>Graphic / Layout</p>
+                        <div class="product-info">
+                            <h4>Graphic Project 01</h4>
+                            <p>Poster / Layout</p>
                         </div>
                     </div>
-                    <div class="work-item">
+
+                    <div class="product-item">
                         <img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg">
-                        <div class="work-info">
-                            <h4>Banner Design</h4>
-                            <p>Contents / Promotion</p>
+                        <div class="product-info">
+                            <h4>Graphic Project 02</h4>
+                            <p>Banner / Contents</p>
                         </div>
                     </div>
-                    <div class="work-item">
+
+                    <div class="product-item">
                         <img src="https://i.pinimg.com/736x/ff/0d/2a/ff0d2a921264637b1268a56fae27867c.jpg">
-                        <div class="work-info">
-                            <h4>Editorial Design</h4>
-                            <p>Print / Visual</p>
+                        <div class="product-info">
+                            <h4>Graphic Project 03</h4>
+                            <p>Editorial / Visual</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-group" data-category="ui">
-                    <div class="work-item">
+                <div class="product-group" data-category="ui">
+                    <div class="product-item">
                         <img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg">
-                        <div class="work-info">
-                            <h4>Website Concept</h4>
-                            <p>Web / UI</p>
+                        <div class="product-info">
+                            <h4>UI Project 01</h4>
+                            <p>Website / UI</p>
                         </div>
                     </div>
-                    <div class="work-item">
+
+                    <div class="product-item">
                         <img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg">
-                        <div class="work-info">
-                            <h4>Mobile UI</h4>
-                            <p>App / Interface</p>
+                        <div class="product-info">
+                            <h4>UI Project 02</h4>
+                            <p>Mobile / App</p>
                         </div>
                     </div>
-                    <div class="work-item">
+
+                    <div class="product-item">
                         <img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg">
-                        <div class="work-info">
-                            <h4>Landing Page</h4>
-                            <p>Web Design</p>
+                        <div class="product-info">
+                            <h4>UI Project 03</h4>
+                            <p>Landing / Web</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-group" data-category="artwork">
-                    <div class="work-item">
+                <div class="product-group" data-category="artwork">
+                    <div class="product-item">
                         <img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg">
-                        <div class="work-info">
-                            <h4>Visual Artwork 01</h4>
-                            <p>Image / Mood</p>
+                        <div class="product-info">
+                            <h4>Artwork 01</h4>
+                            <p>Visual / Mood</p>
                         </div>
                     </div>
-                    <div class="work-item">
+
+                    <div class="product-item">
                         <img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg">
-                        <div class="work-info">
-                            <h4>Visual Artwork 02</h4>
+                        <div class="product-info">
+                            <h4>Artwork 02</h4>
                             <p>Art Direction</p>
                         </div>
                     </div>
-                    <div class="work-item">
+
+                    <div class="product-item">
                         <img src="https://i.pinimg.com/736x/ff/0d/2a/ff0d2a921264637b1268a56fae27867c.jpg">
-                        <div class="work-info">
-                            <h4>Visual Artwork 03</h4>
+                        <div class="product-info">
+                            <h4>Artwork 03</h4>
                             <p>Concept Visual</p>
                         </div>
                     </div>
@@ -900,18 +855,26 @@ body{
 </div>
 
 <script>
+const categoryPanel = document.querySelector(".category-panel");
 const buttons = document.querySelectorAll(".category-btn");
-const groups = document.querySelectorAll(".project-group");
+const groups = document.querySelectorAll(".product-group");
 
 buttons.forEach(button=>{
     button.addEventListener("click",()=>{
         const target = button.dataset.tab;
 
+        categoryPanel.classList.add("opened");
+
         buttons.forEach(btn=>btn.classList.remove("active"));
         groups.forEach(group=>group.classList.remove("active"));
 
         button.classList.add("active");
-        document.querySelector(`[data-category="${target}"]`).classList.add("active");
+
+        if(target === "all"){
+            groups.forEach(group=>group.classList.add("active"));
+        }else{
+            document.querySelector(`[data-category="${target}"]`).classList.add("active");
+        }
     });
 });
 </script>
