@@ -236,7 +236,7 @@ body{
 
 /* 한 번 스와이프용: 높이 거의 없게 */
 .about-hold{
-    height:1px;
+    height:calc(100vh - 105px);
     scroll-snap-align:none;
 }
 
@@ -606,7 +606,11 @@ body{
         min-height:calc(100vh - 86px);
         padding:42px 24px 48px;
     }
+    .about-hold{
 
+        height:calc(100vh - 86px);
+
+    }
     .category-panel{
         min-height:calc(100vh - 86px);
         padding:42px 24px 48px;
