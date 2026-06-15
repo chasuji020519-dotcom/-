@@ -44,6 +44,7 @@ body{
     z-index:1;
     background:#fff;
     overflow:hidden;
+    scroll-snap-align:start;
 }
 
 .nav{
@@ -206,7 +207,6 @@ body{
     to{transform:translateX(-50%)}
 }
 
-/* scroll panels */
 .scroll-area{
     position:relative;
     z-index:5;
@@ -216,9 +216,8 @@ body{
 .about-panel,
 .category-panel{
     width:100%;
-    min-height:100vh;
-    padding:90px 40px;
-    background:rgba(255,255,255,.68);
+    padding:70px 40px;
+    background:rgba(255,255,255,.58);
     backdrop-filter:blur(32px);
     -webkit-backdrop-filter:blur(32px);
     border-top:1px solid rgba(255,255,255,.8);
@@ -228,14 +227,22 @@ body{
 }
 
 .about-panel{
-    position:relative;
-    z-index:2;
+    position:sticky;
+    top:105px;
+    z-index:1;
+    min-height:calc(100vh - 105px);
+}
+
+.about-hold{
+    height:100vh;
+    scroll-snap-align:start;
 }
 
 .category-panel{
     position:relative;
     z-index:3;
-    background:rgba(255,255,255,.76);
+    min-height:100vh;
+    background:rgba(255,255,255,.72);
 }
 
 .panel-inner{
@@ -436,7 +443,6 @@ body{
     gap:28px;
     opacity:0;
     visibility:hidden;
-    overflow:visible;
     transform:translateY(32px);
     pointer-events:none;
     transition:
@@ -538,10 +544,6 @@ body{
 }
 
 @media(max-width:768px){
-    html{
-        scroll-snap-type:y proximity;
-    }
-
     .back-home-zone{
         height:86px;
     }
@@ -585,9 +587,14 @@ body{
         height:180px;
     }
 
-    .about-panel,
+    .about-panel{
+        top:86px;
+        min-height:calc(100vh - 86px);
+        padding:42px 24px 48px;
+    }
+
     .category-panel{
-        padding:46px 24px 60px;
+        padding:42px 24px 48px;
     }
 
     .panel-title{
@@ -783,6 +790,8 @@ body{
         </div>
 
     </section>
+
+    <div class="about-hold"></div>
 
     <section class="category-panel" id="category">
 
