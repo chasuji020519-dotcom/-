@@ -402,6 +402,7 @@ body.category-mode .nav{
     color:rgba(0,0,0,.52);
 }
 
+/* CATEGORY */
 .category-head{
     text-align:center;
     transition:.65s cubic-bezier(.22,1,.36,1);
@@ -691,13 +692,24 @@ body.category-mode .nav{
     width:100%;
     height:88vh;
     max-height:100vh;
-    background:rgba(255,255,255,.94);
+    background:rgba(255,255,255,.96);
     border-radius:38px 38px 0 0;
     overflow-y:auto;
     transform:translateY(100%);
-    transition:.7s cubic-bezier(.22,1,.36,1);
+    transition:
+        transform .7s cubic-bezier(.22,1,.36,1),
+        height .45s cubic-bezier(.22,1,.36,1),
+        border-radius .45s cubic-bezier(.22,1,.36,1);
     box-shadow:0 -30px 90px rgba(0,0,0,.18);
     scroll-behavior:smooth;
+}
+
+.detail-overlay.show .detail-panel{
+    transform:translateY(0);
+}
+
+.detail-overlay.full{
+    background:rgba(0,0,0,.08);
 }
 
 .detail-overlay.full .detail-panel{
@@ -713,13 +725,13 @@ body.category-mode .nav{
     height:48px;
     border:none;
     border-radius:50%;
-    background:rgba(255,255,255,.85);
+    background:rgba(255,255,255,.9);
     box-shadow:0 8px 24px rgba(0,0,0,.1);
     cursor:pointer;
     display:flex;
     align-items:center;
     justify-content:center;
-    z-index:5;
+    z-index:20;
 }
 
 .detail-close svg{
@@ -751,7 +763,7 @@ body.category-mode .nav{
 .detail-content{
     max-width:1050px;
     margin:0 auto;
-    padding:58px 40px 100px;
+    padding:58px 40px 120px;
 }
 
 .detail-category{
@@ -800,6 +812,23 @@ body.category-mode .nav{
 .detail-meta strong{
     font-size:16px;
     letter-spacing:-.03em;
+}
+
+.detail-long{
+    margin-top:46px;
+    padding-top:40px;
+    border-top:1px solid rgba(0,0,0,.08);
+}
+
+.detail-long h3{
+    font-size:26px;
+    letter-spacing:-.05em;
+    margin-bottom:16px;
+}
+
+.detail-long p{
+    margin-top:0;
+    margin-bottom:22px;
 }
 
 #contact{
@@ -971,12 +1000,17 @@ body.category-mode .nav{
         border-radius:30px 30px 0 0;
     }
 
+    .detail-overlay.full .detail-panel{
+        height:100vh;
+        border-radius:0;
+    }
+
     .detail-image{
         height:300px;
     }
 
     .detail-content{
-        padding:42px 24px 80px;
+        padding:42px 24px 90px;
     }
 
     .detail-content p{
@@ -1332,6 +1366,24 @@ body.category-mode .nav{
                     <strong>2026</strong>
                 </div>
             </div>
+
+            <div class="detail-long">
+                <h3>Project Story</h3>
+                <p>
+                    이 영역은 상세 설명이 길어질 때 사용하는 공간입니다. 프로젝트의 목적, 디자인 방향,
+                    작업 과정, 사용한 컬러와 레이아웃, 완성 결과까지 자연스럽게 작성할 수 있습니다.
+                </p>
+
+                <p>
+                    상세 내용이 길어지면 이 패널 안에서 스크롤할 수 있고, 스크롤을 조금 내리면 패널이
+                    화면 위까지 확장되어 더 넓게 볼 수 있도록 설정했습니다.
+                </p>
+
+                <p>
+                    실제 포트폴리오에서는 이곳에 작업 의도, 문제 해결 과정, 디자인 포인트, 결과물 설명을
+                    넣으면 좋아요.
+                </p>
+            </div>
         </div>
 
     </div>
@@ -1399,13 +1451,20 @@ backZone.addEventListener("click",()=>{
     });
 });
 
-/* 상품 상세 패널 */
+/* 상세 패널 */
 const detailOverlay = document.querySelector(".detail-overlay");
+const detailPanel = document.querySelector(".detail-panel");
 const detailClose = document.querySelector(".detail-close");
 const detailImg = document.getElementById("detailImg");
 const detailTitle = document.getElementById("detailTitle");
 const detailDesc = document.getElementById("detailDesc");
 const detailType = document.getElementById("detailType");
+
+function closeDetail(){
+    detailOverlay.classList.remove("show");
+    detailOverlay.classList.remove("full");
+    detailPanel.scrollTop = 0;
+}
 
 document.querySelectorAll(".product-item").forEach(item=>{
     item.addEventListener("click",()=>{
@@ -1421,30 +1480,25 @@ document.querySelectorAll(".product-item").forEach(item=>{
         detailDesc.innerText =
         "이 프로젝트는 브랜드의 분위기와 시각적 완성도를 높이기 위해 구성한 작업입니다. 메인 비주얼, 컬러감, 레이아웃, 디테일 요소를 중심으로 전체적인 무드를 정리했습니다.";
 
+        detailPanel.scrollTop = 0;
+        detailOverlay.classList.remove("full");
         detailOverlay.classList.add("show");
     });
 });
 
-detailClose.addEventListener("click",()=>{
-    detailOverlay.classList.remove("show");
-    detailOverlay.classList.remove("full");
-    detailPanel.scrollTop = 0;
-});
-
-detailOverlay.addEventListener("click",(e)=>{
-    if(e.target === detailOverlay){
-        detailOverlay.classList.remove("show");
-        detailOverlay.classList.remove("full");
-        detailPanel.scrollTop = 0;
-    }
-});
-    const detailPanel = document.querySelector(".detail-panel");
-
 detailPanel.addEventListener("scroll",()=>{
-    if(detailPanel.scrollTop > 40){
+    if(detailPanel.scrollTop > 35){
         detailOverlay.classList.add("full");
     }else{
         detailOverlay.classList.remove("full");
+    }
+});
+
+detailClose.addEventListener("click",closeDetail);
+
+detailOverlay.addEventListener("click",(e)=>{
+    if(e.target === detailOverlay){
+        closeDetail();
     }
 });
 </script>
