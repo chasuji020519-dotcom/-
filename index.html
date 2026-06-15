@@ -371,6 +371,65 @@ body{
 }
 
 /* CATEGORY */
+    .category-preview{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+    margin-top:56px;
+    opacity:.72;
+    filter:saturate(.85);
+    transition:.5s ease;
+}
+
+.category-panel.opened .category-preview{
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(20px);
+    height:0;
+    margin-top:0;
+    overflow:hidden;
+}
+
+.preview-item{
+    height:260px;
+    border-radius:30px;
+    overflow:hidden;
+    position:relative;
+    background:rgba(255,255,255,.35);
+    border:1px solid rgba(255,255,255,.7);
+    box-shadow:0 18px 55px rgba(0,0,0,.09);
+}
+
+.preview-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    filter:blur(1px) brightness(.88);
+    transform:scale(1.04);
+}
+
+.preview-item span{
+    position:absolute;
+    left:22px;
+    bottom:20px;
+    color:#fff;
+    font-size:22px;
+    font-weight:600;
+    letter-spacing:-.04em;
+    z-index:2;
+}
+
+.preview-item::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,.48),
+        rgba(0,0,0,.04)
+    );
+}
 .category-head{
     text-align:center;
     transition:.65s cubic-bezier(.22,1,.36,1);
@@ -686,6 +745,16 @@ body{
     .product-item{
         height:260px;
     }
+
+    .category-preview{
+    grid-template-columns:1fr;
+    gap:18px;
+    margin-top:36px;
+}
+
+.preview-item{
+    height:210px;
+
 }
 </style>
 </head>
@@ -854,6 +923,23 @@ body{
                 <button class="category-btn" data-tab="artwork">아트웍</button>
             </div>
 
+
+
+            <div class="category-preview">
+    <div class="preview-item">
+        <img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg">
+        <span>Brand</span>
+    </div>
+    <div class="preview-item">
+        <img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg">
+        <span>Graphic</span>
+    </div>
+    <div class="preview-item">
+        <img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg">
+        <span>UI Concept</span>
+    </div>
+</div>
+            
             <div class="product-list">
 
                 <div class="product-group" data-category="brand">
