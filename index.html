@@ -7,17 +7,20 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+
+html{
+    scroll-behavior:smooth;
+    scroll-snap-type:y mandatory;
+}
 
 body{
     background:#fff;
     font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;
     color:#111;
     overflow-x:hidden;
-    overscroll-behavior:y contain;
+    overscroll-behavior-y:contain;
 }
 
-/* 메인 고정 */
 .main-fixed{
     position:fixed;
     inset:0;
@@ -26,6 +29,7 @@ body{
     z-index:1;
     background:#fff;
     overflow:hidden;
+    scroll-snap-align:start;
 }
 
 .nav{
@@ -44,6 +48,8 @@ body{
     font-size:24px;
     font-weight:700;
     letter-spacing:.12em;
+    color:#111;
+    text-decoration:none;
 }
 
 .menu{
@@ -139,7 +145,6 @@ body{
     88%,100%{transform:translateY(-4.4em)}
 }
 
-/* 하단 이미지 */
 .image-marquee{
     position:relative;
     width:100%;
@@ -187,14 +192,12 @@ body{
     to{transform:translateX(-50%)}
 }
 
-/* 스크롤 영역 */
 .scroll-area{
     position:relative;
     z-index:5;
     margin-top:100vh;
 }
 
-/* 패널 공통 */
 .about-panel,
 .category-panel{
     width:100%;
@@ -204,9 +207,10 @@ body{
     -webkit-backdrop-filter:blur(32px);
     border-top:1px solid rgba(255,255,255,.8);
     box-shadow:0 -30px 90px rgba(0,0,0,.12);
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
 }
 
-/* 소개 패널 */
 .about-panel{
     position:sticky;
     top:105px;
@@ -214,12 +218,11 @@ body{
     min-height:calc(100vh - 105px);
 }
 
-/* 소개 패널 멈춤 공간 */
 .about-hold{
     height:100vh;
+    scroll-snap-align:start;
 }
 
-/* 카테고리 패널 */
 .category-panel{
     position:relative;
     z-index:3;
@@ -345,7 +348,7 @@ body{
 /* CATEGORY */
 .category-head{
     text-align:center;
-    transition:.5s ease;
+    transition:.55s cubic-bezier(.22,1,.36,1);
 }
 
 .category-panel.opened .category-head{
@@ -354,7 +357,7 @@ body{
 
 .category-head .panel-desc{
     margin:0 auto;
-    transition:.5s ease;
+    transition:.55s cubic-bezier(.22,1,.36,1);
 }
 
 .category-panel.opened .category-head .panel-desc{
@@ -370,35 +373,36 @@ body{
 
 .category-buttons{
     display:flex;
-    justify-content:center;
     align-items:center;
-    gap:18px;
+    gap:12px;
     flex-wrap:wrap;
-    margin-top:46px;
+    width:fit-content;
+    margin:34px auto 0;
     transition:.55s cubic-bezier(.22,1,.36,1);
 }
 
 .category-panel.opened .category-buttons{
-    justify-content:flex-start;
+    margin-left:0;
+    margin-right:auto;
 }
 
 .category-btn{
     border:none;
     outline:none;
     cursor:pointer;
-    padding:22px 42px;
+    padding:14px 26px;
     border-radius:999px;
     background:#f3f3f3;
-    color:#5f5f5f;
-    font-size:24px;
-    font-weight:700;
-    letter-spacing:-.05em;
-    transition:.35s ease;
+    color:#666;
+    font-size:16px;
+    font-weight:600;
+    letter-spacing:-.03em;
+    transition:.3s ease;
 }
 
 .category-btn:hover{
-    background:#ededed;
-    transform:translateY(-3px);
+    background:#ececec;
+    transform:translateY(-2px);
 }
 
 .category-btn.active{
@@ -406,7 +410,6 @@ body{
     color:#fff;
 }
 
-/* 상품 리스트 */
 .product-list{
     margin-top:44px;
 }
@@ -473,7 +476,6 @@ body{
     opacity:.8;
 }
 
-/* 반응형 */
 @media(max-width:900px){
     .about-layout{
         grid-template-columns:1fr;
@@ -556,16 +558,18 @@ body{
     }
 
     .category-buttons{
-        justify-content:flex-start;
+        margin-left:0;
+        margin-right:auto;
         flex-wrap:nowrap;
         overflow-x:auto;
         padding-bottom:10px;
+        width:100%;
     }
 
     .category-btn{
         flex:0 0 auto;
-        padding:18px 34px;
-        font-size:20px;
+        padding:12px 22px;
+        font-size:15px;
     }
 
     .product-group{
@@ -581,15 +585,16 @@ body{
 
 <body>
 
-<div class="main-fixed">
+<div class="main-fixed" id="top">
 
     <nav class="nav">
-        <div class="logo">Portfolio</div>
+        <a href="#top" class="logo">Portfolio</a>
 
         <div class="menu">
+            <a href="#top">HOME</a>
             <a href="#about">ABOUT</a>
             <a href="#category">CATEGORY</a>
-            <a href="#">CONTACT</a>
+            <a href="#contact">CONTACT</a>
         </div>
     </nav>
 
@@ -727,7 +732,7 @@ body{
             <div class="category-head">
                 <h2 class="panel-title">CATEGORY</h2>
                 <p class="panel-desc">
-                    고객님이 좋아할 만한 카테고리별 상품
+                    작업 유형별로 포트폴리오를 볼 수 있도록 정리했습니다.
                 </p>
                 <p class="category-small">SELECT YOUR PROJECT</p>
             </div>
@@ -851,6 +856,8 @@ body{
         </div>
 
     </section>
+
+    <section id="contact"></section>
 
 </div>
 
