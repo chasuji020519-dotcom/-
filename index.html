@@ -226,7 +226,6 @@ body{
     scroll-snap-stop:always;
 }
 
-/* 소개 패널: 상단 여백 있는 카드형 */
 .about-panel{
     position:sticky;
     top:105px;
@@ -234,13 +233,11 @@ body{
     min-height:calc(100vh - 105px);
 }
 
-/* 한 번 스와이프용: 높이 거의 없게 */
 .about-hold{
     height:calc(100vh - 105px);
     scroll-snap-align:none;
 }
 
-/* 카테고리 패널 */
 .category-panel{
     position:relative;
     z-index:3;
@@ -371,65 +368,6 @@ body{
 }
 
 /* CATEGORY */
-    .category-preview{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:22px;
-    margin-top:56px;
-    opacity:.72;
-    filter:saturate(.85);
-    transition:.5s ease;
-}
-
-.category-panel.opened .category-preview{
-    opacity:0;
-    visibility:hidden;
-    transform:translateY(20px);
-    height:0;
-    margin-top:0;
-    overflow:hidden;
-}
-
-.preview-item{
-    height:260px;
-    border-radius:30px;
-    overflow:hidden;
-    position:relative;
-    background:rgba(255,255,255,.35);
-    border:1px solid rgba(255,255,255,.7);
-    box-shadow:0 18px 55px rgba(0,0,0,.09);
-}
-
-.preview-item img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-    filter:blur(1px) brightness(.88);
-    transform:scale(1.04);
-}
-
-.preview-item span{
-    position:absolute;
-    left:22px;
-    bottom:20px;
-    color:#fff;
-    font-size:22px;
-    font-weight:600;
-    letter-spacing:-.04em;
-    z-index:2;
-}
-
-.preview-item::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(
-        to top,
-        rgba(0,0,0,.48),
-        rgba(0,0,0,.04)
-    );
-}
 .category-head{
     text-align:center;
     transition:.65s cubic-bezier(.22,1,.36,1);
@@ -520,9 +458,111 @@ body{
         0 14px 34px rgba(0,0,0,.22);
 }
 
+.category-preview{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+    margin-top:56px;
+    opacity:.72;
+    filter:saturate(.85);
+    transition:.5s ease;
+}
+
+.category-panel.opened .category-preview{
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(20px);
+    height:0;
+    margin-top:0;
+    overflow:hidden;
+}
+
+.preview-item{
+    height:260px;
+    border-radius:30px;
+    overflow:hidden;
+    position:relative;
+    background:rgba(255,255,255,.35);
+    border:1px solid rgba(255,255,255,.7);
+    box-shadow:0 18px 55px rgba(0,0,0,.09);
+}
+
+.preview-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    filter:blur(1px) brightness(.88);
+    transform:scale(1.04);
+}
+
+.preview-item span{
+    position:absolute;
+    left:22px;
+    bottom:20px;
+    color:#fff;
+    font-size:22px;
+    font-weight:600;
+    letter-spacing:-.04em;
+    z-index:2;
+}
+
+.preview-item::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,.48),
+        rgba(0,0,0,.04)
+    );
+}
+
+.category-back-wrap{
+    display:flex;
+    justify-content:flex-start;
+    margin-top:34px;
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(14px);
+    height:0;
+    overflow:hidden;
+    transition:.45s ease;
+}
+
+.category-panel.opened .category-back-wrap{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+    height:auto;
+    overflow:visible;
+}
+
+.category-back-btn{
+    border:1px solid rgba(255,255,255,.75);
+    cursor:pointer;
+    padding:12px 22px;
+    border-radius:999px;
+    background:rgba(255,255,255,.55);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    color:#333;
+    font-size:14px;
+    font-weight:600;
+    box-shadow:
+        inset 0 1px 1px rgba(255,255,255,.9),
+        0 10px 28px rgba(0,0,0,.12);
+    transition:.3s ease;
+}
+
+.category-back-btn:hover{
+    transform:translateY(-2px);
+    background:rgba(255,255,255,.8);
+}
+
 .product-list{
     position:relative;
-    margin-top:60px;
+    margin-top:40px;
     min-height:620px;
 }
 
@@ -549,7 +589,6 @@ body{
     pointer-events:auto;
 }
 
-/* 전체 클릭 시 빈 공간 안 생기게 */
 .product-list.all-active{
     min-height:0;
 }
@@ -566,7 +605,7 @@ body{
 
 .product-item{
     height:310px;
-    border-radius:10px;
+    border-radius:30px;
     overflow:hidden;
     position:relative;
     background:#eee;
@@ -687,11 +726,11 @@ body{
         min-height:calc(100vh - 86px);
         padding:42px 24px 48px;
     }
+
     .about-hold{
-
         height:calc(100vh - 86px);
-
     }
+
     .category-panel{
         min-height:calc(100vh - 86px);
         padding:42px 24px 48px;
@@ -728,6 +767,16 @@ body{
         font-size:15px;
     }
 
+    .category-preview{
+        grid-template-columns:1fr;
+        gap:18px;
+        margin-top:36px;
+    }
+
+    .preview-item{
+        height:210px;
+    }
+
     .product-list{
         margin-top:34px;
         min-height:1120px;
@@ -745,16 +794,6 @@ body{
     .product-item{
         height:260px;
     }
-
-    .category-preview{
-    grid-template-columns:1fr;
-    gap:18px;
-    margin-top:36px;
-}
-
-.preview-item{
-    height:210px;
-
 }
 </style>
 </head>
@@ -923,23 +962,25 @@ body{
                 <button class="category-btn" data-tab="artwork">아트웍</button>
             </div>
 
-
-
             <div class="category-preview">
-    <div class="preview-item">
-        <img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg">
-        <span>Brand</span>
-    </div>
-    <div class="preview-item">
-        <img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg">
-        <span>Graphic</span>
-    </div>
-    <div class="preview-item">
-        <img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg">
-        <span>UI Concept</span>
-    </div>
-</div>
-            
+                <div class="preview-item">
+                    <img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg">
+                    <span>Brand</span>
+                </div>
+                <div class="preview-item">
+                    <img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg">
+                    <span>Graphic</span>
+                </div>
+                <div class="preview-item">
+                    <img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg">
+                    <span>UI Concept</span>
+                </div>
+            </div>
+
+            <div class="category-back-wrap">
+                <button class="category-back-btn">← Back</button>
+            </div>
+
             <div class="product-list">
 
                 <div class="product-group" data-category="brand">
@@ -1062,6 +1103,7 @@ const buttons = document.querySelectorAll(".category-btn");
 const groups = document.querySelectorAll(".product-group");
 const productList = document.querySelector(".product-list");
 const backZone = document.querySelector(".back-home-zone");
+const categoryBackBtn = document.querySelector(".category-back-btn");
 
 buttons.forEach(button=>{
     button.addEventListener("click",()=>{
@@ -1083,6 +1125,15 @@ buttons.forEach(button=>{
             if(selected) selected.classList.add("active");
         }
     });
+});
+
+categoryBackBtn.addEventListener("click",()=>{
+    categoryPanel.classList.remove("opened");
+
+    buttons.forEach(btn=>btn.classList.remove("active"));
+    groups.forEach(group=>group.classList.remove("active"));
+
+    productList.classList.remove("all-active");
 });
 
 window.addEventListener("scroll",()=>{
