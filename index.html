@@ -613,12 +613,19 @@ body.category-mode .nav{
 }
 
 .product-list{
-    position:relative;
-    margin-top:40px;
-    min-height:620px;
+    opacity:0;
+    visibility:hidden;
+    height:0;
+    overflow:hidden;
+    margin-top:0;
 }
-    .category-panel:not(.opened) .product-list{
-    display:none;
+
+.category-panel.opened .product-list{
+    opacity:1;
+    visibility:visible;
+    height:auto;
+    overflow:visible;
+    margin-top:40px;
 }
 
 .product-group{
