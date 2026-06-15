@@ -21,6 +21,33 @@ body{
     overscroll-behavior-y:contain;
 }
 
+body.category-mode{
+    overflow:hidden;
+}
+
+body.category-mode .main-fixed,
+body.category-mode .about-panel,
+body.category-mode .about-hold{
+    display:none;
+}
+
+body.category-mode .scroll-area{
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    margin-top:0;
+    overflow-y:auto;
+    background:#fff;
+}
+
+body.category-mode .category-panel{
+    min-height:100vh;
+    padding-top:70px;
+    box-shadow:none;
+    border-top:none;
+    scroll-snap-align:none;
+}
+
 .back-home-zone{
     position:fixed;
     top:0;
@@ -34,6 +61,10 @@ body{
 
 .back-home-zone.active{
     pointer-events:auto;
+}
+
+body.category-mode .back-home-zone{
+    display:none;
 }
 
 .main-fixed{
@@ -57,6 +88,10 @@ body{
     align-items:center;
     padding:32px 40px;
     z-index:999;
+}
+
+body.category-mode .nav{
+    display:none;
 }
 
 .logo{
@@ -412,7 +447,8 @@ body{
     transform:translateX(0);
 }
 
-.category-btn{
+.category-btn,
+.category-back-btn{
     border:1px solid rgba(255,255,255,.75);
     outline:none;
     cursor:pointer;
@@ -436,7 +472,8 @@ body{
     transition:.35s cubic-bezier(.22,1,.36,1);
 }
 
-.category-btn:hover{
+.category-btn:hover,
+.category-back-btn:hover{
     background:linear-gradient(
         145deg,
         rgba(255,255,255,.9),
@@ -456,6 +493,18 @@ body{
     box-shadow:
         inset 0 1px 1px rgba(255,255,255,.18),
         0 14px 34px rgba(0,0,0,.22);
+}
+
+.category-back-btn{
+    display:none;
+    background:rgba(17,17,17,.9);
+    color:#fff;
+    border-color:rgba(255,255,255,.35);
+}
+
+.category-panel.opened .category-back-btn{
+    display:inline-flex;
+    align-items:center;
 }
 
 .category-preview{
@@ -516,48 +565,6 @@ body{
         rgba(0,0,0,.48),
         rgba(0,0,0,.04)
     );
-}
-
-.category-back-wrap{
-    display:flex;
-    justify-content:flex-start;
-    margin-top:34px;
-    opacity:0;
-    visibility:hidden;
-    transform:translateY(14px);
-    height:0;
-    overflow:hidden;
-    transition:.45s ease;
-}
-
-.category-panel.opened .category-back-wrap{
-    opacity:1;
-    visibility:visible;
-    transform:translateY(0);
-    height:auto;
-    overflow:visible;
-}
-
-.category-back-btn{
-    border:1px solid rgba(255,255,255,.75);
-    cursor:pointer;
-    padding:12px 22px;
-    border-radius:999px;
-    background:rgba(255,255,255,.55);
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-    color:#333;
-    font-size:14px;
-    font-weight:600;
-    box-shadow:
-        inset 0 1px 1px rgba(255,255,255,.9),
-        0 10px 28px rgba(0,0,0,.12);
-    transition:.3s ease;
-}
-
-.category-back-btn:hover{
-    transform:translateY(-2px);
-    background:rgba(255,255,255,.8);
 }
 
 .product-list{
@@ -736,6 +743,11 @@ body{
         padding:42px 24px 48px;
     }
 
+    body.category-mode .category-panel{
+        min-height:100vh;
+        padding:42px 24px 48px;
+    }
+
     .panel-title{
         font-size:clamp(42px,12vw,68px);
     }
@@ -761,7 +773,8 @@ body{
         transform:none;
     }
 
-    .category-btn{
+    .category-btn,
+    .category-back-btn{
         flex:0 0 auto;
         padding:12px 22px;
         font-size:15px;
@@ -960,6 +973,7 @@ body{
                 <button class="category-btn" data-tab="graphic">그래픽</button>
                 <button class="category-btn" data-tab="ui">UI</button>
                 <button class="category-btn" data-tab="artwork">아트웍</button>
+                <button class="category-back-btn">← Back</button>
             </div>
 
             <div class="category-preview">
@@ -975,10 +989,6 @@ body{
                     <img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg">
                     <span>UI Concept</span>
                 </div>
-            </div>
-
-            <div class="category-back-wrap">
-                <button class="category-back-btn">← Back</button>
             </div>
 
             <div class="product-list">
@@ -1109,7 +1119,13 @@ buttons.forEach(button=>{
     button.addEventListener("click",()=>{
         const target = button.dataset.tab;
 
+        document.body.classList.add("category-mode");
         categoryPanel.classList.add("opened");
+
+        document.querySelector(".scroll-area").scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
 
         buttons.forEach(btn=>btn.classList.remove("active"));
         groups.forEach(group=>group.classList.remove("active"));
@@ -1128,12 +1144,17 @@ buttons.forEach(button=>{
 });
 
 categoryBackBtn.addEventListener("click",()=>{
+    document.body.classList.remove("category-mode");
     categoryPanel.classList.remove("opened");
 
     buttons.forEach(btn=>btn.classList.remove("active"));
     groups.forEach(group=>group.classList.remove("active"));
-
     productList.classList.remove("all-active");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 });
 
 window.addEventListener("scroll",()=>{
