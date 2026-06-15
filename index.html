@@ -21,6 +21,22 @@ body{
     overscroll-behavior-y:contain;
 }
 
+/* 상단 여백 클릭하면 메인으로 */
+.back-home-zone{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:105px;
+    z-index:900;
+    pointer-events:none;
+    cursor:pointer;
+}
+
+.back-home-zone.active{
+    pointer-events:auto;
+}
+
 .main-fixed{
     position:fixed;
     inset:0;
@@ -365,10 +381,9 @@ body{
 .category-panel.opened .category-head .panel-desc{
     margin:0;
 }
-    .category-panel.opened{
 
+.category-panel.opened{
     align-items:flex-start;
-
 }
 
 .category-small{
@@ -508,6 +523,10 @@ body{
 }
 
 @media(max-width:768px){
+    .back-home-zone{
+        height:86px;
+    }
+
     .nav{
         padding:28px 24px;
     }
@@ -596,6 +615,8 @@ body{
 </head>
 
 <body>
+
+<div class="back-home-zone"></div>
 
 <div class="main-fixed" id="top">
 
@@ -877,6 +898,7 @@ body{
 const categoryPanel = document.querySelector(".category-panel");
 const buttons = document.querySelectorAll(".category-btn");
 const groups = document.querySelectorAll(".product-group");
+const backZone = document.querySelector(".back-home-zone");
 
 buttons.forEach(button=>{
     button.addEventListener("click",()=>{
@@ -894,6 +916,21 @@ buttons.forEach(button=>{
         }else{
             document.querySelector(`[data-category="${target}"]`).classList.add("active");
         }
+    });
+});
+
+window.addEventListener("scroll",()=>{
+    if(window.scrollY > 300){
+        backZone.classList.add("active");
+    }else{
+        backZone.classList.remove("active");
+    }
+});
+
+backZone.addEventListener("click",()=>{
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
     });
 });
 </script>
