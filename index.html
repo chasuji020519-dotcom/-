@@ -21,6 +21,7 @@ body{
     overscroll-behavior-y:contain;
 }
 
+/* 카테고리 상세 모드 */
 body.category-mode{
     overflow:hidden;
 }
@@ -412,13 +413,88 @@ body.category-mode .nav{
     text-align:left;
 }
 
+.category-title-row{
+    display:flex;
+    align-items:center;
+    width:max-content;
+    margin-left:50%;
+    transform:translateX(-50%);
+    transition:
+        margin-left .75s cubic-bezier(.22,1,.36,1),
+        transform .75s cubic-bezier(.22,1,.36,1),
+        width .75s cubic-bezier(.22,1,.36,1);
+}
+
+.category-panel.opened .category-title-row{
+    width:100%;
+    margin-left:0;
+    transform:translateX(0);
+    justify-content:space-between;
+}
+
+.category-title-row .panel-title{
+    margin-bottom:0;
+}
+
+.category-back-btn{
+    display:none;
+    width:48px;
+    height:48px;
+    border:none;
+    background:transparent;
+    cursor:pointer;
+    position:relative;
+    flex-shrink:0;
+    transition:.3s ease;
+}
+
+.category-panel.opened .category-back-btn{
+    display:block;
+}
+
+.category-back-btn::before{
+    content:"";
+    position:absolute;
+    left:12px;
+    top:50%;
+    width:24px;
+    height:2px;
+    background:#111;
+    transform:translateY(-50%);
+}
+
+.category-back-btn span::before,
+.category-back-btn span::after{
+    content:"";
+    position:absolute;
+    left:12px;
+    width:14px;
+    height:2px;
+    background:#111;
+    transform-origin:left center;
+}
+
+.category-back-btn span::before{
+    top:18px;
+    transform:rotate(-45deg);
+}
+
+.category-back-btn span::after{
+    top:28px;
+    transform:rotate(45deg);
+}
+
+.category-back-btn:hover{
+    transform:translateX(-6px);
+}
+
 .category-head .panel-desc{
-    margin:0 auto;
+    margin:16px auto 0;
     transition:.65s cubic-bezier(.22,1,.36,1);
 }
 
 .category-panel.opened .category-head .panel-desc{
-    margin:0;
+    margin-left:0;
 }
 
 .category-small{
@@ -447,8 +523,7 @@ body.category-mode .nav{
     transform:translateX(0);
 }
 
-.category-btn,
-.category-back-btn{
+.category-btn{
     border:1px solid rgba(255,255,255,.75);
     outline:none;
     cursor:pointer;
@@ -472,8 +547,7 @@ body.category-mode .nav{
     transition:.35s cubic-bezier(.22,1,.36,1);
 }
 
-.category-btn:hover,
-.category-back-btn:hover{
+.category-btn:hover{
     background:linear-gradient(
         145deg,
         rgba(255,255,255,.9),
@@ -493,18 +567,6 @@ body.category-mode .nav{
     box-shadow:
         inset 0 1px 1px rgba(255,255,255,.18),
         0 14px 34px rgba(0,0,0,.22);
-}
-
-.category-back-btn{
-    display:none;
-    background:rgba(17,17,17,.9);
-    color:#fff;
-    border-color:rgba(255,255,255,.35);
-}
-
-.category-panel.opened .category-back-btn{
-    display:inline-flex;
-    align-items:center;
 }
 
 .category-preview{
@@ -773,11 +835,15 @@ body.category-mode .nav{
         transform:none;
     }
 
-    .category-btn,
-    .category-back-btn{
+    .category-btn{
         flex:0 0 auto;
         padding:12px 22px;
         font-size:15px;
+    }
+
+    .category-back-btn{
+        width:44px;
+        height:44px;
     }
 
     .category-preview{
@@ -960,11 +1026,21 @@ body.category-mode .nav{
         <div class="panel-inner">
 
             <div class="category-head">
-                <h2 class="panel-title">CATEGORY</h2>
+
+                <div class="category-title-row">
+                    <h2 class="panel-title">CATEGORY</h2>
+
+                    <button class="category-back-btn" aria-label="Back">
+                        <span></span>
+                    </button>
+                </div>
+
                 <p class="panel-desc">
                     작업 유형별로 포트폴리오를 볼 수 있도록 정리했습니다.
                 </p>
+
                 <p class="category-small">SELECT YOUR PROJECT</p>
+
             </div>
 
             <div class="category-buttons">
@@ -973,7 +1049,6 @@ body.category-mode .nav{
                 <button class="category-btn" data-tab="graphic">그래픽</button>
                 <button class="category-btn" data-tab="ui">UI</button>
                 <button class="category-btn" data-tab="artwork">아트웍</button>
-                <button class="category-back-btn">← Back</button>
             </div>
 
             <div class="category-preview">
@@ -1114,6 +1189,7 @@ const groups = document.querySelectorAll(".product-group");
 const productList = document.querySelector(".product-list");
 const backZone = document.querySelector(".back-home-zone");
 const categoryBackBtn = document.querySelector(".category-back-btn");
+const scrollArea = document.querySelector(".scroll-area");
 
 buttons.forEach(button=>{
     button.addEventListener("click",()=>{
@@ -1122,7 +1198,7 @@ buttons.forEach(button=>{
         document.body.classList.add("category-mode");
         categoryPanel.classList.add("opened");
 
-        document.querySelector(".scroll-area").scrollTo({
+        scrollArea.scrollTo({
             top:0,
             behavior:"smooth"
         });
