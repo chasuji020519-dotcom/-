@@ -21,7 +21,6 @@ body{
     overscroll-behavior-y:contain;
 }
 
-/* 카테고리 상세 모드 */
 body.category-mode{
     overflow:hidden;
 }
@@ -403,7 +402,6 @@ body.category-mode .nav{
     color:rgba(0,0,0,.52);
 }
 
-/* CATEGORY */
 .category-head{
     text-align:center;
     transition:.65s cubic-bezier(.22,1,.36,1);
@@ -419,10 +417,7 @@ body.category-mode .nav{
     width:max-content;
     margin-left:50%;
     transform:translateX(-50%);
-    transition:
-        margin-left .75s cubic-bezier(.22,1,.36,1),
-        transform .75s cubic-bezier(.22,1,.36,1),
-        width .75s cubic-bezier(.22,1,.36,1);
+    transition:.75s cubic-bezier(.22,1,.36,1);
 }
 
 .category-panel.opened .category-title-row{
@@ -473,7 +468,6 @@ body.category-mode .nav{
 
 .category-head .panel-desc{
     margin:16px auto 0;
-    transition:.65s cubic-bezier(.22,1,.36,1);
 }
 
 .category-panel.opened .category-head .panel-desc{
@@ -496,9 +490,7 @@ body.category-mode .nav{
     margin-top:34px;
     margin-left:50%;
     transform:translateX(-50%);
-    transition:
-        margin-left .75s cubic-bezier(.22,1,.36,1),
-        transform .75s cubic-bezier(.22,1,.36,1);
+    transition:.75s cubic-bezier(.22,1,.36,1);
 }
 
 .category-panel.opened .category-buttons{
@@ -512,44 +504,24 @@ body.category-mode .nav{
     cursor:pointer;
     padding:15px 30px;
     border-radius:999px;
-    background:linear-gradient(
-        145deg,
-        rgba(255,255,255,.72),
-        rgba(255,255,255,.28)
-    );
+    background:linear-gradient(145deg,rgba(255,255,255,.72),rgba(255,255,255,.28));
     color:#222;
     font-size:16px;
     font-weight:600;
     letter-spacing:-.03em;
     backdrop-filter:blur(18px);
     -webkit-backdrop-filter:blur(18px);
-    box-shadow:
-        inset 0 1px 1px rgba(255,255,255,.9),
-        inset 0 -8px 18px rgba(0,0,0,.04),
-        0 10px 28px rgba(0,0,0,.12);
+    box-shadow:inset 0 1px 1px rgba(255,255,255,.9),0 10px 28px rgba(0,0,0,.12);
     transition:.35s cubic-bezier(.22,1,.36,1);
 }
 
 .category-btn:hover{
-    background:linear-gradient(
-        145deg,
-        rgba(255,255,255,.9),
-        rgba(255,255,255,.42)
-    );
     transform:translateY(-3px);
-    box-shadow:
-        inset 0 1px 1px rgba(255,255,255,1),
-        inset 0 -8px 18px rgba(0,0,0,.05),
-        0 16px 38px rgba(0,0,0,.16);
 }
 
 .category-btn.active{
     background:rgba(17,17,17,.9);
     color:#fff;
-    border-color:rgba(255,255,255,.35);
-    box-shadow:
-        inset 0 1px 1px rgba(255,255,255,.18),
-        0 14px 34px rgba(0,0,0,.22);
 }
 
 .category-preview{
@@ -605,11 +577,7 @@ body.category-mode .nav{
     content:"";
     position:absolute;
     inset:0;
-    background:linear-gradient(
-        to top,
-        rgba(0,0,0,.48),
-        rgba(0,0,0,.04)
-    );
+    background:linear-gradient(to top,rgba(0,0,0,.48),rgba(0,0,0,.04));
 }
 
 .product-list{
@@ -617,7 +585,8 @@ body.category-mode .nav{
     margin-top:40px;
     min-height:620px;
 }
-    .category-panel:not(.opened) .product-list{
+
+.category-panel:not(.opened) .product-list{
     display:none;
 }
 
@@ -631,10 +600,7 @@ body.category-mode .nav{
     visibility:hidden;
     transform:translateY(32px);
     pointer-events:none;
-    transition:
-        opacity .45s ease,
-        transform .65s cubic-bezier(.22,1,.36,1),
-        visibility .45s ease;
+    transition:.65s cubic-bezier(.22,1,.36,1);
 }
 
 .product-group.active{
@@ -665,6 +631,7 @@ body.category-mode .nav{
     position:relative;
     background:#eee;
     box-shadow:0 20px 55px rgba(0,0,0,.09);
+    cursor:pointer;
 }
 
 .product-item img{
@@ -686,7 +653,7 @@ body.category-mode .nav{
     width:100%;
     padding:22px;
     color:#fff;
-    background:linear-gradient(to top, rgba(0,0,0,.58), transparent);
+    background:linear-gradient(to top,rgba(0,0,0,.58),transparent);
 }
 
 .product-info h4{
@@ -700,26 +667,19 @@ body.category-mode .nav{
     opacity:.8;
 }
 
-#contact{
-    display:none;
-}
-    /* 상세 패널 */
-
+/* 상세 패드창 */
 .detail-overlay{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.25);
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
-
+    z-index:5000;
     display:flex;
     align-items:flex-end;
-
+    background:rgba(0,0,0,.22);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
     opacity:0;
     visibility:hidden;
-
     transition:.35s ease;
-    z-index:3000;
 }
 
 .detail-overlay.show{
@@ -729,19 +689,13 @@ body.category-mode .nav{
 
 .detail-panel{
     width:100%;
-    height:90vh;
-
-    background:rgba(255,255,255,.92);
-
-    border-radius:40px 40px 0 0;
-
-    overflow:auto;
-
+    height:88vh;
+    background:rgba(255,255,255,.94);
+    border-radius:38px 38px 0 0;
+    overflow-y:auto;
     transform:translateY(100%);
     transition:.7s cubic-bezier(.22,1,.36,1);
-
-    box-shadow:
-    0 -30px 80px rgba(0,0,0,.15);
+    box-shadow:0 -30px 90px rgba(0,0,0,.18);
 }
 
 .detail-overlay.show .detail-panel{
@@ -750,20 +704,19 @@ body.category-mode .nav{
 
 .detail-close{
     position:sticky;
-    top:24px;
-    margin-left:auto;
-    margin-right:24px;
-
+    top:22px;
+    margin:22px 24px 0 auto;
     width:48px;
     height:48px;
-
     border:none;
-    background:rgba(255,255,255,.8);
-
     border-radius:50%;
-
+    background:rgba(255,255,255,.85);
+    box-shadow:0 8px 24px rgba(0,0,0,.1);
     cursor:pointer;
-    z-index:10;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:5;
 }
 
 .detail-close svg{
@@ -780,39 +733,74 @@ body.category-mode .nav{
 
 .detail-image{
     width:100%;
-    height:420px;
+    height:430px;
+    margin-top:-48px;
+    background:#eee;
 }
 
 .detail-image img{
     width:100%;
     height:100%;
     object-fit:cover;
+    display:block;
 }
 
 .detail-content{
-    max-width:1000px;
-    margin:auto;
-    padding:60px 40px 100px;
+    max-width:1050px;
+    margin:0 auto;
+    padding:58px 40px 100px;
 }
 
 .detail-category{
     display:block;
-    margin-bottom:14px;
+    margin-bottom:16px;
     font-size:12px;
-    letter-spacing:.15em;
+    letter-spacing:.16em;
     color:rgba(0,0,0,.45);
 }
 
 .detail-content h2{
     font-size:clamp(38px,5vw,72px);
-    letter-spacing:-.06em;
+    line-height:.95;
+    letter-spacing:-.07em;
 }
 
 .detail-content p{
+    max-width:720px;
     margin-top:24px;
     font-size:17px;
     line-height:1.8;
-    color:rgba(0,0,0,.65);
+    color:rgba(0,0,0,.62);
+}
+
+.detail-meta{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    margin-top:42px;
+}
+
+.detail-meta div{
+    padding:22px;
+    border-radius:24px;
+    background:rgba(255,255,255,.65);
+    border:1px solid rgba(0,0,0,.06);
+}
+
+.detail-meta span{
+    display:block;
+    font-size:12px;
+    color:rgba(0,0,0,.38);
+    margin-bottom:10px;
+}
+
+.detail-meta strong{
+    font-size:16px;
+    letter-spacing:-.03em;
+}
+
+#contact{
+    display:none;
 }
 
 @media(max-width:900px){
@@ -840,6 +828,10 @@ body.category-mode .nav{
 
     .product-list.all-active{
         min-height:0;
+    }
+
+    .detail-meta{
+        grid-template-columns:1fr;
     }
 }
 
@@ -969,6 +961,23 @@ body.category-mode .nav{
 
     .product-item{
         height:260px;
+    }
+
+    .detail-panel{
+        height:90vh;
+        border-radius:30px 30px 0 0;
+    }
+
+    .detail-image{
+        height:300px;
+    }
+
+    .detail-content{
+        padding:42px 24px 80px;
+    }
+
+    .detail-content p{
+        font-size:15px;
     }
 }
 </style>
@@ -1128,11 +1137,11 @@ body.category-mode .nav{
                     <h2 class="panel-title">CATEGORY</h2>
 
                     <button class="category-back-btn" aria-label="Back">
-    <svg viewBox="0 0 48 48" aria-hidden="true">
-        <path d="M28 12 L16 24 L28 36" />
-        <path d="M17 24 H38" />
-    </svg>
-</button>
+                        <svg viewBox="0 0 48 48" aria-hidden="true">
+                            <path d="M28 12 L16 24 L28 36" />
+                            <path d="M17 24 H38" />
+                        </svg>
+                    </button>
                 </div>
 
                 <p class="panel-desc">
@@ -1275,43 +1284,54 @@ body.category-mode .nav{
             </div>
 
         </div>
-<div class="detail-overlay">
 
+    </section>
+
+    <section id="contact"></section>
+
+</div>
+
+<div class="detail-overlay">
     <div class="detail-panel">
 
-        <button class="detail-close">
+        <button class="detail-close" aria-label="Close">
             <svg viewBox="0 0 24 24">
                 <path d="M6 6L18 18M18 6L6 18"/>
             </svg>
         </button>
 
         <div class="detail-image">
-            <img id="detailImg" src="">
+            <img id="detailImg" src="" alt="project detail image">
         </div>
 
         <div class="detail-content">
+            <span class="detail-category">PORTFOLIO PROJECT</span>
 
-            <span class="detail-category">
-                PORTFOLIO PROJECT
-            </span>
-
-            <h2 id="detailTitle">
-                Project Title
-            </h2>
+            <h2 id="detailTitle">Project Title</h2>
 
             <p id="detailDesc">
-                프로젝트 설명이 들어갑니다.
+                프로젝트 상세 설명이 들어갑니다.
             </p>
 
+            <div class="detail-meta">
+                <div>
+                    <span>TYPE</span>
+                    <strong id="detailType">Brand Design</strong>
+                </div>
+
+                <div>
+                    <span>ROLE</span>
+                    <strong>Design / Visual</strong>
+                </div>
+
+                <div>
+                    <span>YEAR</span>
+                    <strong>2026</strong>
+                </div>
+            </div>
         </div>
 
     </div>
-
-</div>
-    </section>
-
-    <section id="contact"></section>
-
 </div>
 
 <script>
@@ -1375,47 +1395,41 @@ backZone.addEventListener("click",()=>{
         behavior:"smooth"
     });
 });
-    const detailOverlay = document.querySelector(".detail-overlay");
-const detailClose = document.querySelector(".detail-close");
 
+/* 상품 상세 패널 */
+const detailOverlay = document.querySelector(".detail-overlay");
+const detailClose = document.querySelector(".detail-close");
 const detailImg = document.getElementById("detailImg");
 const detailTitle = document.getElementById("detailTitle");
 const detailDesc = document.getElementById("detailDesc");
+const detailType = document.getElementById("detailType");
 
 document.querySelectorAll(".product-item").forEach(item=>{
-
     item.addEventListener("click",()=>{
 
-        const img = item.querySelector("img").src;
+        const img = item.querySelector("img").getAttribute("src");
         const title = item.querySelector("h4").innerText;
-        const desc = item.querySelector("p").innerText;
+        const type = item.querySelector("p").innerText;
 
-        detailImg.src = img;
-        detailTitle.textContent = title;
+        detailImg.setAttribute("src", img);
+        detailTitle.innerText = title;
+        detailType.innerText = type;
 
-        detailDesc.textContent =
-        "프로젝트에 대한 상세 설명이 들어가는 영역입니다. 디자인 컨셉, 작업 과정, 사용 툴, 결과물 등을 자유롭게 작성할 수 있습니다.";
+        detailDesc.innerText =
+        "이 프로젝트는 브랜드의 분위기와 시각적 완성도를 높이기 위해 구성한 작업입니다. 메인 비주얼, 컬러감, 레이아웃, 디테일 요소를 중심으로 전체적인 무드를 정리했습니다.";
 
         detailOverlay.classList.add("show");
-        document.body.style.overflow="hidden";
     });
-
 });
 
 detailClose.addEventListener("click",()=>{
-
     detailOverlay.classList.remove("show");
-    document.body.style.overflow="";
 });
 
 detailOverlay.addEventListener("click",(e)=>{
-
     if(e.target === detailOverlay){
-
         detailOverlay.classList.remove("show");
-        document.body.style.overflow="";
     }
-
 });
 </script>
 
