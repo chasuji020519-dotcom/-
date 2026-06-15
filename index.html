@@ -29,7 +29,6 @@ body{
     z-index:1;
     background:#fff;
     overflow:hidden;
-    scroll-snap-align:start;
 }
 
 .nav{
@@ -191,7 +190,7 @@ body{
     to{transform:translateX(-50%)}
 }
 
-/* 스크롤 패널 영역 */
+/* 스크롤 영역 */
 .scroll-area{
     position:relative;
     z-index:5;
@@ -202,33 +201,35 @@ body{
 .about-panel,
 .category-panel{
     width:100%;
-    min-height:calc(100vh - 105px);
-    padding:70px 40px;
+    min-height:100vh;
+    padding:150px 40px 70px;
     background:rgba(255,255,255,.58);
     backdrop-filter:blur(32px);
     -webkit-backdrop-filter:blur(32px);
     border-top:1px solid rgba(255,255,255,.8);
     box-shadow:0 -30px 90px rgba(0,0,0,.12);
-
-    scroll-snap-align:end;
+    scroll-snap-align:start;
     scroll-snap-stop:always;
 }
 
-/* 소개패널 */
+/* ABOUT 패널 */
 .about-panel{
-    position:relative;
+    position:sticky;
+    top:0;
     z-index:1;
-    margin-top:105px;
 }
 
-/* 카테고리패널 */
+/* ABOUT가 단독으로 보이는 스크롤 여백 */
+.about-space{
+    height:100vh;
+    scroll-snap-align:start;
+}
+
+/* CATEGORY 패널 - 아래에서 올라와 덮는 패널 */
 .category-panel{
     position:relative;
     z-index:2;
-    margin-top:0;
     background:rgba(255,255,255,.68);
-    scroll-snap-align:start;
-    min-height:100vh;
 }
 
 .panel-inner{
@@ -470,15 +471,9 @@ body{
         height:180px;
     }
 
-    .about-panel{
-        min-height:calc(100vh - 86px);
-        margin-top:86px;
-        padding:42px 24px 48px;
-    }
-
+    .about-panel,
     .category-panel{
-        min-height:100vh;
-        padding:42px 24px 48px;
+        padding:120px 24px 48px;
     }
 
     .panel-title{
@@ -663,6 +658,8 @@ body{
         </div>
 
     </section>
+
+    <div class="about-space"></div>
 
     <section class="category-panel" id="category">
 
