@@ -7,13 +7,18 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+
+html{
+    scroll-behavior:smooth;
+    scroll-snap-type:y proximity;
+}
 
 body{
     background:#fff;
     font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;
     color:#111;
     overflow-x:hidden;
+    overscroll-behavior:y contain;
 }
 
 /* 메인 고정 */
@@ -203,9 +208,12 @@ body{
     -webkit-backdrop-filter:blur(32px);
     border-top:1px solid rgba(255,255,255,.8);
     box-shadow:0 -30px 90px rgba(0,0,0,.12);
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+    transition:transform .8s cubic-bezier(.22,1,.36,1);
 }
 
-/* 소개 패널: 상단 메뉴 보이게 */
+/* 소개 패널 */
 .about-panel{
     position:sticky;
     top:105px;
@@ -213,17 +221,16 @@ body{
     min-height:calc(100vh - 105px);
 }
 
-/* 소개 패널이 한 번 멈춰있는 공간 */
+/* 소개 패널 멈춤 공간 */
 .about-hold{
     height:100vh;
 }
 
-/* 카테고리 패널: 아래에서 올라와 소개를 덮음 */
+/* 카테고리 패널 */
 .category-panel{
     position:relative;
     z-index:3;
     min-height:100vh;
-    margin-top:0;
     background:rgba(255,255,255,.68);
 }
 
@@ -350,43 +357,52 @@ body{
 
 /* CATEGORY */
 .category-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-    gap:30px;
-    margin-bottom:34px;
+    text-align:center;
+    margin-bottom:42px;
+}
+
+.category-head .panel-desc{
+    margin:0 auto;
 }
 
 .category-small{
+    margin-top:16px;
     font-size:13px;
     color:rgba(0,0,0,.45);
     letter-spacing:.08em;
 }
 
 .category-buttons{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:14px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:18px;
+    flex-wrap:wrap;
+    margin-top:44px;
 }
 
 .category-btn{
-    min-height:250px;
+    width:250px;
+    height:210px;
     padding:24px;
     border-radius:30px;
-    text-decoration:none;
-    color:#111;
-    background:rgba(255,255,255,.44);
     border:1px solid rgba(255,255,255,.78);
+    background:rgba(255,255,255,.44);
     box-shadow:0 18px 45px rgba(0,0,0,.07);
     display:flex;
     flex-direction:column;
     justify-content:space-between;
+    text-align:left;
+    color:#111;
+    cursor:pointer;
     transition:.35s ease;
 }
 
-.category-btn:hover{
+.category-btn:hover,
+.category-btn.active{
     transform:translateY(-8px);
-    background:rgba(255,255,255,.75);
+    background:rgba(255,255,255,.82);
+    border-color:rgba(0,0,0,.12);
 }
 
 .category-btn span{
@@ -406,6 +422,76 @@ body{
     color:rgba(0,0,0,.52);
 }
 
+/* 클릭하면 펼쳐지는 작업 영역 */
+.project-list{
+    margin-top:46px;
+}
+
+.project-group{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+
+    max-height:0;
+    opacity:0;
+    overflow:hidden;
+    transform:translateY(20px);
+    transition:
+        max-height .75s cubic-bezier(.22,1,.36,1),
+        opacity .45s ease,
+        transform .55s cubic-bezier(.22,1,.36,1);
+}
+
+.project-group.active{
+    max-height:900px;
+    opacity:1;
+    transform:translateY(0);
+}
+
+.work-item{
+    height:230px;
+    border-radius:26px;
+    overflow:hidden;
+    background:rgba(255,255,255,.5);
+    border:1px solid rgba(255,255,255,.78);
+    box-shadow:0 16px 38px rgba(0,0,0,.06);
+    position:relative;
+}
+
+.work-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    filter:saturate(.9) contrast(1.04);
+    transition:.45s ease;
+}
+
+.work-item:hover img{
+    transform:scale(1.06);
+}
+
+.work-info{
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    padding:18px;
+    background:linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0));
+    color:#fff;
+}
+
+.work-info h4{
+    font-size:18px;
+    letter-spacing:-.04em;
+}
+
+.work-info p{
+    margin-top:5px;
+    font-size:12px;
+    opacity:.78;
+}
+
 /* 반응형 */
 @media(max-width:900px){
     .about-layout{
@@ -421,7 +507,7 @@ body{
         grid-template-columns:1fr;
     }
 
-    .category-buttons{
+    .project-group{
         grid-template-columns:repeat(2,1fr);
     }
 }
@@ -502,20 +588,25 @@ body{
         font-size:21px;
     }
 
-    .category-head{
-        display:block;
-    }
-
-    .category-small{
-        margin-top:18px;
-    }
-
     .category-buttons{
-        grid-template-columns:1fr;
+        justify-content:flex-start;
+        flex-wrap:nowrap;
+        overflow-x:auto;
+        padding-bottom:10px;
     }
 
     .category-btn{
-        min-height:175px;
+        width:220px;
+        height:180px;
+        flex:0 0 auto;
+    }
+
+    .project-group{
+        grid-template-columns:1fr;
+    }
+
+    .work-item{
+        height:220px;
     }
 }
 </style>
@@ -667,41 +758,138 @@ body{
         <div class="panel-inner">
 
             <div class="category-head">
-                <div>
-                    <h2 class="panel-title">CATEGORY</h2>
-                    <p class="panel-desc">
-                        작업 유형별로 포트폴리오를 볼 수 있도록 정리했습니다.
-                    </p>
-                </div>
-
+                <h2 class="panel-title">CATEGORY</h2>
+                <p class="panel-desc">
+                    작업 유형별로 포트폴리오를 볼 수 있도록 정리했습니다.
+                </p>
                 <p class="category-small">SELECT YOUR PROJECT</p>
             </div>
 
             <div class="category-buttons">
 
-                <a href="#" class="category-btn">
+                <button class="category-btn active" data-tab="brand">
                     <span>01</span>
                     <strong>Brand<br>Design</strong>
                     <p>브랜드 로고, 무드, 아이덴티티 작업</p>
-                </a>
+                </button>
 
-                <a href="#" class="category-btn">
+                <button class="category-btn" data-tab="graphic">
                     <span>02</span>
                     <strong>Graphic<br>Design</strong>
                     <p>포스터, 배너, 콘텐츠 디자인</p>
-                </a>
+                </button>
 
-                <a href="#" class="category-btn">
+                <button class="category-btn" data-tab="ui">
                     <span>03</span>
                     <strong>UI<br>Concept</strong>
                     <p>웹사이트, 모바일 화면 구성</p>
-                </a>
+                </button>
 
-                <a href="#" class="category-btn">
+                <button class="category-btn" data-tab="artwork">
                     <span>04</span>
                     <strong>Visual<br>Artwork</strong>
                     <p>분위기 있는 비주얼 이미지 작업</p>
-                </a>
+                </button>
+
+            </div>
+
+            <div class="project-list">
+
+                <div class="project-group active" data-category="brand">
+                    <div class="work-item">
+                        <img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg">
+                        <div class="work-info">
+                            <h4>Brand Project 01</h4>
+                            <p>Logo / Identity</p>
+                        </div>
+                    </div>
+                    <div class="work-item">
+                        <img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg">
+                        <div class="work-info">
+                            <h4>Brand Project 02</h4>
+                            <p>Mood / Package</p>
+                        </div>
+                    </div>
+                    <div class="work-item">
+                        <img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg">
+                        <div class="work-info">
+                            <h4>Brand Project 03</h4>
+                            <p>Visual System</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-group" data-category="graphic">
+                    <div class="work-item">
+                        <img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg">
+                        <div class="work-info">
+                            <h4>Poster Design</h4>
+                            <p>Graphic / Layout</p>
+                        </div>
+                    </div>
+                    <div class="work-item">
+                        <img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg">
+                        <div class="work-info">
+                            <h4>Banner Design</h4>
+                            <p>Contents / Promotion</p>
+                        </div>
+                    </div>
+                    <div class="work-item">
+                        <img src="https://i.pinimg.com/736x/ff/0d/2a/ff0d2a921264637b1268a56fae27867c.jpg">
+                        <div class="work-info">
+                            <h4>Editorial Design</h4>
+                            <p>Print / Visual</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-group" data-category="ui">
+                    <div class="work-item">
+                        <img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg">
+                        <div class="work-info">
+                            <h4>Website Concept</h4>
+                            <p>Web / UI</p>
+                        </div>
+                    </div>
+                    <div class="work-item">
+                        <img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg">
+                        <div class="work-info">
+                            <h4>Mobile UI</h4>
+                            <p>App / Interface</p>
+                        </div>
+                    </div>
+                    <div class="work-item">
+                        <img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg">
+                        <div class="work-info">
+                            <h4>Landing Page</h4>
+                            <p>Web Design</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-group" data-category="artwork">
+                    <div class="work-item">
+                        <img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg">
+                        <div class="work-info">
+                            <h4>Visual Artwork 01</h4>
+                            <p>Image / Mood</p>
+                        </div>
+                    </div>
+                    <div class="work-item">
+                        <img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg">
+                        <div class="work-info">
+                            <h4>Visual Artwork 02</h4>
+                            <p>Art Direction</p>
+                        </div>
+                    </div>
+                    <div class="work-item">
+                        <img src="https://i.pinimg.com/736x/ff/0d/2a/ff0d2a921264637b1268a56fae27867c.jpg">
+                        <div class="work-info">
+                            <h4>Visual Artwork 03</h4>
+                            <p>Concept Visual</p>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
@@ -710,6 +898,23 @@ body{
     </section>
 
 </div>
+
+<script>
+const buttons = document.querySelectorAll(".category-btn");
+const groups = document.querySelectorAll(".project-group");
+
+buttons.forEach(button=>{
+    button.addEventListener("click",()=>{
+        const target = button.dataset.tab;
+
+        buttons.forEach(btn=>btn.classList.remove("active"));
+        groups.forEach(group=>group.classList.remove("active"));
+
+        button.classList.add("active");
+        document.querySelector(`[data-category="${target}"]`).classList.add("active");
+    });
+});
+</script>
 
 </body>
 </html>
