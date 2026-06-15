@@ -215,25 +215,18 @@ body{
 
 .about-panel,
 .category-panel{
-    position:relative;
-    z-index:3;
-    min-height:calc(100vh - 105px);
-    background:rgba(255,255,255,.72);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-    .category-panel .panel-inner{
     width:100%;
-    transform:translateY(80px);
-}
-    .category-panel.opened .panel-inner{
-    transform:translateY(0);
-    transition:.7s cubic-bezier(.22,1,.36,1);
+    padding:70px 40px;
+    background:rgba(255,255,255,.58);
+    backdrop-filter:blur(32px);
+    -webkit-backdrop-filter:blur(32px);
+    border-top:1px solid rgba(255,255,255,.8);
+    box-shadow:0 -30px 90px rgba(0,0,0,.12);
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
 }
 
-/* 소개 패널: 상단 여백 있는 카드형 */
+/* 소개 패널 */
 .about-panel{
     position:sticky;
     top:105px;
@@ -241,10 +234,10 @@ body{
     min-height:calc(100vh - 105px);
 }
 
-/* 한 번 스와이프용: 높이 거의 없게 */
 .about-hold{
-    height:calc(100vh - 105px);
-    scroll-snap-align:none;
+    height:100vh;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
 }
 
 /* 카테고리 패널 */
@@ -255,6 +248,7 @@ body{
     background:rgba(255,255,255,.72);
     display:flex;
     align-items:center;
+    justify-content:center;
 }
 
 .category-panel.opened{
@@ -265,6 +259,15 @@ body{
     max-width:1180px;
     width:100%;
     margin:0 auto;
+}
+
+.category-panel .panel-inner{
+    transform:translateY(40px);
+    transition:.75s cubic-bezier(.22,1,.36,1);
+}
+
+.category-panel.opened .panel-inner{
+    transform:translateY(0);
 }
 
 .about-layout{
@@ -446,10 +449,20 @@ body{
     color:#fff;
 }
 
+/* 클릭 전에는 상품 영역이 공간을 차지하지 않게 */
 .product-list{
     position:relative;
+    margin-top:0;
+    min-height:0;
+    height:0;
+    overflow:hidden;
+}
+
+.category-panel.opened .product-list{
     margin-top:60px;
     min-height:620px;
+    height:auto;
+    overflow:visible;
 }
 
 .product-group{
@@ -475,7 +488,6 @@ body{
     pointer-events:auto;
 }
 
-/* 전체 클릭 시 빈 공간 안 생기게 */
 .product-list.all-active{
     min-height:0;
 }
@@ -492,7 +504,7 @@ body{
 
 .product-item{
     height:310px;
-    border-radius:10px;
+    border-radius:30px;
     overflow:hidden;
     position:relative;
     background:#eee;
@@ -555,7 +567,7 @@ body{
         gap:20px;
     }
 
-    .product-list{
+    .category-panel.opened .product-list{
         min-height:900px;
     }
 
@@ -613,14 +625,22 @@ body{
         min-height:calc(100vh - 86px);
         padding:42px 24px 48px;
     }
+
     .about-hold{
-
-        height:calc(100vh - 86px);
-
+        height:100vh;
     }
+
     .category-panel{
         min-height:calc(100vh - 86px);
         padding:42px 24px 48px;
+    }
+
+    .category-panel .panel-inner{
+        transform:translateY(20px);
+    }
+
+    .category-panel.opened .panel-inner{
+        transform:translateY(0);
     }
 
     .panel-title{
@@ -654,7 +674,7 @@ body{
         font-size:15px;
     }
 
-    .product-list{
+    .category-panel.opened .product-list{
         margin-top:34px;
         min-height:1120px;
     }
