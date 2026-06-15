@@ -197,7 +197,7 @@ body{
 .about-panel,
 .category-panel{
     width:100%;
-    min-height:100vh;
+    min-height:calc(100vh - 110px);
     padding:70px 40px;
     background:rgba(255,255,255,.58);
     backdrop-filter:blur(32px);
@@ -206,10 +206,10 @@ body{
     box-shadow:0 -30px 90px rgba(0,0,0,.12);
 }
 
-/* ABOUT 패널 */
+/* ABOUT 패널 - 하단에서 걸리는 느낌 */
 .about-panel{
     position:sticky;
-    top:0;
+    top:110px;
     z-index:1;
 }
 
@@ -461,8 +461,10 @@ body{
     }
 
     .about-panel,
+    top:86px;
+    }
     .category-panel{
-        min-height:100vh;
+        min-height:calc(100vh - 86px);
         padding:42px 24px 48px;
     }
 
