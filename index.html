@@ -385,12 +385,16 @@ body{
     flex-wrap:wrap;
     width:fit-content;
     margin:34px auto 0;
-    transition:.55s cubic-bezier(.22,1,.36,1);
+    transform:translateX(0);
+    transition:
+        margin .7s cubic-bezier(.22,1,.36,1),
+        transform .7s cubic-bezier(.22,1,.36,1);
 }
 
 .category-panel.opened .category-buttons{
     margin-left:0;
     margin-right:auto;
+    transform:translateX(0);
 }
 
 .category-btn{
@@ -439,6 +443,7 @@ body{
     max-height:1200px;
     opacity:1;
     transform:translateY(0);
+    transition-delay:.18s;
 }
 
 .product-item{
