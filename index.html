@@ -1019,7 +1019,7 @@ body.logged-in #loginBox{display:none}
 </style>
 </head>
 
-<body>
+<body class="light-mode">
 
 <div class="back-home-zone"></div>
 
@@ -1231,35 +1231,20 @@ const SITE_TEXT={
 };
 
 /* 여기서 라이트/다크 색 변경 가능 */
-const THEME={
-  light:{
-    bg:"#ffffff",
-    text:"#111111",
-    sub:"#8a8a8a",
-    panelBg:"rgba(255,255,255,.72)",
-    panelBorder:"rgba(255,255,255,.8)",
-    cardBg:"rgba(255,255,255,.48)",
-    cardBorder:"rgba(0,0,0,.08)",
-    boxText:"rgba(0,0,0,.55)",
-    buttonBg:"#111111",
-    buttonText:"#ffffff",
-    marqueeGradient:"linear-gradient(to bottom,rgba(255,255,255,1) 0%,rgba(255,255,255,.65) 18%,rgba(255,255,255,.12) 42%,rgba(0,0,0,.18) 100%)"
-  },
-  dark:{
-    bg:"#111111",
-    text:"#f5f5f5",
-    sub:"rgba(255,255,255,.55)",
-    panelBg:"rgba(20,20,20,.78)",
-    panelBorder:"rgba(255,255,255,.12)",
-    cardBg:"rgba(255,255,255,.08)",
-    cardBorder:"rgba(255,255,255,.14)",
-    boxText:"rgba(255,255,255,.58)",
-    buttonBg:"#ffffff",
-    buttonText:"#111111",
-    marqueeGradient:"linear-gradient(to bottom,rgba(17,17,17,1) 0%,rgba(17,17,17,.7) 18%,rgba(17,17,17,.18) 42%,rgba(255,255,255,.1) 100%)"
-  }
-};
+const darkToggle=document.getElementById("darkToggle");
 
+darkToggle.innerText="◐";
+
+darkToggle.addEventListener("click",()=>{
+
+  document.body.classList.toggle("dark-mode");
+
+  const isDark=document.body.classList.contains("dark-mode");
+
+  darkToggle.innerText=isDark ? "☀" : "◐";
+
+});
+  
 function setTheme(mode){
   const t=THEME[mode];
   const root=document.documentElement;
