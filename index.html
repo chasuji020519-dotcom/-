@@ -9,1059 +9,219 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-
 html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
-
-body{
-    background:#fff;
-    font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;
-    color:#111;
-    overflow-x:hidden;
-    overscroll-behavior-y:contain;
-}
-
+body{background:#fff;font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;color:#111;overflow-x:hidden;overscroll-behavior-y:contain}
 body.category-mode{overflow:hidden}
+body.category-mode .main-fixed,body.category-mode .about-panel,body.category-mode .about-hold{display:none}
+body.category-mode .scroll-area{position:fixed;inset:0;z-index:1000;margin-top:0;overflow-y:auto;background:#fff}
+body.category-mode .category-panel{min-height:100vh;padding-top:70px;box-shadow:none;border-top:none;scroll-snap-align:none}
 
-body.category-mode .main-fixed,
-body.category-mode .about-panel,
-body.category-mode .about-hold{display:none}
-
-body.category-mode .scroll-area{
-    position:fixed;
-    inset:0;
-    z-index:1000;
-    margin-top:0;
-    overflow-y:auto;
-    background:#fff;
-}
-
-body.category-mode .category-panel{
-    min-height:100vh;
-    padding-top:70px;
-    box-shadow:none;
-    border-top:none;
-    scroll-snap-align:none;
-}
-
-.back-home-zone{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:105px;
-    z-index:900;
-    pointer-events:none;
-    cursor:pointer;
-}
-
+.back-home-zone{position:fixed;top:0;left:0;width:100%;height:105px;z-index:900;pointer-events:none;cursor:pointer}
 .back-home-zone.active{pointer-events:auto}
 body.category-mode .back-home-zone{display:none}
 
-.main-fixed{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100vh;
-    z-index:1;
-    background:#fff;
-    overflow:hidden;
-    scroll-snap-align:start;
-}
-
-.nav{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:32px 40px;
-    z-index:999;
-}
-
+.main-fixed{position:fixed;inset:0;width:100%;height:100vh;z-index:1;background:#fff;overflow:hidden;scroll-snap-align:start}
+.nav{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:32px 40px;z-index:999}
 body.category-mode .nav{display:none}
+.logo{font-size:24px;font-weight:700;letter-spacing:.12em;color:#111;text-decoration:none}
+.menu{display:flex;gap:24px}
+.menu a{text-decoration:none;color:#111;font-size:16px;font-weight:400;letter-spacing:.08em}
 
-.logo{
-    font-size:24px;
-    font-weight:700;
-    letter-spacing:.12em;
-    color:#111;
-    text-decoration:none;
-}
-
-.menu{
-    display:flex;
-    gap:24px;
-}
-
-.menu a{
-    text-decoration:none;
-    color:#111;
-    font-size:16px;
-    font-weight:400;
-    letter-spacing:.08em;
-}
-
-.hero{
-    width:100%;
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    padding:90px 0 0;
-}
-
-.hero-content{
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    width:100%;
-    padding:0 40px;
-}
-
-.title{
-    width:min(1500px,100%);
-    display:grid;
-    grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
-    align-items:center;
-    font-size:clamp(70px,7.5vw,130px);
-    font-weight:700;
-    letter-spacing:-0.08em;
-    line-height:1;
-}
-
-.fixed{
-    white-space:nowrap;
-    text-align:center;
-    padding:0 .2em;
-}
-
-.box{
-    width:100%;
-    height:1.1em;
-    overflow:hidden;
-}
-
-.slider{
-    display:flex;
-    flex-direction:column;
-    animation:slideText 14s infinite ease-in-out;
-}
-
-.word{
-    height:1.1em;
-    line-height:1.1em;
-    white-space:nowrap;
-}
-
+.hero{width:100%;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:90px 0 0}
+.hero-content{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;width:100%;padding:0 40px}
+.title{width:min(1500px,100%);display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;font-size:clamp(70px,7.5vw,130px);font-weight:700;letter-spacing:-0.08em;line-height:1}
+.fixed{white-space:nowrap;text-align:center;padding:0 .2em}
+.box{width:100%;height:1.1em;overflow:hidden}
+.slider{display:flex;flex-direction:column;animation:slideText 14s infinite ease-in-out}
+.word{height:1.1em;line-height:1.1em;white-space:nowrap}
 .left .word{text-align:right;padding-right:.08em}
 .right .word{text-align:left;padding-left:.08em}
-
-.subtitle{
-    margin-top:30px;
-    font-size:18px;
-    color:#8a8a8a;
-    letter-spacing:-0.02em;
-}
-
+.subtitle{margin-top:30px;font-size:18px;color:#8a8a8a;letter-spacing:-0.02em}
 @keyframes slideText{
-    0%,16%{transform:translateY(0)}
-    22%,38%{transform:translateY(-1.1em)}
-    44%,60%{transform:translateY(-2.2em)}
-    66%,82%{transform:translateY(-3.3em)}
-    88%,100%{transform:translateY(-4.4em)}
+0%,16%{transform:translateY(0)}
+22%,38%{transform:translateY(-1.1em)}
+44%,60%{transform:translateY(-2.2em)}
+66%,82%{transform:translateY(-3.3em)}
+88%,100%{transform:translateY(-4.4em)}
 }
 
-.image-marquee{
-    position:relative;
-    width:100%;
-    overflow:hidden;
-}
+.image-marquee{position:relative;width:100%;overflow:hidden}
+.image-marquee::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(to bottom,rgba(255,255,255,1) 0%,rgba(255,255,255,.65) 18%,rgba(255,255,255,.12) 42%,rgba(0,0,0,.18) 100%)}
+.marquee-track{display:flex;width:max-content;animation:marquee 38s linear infinite}
+.project{flex-shrink:0;width:300px;height:200px;overflow:hidden}
+.project img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.9) contrast(1.05)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-.image-marquee::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    z-index:2;
-    pointer-events:none;
-    background:linear-gradient(
-        to bottom,
-        rgba(255,255,255,1) 0%,
-        rgba(255,255,255,.65) 18%,
-        rgba(255,255,255,.12) 42%,
-        rgba(0,0,0,.18) 100%
-    );
-}
-
-.marquee-track{
-    display:flex;
-    width:max-content;
-    animation:marquee 38s linear infinite;
-}
-
-.project{
-    flex-shrink:0;
-    width:300px;
-    height:200px;
-    overflow:hidden;
-}
-
-.project img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-    filter:saturate(.9) contrast(1.05);
-}
-
-@keyframes marquee{
-    from{transform:translateX(0)}
-    to{transform:translateX(-50%)}
-}
-
-.scroll-area{
-    position:relative;
-    z-index:5;
-    margin-top:100vh;
-}
-
-.about-panel,
-.category-panel{
-    width:100%;
-    padding:70px 40px;
-    background:rgba(255,255,255,.58);
-    backdrop-filter:blur(32px);
-    -webkit-backdrop-filter:blur(32px);
-    border-top:1px solid rgba(255,255,255,.8);
-    box-shadow:0 -30px 90px rgba(0,0,0,.12);
-    scroll-snap-align:start;
-    scroll-snap-stop:always;
-}
-
-.about-panel{
-    position:sticky;
-    top:105px;
-    z-index:1;
-    min-height:calc(100vh - 105px);
-}
-
-.about-hold{
-    height:calc(100vh - 105px);
-    scroll-snap-align:none;
-}
-
-.category-panel{
-    position:relative;
-    z-index:3;
-    min-height:calc(100vh - 105px);
-    background:rgba(255,255,255,.72);
-    display:flex;
-    align-items:center;
-}
-
+.scroll-area{position:relative;z-index:5;margin-top:100vh}
+.about-panel,.category-panel{width:100%;padding:70px 40px;background:rgba(255,255,255,.58);backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);border-top:1px solid rgba(255,255,255,.8);box-shadow:0 -30px 90px rgba(0,0,0,.12);scroll-snap-align:start;scroll-snap-stop:always}
+.about-panel{position:sticky;top:105px;z-index:1;min-height:calc(100vh - 105px)}
+.about-hold{height:calc(100vh - 105px);scroll-snap-align:none}
+.category-panel{position:relative;z-index:3;min-height:calc(100vh - 105px);background:rgba(255,255,255,.72);display:flex;align-items:center}
 .category-panel.opened{align-items:flex-start}
+.panel-inner{max-width:1180px;width:100%;margin:0 auto}
 
-.panel-inner{
-    max-width:1180px;
-    width:100%;
-    margin:0 auto;
-}
-
-.about-layout{
-    display:grid;
-    grid-template-columns:300px 1fr;
-    gap:48px;
-    align-items:start;
-}
-
-.profile-card{
-    border-radius:16px;
-    overflow:hidden;
-    background:rgba(255,255,255,.45);
-    border:1px solid rgba(255,255,255,.75);
-    box-shadow:0 18px 50px rgba(0,0,0,.08);
-}
-
-.profile-img{
-    width:100%;
-    height:360px;
-    background:#eee;
-    overflow:hidden;
-}
-
-.profile-img img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-}
-
+.about-layout{display:grid;grid-template-columns:300px 1fr;gap:48px;align-items:start}
+.profile-card{border-radius:16px;overflow:hidden;background:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.75);box-shadow:0 18px 50px rgba(0,0,0,.08)}
+.profile-img{width:100%;height:360px;background:#eee;overflow:hidden}
+.profile-img img{width:100%;height:100%;object-fit:cover;display:block}
 .profile-info{padding:22px}
+.profile-info h3{font-size:22px;letter-spacing:-.04em;margin-bottom:8px}
+.profile-info p{font-size:13px;line-height:1.65;color:rgba(0,0,0,.55)}
+.panel-title{font-size:clamp(28px,4vw,60px);line-height:.95;letter-spacing:-.075em;margin-bottom:16px}
+.panel-desc{max-width:650px;font-size:16px;line-height:1.75;color:rgba(0,0,0,.58)}
+.keyword-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.keyword{padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.48);border:1px solid rgba(0,0,0,.08);font-size:12px;color:rgba(0,0,0,.62)}
+.panel-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+.card{min-height:145px;padding:22px;border-radius:24px;background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.7);box-shadow:0 14px 40px rgba(0,0,0,.06)}
+.card span{display:block;font-size:11px;color:rgba(0,0,0,.38);margin-bottom:22px}
+.card h3{font-size:21px;letter-spacing:-.04em;margin-bottom:10px}
+.card p{font-size:13px;line-height:1.6;color:rgba(0,0,0,.52)}
 
-.profile-info h3{
-    font-size:22px;
-    letter-spacing:-.04em;
-    margin-bottom:8px;
-}
-
-.profile-info p{
-    font-size:13px;
-    line-height:1.65;
-    color:rgba(0,0,0,.55);
-}
-
-.panel-title{
-    font-size:clamp(28px,4vw,60px);
-    line-height:.95;
-    letter-spacing:-.075em;
-    margin-bottom:16px;
-}
-
-.panel-desc{
-    max-width:650px;
-    font-size:16px;
-    line-height:1.75;
-    color:rgba(0,0,0,.58);
-}
-
-.keyword-row{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:24px;
-}
-
-.keyword{
-    padding:8px 14px;
-    border-radius:999px;
-    background:rgba(255,255,255,.48);
-    border:1px solid rgba(0,0,0,.08);
-    font-size:12px;
-    color:rgba(0,0,0,.62);
-}
-
-.panel-cards{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-    margin-top:28px;
-}
-
-.card{
-    min-height:145px;
-    padding:22px;
-    border-radius:24px;
-    background:rgba(255,255,255,.42);
-    border:1px solid rgba(255,255,255,.7);
-    box-shadow:0 14px 40px rgba(0,0,0,.06);
-}
-
-.card span{
-    display:block;
-    font-size:11px;
-    color:rgba(0,0,0,.38);
-    margin-bottom:22px;
-}
-
-.card h3{
-    font-size:21px;
-    letter-spacing:-.04em;
-    margin-bottom:10px;
-}
-
-.card p{
-    font-size:13px;
-    line-height:1.6;
-    color:rgba(0,0,0,.52);
-}
-
-.category-head{
-    text-align:center;
-    transition:.65s cubic-bezier(.22,1,.36,1);
-}
-
+.category-head{text-align:center;transition:.65s cubic-bezier(.22,1,.36,1)}
 .category-panel.opened .category-head{text-align:left}
-
-.category-title-row{
-    display:flex;
-    align-items:center;
-    width:max-content;
-    margin-left:50%;
-    transform:translateX(-50%);
-    transition:.75s cubic-bezier(.22,1,.36,1);
-}
-
-.category-panel.opened .category-title-row{
-    width:100%;
-    margin-left:0;
-    transform:translateX(0);
-    justify-content:space-between;
-}
-
+.category-title-row{display:flex;align-items:center;width:max-content;margin-left:50%;transform:translateX(-50%);transition:.75s cubic-bezier(.22,1,.36,1)}
+.category-panel.opened .category-title-row{width:100%;margin-left:0;transform:translateX(0);justify-content:space-between}
 .category-title-row .panel-title{margin-bottom:0}
-
-.category-actions{
-    display:none;
-    align-items:center;
-    gap:10px;
-}
-
+.category-actions{display:none;align-items:center;gap:10px}
 .category-panel.opened .category-actions{display:flex}
-
-.category-back-btn,
-.category-add-btn{
-    width:56px;
-    height:56px;
-    border:none;
-    background:transparent;
-    cursor:pointer;
-    flex-shrink:0;
-    transition:.3s ease;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.category-add-btn{
-    border-radius:50%;
-    background:rgba(17,17,17,.92);
-    color:#fff;
-    font-size:34px;
-    font-weight:200;
-    line-height:1;
-    box-shadow:0 12px 30px rgba(0,0,0,.16);
-}
-
-.category-back-btn svg{
-    width:44px;
-    height:44px;
-    overflow:visible;
-}
-
-.category-back-btn path{
-    fill:none;
-    stroke:#111;
-    stroke-width:3.2;
-    stroke-linecap:square;
-    stroke-linejoin:miter;
-}
-
+.category-back-btn,.category-add-btn{width:56px;height:56px;border:none;background:transparent;cursor:pointer;flex-shrink:0;transition:.3s ease;display:flex;align-items:center;justify-content:center}
+.category-add-btn{border-radius:50%;background:rgba(17,17,17,.92);color:#fff;font-size:34px;font-weight:200;line-height:1;box-shadow:0 12px 30px rgba(0,0,0,.16)}
+.category-back-btn svg{width:44px;height:44px;overflow:visible}
+.category-back-btn path{fill:none;stroke:#111;stroke-width:3.2;stroke-linecap:square;stroke-linejoin:miter}
 .category-back-btn:hover{transform:translateX(-4px)}
 .category-add-btn:hover{transform:translateY(-3px)}
-
 .category-head .panel-desc{margin:16px auto 0}
 .category-panel.opened .category-head .panel-desc{margin-left:0}
+.category-small{margin-top:16px;font-size:13px;color:rgba(0,0,0,.45);letter-spacing:.08em}
 
-.category-small{
-    margin-top:16px;
-    font-size:13px;
-    color:rgba(0,0,0,.45);
-    letter-spacing:.08em;
-}
-
-.category-buttons{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    flex-wrap:wrap;
-    width:max-content;
-    margin-top:34px;
-    margin-left:50%;
-    transform:translateX(-50%);
-    transition:.75s cubic-bezier(.22,1,.36,1);
-}
-
-.category-panel.opened .category-buttons{
-    margin-left:0;
-    transform:translateX(0);
-}
-
-.category-btn{
-    border:1px solid rgba(255,255,255,.75);
-    outline:none;
-    cursor:pointer;
-    padding:15px 30px;
-    border-radius:999px;
-    background:linear-gradient(145deg,rgba(255,255,255,.72),rgba(255,255,255,.28));
-    color:#222;
-    font-size:16px;
-    font-weight:600;
-    letter-spacing:-.03em;
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-    box-shadow:inset 0 1px 1px rgba(255,255,255,.9),0 10px 28px rgba(0,0,0,.12);
-    transition:.35s cubic-bezier(.22,1,.36,1);
-}
-
+.category-buttons{display:flex;align-items:center;gap:12px;flex-wrap:wrap;width:max-content;margin-top:34px;margin-left:50%;transform:translateX(-50%);transition:.75s cubic-bezier(.22,1,.36,1)}
+.category-panel.opened .category-buttons{margin-left:0;transform:translateX(0)}
+.category-btn{border:1px solid rgba(255,255,255,.75);outline:none;cursor:pointer;padding:15px 30px;border-radius:999px;background:linear-gradient(145deg,rgba(255,255,255,.72),rgba(255,255,255,.28));color:#222;font-size:16px;font-weight:600;letter-spacing:-.03em;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:inset 0 1px 1px rgba(255,255,255,.9),0 10px 28px rgba(0,0,0,.12);transition:.35s cubic-bezier(.22,1,.36,1)}
 .category-btn:hover{transform:translateY(-3px)}
+.category-btn.active{background:rgba(17,17,17,.9);color:#fff}
 
-.category-btn.active{
-    background:rgba(17,17,17,.9);
-    color:#fff;
-}
+.category-preview{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px;opacity:.72;filter:saturate(.85);transition:.5s ease}
+.category-panel.opened .category-preview{opacity:0;visibility:hidden;transform:translateY(20px);height:0;margin-top:0;overflow:hidden}
+.preview-item{height:260px;border-radius:30px;overflow:hidden;position:relative;background:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.7);box-shadow:0 18px 55px rgba(0,0,0,.09)}
+.preview-item img{width:100%;height:100%;object-fit:cover;display:block;filter:blur(1px) brightness(.88);transform:scale(1.04)}
+.preview-item span{position:absolute;left:22px;bottom:20px;color:#fff;font-size:22px;font-weight:600;letter-spacing:-.04em;z-index:2}
+.preview-item::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.48),rgba(0,0,0,.04))}
 
-.category-preview{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:22px;
-    margin-top:56px;
-    opacity:.72;
-    filter:saturate(.85);
-    transition:.5s ease;
-}
-
-.category-panel.opened .category-preview{
-    opacity:0;
-    visibility:hidden;
-    transform:translateY(20px);
-    height:0;
-    margin-top:0;
-    overflow:hidden;
-}
-
-.preview-item{
-    height:260px;
-    border-radius:30px;
-    overflow:hidden;
-    position:relative;
-    background:rgba(255,255,255,.35);
-    border:1px solid rgba(255,255,255,.7);
-    box-shadow:0 18px 55px rgba(0,0,0,.09);
-}
-
-.preview-item img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-    filter:blur(1px) brightness(.88);
-    transform:scale(1.04);
-}
-
-.preview-item span{
-    position:absolute;
-    left:22px;
-    bottom:20px;
-    color:#fff;
-    font-size:22px;
-    font-weight:600;
-    letter-spacing:-.04em;
-    z-index:2;
-}
-
-.preview-item::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(to top,rgba(0,0,0,.48),rgba(0,0,0,.04));
-}
-
-.product-list{
-    position:relative;
-    margin-top:40px;
-    min-height:620px;
-}
-
+.product-list{position:relative;margin-top:40px;min-height:620px}
 .category-panel:not(.opened) .product-list{display:none}
-
-.product-group{
-    position:absolute;
-    inset:0;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:28px;
-    opacity:0;
-    visibility:hidden;
-    transform:translateY(32px);
-    pointer-events:none;
-    transition:.65s cubic-bezier(.22,1,.36,1);
-}
-
-.product-group.active{
-    opacity:1;
-    visibility:visible;
-    transform:translateY(0);
-    pointer-events:auto;
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:28px;
-}
-
-.product-list.all-active{
-    min-height:0;
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:28px;
-}
-
-.product-list.all-active .product-group{
-    display:contents;
-}
-
-.product-list.all-active .product-item{
-    width:100%;
-}
-
-.product-item{
-    height:310px;
-    border-radius:10px;
-    overflow:hidden;
-    position:relative;
-    background:#eee;
-    box-shadow:0 20px 55px rgba(0,0,0,.09);
-    cursor:pointer;
-}
-
-.product-item img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-    transition:.45s ease;
-}
-
+.product-group{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;opacity:0;visibility:hidden;transform:translateY(32px);pointer-events:none;transition:.65s cubic-bezier(.22,1,.36,1)}
+.product-group.active{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.product-list.all-active{min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.product-list.all-active .product-group{display:contents}
+.product-list.all-active .product-item{width:100%}
+.product-item{height:310px;border-radius:10px;overflow:hidden;position:relative;background:#eee;box-shadow:0 20px 55px rgba(0,0,0,.09);cursor:pointer}
+.product-item img{width:100%;height:100%;object-fit:cover;display:block;transition:.45s ease}
 .product-item:hover img{transform:scale(1.06)}
+.product-info{position:absolute;left:0;bottom:0;width:100%;padding:22px;color:#fff;background:linear-gradient(to top,rgba(0,0,0,.58),transparent)}
+.product-info h4{font-size:20px;letter-spacing:-.04em}
+.product-info p{margin-top:5px;font-size:13px;opacity:.8}
 
-.product-info{
-    position:absolute;
-    left:0;
-    bottom:0;
-    width:100%;
-    padding:22px;
-    color:#fff;
-    background:linear-gradient(to top,rgba(0,0,0,.58),transparent);
-}
+/* 상세 / 관리자 패널 */
+.detail-overlay,.admin-overlay{position:fixed;inset:0;z-index:5000;display:flex;align-items:flex-end;background:rgba(0,0,0,.22);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;visibility:hidden;transition:.35s ease}
+.detail-overlay.show,.admin-overlay.show{opacity:1;visibility:visible}
+.detail-panel,.admin-panel{width:100%;height:88vh;max-height:100vh;background:rgba(255,255,255,.96);border-radius:38px 38px 0 0;overflow-y:auto;transform:translateY(100%);transition:transform .7s cubic-bezier(.22,1,.36,1),height .45s cubic-bezier(.22,1,.36,1),border-radius .45s cubic-bezier(.22,1,.36,1);box-shadow:0 -30px 90px rgba(0,0,0,.18);scroll-behavior:smooth}
+.detail-overlay.show .detail-panel,.admin-overlay.show .admin-panel{transform:translateY(0)}
+.detail-overlay.full,.admin-overlay.full{background:rgba(0,0,0,.08)}
+.detail-overlay.full .detail-panel,.admin-overlay.full .admin-panel{height:100vh;border-radius:0}
+.detail-close,.admin-close{position:sticky;top:22px;margin:22px 24px 0 auto;width:48px;height:48px;border:none;border-radius:50%;background:rgba(255,255,255,.9);box-shadow:0 8px 24px rgba(0,0,0,.1);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:20}
+.detail-close svg,.admin-close svg{width:22px;height:22px}
+.detail-close path,.admin-close path{stroke:#111;stroke-width:2;fill:none;stroke-linecap:round}
 
-.product-info h4{
-    font-size:20px;
-    letter-spacing:-.04em;
-}
-
-.product-info p{
-    margin-top:5px;
-    font-size:13px;
-    opacity:.8;
-}
-
-/* 상세 패드창 */
-.detail-overlay,
-.admin-overlay{
-    position:fixed;
-    inset:0;
-    z-index:5000;
-    display:flex;
-    align-items:flex-end;
-    background:rgba(0,0,0,.22);
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
-    opacity:0;
-    visibility:hidden;
-    transition:.35s ease;
-}
-
-.detail-overlay.show,
-.admin-overlay.show{
-    opacity:1;
-    visibility:visible;
-}
-
-.detail-panel,
-.admin-panel{
-    width:100%;
-    height:88vh;
-    max-height:100vh;
-    background:rgba(255,255,255,.96);
-    border-radius:38px 38px 0 0;
-    overflow-y:auto;
-    transform:translateY(100%);
-    transition:
-        transform .7s cubic-bezier(.22,1,.36,1),
-        height .45s cubic-bezier(.22,1,.36,1),
-        border-radius .45s cubic-bezier(.22,1,.36,1);
-    box-shadow:0 -30px 90px rgba(0,0,0,.18);
-    scroll-behavior:smooth;
-}
-
-.detail-overlay.show .detail-panel,
-.admin-overlay.show .admin-panel{
-    transform:translateY(0);
-}
-
-.detail-overlay.full,
-.admin-overlay.full{
-    background:rgba(0,0,0,.08);
-}
-
-.detail-overlay.full .detail-panel,
-.admin-overlay.full .admin-panel{
-    height:100vh;
-    border-radius:0;
-}
-
-.detail-close,
-.admin-close{
-    position:sticky;
-    top:22px;
-    margin:22px 24px 0 auto;
-    width:48px;
-    height:48px;
-    border:none;
-    border-radius:50%;
-    background:rgba(255,255,255,.9);
-    box-shadow:0 8px 24px rgba(0,0,0,.1);
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:20;
-}
-
-.detail-close svg,
-.admin-close svg{
-    width:22px;
-    height:22px;
-}
-
-.detail-close path,
-.admin-close path{
-    stroke:#111;
-    stroke-width:2;
-    fill:none;
-    stroke-linecap:round;
-}
-
-.detail-image{
-    width:100%;
-    max-width:1050px;
-    height:auto;
-    margin:40px auto 0;
-    padding:0 40px;
-    background:transparent;
-}
-
-.detail-image img{
-    width:100%;
-    max-height:520px;
-    object-fit:contain;
-    border-radius:32px;
-    background:#f3f3f3;
-    display:block;
-}
-
-.detail-content,
-.admin-content{
-    max-width:1050px;
-    margin:0 auto;
-    padding:58px 40px 120px;
-}
-
-.detail-category{
-    display:block;
-    margin-bottom:16px;
-    font-size:12px;
-    letter-spacing:.16em;
-    color:rgba(0,0,0,.45);
-}
-
-.detail-content h2,
-.admin-content h2{
-    font-size:clamp(38px,5vw,72px);
-    line-height:.95;
-    letter-spacing:-.07em;
-}
-
-.detail-content p{
-    max-width:720px;
-    margin-top:24px;
-    font-size:17px;
-    line-height:1.8;
-    color:rgba(0,0,0,.62);
-}
-
-.detail-meta{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:14px;
-    margin-top:42px;
-}
-
-.detail-meta div{
-    padding:22px;
-    border-radius:24px;
-    background:rgba(255,255,255,.65);
-    border:1px solid rgba(0,0,0,.06);
-}
-
-.detail-meta span{
-    display:block;
-    font-size:12px;
-    color:rgba(0,0,0,.38);
-    margin-bottom:10px;
-}
-
-.detail-meta strong{
-    font-size:16px;
-    letter-spacing:-.03em;
-}
-
-.detail-long{
-    margin-top:46px;
-    padding-top:40px;
-    border-top:1px solid rgba(0,0,0,.08);
-}
-
-.detail-long h3{
-    font-size:26px;
-    letter-spacing:-.05em;
-    margin-bottom:16px;
-}
-
-.detail-long p{
-    margin-top:0;
-    margin-bottom:22px;
-}
-
-.detail-gallery{
-    margin-top:42px;
-    display:flex;
-    flex-direction:column;
-    gap:34px;
-}
-
-.detail-gallery img{
-    width:100%;
-    max-width:1000px;
-    max-height:none;
-    object-fit:contain;
-    display:block;
-    border-radius:24px;
-    background:#f3f3f3;
-}
-
-.detail-links{
-    margin-top:42px;
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.detail-links a{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    padding:14px 22px;
-    border-radius:999px;
-    background:#111;
-    color:#fff;
-    text-decoration:none;
-    font-size:14px;
-}
-
-.detail-edit-btn{
-    display:none;
-    margin-top:34px;
-    border:none;
-    border-radius:999px;
-    padding:14px 26px;
-    background:#111;
-    color:#fff;
-    cursor:pointer;
-}
-
+.detail-image{width:100%;max-width:1050px;height:auto;margin:40px auto 0;padding:0 40px;background:transparent}
+.detail-image img{width:100%;max-height:520px;object-fit:contain;border-radius:32px;background:#f3f3f3;display:block}
+.detail-content,.admin-content{max-width:1050px;margin:0 auto;padding:58px 40px 120px}
+.detail-category{display:block;margin-bottom:16px;font-size:12px;letter-spacing:.16em;color:rgba(0,0,0,.45)}
+.detail-content h2,.admin-content h2{font-size:clamp(38px,5vw,72px);line-height:.95;letter-spacing:-.07em}
+.detail-content p{max-width:720px;margin-top:24px;font-size:17px;line-height:1.8;color:rgba(0,0,0,.62)}
+.detail-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:42px}
+.detail-meta div{padding:22px;border-radius:24px;background:rgba(255,255,255,.65);border:1px solid rgba(0,0,0,.06)}
+.detail-meta span{display:block;font-size:12px;color:rgba(0,0,0,.38);margin-bottom:10px}
+.detail-meta strong{font-size:16px;letter-spacing:-.03em}
+.detail-long{margin-top:46px;padding-top:40px;border-top:1px solid rgba(0,0,0,.08)}
+.detail-long h3{font-size:26px;letter-spacing:-.05em;margin-bottom:16px}
+.detail-long p{margin-top:0;margin-bottom:22px}
+.detail-gallery{margin-top:42px;display:flex;flex-direction:column;gap:34px}
+.detail-gallery img{width:100%;max-width:1000px;max-height:none;object-fit:contain;display:block;border-radius:24px;background:#f3f3f3}
+.detail-links{margin-top:42px;display:flex;gap:10px;flex-wrap:wrap}
+.detail-links a{display:inline-flex;align-items:center;justify-content:center;padding:14px 22px;border-radius:999px;background:#111;color:#fff;text-decoration:none;font-size:14px}
+.detail-edit-btn{display:none;margin-top:34px;border:none;border-radius:999px;padding:14px 26px;background:#111;color:#fff;cursor:pointer}
 body.logged-in .detail-edit-btn{display:inline-flex}
 
-/* 관리자 등록창 */
-.admin-form{
-    margin-top:34px;
-}
-
-.admin-form input,
-.admin-form select,
-.admin-form textarea{
-    width:100%;
-    padding:15px 16px;
-    border:1px solid rgba(0,0,0,.1);
-    border-radius:16px;
-    margin-bottom:12px;
-    font-size:15px;
-    background:rgba(255,255,255,.78);
-    outline:none;
-}
-
-.admin-form textarea{
-    min-height:170px;
-    resize:vertical;
-}
-
-.admin-label{
-    display:block;
-    margin:18px 0 8px;
-    font-size:13px;
-    color:rgba(0,0,0,.5);
-}
-
-.admin-btn-row{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-top:12px;
-}
-
-.admin-btn{
-    border:none;
-    border-radius:999px;
-    padding:14px 24px;
-    background:#111;
-    color:#fff;
-    cursor:pointer;
-    font-size:15px;
-}
-
-.admin-btn.sub{
-    background:#eee;
-    color:#111;
-}
-
-.admin-status{
-    margin-top:16px;
-    color:rgba(0,0,0,.55);
-    font-size:14px;
-}
-
+/* 관리자 */
+.admin-form{margin-top:34px}
+.admin-form input,.admin-form select,.admin-form textarea{width:100%;padding:15px 16px;border:1px solid rgba(0,0,0,.1);border-radius:16px;margin-bottom:12px;font-size:15px;background:rgba(255,255,255,.78);outline:none}
+.admin-form textarea{min-height:170px;resize:vertical}
+.admin-label{display:block;margin:18px 0 8px;font-size:13px;color:rgba(0,0,0,.5)}
+.admin-btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.admin-btn{border:none;border-radius:999px;padding:14px 24px;background:#111;color:#fff;cursor:pointer;font-size:15px}
+.admin-btn.sub{background:#eee;color:#111}
+.admin-status{margin-top:16px;color:rgba(0,0,0,.55);font-size:14px}
 #adminFormBox{display:none}
 #loginBox{display:block}
 body.logged-in #adminFormBox{display:block}
 body.logged-in #loginBox{display:none}
 
+.detail-preview-list{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:12px 0 20px}
+.detail-preview-item{position:relative;border-radius:16px;overflow:hidden;background:#eee;cursor:grab;border:1px solid rgba(0,0,0,.08)}
+.detail-preview-item.dragging{opacity:.4}
+.detail-preview-item img{width:100%;height:140px;object-fit:cover;display:block}
+.detail-preview-item button{position:absolute;top:8px;right:8px;width:28px;height:28px;border:none;border-radius:50%;background:rgba(0,0,0,.75);color:#fff;cursor:pointer}
+.detail-preview-item span{position:absolute;left:8px;bottom:8px;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.85);font-size:11px}
+
 #contact{display:none}
 
 @media(max-width:900px){
-    .about-layout{grid-template-columns:1fr;gap:34px}
-    .profile-card{max-width:360px}
-    .panel-cards{grid-template-columns:1fr}
-
-    .product-list.all-active,
-    .product-group.active{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-    }
-
-    .product-list{min-height:900px}
-    .product-list.all-active{min-height:0}
-    .detail-meta{grid-template-columns:1fr}
+.about-layout{grid-template-columns:1fr;gap:34px}
+.profile-card{max-width:360px}
+.panel-cards{grid-template-columns:1fr}
+.product-list.all-active,.product-group.active{grid-template-columns:repeat(2,minmax(0,1fr))}
+.product-list{min-height:900px}
+.product-list.all-active{min-height:0}
+.detail-meta{grid-template-columns:1fr}
+.detail-preview-list{grid-template-columns:repeat(2,1fr)}
 }
 
 @media(max-width:768px){
-    .back-home-zone{height:86px}
-    .nav{padding:28px 24px}
-    .logo{font-size:15px}
-    .menu{gap:15px}
-    .menu a{font-size:10px}
-    .hero{padding:80px 0 0}
-    .hero-content{padding:0 24px}
-    .title{font-size:clamp(44px,11vw,76px)}
-    .subtitle{font-size:15px;text-align:center;margin-top:24px}
-    .project{width:280px;height:180px}
-
-    .about-panel{
-        top:86px;
-        min-height:calc(100vh - 86px);
-        padding:42px 24px 48px;
-    }
-
-    .about-hold{height:calc(100vh - 86px)}
-
-    .category-panel{
-        min-height:calc(100vh - 86px);
-        padding:42px 24px 48px;
-    }
-
-    body.category-mode .category-panel{
-        min-height:100vh;
-        padding:42px 24px 48px;
-    }
-
-    .panel-title{font-size:clamp(42px,12vw,68px)}
-    .panel-desc{font-size:15px}
-    .profile-img{height:390px}
-
-    .category-buttons{
-        margin-left:0;
-        transform:none;
-        width:100%;
-        flex-wrap:nowrap;
-        overflow-x:auto;
-        padding-bottom:10px;
-    }
-
-    .category-panel.opened .category-buttons{transform:none}
-
-    .category-btn{
-        flex:0 0 auto;
-        padding:12px 22px;
-        font-size:15px;
-    }
-
-    .category-back-btn,
-    .category-add-btn{
-        width:44px;
-        height:44px;
-    }
-
-    .category-add-btn{font-size:28px}
-
-    .category-preview{
-        grid-template-columns:1fr;
-        gap:18px;
-        margin-top:36px;
-    }
-
-    .preview-item{height:210px}
-
-    .product-list{
-        margin-top:34px;
-        min-height:1120px;
-    }
-
-    .product-list.all-active{min-height:0}
-
-    .product-list.all-active,
-    .product-group.active{
-        grid-template-columns:1fr;
-    }
-
-    .product-item{height:260px}
-
-    .detail-panel,
-    .admin-panel{
-        height:90vh;
-        border-radius:30px 30px 0 0;
-    }
-
-    .detail-overlay.full .detail-panel,
-    .admin-overlay.full .admin-panel{
-        height:100vh;
-        border-radius:0;
-    }
-
-    .detail-image{
-        padding:0 24px;
-    }
-
-    .detail-image img{
-        max-height:360px;
-        border-radius:22px;
-    }
-
-    .detail-content,
-    .admin-content{
-        padding:42px 24px 90px;
-    }
-
-    .detail-content p{font-size:15px}
+.back-home-zone{height:86px}
+.nav{padding:28px 24px}
+.logo{font-size:15px}
+.menu{gap:15px}
+.menu a{font-size:10px}
+.hero{padding:80px 0 0}
+.hero-content{padding:0 24px}
+.title{font-size:clamp(44px,11vw,76px)}
+.subtitle{font-size:15px;text-align:center;margin-top:24px}
+.project{width:280px;height:180px}
+.about-panel{top:86px;min-height:calc(100vh - 86px);padding:42px 24px 48px}
+.about-hold{height:calc(100vh - 86px)}
+.category-panel{min-height:calc(100vh - 86px);padding:42px 24px 48px}
+body.category-mode .category-panel{min-height:100vh;padding:42px 24px 48px}
+.panel-title{font-size:clamp(42px,12vw,68px)}
+.panel-desc{font-size:15px}
+.profile-img{height:390px}
+.category-buttons{margin-left:0;transform:none;width:100%;flex-wrap:nowrap;overflow-x:auto;padding-bottom:10px}
+.category-panel.opened .category-buttons{transform:none}
+.category-btn{flex:0 0 auto;padding:12px 22px;font-size:15px}
+.category-back-btn,.category-add-btn{width:44px;height:44px}
+.category-add-btn{font-size:28px}
+.category-preview{grid-template-columns:1fr;gap:18px;margin-top:36px}
+.preview-item{height:210px}
+.product-list{margin-top:34px;min-height:1120px}
+.product-list.all-active{min-height:0}
+.product-list.all-active,.product-group.active{grid-template-columns:1fr}
+.product-item{height:260px}
+.detail-panel,.admin-panel{height:90vh;border-radius:30px 30px 0 0}
+.detail-overlay.full .detail-panel,.admin-overlay.full .admin-panel{height:100vh;border-radius:0}
+.detail-image{padding:0 24px}
+.detail-image img{max-height:360px;border-radius:22px}
+.detail-content,.admin-content{padding:42px 24px 90px}
+.detail-content p{font-size:15px}
+.detail-preview-list{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -1071,760 +231,587 @@ body.logged-in #loginBox{display:none}
 <div class="back-home-zone"></div>
 
 <div class="main-fixed" id="top">
-    <nav class="nav">
-        <a href="#top" class="logo">Portfolio</a>
+<nav class="nav">
+<a href="#top" class="logo">Portfolio</a>
+<div class="menu">
+<a href="#top">HOME</a>
+<a href="#about">ABOUT</a>
+<a href="#category">CATEGORY</a>
+<a href="#contact">CONTACT</a>
+</div>
+</nav>
 
-        <div class="menu">
-            <a href="#top">HOME</a>
-            <a href="#about">ABOUT</a>
-            <a href="#category">CATEGORY</a>
-            <a href="#contact">CONTACT</a>
-        </div>
-    </nav>
+<section class="hero">
+<div class="hero-content">
+<h1 class="title">
+<div class="box left"><div class="slider">
+<div class="word">감각을</div><div class="word">가치를</div><div class="word">경험을</div><div class="word">생각을</div><div class="word">감각을</div>
+</div></div>
+<span class="fixed">담은</span>
+<div class="box right"><div class="slider">
+<div class="word">디자인</div><div class="word">퀄리티</div><div class="word">임팩트</div><div class="word">디테일</div><div class="word">디자인</div>
+</div></div>
+</h1>
+<p class="subtitle">작은 브랜드라도 온라인에서는 단단하게 보여야 하니까요.</p>
+</div>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1 class="title">
-                <div class="box left">
-                    <div class="slider">
-                        <div class="word">감각을</div>
-                        <div class="word">가치를</div>
-                        <div class="word">경험을</div>
-                        <div class="word">생각을</div>
-                        <div class="word">감각을</div>
-                    </div>
-                </div>
-
-                <span class="fixed">담은</span>
-
-                <div class="box right">
-                    <div class="slider">
-                        <div class="word">디자인</div>
-                        <div class="word">퀄리티</div>
-                        <div class="word">임팩트</div>
-                        <div class="word">디테일</div>
-                        <div class="word">디자인</div>
-                    </div>
-                </div>
-            </h1>
-
-            <p class="subtitle">
-                작은 브랜드라도 온라인에서는 단단하게 보여야 하니까요.
-            </p>
-        </div>
-
-        <div class="image-marquee">
-            <div class="marquee-track">
-                <div class="project"><img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg"></div>
-                <div class="project"><img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg"></div>
-                <div class="project"><img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg"></div>
-                <div class="project"><img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg"></div>
-                <div class="project"><img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg"></div>
-
-                <div class="project"><img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg"></div>
-                <div class="project"><img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg"></div>
-                <div class="project"><img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg"></div>
-                <div class="project"><img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg"></div>
-                <div class="project"><img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg"></div>
-            </div>
-        </div>
-    </section>
+<div class="image-marquee"><div class="marquee-track">
+<div class="project"><img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg"></div>
+<div class="project"><img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg"></div>
+<div class="project"><img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg"></div>
+<div class="project"><img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg"></div>
+<div class="project"><img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg"></div>
+<div class="project"><img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg"></div>
+<div class="project"><img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg"></div>
+<div class="project"><img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg"></div>
+<div class="project"><img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg"></div>
+<div class="project"><img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg"></div>
+</div></div>
+</section>
 </div>
 
 <div class="scroll-area">
 
-    <section class="about-panel" id="about">
-        <div class="panel-inner">
-            <div class="about-layout">
+<section class="about-panel" id="about">
+<div class="panel-inner"><div class="about-layout">
+<div class="profile-card">
+<div class="profile-img"><img src="https://i.pinimg.com/736x/ff/0d/2a/ff0d2a921264637b1268a56fae27867c.jpg" alt="profile image"></div>
+<div class="profile-info"><h3>CHA SUJI _ 차수지</h3><p>01080195019<br>suji020519@kakao.com</p></div>
+</div>
+<div class="about-content">
+<h2 class="panel-title">ABOUT</h2>
+<p class="panel-desc">감각적인 비주얼과 섬세한 디테일을 바탕으로 브랜드의 분위기를 정리하고,<br>보는 사람이 오래 기억할 수 있는 디자인을 만듭니다.</p>
+<div class="keyword-row">
+<span class="keyword">불꽃같은 열정으로 꽃피우는</span>
+<span class="keyword">디자이너 차수지입니다.</span>
+<span class="keyword">Detail</span>
+<span class="keyword">Layout</span>
+<span class="keyword">Portfolio</span>
+</div>
+<div class="panel-cards">
+<div class="card"><span>01</span><h3>Brand Design</h3><p>브랜드의 방향성과 분위기를 시각적으로 정리하는 작업입니다.</p></div>
+<div class="card"><span>02</span><h3>Graphic Design</h3><p>포스터, 콘텐츠, 편집 디자인 등 인상적인 비주얼을 만듭니다.</p></div>
+<div class="card"><span>03</span><h3>UI Concept</h3><p>웹과 모바일 화면에서 보기 좋은 구조와 흐름을 설계합니다.</p></div>
+</div>
+</div>
+</div></div>
+</section>
 
-                <div class="profile-card">
-                    <div class="profile-img">
-                        <img src="https://i.pinimg.com/736x/ff/0d/2a/ff0d2a921264637b1268a56fae27867c.jpg" alt="profile image">
-                    </div>
+<div class="about-hold"></div>
 
-                    <div class="profile-info">
-                        <h3>CHA SUJI _ 차수지</h3>
-                        <p>
-                            01080195019<br>
-                            suji020519@kakao.com
-                        </p>
-                    </div>
-                </div>
+<section class="category-panel" id="category">
+<div class="panel-inner">
 
-                <div class="about-content">
-                    <h2 class="panel-title">ABOUT</h2>
+<div class="category-head">
+<div class="category-title-row">
+<h2 class="panel-title">CATEGORY</h2>
+<div class="category-actions">
+<button class="category-add-btn" aria-label="Add Project">+</button>
+<button class="category-back-btn" aria-label="Back">
+<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M28 12 L16 24 L28 36"/><path d="M17 24 H38"/></svg>
+</button>
+</div>
+</div>
+<p class="panel-desc">작업 유형별로 포트폴리오를 볼 수 있도록 정리했습니다.</p>
+<p class="category-small">SELECT YOUR PROJECT</p>
+</div>
 
-                    <p class="panel-desc">
-                        감각적인 비주얼과 섬세한 디테일을 바탕으로 브랜드의 분위기를 정리하고,<br>
-                        보는 사람이 오래 기억할 수 있는 디자인을 만듭니다.
-                    </p>
+<div class="category-buttons">
+<button class="category-btn" data-tab="all">전체</button>
+<button class="category-btn" data-tab="brand">브랜드</button>
+<button class="category-btn" data-tab="graphic">그래픽</button>
+<button class="category-btn" data-tab="ui">UI</button>
+<button class="category-btn" data-tab="artwork">아트웍</button>
+</div>
 
-                    <div class="keyword-row">
-                        <span class="keyword">불꽃같은 열정으로 꽃피우는</span>
-                        <span class="keyword">디자이너 차수지입니다.</span>
-                        <span class="keyword">Detail</span>
-                        <span class="keyword">Layout</span>
-                        <span class="keyword">Portfolio</span>
-                    </div>
+<div class="category-preview">
+<div class="preview-item"><img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg"><span>Brand</span></div>
+<div class="preview-item"><img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg"><span>Graphic</span></div>
+<div class="preview-item"><img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg"><span>UI Concept</span></div>
+</div>
 
-                    <div class="panel-cards">
-                        <div class="card">
-                            <span>01</span>
-                            <h3>Brand Design</h3>
-                            <p>브랜드의 방향성과 분위기를 시각적으로 정리하는 작업입니다.</p>
-                        </div>
+<div class="product-list">
+<div class="product-group" data-category="brand"></div>
+<div class="product-group" data-category="graphic"></div>
+<div class="product-group" data-category="ui"></div>
+<div class="product-group" data-category="artwork"></div>
+</div>
 
-                        <div class="card">
-                            <span>02</span>
-                            <h3>Graphic Design</h3>
-                            <p>포스터, 콘텐츠, 편집 디자인 등 인상적인 비주얼을 만듭니다.</p>
-                        </div>
+</div>
+</section>
 
-                        <div class="card">
-                            <span>03</span>
-                            <h3>UI Concept</h3>
-                            <p>웹과 모바일 화면에서 보기 좋은 구조와 흐름을 설계합니다.</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <div class="about-hold"></div>
-
-    <section class="category-panel" id="category">
-        <div class="panel-inner">
-
-            <div class="category-head">
-                <div class="category-title-row">
-                    <h2 class="panel-title">CATEGORY</h2>
-
-                    <div class="category-actions">
-                        <button class="category-add-btn" aria-label="Add Project">+</button>
-
-                        <button class="category-back-btn" aria-label="Back">
-                            <svg viewBox="0 0 48 48" aria-hidden="true">
-                                <path d="M28 12 L16 24 L28 36" />
-                                <path d="M17 24 H38" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <p class="panel-desc">
-                    작업 유형별로 포트폴리오를 볼 수 있도록 정리했습니다.
-                </p>
-
-                <p class="category-small">SELECT YOUR PROJECT</p>
-            </div>
-
-            <div class="category-buttons">
-                <button class="category-btn" data-tab="all">전체</button>
-                <button class="category-btn" data-tab="brand">브랜드</button>
-                <button class="category-btn" data-tab="graphic">그래픽</button>
-                <button class="category-btn" data-tab="ui">UI</button>
-                <button class="category-btn" data-tab="artwork">아트웍</button>
-            </div>
-
-            <div class="category-preview">
-                <div class="preview-item">
-                    <img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg">
-                    <span>Brand</span>
-                </div>
-                <div class="preview-item">
-                    <img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg">
-                    <span>Graphic</span>
-                </div>
-                <div class="preview-item">
-                    <img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg">
-                    <span>UI Concept</span>
-                </div>
-            </div>
-
-            <div class="product-list">
-                <div class="product-group" data-category="brand"></div>
-                <div class="product-group" data-category="graphic"></div>
-                <div class="product-group" data-category="ui"></div>
-                <div class="product-group" data-category="artwork"></div>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="contact"></section>
+<section id="contact"></section>
 </div>
 
 <div class="detail-overlay">
-    <div class="detail-panel">
-
-        <button class="detail-close" aria-label="Close">
-            <svg viewBox="0 0 24 24">
-                <path d="M6 6L18 18M18 6L6 18"/>
-            </svg>
-        </button>
-
-        <div class="detail-image">
-            <img id="detailImg" src="" alt="project detail image">
-        </div>
-
-        <div class="detail-content">
-            <span class="detail-category">PORTFOLIO PROJECT</span>
-
-            <h2 id="detailTitle">Project Title</h2>
-
-            <p id="detailDesc">
-                프로젝트 상세 설명이 들어갑니다.
-            </p>
-
-            <div class="detail-meta">
-                <div>
-                    <span>TYPE</span>
-                    <strong id="detailType">Brand Design</strong>
-                </div>
-
-                <div>
-                    <span>ROLE</span>
-                    <strong id="detailRole">Design / Visual</strong>
-                </div>
-
-                <div>
-                    <span>YEAR</span>
-                    <strong id="detailYear">2026</strong>
-                </div>
-            </div>
-
-            <div class="detail-long">
-                <h3>Project Story</h3>
-                <p id="detailStory">
-                    상세 설명이 들어갑니다.
-                </p>
-
-                <div class="detail-gallery" id="detailGallery"></div>
-
-                <div class="detail-links" id="detailLinks"></div>
-            </div>
-
-            <button class="detail-edit-btn">수정하기</button>
-        </div>
-
-    </div>
+<div class="detail-panel">
+<button class="detail-close" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6L18 18M18 6L6 18"/></svg></button>
+<div class="detail-image"><img id="detailImg" src="" alt="project detail image"></div>
+<div class="detail-content">
+<span class="detail-category">PORTFOLIO PROJECT</span>
+<h2 id="detailTitle">Project Title</h2>
+<p id="detailDesc">프로젝트 상세 설명이 들어갑니다.</p>
+<div class="detail-meta">
+<div><span>TYPE</span><strong id="detailType">Brand Design</strong></div>
+<div><span>ROLE</span><strong id="detailRole">Design / Visual</strong></div>
+<div><span>YEAR</span><strong id="detailYear">2026</strong></div>
+</div>
+<div class="detail-long">
+<h3>Project Story</h3>
+<p id="detailStory">상세 설명이 들어갑니다.</p>
+<div class="detail-gallery" id="detailGallery"></div>
+<div class="detail-links" id="detailLinks"></div>
+</div>
+<button class="detail-edit-btn">수정하기</button>
+</div>
+</div>
 </div>
 
 <div class="admin-overlay">
-    <div class="admin-panel">
+<div class="admin-panel">
+<button class="admin-close" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6L18 18M18 6L6 18"/></svg></button>
 
-        <button class="admin-close" aria-label="Close">
-            <svg viewBox="0 0 24 24">
-                <path d="M6 6L18 18M18 6L6 18"/>
-            </svg>
-        </button>
+<div class="admin-content">
+<h2 id="adminTitle">ADD PROJECT</h2>
 
-        <div class="admin-content">
-            <h2 id="adminTitle">ADD PROJECT</h2>
+<div id="loginBox" class="admin-form">
+<input type="email" id="loginEmail" placeholder="관리자 이메일">
+<input type="password" id="loginPassword" placeholder="비밀번호">
+<div class="admin-btn-row"><button class="admin-btn" id="loginBtn">로그인</button></div>
+<p class="admin-status">관리자만 게시물을 등록할 수 있어.</p>
+</div>
 
-            <div id="loginBox" class="admin-form">
-                <input type="email" id="loginEmail" placeholder="관리자 이메일">
-                <input type="password" id="loginPassword" placeholder="비밀번호">
+<div id="adminFormBox" class="admin-form">
+<input type="hidden" id="editId">
+<input type="text" id="projectTitle" placeholder="제목">
 
-                <div class="admin-btn-row">
-                    <button class="admin-btn" id="loginBtn">로그인</button>
-                </div>
+<select id="projectCategory">
+<option value="brand">브랜드</option>
+<option value="graphic">그래픽</option>
+<option value="ui">UI</option>
+<option value="artwork">아트웍</option>
+</select>
 
-                <p class="admin-status">관리자만 게시물을 등록할 수 있어.</p>
-            </div>
+<input type="text" id="projectShortDesc" placeholder="짧은 설명 예: Logo / Identity">
+<textarea id="projectContent" placeholder="상세 설명"></textarea>
+<input type="text" id="projectRole" placeholder="역할 예: Design / Visual">
+<input type="text" id="projectYear" placeholder="연도 예: 2026">
 
-            <div id="adminFormBox" class="admin-form">
-                <input type="hidden" id="editId">
+<label class="admin-label">대표 이미지</label>
+<input type="file" id="projectImage" accept="image/*">
 
-                <input type="text" id="projectTitle" placeholder="제목">
+<label class="admin-label">상세 이미지 여러 장</label>
+<input type="file" id="projectDetailImages" accept="image/*" multiple>
+<div id="detailPreviewList" class="detail-preview-list"></div>
 
-                <select id="projectCategory">
-                    <option value="brand">브랜드</option>
-                    <option value="graphic">그래픽</option>
-                    <option value="ui">UI</option>
-                    <option value="artwork">아트웍</option>
-                </select>
+<label class="admin-label">영상 / 움짤 링크</label>
+<input type="text" id="projectVideoUrl" placeholder="유튜브, 비메오, GIF 링크 등">
 
-                <input type="text" id="projectShortDesc" placeholder="짧은 설명 예: Logo / Identity">
+<label class="admin-label">PDF / 외부 링크</label>
+<input type="text" id="projectPdfUrl" placeholder="PDF, Behance, Figma, Notion 링크 등">
 
-                <textarea id="projectContent" placeholder="상세 설명"></textarea>
-
-                <input type="text" id="projectRole" placeholder="역할 예: Design / Visual">
-
-                <input type="text" id="projectYear" placeholder="연도 예: 2026">
-
-                <label class="admin-label">대표 이미지</label>
-                <input type="file" id="projectImage" accept="image/*">
-
-                <label class="admin-label">상세 이미지 여러 장</label>
-                <input type="file" id="projectDetailImages" accept="image/*" multiple>
-
-                <label class="admin-label">영상 / 움짤 링크</label>
-                <input type="text" id="projectVideoUrl" placeholder="유튜브, 비메오, GIF 링크 등">
-
-                <label class="admin-label">PDF / 외부 링크</label>
-                <input type="text" id="projectPdfUrl" placeholder="PDF, Behance, Figma, Notion 링크 등">
-
-                <div class="admin-btn-row">
-                    <button class="admin-btn" id="saveBtn">저장하기</button>
-                    <button class="admin-btn sub" id="resetBtn">새 글</button>
-                    <button class="admin-btn sub" id="deleteBtn">삭제</button>
-                    <button class="admin-btn sub" id="logoutBtn">로그아웃</button>
-                </div>
-
-                <p class="admin-status" id="adminStatus"></p>
-            </div>
-        </div>
-
-    </div>
+<div class="admin-btn-row">
+<button class="admin-btn" id="saveBtn">저장하기</button>
+<button class="admin-btn sub" id="resetBtn">새 글</button>
+<button class="admin-btn sub" id="deleteBtn">삭제</button>
+<button class="admin-btn sub" id="logoutBtn">로그아웃</button>
+</div>
+<p class="admin-status" id="adminStatus"></p>
+</div>
+</div>
+</div>
 </div>
 
 <script>
-const SUPABASE_URL = "https://cwnfcrokfkhmguvsqcgs.supabase.co";
-const SUPABASE_KEY = "sb_publishable_nlc6fsuk7kscuECiLoZImg_P_-Psp_S";
-const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const SUPABASE_URL="https://cwnfcrokfkhmguvsqcgs.supabase.co";
+const SUPABASE_KEY="sb_publishable_nlc6fsuk7kscuECiLoZImg_P_-Psp_S";
+const client=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
-const categoryPanel = document.querySelector(".category-panel");
-const buttons = document.querySelectorAll(".category-btn");
-const groups = document.querySelectorAll(".product-group");
-const productList = document.querySelector(".product-list");
-const backZone = document.querySelector(".back-home-zone");
-const categoryBackBtn = document.querySelector(".category-back-btn");
-const categoryAddBtn = document.querySelector(".category-add-btn");
-const scrollArea = document.querySelector(".scroll-area");
+const categoryPanel=document.querySelector(".category-panel");
+const buttons=document.querySelectorAll(".category-btn");
+const groups=document.querySelectorAll(".product-group");
+const productList=document.querySelector(".product-list");
+const backZone=document.querySelector(".back-home-zone");
+const categoryBackBtn=document.querySelector(".category-back-btn");
+const categoryAddBtn=document.querySelector(".category-add-btn");
+const scrollArea=document.querySelector(".scroll-area");
 
-const detailOverlay = document.querySelector(".detail-overlay");
-const detailPanel = document.querySelector(".detail-panel");
-const detailClose = document.querySelector(".detail-close");
-const detailImg = document.getElementById("detailImg");
-const detailTitle = document.getElementById("detailTitle");
-const detailDesc = document.getElementById("detailDesc");
-const detailType = document.getElementById("detailType");
-const detailRole = document.getElementById("detailRole");
-const detailYear = document.getElementById("detailYear");
-const detailStory = document.getElementById("detailStory");
-const detailGallery = document.getElementById("detailGallery");
-const detailLinks = document.getElementById("detailLinks");
-const detailEditBtn = document.querySelector(".detail-edit-btn");
+const detailOverlay=document.querySelector(".detail-overlay");
+const detailPanel=document.querySelector(".detail-panel");
+const detailClose=document.querySelector(".detail-close");
+const detailImg=document.getElementById("detailImg");
+const detailTitle=document.getElementById("detailTitle");
+const detailDesc=document.getElementById("detailDesc");
+const detailType=document.getElementById("detailType");
+const detailRole=document.getElementById("detailRole");
+const detailYear=document.getElementById("detailYear");
+const detailStory=document.getElementById("detailStory");
+const detailGallery=document.getElementById("detailGallery");
+const detailLinks=document.getElementById("detailLinks");
+const detailEditBtn=document.querySelector(".detail-edit-btn");
 
-const adminOverlay = document.querySelector(".admin-overlay");
-const adminPanel = document.querySelector(".admin-panel");
-const adminClose = document.querySelector(".admin-close");
-const adminTitle = document.getElementById("adminTitle");
-const adminStatus = document.getElementById("adminStatus");
+const adminOverlay=document.querySelector(".admin-overlay");
+const adminPanel=document.querySelector(".admin-panel");
+const adminClose=document.querySelector(".admin-close");
+const adminTitle=document.getElementById("adminTitle");
+const adminStatus=document.getElementById("adminStatus");
 
-const editId = document.getElementById("editId");
-const projectTitle = document.getElementById("projectTitle");
-const projectCategory = document.getElementById("projectCategory");
-const projectShortDesc = document.getElementById("projectShortDesc");
-const projectContent = document.getElementById("projectContent");
-const projectRole = document.getElementById("projectRole");
-const projectYear = document.getElementById("projectYear");
-const projectImage = document.getElementById("projectImage");
-const projectDetailImages = document.getElementById("projectDetailImages");
-const projectVideoUrl = document.getElementById("projectVideoUrl");
-const projectPdfUrl = document.getElementById("projectPdfUrl");
+const editId=document.getElementById("editId");
+const projectTitle=document.getElementById("projectTitle");
+const projectCategory=document.getElementById("projectCategory");
+const projectShortDesc=document.getElementById("projectShortDesc");
+const projectContent=document.getElementById("projectContent");
+const projectRole=document.getElementById("projectRole");
+const projectYear=document.getElementById("projectYear");
+const projectImage=document.getElementById("projectImage");
+const projectDetailImages=document.getElementById("projectDetailImages");
+const projectVideoUrl=document.getElementById("projectVideoUrl");
+const projectPdfUrl=document.getElementById("projectPdfUrl");
+const detailPreviewList=document.getElementById("detailPreviewList");
 
-let allProjects = [];
-let currentProject = null;
+let allProjects=[];
+let currentProject=null;
+let detailItems=[];
+let draggedIndex=null;
 
 async function checkLogin(){
-    const { data } = await client.auth.getSession();
-
-    if(data.session){
-        document.body.classList.add("logged-in");
-    }else{
-        document.body.classList.remove("logged-in");
-    }
+const {data}=await client.auth.getSession();
+if(data.session){document.body.classList.add("logged-in")}
+else{document.body.classList.remove("logged-in")}
 }
 
+function renderDetailPreview(){
+detailPreviewList.innerHTML="";
+detailItems.forEach((item,index)=>{
+const div=document.createElement("div");
+div.className="detail-preview-item";
+div.draggable=true;
+div.dataset.index=index;
+div.innerHTML=`<img src="${item.preview}"><button type="button">×</button><span>${index+1}</span>`;
+
+div.querySelector("button").addEventListener("click",()=>{
+detailItems.splice(index,1);
+renderDetailPreview();
+});
+
+div.addEventListener("dragstart",()=>{
+draggedIndex=index;
+div.classList.add("dragging");
+});
+
+div.addEventListener("dragend",()=>{
+draggedIndex=null;
+div.classList.remove("dragging");
+});
+
+div.addEventListener("dragover",(e)=>e.preventDefault());
+
+div.addEventListener("drop",(e)=>{
+e.preventDefault();
+const targetIndex=Number(div.dataset.index);
+if(draggedIndex===null||draggedIndex===targetIndex)return;
+const movedItem=detailItems.splice(draggedIndex,1)[0];
+detailItems.splice(targetIndex,0,movedItem);
+renderDetailPreview();
+});
+
+detailPreviewList.appendChild(div);
+});
+}
+
+projectDetailImages.addEventListener("change",(e)=>{
+const files=Array.from(e.target.files);
+files.forEach(file=>{
+detailItems.push({
+type:"file",
+file:file,
+preview:URL.createObjectURL(file),
+url:null
+});
+});
+projectDetailImages.value="";
+renderDetailPreview();
+});
+
 function closeDetail(){
-    detailOverlay.classList.remove("show");
-    detailOverlay.classList.remove("full");
-    detailPanel.scrollTop = 0;
+detailOverlay.classList.remove("show");
+detailOverlay.classList.remove("full");
+detailPanel.scrollTop=0;
 }
 
 function openDetail(project){
-    currentProject = project;
+currentProject=project;
+detailImg.src=project.image_url||"";
+detailTitle.innerText=project.title||"Untitled";
+detailDesc.innerText=project.short_desc||"";
+detailType.innerText=project.category||"";
+detailRole.innerText=project.role||"Design / Visual";
+detailYear.innerText=project.project_year||"2026";
+detailStory.innerText=project.content||"상세 설명이 아직 없습니다.";
 
-    detailImg.src = project.image_url || "";
-    detailTitle.innerText = project.title || "Untitled";
-    detailDesc.innerText = project.short_desc || "";
-    detailType.innerText = project.category || "";
-    detailRole.innerText = project.role || "Design / Visual";
-    detailYear.innerText = project.project_year || "2026";
-    detailStory.innerText = project.content || "상세 설명이 아직 없습니다.";
+detailGallery.innerHTML="";
+detailLinks.innerHTML="";
 
-    detailGallery.innerHTML = "";
-    detailLinks.innerHTML = "";
+(project.detail_images||[]).forEach(url=>{
+detailGallery.innerHTML+=`<img src="${url}" alt="detail image">`;
+});
 
-    const detailImages = project.detail_images || [];
+if(project.video_url){
+detailLinks.innerHTML+=`<a href="${project.video_url}" target="_blank">영상 보기</a>`;
+}
+if(project.pdf_url){
+detailLinks.innerHTML+=`<a href="${project.pdf_url}" target="_blank">PDF / 외부 링크</a>`;
+}
 
-    detailImages.forEach(url=>{
-        detailGallery.innerHTML += `
-            <img src="${url}" alt="detail image">
-        `;
-    });
-
-    if(project.video_url){
-        detailLinks.innerHTML += `
-            <a href="${project.video_url}" target="_blank">영상 보기</a>
-        `;
-    }
-
-    if(project.pdf_url){
-        detailLinks.innerHTML += `
-            <a href="${project.pdf_url}" target="_blank">PDF / 외부 링크</a>
-        `;
-    }
-
-    detailPanel.scrollTop = 0;
-    detailOverlay.classList.remove("full");
-    detailOverlay.classList.add("show");
+detailPanel.scrollTop=0;
+detailOverlay.classList.remove("full");
+detailOverlay.classList.add("show");
 }
 
 function makeCard(project){
-    return `
-        <div class="product-item" data-id="${project.id}">
-            <img src="${project.image_url || ""}" alt="${project.title || ""}">
-            <div class="product-info">
-                <h4>${project.title || "Untitled"}</h4>
-                <p>${project.short_desc || ""}</p>
-            </div>
-        </div>
-    `;
+return `
+<div class="product-item" data-id="${project.id}">
+<img src="${project.image_url||""}" alt="${project.title||""}">
+<div class="product-info">
+<h4>${project.title||"Untitled"}</h4>
+<p>${project.short_desc||""}</p>
+</div>
+</div>`;
 }
 
 async function loadProjects(){
-    const { data, error } = await client
-        .from("projects")
-        .select("*")
-        .order("created_at", { ascending:false });
-
-    if(error){
-        console.log(error);
-        return;
-    }
-
-    allProjects = data || [];
-
-    groups.forEach(group=>{
-        group.innerHTML = "";
-    });
-
-    allProjects.forEach(project=>{
-        const group = document.querySelector(`[data-category="${project.category}"]`);
-        if(group){
-            group.innerHTML += makeCard(project);
-        }
-    });
-
-    document.querySelectorAll(".product-item").forEach(item=>{
-        item.addEventListener("click",()=>{
-            const id = Number(item.dataset.id);
-            const project = allProjects.find(p=>p.id === id);
-            if(project) openDetail(project);
-        });
-    });
+const {data,error}=await client.from("projects").select("*").order("created_at",{ascending:false});
+if(error){console.log(error);return}
+allProjects=data||[];
+groups.forEach(group=>group.innerHTML="");
+allProjects.forEach(project=>{
+const group=document.querySelector(`[data-category="${project.category}"]`);
+if(group){group.innerHTML+=makeCard(project)}
+});
+document.querySelectorAll(".product-item").forEach(item=>{
+item.addEventListener("click",()=>{
+const id=Number(item.dataset.id);
+const project=allProjects.find(p=>p.id===id);
+if(project)openDetail(project);
+});
+});
 }
 
 buttons.forEach(button=>{
-    button.addEventListener("click",()=>{
-        const target = button.dataset.tab;
-
-        document.body.classList.add("category-mode");
-        categoryPanel.classList.add("opened");
-
-        scrollArea.scrollTo({
-            top:0,
-            behavior:"smooth"
-        });
-
-        buttons.forEach(btn=>btn.classList.remove("active"));
-        groups.forEach(group=>group.classList.remove("active"));
-        productList.classList.remove("all-active");
-
-        button.classList.add("active");
-
-        if(target === "all"){
-            productList.classList.add("all-active");
-            groups.forEach(group=>group.classList.add("active"));
-        }else{
-            const selected = document.querySelector(`[data-category="${target}"]`);
-            if(selected) selected.classList.add("active");
-        }
-    });
+button.addEventListener("click",()=>{
+const target=button.dataset.tab;
+document.body.classList.add("category-mode");
+categoryPanel.classList.add("opened");
+scrollArea.scrollTo({top:0,behavior:"smooth"});
+buttons.forEach(btn=>btn.classList.remove("active"));
+groups.forEach(group=>group.classList.remove("active"));
+productList.classList.remove("all-active");
+button.classList.add("active");
+if(target==="all"){
+productList.classList.add("all-active");
+groups.forEach(group=>group.classList.add("active"));
+}else{
+const selected=document.querySelector(`[data-category="${target}"]`);
+if(selected)selected.classList.add("active");
+}
+});
 });
 
 categoryBackBtn.addEventListener("click",()=>{
-    document.body.classList.remove("category-mode");
-    categoryPanel.classList.remove("opened");
-
-    buttons.forEach(btn=>btn.classList.remove("active"));
-    groups.forEach(group=>group.classList.remove("active"));
-    productList.classList.remove("all-active");
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+document.body.classList.remove("category-mode");
+categoryPanel.classList.remove("opened");
+buttons.forEach(btn=>btn.classList.remove("active"));
+groups.forEach(group=>group.classList.remove("active"));
+productList.classList.remove("all-active");
+window.scrollTo({top:0,behavior:"smooth"});
 });
 
 window.addEventListener("scroll",()=>{
-    backZone.classList.toggle("active", window.scrollY > 300);
+backZone.classList.toggle("active",window.scrollY>300);
 });
 
 backZone.addEventListener("click",()=>{
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+window.scrollTo({top:0,behavior:"smooth"});
 });
 
 detailPanel.addEventListener("scroll",()=>{
-    if(detailPanel.scrollTop > 35){
-        detailOverlay.classList.add("full");
-    }else{
-        detailOverlay.classList.remove("full");
-    }
+detailOverlay.classList.toggle("full",detailPanel.scrollTop>35);
 });
 
 adminPanel.addEventListener("scroll",()=>{
-    if(adminPanel.scrollTop > 35){
-        adminOverlay.classList.add("full");
-    }else{
-        adminOverlay.classList.remove("full");
-    }
+adminOverlay.classList.toggle("full",adminPanel.scrollTop>35);
 });
 
 detailClose.addEventListener("click",closeDetail);
 
 detailOverlay.addEventListener("click",(e)=>{
-    if(e.target === detailOverlay){
-        closeDetail();
-    }
+if(e.target===detailOverlay)closeDetail();
 });
 
 function openAdmin(){
-    adminOverlay.classList.add("show");
-    adminOverlay.classList.remove("full");
-    adminPanel.scrollTop = 0;
+adminOverlay.classList.add("show");
+adminOverlay.classList.remove("full");
+adminPanel.scrollTop=0;
 }
 
 function closeAdmin(){
-    adminOverlay.classList.remove("show");
-    adminOverlay.classList.remove("full");
-    adminPanel.scrollTop = 0;
+adminOverlay.classList.remove("show");
+adminOverlay.classList.remove("full");
+adminPanel.scrollTop=0;
 }
 
 categoryAddBtn.addEventListener("click",()=>{
-    resetForm();
-    openAdmin();
+resetForm();
+openAdmin();
 });
 
 adminClose.addEventListener("click",closeAdmin);
 
 adminOverlay.addEventListener("click",(e)=>{
-    if(e.target === adminOverlay){
-        closeAdmin();
-    }
+if(e.target===adminOverlay)closeAdmin();
 });
 
 document.getElementById("loginBtn").addEventListener("click",async()=>{
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
-
-    const { error } = await client.auth.signInWithPassword({
-        email,
-        password
-    });
-
-    if(error){
-        alert("로그인 실패: " + error.message);
-        return;
-    }
-
-    await checkLogin();
-    resetForm();
+const email=document.getElementById("loginEmail").value;
+const password=document.getElementById("loginPassword").value;
+const {error}=await client.auth.signInWithPassword({email,password});
+if(error){alert("로그인 실패: "+error.message);return}
+await checkLogin();
+resetForm();
 });
 
 document.getElementById("logoutBtn").addEventListener("click",async()=>{
-    await client.auth.signOut();
-    document.body.classList.remove("logged-in");
-    closeAdmin();
+await client.auth.signOut();
+document.body.classList.remove("logged-in");
+closeAdmin();
 });
 
 async function uploadImage(){
-    const file = projectImage.files[0];
-
-    if(!file) return null;
-
-    const fileName = `${Date.now()}-${file.name}`;
-
-    const { error } = await client.storage
-        .from("portfolio")
-        .upload(fileName, file);
-
-    if(error){
-        alert("이미지 업로드 실패: " + error.message);
-        return null;
-    }
-
-    const { data } = client.storage
-        .from("portfolio")
-        .getPublicUrl(fileName);
-
-    return data.publicUrl;
+const file=projectImage.files[0];
+if(!file)return null;
+const fileName=`${Date.now()}-${file.name}`;
+const {error}=await client.storage.from("portfolio").upload(fileName,file);
+if(error){alert("대표 이미지 업로드 실패: "+error.message);return null}
+const {data}=client.storage.from("portfolio").getPublicUrl(fileName);
+return data.publicUrl;
 }
 
 async function uploadDetailImages(){
-    const files = projectDetailImages.files;
-
-    if(!files || files.length === 0) return null;
-
-    const urls = [];
-
-    for(const file of files){
-        const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}-${file.name}`;
-
-        const { error } = await client.storage
-            .from("portfolio")
-            .upload(fileName, file);
-
-        if(error){
-            alert("상세 이미지 업로드 실패: " + error.message);
-            return null;
-        }
-
-        const { data } = client.storage
-            .from("portfolio")
-            .getPublicUrl(fileName);
-
-        urls.push(data.publicUrl);
-    }
-
-    return urls;
+if(!detailItems.length)return null;
+const urls=[];
+for(const item of detailItems){
+if(item.type==="url"){
+urls.push(item.url);
+continue;
+}
+const file=item.file;
+const fileName=`${Date.now()}-${Math.random().toString(36).slice(2)}-${file.name}`;
+const {error}=await client.storage.from("portfolio").upload(fileName,file);
+if(error){alert("상세 이미지 업로드 실패: "+error.message);return null}
+const {data}=client.storage.from("portfolio").getPublicUrl(fileName);
+urls.push(data.publicUrl);
+}
+return urls;
 }
 
 document.getElementById("saveBtn").addEventListener("click",async()=>{
-    if(!projectTitle.value){
-        alert("제목을 입력해줘");
-        return;
-    }
+if(!projectTitle.value){alert("제목을 입력해줘");return}
+adminStatus.innerText="저장 중...";
+const imageUrl=await uploadImage();
+const detailImages=await uploadDetailImages();
 
-    adminStatus.innerText = "저장 중...";
+const projectData={
+title:projectTitle.value,
+category:projectCategory.value,
+short_desc:projectShortDesc.value,
+content:projectContent.value,
+role:projectRole.value,
+project_year:projectYear.value,
+video_url:projectVideoUrl.value,
+pdf_url:projectPdfUrl.value
+};
 
-    const imageUrl = await uploadImage();
-    const detailImages = await uploadDetailImages();
+if(imageUrl){projectData.image_url=imageUrl}
+if(detailImages){projectData.detail_images=detailImages}
 
-    const projectData = {
-        title:projectTitle.value,
-        category:projectCategory.value,
-        short_desc:projectShortDesc.value,
-        content:projectContent.value,
-        role:projectRole.value,
-        project_year:projectYear.value,
-        video_url:projectVideoUrl.value,
-        pdf_url:projectPdfUrl.value
-    };
+let result;
+if(editId.value){
+result=await client.from("projects").update(projectData).eq("id",editId.value);
+}else{
+result=await client.from("projects").insert(projectData);
+}
 
-    if(imageUrl){
-        projectData.image_url = imageUrl;
-    }
+if(result.error){
+adminStatus.innerText="";
+alert("저장 실패: "+result.error.message);
+return;
+}
 
-    if(detailImages){
-        projectData.detail_images = detailImages;
-    }
-
-    let result;
-
-    if(editId.value){
-        result = await client
-            .from("projects")
-            .update(projectData)
-            .eq("id", editId.value);
-    }else{
-        result = await client
-            .from("projects")
-            .insert(projectData);
-    }
-
-    if(result.error){
-        adminStatus.innerText = "";
-        alert("저장 실패: " + result.error.message);
-        return;
-    }
-
-    adminStatus.innerText = "저장 완료!";
-    await loadProjects();
-    resetForm();
+adminStatus.innerText="저장 완료!";
+await loadProjects();
+resetForm();
 });
 
 document.getElementById("resetBtn").addEventListener("click",resetForm);
 
 document.getElementById("deleteBtn").addEventListener("click",async()=>{
-    if(!editId.value){
-        alert("삭제할 게시물이 없어");
-        return;
-    }
-
-    if(!confirm("정말 삭제할까?")) return;
-
-    const { error } = await client
-        .from("projects")
-        .delete()
-        .eq("id", editId.value);
-
-    if(error){
-        alert("삭제 실패: " + error.message);
-        return;
-    }
-
-    alert("삭제 완료");
-    resetForm();
-    closeAdmin();
-    closeDetail();
-    await loadProjects();
+if(!editId.value){alert("삭제할 게시물이 없어");return}
+if(!confirm("정말 삭제할까?"))return;
+const {error}=await client.from("projects").delete().eq("id",editId.value);
+if(error){alert("삭제 실패: "+error.message);return}
+alert("삭제 완료");
+resetForm();
+closeAdmin();
+closeDetail();
+await loadProjects();
 });
 
 function resetForm(){
-    adminTitle.innerText = "ADD PROJECT";
-    editId.value = "";
-    projectTitle.value = "";
-    projectCategory.value = "brand";
-    projectShortDesc.value = "";
-    projectContent.value = "";
-    projectRole.value = "";
-    projectYear.value = "";
-    projectImage.value = "";
-    projectDetailImages.value = "";
-    projectVideoUrl.value = "";
-    projectPdfUrl.value = "";
-    adminStatus.innerText = "";
+adminTitle.innerText="ADD PROJECT";
+editId.value="";
+projectTitle.value="";
+projectCategory.value="brand";
+projectShortDesc.value="";
+projectContent.value="";
+projectRole.value="";
+projectYear.value="";
+projectImage.value="";
+projectDetailImages.value="";
+projectVideoUrl.value="";
+projectPdfUrl.value="";
+adminStatus.innerText="";
+detailItems=[];
+renderDetailPreview();
 }
 
 function fillForm(project){
-    adminTitle.innerText = "EDIT PROJECT";
-    editId.value = project.id;
-    projectTitle.value = project.title || "";
-    projectCategory.value = project.category || "brand";
-    projectShortDesc.value = project.short_desc || "";
-    projectContent.value = project.content || "";
-    projectRole.value = project.role || "";
-    projectYear.value = project.project_year || "";
-    projectImage.value = "";
-    projectDetailImages.value = "";
-    projectVideoUrl.value = project.video_url || "";
-    projectPdfUrl.value = project.pdf_url || "";
+adminTitle.innerText="EDIT PROJECT";
+editId.value=project.id;
+projectTitle.value=project.title||"";
+projectCategory.value=project.category||"brand";
+projectShortDesc.value=project.short_desc||"";
+projectContent.value=project.content||"";
+projectRole.value=project.role||"";
+projectYear.value=project.project_year||"";
+projectImage.value="";
+projectDetailImages.value="";
+projectVideoUrl.value=project.video_url||"";
+projectPdfUrl.value=project.pdf_url||"";
+
+detailItems=(project.detail_images||[]).map(url=>({
+type:"url",
+file:null,
+preview:url,
+url:url
+}));
+renderDetailPreview();
 }
 
 detailEditBtn.addEventListener("click",()=>{
-    if(!currentProject) return;
-    fillForm(currentProject);
-    closeDetail();
-    openAdmin();
+if(!currentProject)return;
+fillForm(currentProject);
+closeDetail();
+openAdmin();
 });
 
 checkLogin();
