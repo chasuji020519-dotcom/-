@@ -586,7 +586,6 @@ body.category-mode .nav{display:none}
     visibility:visible;
     transform:translateY(0);
     pointer-events:auto;
-
     display:grid;
     grid-template-columns:repeat(3,minmax(0,1fr));
     gap:28px;
@@ -594,20 +593,18 @@ body.category-mode .nav{display:none}
 
 .product-list.all-active{
     min-height:0;
-}
-
-.product-list.all-active .product-group{
-    position:relative;
-    inset:auto;
-
     display:grid;
     grid-template-columns:repeat(3,minmax(0,1fr));
     gap:28px;
-
-    margin-bottom:28px;
 }
 
-.product-list.all-active .product-group:last-child{margin-bottom:0}
+.product-list.all-active .product-group{
+    display:contents;
+}
+
+.product-list.all-active .product-item{
+    width:100%;
+}
 
 .product-item{
     height:310px;
@@ -752,6 +749,7 @@ body.category-mode .nav{display:none}
     object-fit:contain;
     border-radius:32px;
     background:#f3f3f3;
+    display:block;
 }
 
 .detail-content,
@@ -827,6 +825,42 @@ body.category-mode .nav{display:none}
     margin-bottom:22px;
 }
 
+.detail-gallery{
+    margin-top:42px;
+    display:flex;
+    flex-direction:column;
+    gap:34px;
+}
+
+.detail-gallery img{
+    width:100%;
+    max-width:1000px;
+    max-height:none;
+    object-fit:contain;
+    display:block;
+    border-radius:24px;
+    background:#f3f3f3;
+}
+
+.detail-links{
+    margin-top:42px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.detail-links a{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:14px 22px;
+    border-radius:999px;
+    background:#111;
+    color:#fff;
+    text-decoration:none;
+    font-size:14px;
+}
+
 .detail-edit-btn{
     display:none;
     margin-top:34px;
@@ -861,6 +895,13 @@ body.logged-in .detail-edit-btn{display:inline-flex}
 .admin-form textarea{
     min-height:170px;
     resize:vertical;
+}
+
+.admin-label{
+    display:block;
+    margin:18px 0 8px;
+    font-size:13px;
+    color:rgba(0,0,0,.5);
 }
 
 .admin-btn-row{
@@ -903,11 +944,9 @@ body.logged-in #loginBox{display:none}
     .profile-card{max-width:360px}
     .panel-cards{grid-template-columns:1fr}
 
-    .product-group,
-    .product-group.active,
-    .product-list.all-active .product-group{
-        grid-template-columns:repeat(2,1fr);
-        gap:20px;
+    .product-list.all-active,
+    .product-group.active{
+        grid-template-columns:repeat(2,minmax(0,1fr));
     }
 
     .product-list{min-height:900px}
@@ -989,11 +1028,9 @@ body.logged-in #loginBox{display:none}
 
     .product-list.all-active{min-height:0}
 
-    .product-group,
-    .product-group.active,
-    .product-list.all-active .product-group{
+    .product-list.all-active,
+    .product-group.active{
         grid-template-columns:1fr;
-        gap:22px;
     }
 
     .product-item{height:260px}
@@ -1010,50 +1047,21 @@ body.logged-in #loginBox{display:none}
         border-radius:0;
     }
 
-    .detail-image{height:300px}
+    .detail-image{
+        padding:0 24px;
+    }
+
+    .detail-image img{
+        max-height:360px;
+        border-radius:22px;
+    }
+
     .detail-content,
     .admin-content{
         padding:42px 24px 90px;
     }
 
     .detail-content p{font-size:15px}
-}
-    /* 전체 보기일 때 게시물 3열로 정렬 */
-.product-list.all-active{
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:28px;
-}
-
-.product-list.all-active .product-group{
-    display:contents;
-}
-
-.product-list.all-active .product-item{
-    width:100%;
-}
-
-/* 개별 카테고리일 때 3열 */
-.product-group.active{
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:28px;
-}
-
-/* 태블릿 */
-@media(max-width:900px){
-    .product-list.all-active,
-    .product-group.active{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-    }
-}
-
-/* 모바일 */
-@media(max-width:768px){
-    .product-list.all-active,
-    .product-group.active{
-        grid-template-columns:1fr;
-    }
 }
 </style>
 </head>
@@ -1292,6 +1300,10 @@ body.logged-in #loginBox{display:none}
                 <p id="detailStory">
                     상세 설명이 들어갑니다.
                 </p>
+
+                <div class="detail-gallery" id="detailGallery"></div>
+
+                <div class="detail-links" id="detailLinks"></div>
             </div>
 
             <button class="detail-edit-btn">수정하기</button>
@@ -1343,7 +1355,17 @@ body.logged-in #loginBox{display:none}
 
                 <input type="text" id="projectYear" placeholder="연도 예: 2026">
 
+                <label class="admin-label">대표 이미지</label>
                 <input type="file" id="projectImage" accept="image/*">
+
+                <label class="admin-label">상세 이미지 여러 장</label>
+                <input type="file" id="projectDetailImages" accept="image/*" multiple>
+
+                <label class="admin-label">영상 / 움짤 링크</label>
+                <input type="text" id="projectVideoUrl" placeholder="유튜브, 비메오, GIF 링크 등">
+
+                <label class="admin-label">PDF / 외부 링크</label>
+                <input type="text" id="projectPdfUrl" placeholder="PDF, Behance, Figma, Notion 링크 등">
 
                 <div class="admin-btn-row">
                     <button class="admin-btn" id="saveBtn">저장하기</button>
@@ -1383,6 +1405,8 @@ const detailType = document.getElementById("detailType");
 const detailRole = document.getElementById("detailRole");
 const detailYear = document.getElementById("detailYear");
 const detailStory = document.getElementById("detailStory");
+const detailGallery = document.getElementById("detailGallery");
+const detailLinks = document.getElementById("detailLinks");
 const detailEditBtn = document.querySelector(".detail-edit-btn");
 
 const adminOverlay = document.querySelector(".admin-overlay");
@@ -1399,6 +1423,9 @@ const projectContent = document.getElementById("projectContent");
 const projectRole = document.getElementById("projectRole");
 const projectYear = document.getElementById("projectYear");
 const projectImage = document.getElementById("projectImage");
+const projectDetailImages = document.getElementById("projectDetailImages");
+const projectVideoUrl = document.getElementById("projectVideoUrl");
+const projectPdfUrl = document.getElementById("projectPdfUrl");
 
 let allProjects = [];
 let currentProject = null;
@@ -1429,6 +1456,29 @@ function openDetail(project){
     detailRole.innerText = project.role || "Design / Visual";
     detailYear.innerText = project.project_year || "2026";
     detailStory.innerText = project.content || "상세 설명이 아직 없습니다.";
+
+    detailGallery.innerHTML = "";
+    detailLinks.innerHTML = "";
+
+    const detailImages = project.detail_images || [];
+
+    detailImages.forEach(url=>{
+        detailGallery.innerHTML += `
+            <img src="${url}" alt="detail image">
+        `;
+    });
+
+    if(project.video_url){
+        detailLinks.innerHTML += `
+            <a href="${project.video_url}" target="_blank">영상 보기</a>
+        `;
+    }
+
+    if(project.pdf_url){
+        detailLinks.innerHTML += `
+            <a href="${project.pdf_url}" target="_blank">PDF / 외부 링크</a>
+        `;
+    }
 
     detailPanel.scrollTop = 0;
     detailOverlay.classList.remove("full");
@@ -1629,6 +1679,35 @@ async function uploadImage(){
     return data.publicUrl;
 }
 
+async function uploadDetailImages(){
+    const files = projectDetailImages.files;
+
+    if(!files || files.length === 0) return null;
+
+    const urls = [];
+
+    for(const file of files){
+        const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}-${file.name}`;
+
+        const { error } = await client.storage
+            .from("portfolio")
+            .upload(fileName, file);
+
+        if(error){
+            alert("상세 이미지 업로드 실패: " + error.message);
+            return null;
+        }
+
+        const { data } = client.storage
+            .from("portfolio")
+            .getPublicUrl(fileName);
+
+        urls.push(data.publicUrl);
+    }
+
+    return urls;
+}
+
 document.getElementById("saveBtn").addEventListener("click",async()=>{
     if(!projectTitle.value){
         alert("제목을 입력해줘");
@@ -1638,6 +1717,7 @@ document.getElementById("saveBtn").addEventListener("click",async()=>{
     adminStatus.innerText = "저장 중...";
 
     const imageUrl = await uploadImage();
+    const detailImages = await uploadDetailImages();
 
     const projectData = {
         title:projectTitle.value,
@@ -1645,11 +1725,17 @@ document.getElementById("saveBtn").addEventListener("click",async()=>{
         short_desc:projectShortDesc.value,
         content:projectContent.value,
         role:projectRole.value,
-        project_year:projectYear.value
+        project_year:projectYear.value,
+        video_url:projectVideoUrl.value,
+        pdf_url:projectPdfUrl.value
     };
 
     if(imageUrl){
         projectData.image_url = imageUrl;
+    }
+
+    if(detailImages){
+        projectData.detail_images = detailImages;
     }
 
     let result;
@@ -1713,6 +1799,9 @@ function resetForm(){
     projectRole.value = "";
     projectYear.value = "";
     projectImage.value = "";
+    projectDetailImages.value = "";
+    projectVideoUrl.value = "";
+    projectPdfUrl.value = "";
     adminStatus.innerText = "";
 }
 
@@ -1726,6 +1815,9 @@ function fillForm(project){
     projectRole.value = project.role || "";
     projectYear.value = project.project_year || "";
     projectImage.value = "";
+    projectDetailImages.value = "";
+    projectVideoUrl.value = project.video_url || "";
+    projectPdfUrl.value = project.pdf_url || "";
 }
 
 detailEditBtn.addEventListener("click",()=>{
