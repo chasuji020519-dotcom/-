@@ -52,7 +52,37 @@ body.category-mode .nav{display:none}
   height:1px;
   scroll-snap-align:none;
 }
-.category-panel{position:relative;z-index:3;min-height:calc(100vh - 105px);background:rgba(255,255,255,.72);display:flex;align-items:center}
+.category-panel{
+  position:relative;
+  z-index:3;
+  min-height:calc(100vh - 105px);
+  background:rgba(255,255,255,.72);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.category-panel:not(.opened) .panel-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:calc(100vh - 245px);
+}
+
+.category-panel:not(.opened) .category-head{
+  text-align:center;
+}
+
+.category-panel:not(.opened) .category-buttons{
+  margin-left:0;
+  transform:none;
+  justify-content:center;
+}
+
+.category-preview{
+  display:none;
+}
 .category-panel.opened{align-items:flex-start}
 .panel-inner{max-width:1180px;width:100%;margin:0 auto}
 .about-layout{display:grid;grid-template-columns:300px 1fr;gap:48px;align-items:start}
@@ -209,13 +239,22 @@ body.logged-in #loginBox{display:none}
 
   }
 
-  .category-panel{
-
-    min-height:calc(100vh - 86px);
-
-    padding:42px 24px 48px;
-
-  }
+.category-panel{
+  position:relative;
+  z-index:3;
+  min-height:calc(100vh - 105px);
+  background:rgba(255,255,255,.72);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+  .category-panel:not(.opened) .panel-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:calc(100vh - 245px);
+}
 
   body.category-mode .category-panel{
 
@@ -442,11 +481,6 @@ body.logged-in #loginBox{display:none}
 <button class="category-btn" data-tab="artwork">아트웍</button>
 </div>
 
-<div class="category-preview">
-<div class="preview-item"><img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg"><span>Brand</span></div>
-<div class="preview-item"><img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg"><span>Graphic</span></div>
-<div class="preview-item"><img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg"><span>UI Concept</span></div>
-</div>
 
 <div class="product-list">
 <div class="product-group" data-category="brand"></div>
