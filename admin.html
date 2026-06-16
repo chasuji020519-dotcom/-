@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Admin</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;
+    background:#f4f4f4;
+    color:#111;
+    padding:40px;
+}
+
+.admin-wrap{
+    max-width:1100px;
+    margin:auto;
+}
+
+h1{
+    font-size:44px;
+    letter-spacing:-.06em;
+    margin-bottom:24px;
+}
+
+.box{
+    background:#fff;
+    border-radius:28px;
+    padding:28px;
+    margin-bottom:24px;
+    box-shadow:0 14px 40px rgba(0,0,0,.06);
+}
+
+input,select,textarea{
+    width:100%;
+    padding:14px 16px;
+    border:1px solid #ddd;
+    border-radius:14px;
+    margin-bottom:12px;
+    font-size:15px;
+}
+
+textarea{
+    min-height:150px;
+    resize:vertical;
+}
+
+button{
+    border:none;
+    border-radius:999px;
+    padding:13px 22px;
+    background:#111;
+    color:#fff;
+    cursor:pointer;
+    font-size:15px;
+}
+
+button.sub{
+    background:#eee;
+    color:#111;
+}
+
+.btn-row{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.project-card{
+    display:grid;
+    grid-template-columns:160px 1fr auto;
+    gap:18px;
+    align-items:center;
+    padding:18px 0;
+    border-bottom:1px solid #eee;
+}
+
+.project-card img{
+    width:160px;
+    height:110px;
+    object-fit:cover;
+    border-radius:18px;
+    background:#eee;
+}
+
+.project-card h3{
+    font-size:22px;
+    letter-spacing:-.04em;
+}
+
+.project-card p{
+    margin-top:6px;
+    color:#777;
+    font-size:14px;
+}
+
+.hidden{
+    display:none;
+}
+
+@media(max-width:768px){
+    body{padding:20px}
+    .project-card{
+        grid-template-columns:1fr;
+    }
+    .project-card img{
+        width:100%;
+        height:220px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="admin-wrap">
+
+    <h1>Portfolio Admin</h1>
+
+    <div class="box" id="loginBox">
+        <h2>관리자 로그인</h2><br>
+
+        <input type="email" id="email" placeholder="이메일">
+        <input type="password" id="password" placeholder="비밀번호">
+
+        <button onclick="login()">로그인</button>
+    </div>
+
+    <div id="adminArea" class="hidden">
+
+        <div class="box">
+            <h2 id="formTitle">게시물 등록</h2><br>
+
+            <input type="hidden" id="editId">
+
+            <input type="text" id="title" placeholder="제목">
+
+            <select id="category">
+                <option value="brand">브랜드</option>
+                <option value="graphic">그래픽</option>
+                <option value="ui">UI</option>
+                <option value="artwork">아트웍</option>
+            </select>
+
+            <input type="text" id="shortDesc" placeholder="짧은 설명 예: Logo / Identity">
+
+            <textarea id="content" placeholder="상세 설명"></textarea>
+
+            <input type="text" id="role" placeholder="작업 역할 예: Design / Visual">
+            <input type="text" id="projectYear" placeholder="연도 예: 2026">
+
+            <input type="file" id="imageFile" accept="image/*">
+
+            <div class="btn-row">
+                <button onclick="saveProject()">저장하기</button>
+                <button class="sub" onclick="resetForm()">새 글 작성</button>
+                <button class="sub" onclick="logout()">로그아웃</button>
+            </div>
+        </div>
+
+        <div class="box">
+            <h2>게시물 목록</h2>
+            <div id="projectList"></div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+const SUPABASE_URL = "https://cwnfcrokfkhmguvsqcgs.supabase.co";
+const SUPABASE_KEY = "sb_publishable_nlc6fsuk7kscuECiLoZImg_P_-Psp_S";
+
+const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const loginBox = document.getElementById("loginBox");
+const adminArea = document.getElementById("adminArea");
+const projectList = document.getElementById("projectList");
+
+async function checkLogin(){
+    const { data } = await client.auth.getSession();
+
+    if(data.session){
+        loginBox.classList.add("hidden");
+        adminArea.classList.remove("hidden");
+        loadProjects();
+    }
+}
+
+async function login(){
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const { error } = await client.auth.signInWithPassword({
+        email,
+        password
+    });
+
+    if(error){
+        alert("로그인 실패: " + error.message);
+        return;
+    }
+
+    checkLogin();
+}
+
+async function logout(){
+    await client.auth.signOut();
+    location.reload();
+}
+
+async function uploadImage(){
+    const file = document.getElementById("imageFile").files[0];
+
+    if(!file) return null;
+
+    const fileName = `${Date.now()}-${file.name}`;
+
+    const { error } = await client.storage
+        .from("portfolio")
+        .upload(fileName, file);
+
+    if(error){
+        alert("이미지 업로드 실패: " + error.message);
+        return null;
+    }
+
+    const { data } = client.storage
+        .from("portfolio")
+        .getPublicUrl(fileName);
+
+    return data.publicUrl;
+}
+
+async function saveProject(){
+    const editId = document.getElementById("editId").value;
+
+    const title = document.getElementById("title").value;
+    const category = document.getElementById("category").value;
+    const shortDesc = document.getElementById("shortDesc").value;
+    const content = document.getElementById("content").value;
+    const role = document.getElementById("role").value;
+    const projectYear = document.getElementById("projectYear").value;
+
+    if(!title){
+        alert("제목을 입력해줘");
+        return;
+    }
+
+    const imageUrl = await uploadImage();
+
+    const projectData = {
+        title:title,
+        category:category,
+        short_desc:shortDesc,
+        content:content,
+        role:role,
+        project_year:projectYear
+    };
+
+    if(imageUrl){
+        projectData.image_url = imageUrl;
+    }
+
+    let result;
+
+    if(editId){
+        result = await client
+            .from("projects")
+            .update(projectData)
+            .eq("id", editId);
+    }else{
+        result = await client
+            .from("projects")
+            .insert(projectData);
+    }
+
+    if(result.error){
+        alert("저장 실패: " + result.error.message);
+        return;
+    }
+
+    alert("저장 완료!");
+    resetForm();
+    loadProjects();
+}
+
+async function loadProjects(){
+    const { data, error } = await client
+        .from("projects")
+        .select("*")
+        .order("created_at", { ascending:false });
+
+    if(error){
+        projectList.innerHTML = "불러오기 실패";
+        return;
+    }
+
+    if(!data.length){
+        projectList.innerHTML = "<p>아직 게시물이 없어.</p>";
+        return;
+    }
+
+    projectList.innerHTML = data.map(project=>`
+        <div class="project-card">
+            <img src="${project.image_url || ""}">
+            <div>
+                <h3>${project.title}</h3>
+                <p>${project.category} / ${project.short_desc || ""}</p>
+            </div>
+            <div class="btn-row">
+                <button onclick='editProject(${JSON.stringify(project)})'>수정</button>
+                <button class="sub" onclick="deleteProject(${project.id})">삭제</button>
+            </div>
+        </div>
+    `).join("");
+}
+
+function editProject(project){
+    document.getElementById("formTitle").innerText = "게시물 수정";
+    document.getElementById("editId").value = project.id;
+    document.getElementById("title").value = project.title || "";
+    document.getElementById("category").value = project.category || "brand";
+    document.getElementById("shortDesc").value = project.short_desc || "";
+    document.getElementById("content").value = project.content || "";
+    document.getElementById("role").value = project.role || "";
+    document.getElementById("projectYear").value = project.project_year || "";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+async function deleteProject(id){
+    if(!confirm("정말 삭제할까?")) return;
+
+    const { error } = await client
+        .from("projects")
+        .delete()
+        .eq("id", id);
+
+    if(error){
+        alert("삭제 실패: " + error.message);
+        return;
+    }
+
+    alert("삭제 완료!");
+    loadProjects();
+}
+
+function resetForm(){
+    document.getElementById("formTitle").innerText = "게시물 등록";
+    document.getElementById("editId").value = "";
+    document.getElementById("title").value = "";
+    document.getElementById("category").value = "brand";
+    document.getElementById("shortDesc").value = "";
+    document.getElementById("content").value = "";
+    document.getElementById("role").value = "";
+    document.getElementById("projectYear").value = "";
+    document.getElementById("imageFile").value = "";
+}
+
+checkLogin();
+</script>
+
+</body>
+</html>
