@@ -1388,8 +1388,12 @@ body.category-mode .nav{
 
     </div>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+const SUPABASE_URL = "https://cwnfcrokfkhmguvsqcgs.supabase.co";
+const SUPABASE_KEY = "sb_publishable_nlc6fsuk7kscuECiLoZImg_P_-Psp_S";
+const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
 const categoryPanel = document.querySelector(".category-panel");
 const buttons = document.querySelectorAll(".category-btn");
 const groups = document.querySelectorAll(".product-group");
@@ -1397,6 +1401,86 @@ const productList = document.querySelector(".product-list");
 const backZone = document.querySelector(".back-home-zone");
 const categoryBackBtn = document.querySelector(".category-back-btn");
 const scrollArea = document.querySelector(".scroll-area");
+
+const detailOverlay = document.querySelector(".detail-overlay");
+const detailPanel = document.querySelector(".detail-panel");
+const detailClose = document.querySelector(".detail-close");
+const detailImg = document.getElementById("detailImg");
+const detailTitle = document.getElementById("detailTitle");
+const detailDesc = document.getElementById("detailDesc");
+const detailType = document.getElementById("detailType");
+
+let allProjects = [];
+
+function closeDetail(){
+    detailOverlay.classList.remove("show");
+    detailOverlay.classList.remove("full");
+    detailPanel.scrollTop = 0;
+}
+
+function openDetail(project){
+    detailImg.src = project.image_url || "";
+    detailTitle.innerText = project.title || "Untitled";
+    detailDesc.innerText = project.short_desc || "";
+    detailType.innerText = project.category || "";
+
+    const roleBox = document.querySelector(".detail-meta div:nth-child(2) strong");
+    const yearBox = document.querySelector(".detail-meta div:nth-child(3) strong");
+    const storyBox = document.querySelector(".detail-long p");
+
+    roleBox.innerText = project.role || "Design / Visual";
+    yearBox.innerText = project.project_year || "2026";
+    storyBox.innerText = project.content || "상세 설명이 아직 없습니다.";
+
+    detailPanel.scrollTop = 0;
+    detailOverlay.classList.remove("full");
+    detailOverlay.classList.add("show");
+}
+
+function makeCard(project){
+    return `
+        <div class="product-item" data-id="${project.id}">
+            <img src="${project.image_url || ""}" alt="${project.title || ""}">
+            <div class="product-info">
+                <h4>${project.title || "Untitled"}</h4>
+                <p>${project.short_desc || ""}</p>
+            </div>
+        </div>
+    `;
+}
+
+async function loadProjects(){
+    const { data, error } = await client
+        .from("projects")
+        .select("*")
+        .order("created_at", { ascending:false });
+
+    if(error){
+        console.log(error);
+        return;
+    }
+
+    allProjects = data || [];
+
+    groups.forEach(group=>{
+        group.innerHTML = "";
+    });
+
+    allProjects.forEach(project=>{
+        const group = document.querySelector(`[data-category="${project.category}"]`);
+        if(group){
+            group.innerHTML += makeCard(project);
+        }
+    });
+
+    document.querySelectorAll(".product-item").forEach(item=>{
+        item.addEventListener("click",()=>{
+            const id = Number(item.dataset.id);
+            const project = allProjects.find(p=>p.id === id);
+            if(project) openDetail(project);
+        });
+    });
+}
 
 buttons.forEach(button=>{
     button.addEventListener("click",()=>{
@@ -1451,41 +1535,6 @@ backZone.addEventListener("click",()=>{
     });
 });
 
-/* 상세 패널 */
-const detailOverlay = document.querySelector(".detail-overlay");
-const detailPanel = document.querySelector(".detail-panel");
-const detailClose = document.querySelector(".detail-close");
-const detailImg = document.getElementById("detailImg");
-const detailTitle = document.getElementById("detailTitle");
-const detailDesc = document.getElementById("detailDesc");
-const detailType = document.getElementById("detailType");
-
-function closeDetail(){
-    detailOverlay.classList.remove("show");
-    detailOverlay.classList.remove("full");
-    detailPanel.scrollTop = 0;
-}
-
-document.querySelectorAll(".product-item").forEach(item=>{
-    item.addEventListener("click",()=>{
-
-        const img = item.querySelector("img").getAttribute("src");
-        const title = item.querySelector("h4").innerText;
-        const type = item.querySelector("p").innerText;
-
-        detailImg.setAttribute("src", img);
-        detailTitle.innerText = title;
-        detailType.innerText = type;
-
-        detailDesc.innerText =
-        "이 프로젝트는 브랜드의 분위기와 시각적 완성도를 높이기 위해 구성한 작업입니다. 메인 비주얼, 컬러감, 레이아웃, 디테일 요소를 중심으로 전체적인 무드를 정리했습니다.";
-
-        detailPanel.scrollTop = 0;
-        detailOverlay.classList.remove("full");
-        detailOverlay.classList.add("show");
-    });
-});
-
 detailPanel.addEventListener("scroll",()=>{
     if(detailPanel.scrollTop > 35){
         detailOverlay.classList.add("full");
@@ -1501,7 +1550,8 @@ detailOverlay.addEventListener("click",(e)=>{
         closeDetail();
     }
 });
-</script>
 
+loadProjects();
+</script>
 </body>
 </html>
