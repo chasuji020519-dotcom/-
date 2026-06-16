@@ -5,13 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
-html{
-    scroll-behavior:smooth;
-    scroll-snap-type:y mandatory;
-}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
 
 body{
     background:#fff;
@@ -21,15 +20,11 @@ body{
     overscroll-behavior-y:contain;
 }
 
-body.category-mode{
-    overflow:hidden;
-}
+body.category-mode{overflow:hidden}
 
 body.category-mode .main-fixed,
 body.category-mode .about-panel,
-body.category-mode .about-hold{
-    display:none;
-}
+body.category-mode .about-hold{display:none}
 
 body.category-mode .scroll-area{
     position:fixed;
@@ -59,13 +54,8 @@ body.category-mode .category-panel{
     cursor:pointer;
 }
 
-.back-home-zone.active{
-    pointer-events:auto;
-}
-
-body.category-mode .back-home-zone{
-    display:none;
-}
+.back-home-zone.active{pointer-events:auto}
+body.category-mode .back-home-zone{display:none}
 
 .main-fixed{
     position:fixed;
@@ -90,9 +80,7 @@ body.category-mode .back-home-zone{
     z-index:999;
 }
 
-body.category-mode .nav{
-    display:none;
-}
+body.category-mode .nav{display:none}
 
 .logo{
     font-size:24px;
@@ -170,15 +158,8 @@ body.category-mode .nav{
     white-space:nowrap;
 }
 
-.left .word{
-    text-align:right;
-    padding-right:.08em;
-}
-
-.right .word{
-    text-align:left;
-    padding-left:.08em;
-}
+.left .word{text-align:right;padding-right:.08em}
+.right .word{text-align:left;padding-left:.08em}
 
 .subtitle{
     margin-top:30px;
@@ -282,9 +263,7 @@ body.category-mode .nav{
     align-items:center;
 }
 
-.category-panel.opened{
-    align-items:flex-start;
-}
+.category-panel.opened{align-items:flex-start}
 
 .panel-inner{
     max-width:1180px;
@@ -321,9 +300,7 @@ body.category-mode .nav{
     display:block;
 }
 
-.profile-info{
-    padding:22px;
-}
+.profile-info{padding:22px}
 
 .profile-info h3{
     font-size:22px;
@@ -402,15 +379,12 @@ body.category-mode .nav{
     color:rgba(0,0,0,.52);
 }
 
-/* CATEGORY */
 .category-head{
     text-align:center;
     transition:.65s cubic-bezier(.22,1,.36,1);
 }
 
-.category-panel.opened .category-head{
-    text-align:left;
-}
+.category-panel.opened .category-head{text-align:left}
 
 .category-title-row{
     display:flex;
@@ -428,12 +402,18 @@ body.category-mode .nav{
     justify-content:space-between;
 }
 
-.category-title-row .panel-title{
-    margin-bottom:0;
+.category-title-row .panel-title{margin-bottom:0}
+
+.category-actions{
+    display:none;
+    align-items:center;
+    gap:10px;
 }
 
-.category-back-btn{
-    display:none;
+.category-panel.opened .category-actions{display:flex}
+
+.category-back-btn,
+.category-add-btn{
     width:56px;
     height:56px;
     border:none;
@@ -441,12 +421,19 @@ body.category-mode .nav{
     cursor:pointer;
     flex-shrink:0;
     transition:.3s ease;
-}
-
-.category-panel.opened .category-back-btn{
     display:flex;
     align-items:center;
     justify-content:center;
+}
+
+.category-add-btn{
+    border-radius:50%;
+    background:rgba(17,17,17,.92);
+    color:#fff;
+    font-size:34px;
+    font-weight:200;
+    line-height:1;
+    box-shadow:0 12px 30px rgba(0,0,0,.16);
 }
 
 .category-back-btn svg{
@@ -463,17 +450,11 @@ body.category-mode .nav{
     stroke-linejoin:miter;
 }
 
-.category-back-btn:hover{
-    transform:translateX(-4px);
-}
+.category-back-btn:hover{transform:translateX(-4px)}
+.category-add-btn:hover{transform:translateY(-3px)}
 
-.category-head .panel-desc{
-    margin:16px auto 0;
-}
-
-.category-panel.opened .category-head .panel-desc{
-    margin-left:0;
-}
+.category-head .panel-desc{margin:16px auto 0}
+.category-panel.opened .category-head .panel-desc{margin-left:0}
 
 .category-small{
     margin-top:16px;
@@ -516,9 +497,7 @@ body.category-mode .nav{
     transition:.35s cubic-bezier(.22,1,.36,1);
 }
 
-.category-btn:hover{
-    transform:translateY(-3px);
-}
+.category-btn:hover{transform:translateY(-3px)}
 
 .category-btn.active{
     background:rgba(17,17,17,.9);
@@ -587,9 +566,7 @@ body.category-mode .nav{
     min-height:620px;
 }
 
-.category-panel:not(.opened) .product-list{
-    display:none;
-}
+.category-panel:not(.opened) .product-list{display:none}
 
 .product-group{
     position:absolute;
@@ -609,6 +586,9 @@ body.category-mode .nav{
     visibility:visible;
     transform:translateY(0);
     pointer-events:auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:28px;
 }
 
 .product-list.all-active{
@@ -619,11 +599,12 @@ body.category-mode .nav{
     position:relative;
     inset:auto;
     margin-bottom:28px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:28px;
 }
 
-.product-list.all-active .product-group:last-child{
-    margin-bottom:0;
-}
+.product-list.all-active .product-group:last-child{margin-bottom:0}
 
 .product-item{
     height:310px;
@@ -643,9 +624,7 @@ body.category-mode .nav{
     transition:.45s ease;
 }
 
-.product-item:hover img{
-    transform:scale(1.06);
-}
+.product-item:hover img{transform:scale(1.06)}
 
 .product-info{
     position:absolute;
@@ -669,7 +648,8 @@ body.category-mode .nav{
 }
 
 /* 상세 패드창 */
-.detail-overlay{
+.detail-overlay,
+.admin-overlay{
     position:fixed;
     inset:0;
     z-index:5000;
@@ -683,12 +663,14 @@ body.category-mode .nav{
     transition:.35s ease;
 }
 
-.detail-overlay.show{
+.detail-overlay.show,
+.admin-overlay.show{
     opacity:1;
     visibility:visible;
 }
 
-.detail-panel{
+.detail-panel,
+.admin-panel{
     width:100%;
     height:88vh;
     max-height:100vh;
@@ -704,20 +686,24 @@ body.category-mode .nav{
     scroll-behavior:smooth;
 }
 
-.detail-overlay.show .detail-panel{
+.detail-overlay.show .detail-panel,
+.admin-overlay.show .admin-panel{
     transform:translateY(0);
 }
 
-.detail-overlay.full{
+.detail-overlay.full,
+.admin-overlay.full{
     background:rgba(0,0,0,.08);
 }
 
-.detail-overlay.full .detail-panel{
+.detail-overlay.full .detail-panel,
+.admin-overlay.full .admin-panel{
     height:100vh;
     border-radius:0;
 }
 
-.detail-close{
+.detail-close,
+.admin-close{
     position:sticky;
     top:22px;
     margin:22px 24px 0 auto;
@@ -734,12 +720,14 @@ body.category-mode .nav{
     z-index:20;
 }
 
-.detail-close svg{
+.detail-close svg,
+.admin-close svg{
     width:22px;
     height:22px;
 }
 
-.detail-close path{
+.detail-close path,
+.admin-close path{
     stroke:#111;
     stroke-width:2;
     fill:none;
@@ -760,7 +748,8 @@ body.category-mode .nav{
     display:block;
 }
 
-.detail-content{
+.detail-content,
+.admin-content{
     max-width:1050px;
     margin:0 auto;
     padding:58px 40px 120px;
@@ -774,7 +763,8 @@ body.category-mode .nav{
     color:rgba(0,0,0,.45);
 }
 
-.detail-content h2{
+.detail-content h2,
+.admin-content h2{
     font-size:clamp(38px,5vw,72px);
     line-height:.95;
     letter-spacing:-.07em;
@@ -831,85 +821,105 @@ body.category-mode .nav{
     margin-bottom:22px;
 }
 
-#contact{
+.detail-edit-btn{
     display:none;
+    margin-top:34px;
+    border:none;
+    border-radius:999px;
+    padding:14px 26px;
+    background:#111;
+    color:#fff;
+    cursor:pointer;
 }
 
+body.logged-in .detail-edit-btn{display:inline-flex}
+
+/* 관리자 등록창 */
+.admin-form{
+    margin-top:34px;
+}
+
+.admin-form input,
+.admin-form select,
+.admin-form textarea{
+    width:100%;
+    padding:15px 16px;
+    border:1px solid rgba(0,0,0,.1);
+    border-radius:16px;
+    margin-bottom:12px;
+    font-size:15px;
+    background:rgba(255,255,255,.78);
+    outline:none;
+}
+
+.admin-form textarea{
+    min-height:170px;
+    resize:vertical;
+}
+
+.admin-btn-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:12px;
+}
+
+.admin-btn{
+    border:none;
+    border-radius:999px;
+    padding:14px 24px;
+    background:#111;
+    color:#fff;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.admin-btn.sub{
+    background:#eee;
+    color:#111;
+}
+
+.admin-status{
+    margin-top:16px;
+    color:rgba(0,0,0,.55);
+    font-size:14px;
+}
+
+#adminFormBox{display:none}
+#loginBox{display:block}
+body.logged-in #adminFormBox{display:block}
+body.logged-in #loginBox{display:none}
+
+#contact{display:none}
+
 @media(max-width:900px){
-    .about-layout{
-        grid-template-columns:1fr;
-        gap:34px;
-    }
+    .about-layout{grid-template-columns:1fr;gap:34px}
+    .profile-card{max-width:360px}
+    .panel-cards{grid-template-columns:1fr}
 
-    .profile-card{
-        max-width:360px;
-    }
-
-    .panel-cards{
-        grid-template-columns:1fr;
-    }
-
-    .product-group{
+    .product-group,
+    .product-group.active,
+    .product-list.all-active .product-group{
         grid-template-columns:repeat(2,1fr);
         gap:20px;
     }
 
-    .product-list{
-        min-height:900px;
-    }
-
-    .product-list.all-active{
-        min-height:0;
-    }
-
-    .detail-meta{
-        grid-template-columns:1fr;
-    }
+    .product-list{min-height:900px}
+    .product-list.all-active{min-height:0}
+    .detail-meta{grid-template-columns:1fr}
 }
 
 @media(max-width:768px){
-    .back-home-zone{
-        height:86px;
-    }
-
-    .nav{
-        padding:28px 24px;
-    }
-
-    .logo{
-        font-size:15px;
-    }
-
-    .menu{
-        gap:15px;
-    }
-
-    .menu a{
-        font-size:10px;
-    }
-
-    .hero{
-        padding:80px 0 0;
-    }
-
-    .hero-content{
-        padding:0 24px;
-    }
-
-    .title{
-        font-size:clamp(44px,11vw,76px);
-    }
-
-    .subtitle{
-        font-size:15px;
-        text-align:center;
-        margin-top:24px;
-    }
-
-    .project{
-        width:280px;
-        height:180px;
-    }
+    .back-home-zone{height:86px}
+    .nav{padding:28px 24px}
+    .logo{font-size:15px}
+    .menu{gap:15px}
+    .menu a{font-size:10px}
+    .hero{padding:80px 0 0}
+    .hero-content{padding:0 24px}
+    .title{font-size:clamp(44px,11vw,76px)}
+    .subtitle{font-size:15px;text-align:center;margin-top:24px}
+    .project{width:280px;height:180px}
 
     .about-panel{
         top:86px;
@@ -917,9 +927,7 @@ body.category-mode .nav{
         padding:42px 24px 48px;
     }
 
-    .about-hold{
-        height:calc(100vh - 86px);
-    }
+    .about-hold{height:calc(100vh - 86px)}
 
     .category-panel{
         min-height:calc(100vh - 86px);
@@ -931,17 +939,9 @@ body.category-mode .nav{
         padding:42px 24px 48px;
     }
 
-    .panel-title{
-        font-size:clamp(42px,12vw,68px);
-    }
-
-    .panel-desc{
-        font-size:15px;
-    }
-
-    .profile-img{
-        height:390px;
-    }
+    .panel-title{font-size:clamp(42px,12vw,68px)}
+    .panel-desc{font-size:15px}
+    .profile-img{height:390px}
 
     .category-buttons{
         margin-left:0;
@@ -952,9 +952,7 @@ body.category-mode .nav{
         padding-bottom:10px;
     }
 
-    .category-panel.opened .category-buttons{
-        transform:none;
-    }
+    .category-panel.opened .category-buttons{transform:none}
 
     .category-btn{
         flex:0 0 auto;
@@ -962,10 +960,13 @@ body.category-mode .nav{
         font-size:15px;
     }
 
-    .category-back-btn{
+    .category-back-btn,
+    .category-add-btn{
         width:44px;
         height:44px;
     }
+
+    .category-add-btn{font-size:28px}
 
     .category-preview{
         grid-template-columns:1fr;
@@ -973,49 +974,43 @@ body.category-mode .nav{
         margin-top:36px;
     }
 
-    .preview-item{
-        height:210px;
-    }
+    .preview-item{height:210px}
 
     .product-list{
         margin-top:34px;
         min-height:1120px;
     }
 
-    .product-list.all-active{
-        min-height:0;
-    }
+    .product-list.all-active{min-height:0}
 
-    .product-group{
+    .product-group,
+    .product-group.active,
+    .product-list.all-active .product-group{
         grid-template-columns:1fr;
         gap:22px;
     }
 
-    .product-item{
-        height:260px;
-    }
+    .product-item{height:260px}
 
-    .detail-panel{
+    .detail-panel,
+    .admin-panel{
         height:90vh;
         border-radius:30px 30px 0 0;
     }
 
-    .detail-overlay.full .detail-panel{
+    .detail-overlay.full .detail-panel,
+    .admin-overlay.full .admin-panel{
         height:100vh;
         border-radius:0;
     }
 
-    .detail-image{
-        height:300px;
-    }
-
-    .detail-content{
+    .detail-image{height:300px}
+    .detail-content,
+    .admin-content{
         padding:42px 24px 90px;
     }
 
-    .detail-content p{
-        font-size:15px;
-    }
+    .detail-content p{font-size:15px}
 }
 </style>
 </head>
@@ -1025,7 +1020,6 @@ body.category-mode .nav{
 <div class="back-home-zone"></div>
 
 <div class="main-fixed" id="top">
-
     <nav class="nav">
         <a href="#top" class="logo">Portfolio</a>
 
@@ -1038,10 +1032,8 @@ body.category-mode .nav{
     </nav>
 
     <section class="hero">
-
         <div class="hero-content">
             <h1 class="title">
-
                 <div class="box left">
                     <div class="slider">
                         <div class="word">감각을</div>
@@ -1063,7 +1055,6 @@ body.category-mode .nav{
                         <div class="word">디자인</div>
                     </div>
                 </div>
-
             </h1>
 
             <p class="subtitle">
@@ -1073,7 +1064,6 @@ body.category-mode .nav{
 
         <div class="image-marquee">
             <div class="marquee-track">
-
                 <div class="project"><img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg"></div>
                 <div class="project"><img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg"></div>
                 <div class="project"><img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg"></div>
@@ -1085,20 +1075,15 @@ body.category-mode .nav{
                 <div class="project"><img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg"></div>
                 <div class="project"><img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg"></div>
                 <div class="project"><img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg"></div>
-
             </div>
         </div>
-
     </section>
-
 </div>
 
 <div class="scroll-area">
 
     <section class="about-panel" id="about">
-
         <div class="panel-inner">
-
             <div class="about-layout">
 
                 <div class="profile-card">
@@ -1116,7 +1101,6 @@ body.category-mode .nav{
                 </div>
 
                 <div class="about-content">
-
                     <h2 class="panel-title">ABOUT</h2>
 
                     <p class="panel-desc">
@@ -1133,7 +1117,6 @@ body.category-mode .nav{
                     </div>
 
                     <div class="panel-cards">
-
                         <div class="card">
                             <span>01</span>
                             <h3>Brand Design</h3>
@@ -1151,34 +1134,32 @@ body.category-mode .nav{
                             <h3>UI Concept</h3>
                             <p>웹과 모바일 화면에서 보기 좋은 구조와 흐름을 설계합니다.</p>
                         </div>
-
                     </div>
-
                 </div>
 
             </div>
-
         </div>
-
     </section>
 
     <div class="about-hold"></div>
 
     <section class="category-panel" id="category">
-
         <div class="panel-inner">
 
             <div class="category-head">
-
                 <div class="category-title-row">
                     <h2 class="panel-title">CATEGORY</h2>
 
-                    <button class="category-back-btn" aria-label="Back">
-                        <svg viewBox="0 0 48 48" aria-hidden="true">
-                            <path d="M28 12 L16 24 L28 36" />
-                            <path d="M17 24 H38" />
-                        </svg>
-                    </button>
+                    <div class="category-actions">
+                        <button class="category-add-btn" aria-label="Add Project">+</button>
+
+                        <button class="category-back-btn" aria-label="Back">
+                            <svg viewBox="0 0 48 48" aria-hidden="true">
+                                <path d="M28 12 L16 24 L28 36" />
+                                <path d="M17 24 H38" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
 
                 <p class="panel-desc">
@@ -1186,7 +1167,6 @@ body.category-mode .nav{
                 </p>
 
                 <p class="category-small">SELECT YOUR PROJECT</p>
-
             </div>
 
             <div class="category-buttons">
@@ -1213,119 +1193,16 @@ body.category-mode .nav{
             </div>
 
             <div class="product-list">
-
-                <div class="product-group" data-category="brand">
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg">
-                        <div class="product-info">
-                            <h4>Brand Project 01</h4>
-                            <p>Logo / Identity</p>
-                        </div>
-                    </div>
-
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg">
-                        <div class="product-info">
-                            <h4>Brand Project 02</h4>
-                            <p>Mood / Package</p>
-                        </div>
-                    </div>
-
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg">
-                        <div class="product-info">
-                            <h4>Brand Project 03</h4>
-                            <p>Visual System</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-group" data-category="graphic">
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg">
-                        <div class="product-info">
-                            <h4>Graphic Project 01</h4>
-                            <p>Poster / Layout</p>
-                        </div>
-                    </div>
-
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg">
-                        <div class="product-info">
-                            <h4>Graphic Project 02</h4>
-                            <p>Banner / Contents</p>
-                        </div>
-                    </div>
-
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/ff/0d/2a/ff0d2a921264637b1268a56fae27867c.jpg">
-                        <div class="product-info">
-                            <h4>Graphic Project 03</h4>
-                            <p>Editorial / Visual</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-group" data-category="ui">
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg">
-                        <div class="product-info">
-                            <h4>UI Project 01</h4>
-                            <p>Website / UI</p>
-                        </div>
-                    </div>
-
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg">
-                        <div class="product-info">
-                            <h4>UI Project 02</h4>
-                            <p>Mobile / App</p>
-                        </div>
-                    </div>
-
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg">
-                        <div class="product-info">
-                            <h4>UI Project 03</h4>
-                            <p>Landing / Web</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-group" data-category="artwork">
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg">
-                        <div class="product-info">
-                            <h4>Artwork 01</h4>
-                            <p>Visual / Mood</p>
-                        </div>
-                    </div>
-
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg">
-                        <div class="product-info">
-                            <h4>Artwork 02</h4>
-                            <p>Art Direction</p>
-                        </div>
-                    </div>
-
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/ff/0d/2a/ff0d2a921264637b1268a56fae27867c.jpg">
-                        <div class="product-info">
-                            <h4>Artwork 03</h4>
-                            <p>Concept Visual</p>
-                        </div>
-                    </div>
-                </div>
-
+                <div class="product-group" data-category="brand"></div>
+                <div class="product-group" data-category="graphic"></div>
+                <div class="product-group" data-category="ui"></div>
+                <div class="product-group" data-category="artwork"></div>
             </div>
 
         </div>
-
     </section>
 
     <section id="contact"></section>
-
 </div>
 
 <div class="detail-overlay">
@@ -1358,37 +1235,87 @@ body.category-mode .nav{
 
                 <div>
                     <span>ROLE</span>
-                    <strong>Design / Visual</strong>
+                    <strong id="detailRole">Design / Visual</strong>
                 </div>
 
                 <div>
                     <span>YEAR</span>
-                    <strong>2026</strong>
+                    <strong id="detailYear">2026</strong>
                 </div>
             </div>
 
             <div class="detail-long">
                 <h3>Project Story</h3>
-                <p>
-                    이 영역은 상세 설명이 길어질 때 사용하는 공간입니다. 프로젝트의 목적, 디자인 방향,
-                    작업 과정, 사용한 컬러와 레이아웃, 완성 결과까지 자연스럽게 작성할 수 있습니다.
+                <p id="detailStory">
+                    상세 설명이 들어갑니다.
                 </p>
+            </div>
 
-                <p>
-                    상세 내용이 길어지면 이 패널 안에서 스크롤할 수 있고, 스크롤을 조금 내리면 패널이
-                    화면 위까지 확장되어 더 넓게 볼 수 있도록 설정했습니다.
-                </p>
+            <button class="detail-edit-btn">수정하기</button>
+        </div>
 
-                <p>
-                    실제 포트폴리오에서는 이곳에 작업 의도, 문제 해결 과정, 디자인 포인트, 결과물 설명을
-                    넣으면 좋아요.
-                </p>
+    </div>
+</div>
+
+<div class="admin-overlay">
+    <div class="admin-panel">
+
+        <button class="admin-close" aria-label="Close">
+            <svg viewBox="0 0 24 24">
+                <path d="M6 6L18 18M18 6L6 18"/>
+            </svg>
+        </button>
+
+        <div class="admin-content">
+            <h2 id="adminTitle">ADD PROJECT</h2>
+
+            <div id="loginBox" class="admin-form">
+                <input type="email" id="loginEmail" placeholder="관리자 이메일">
+                <input type="password" id="loginPassword" placeholder="비밀번호">
+
+                <div class="admin-btn-row">
+                    <button class="admin-btn" id="loginBtn">로그인</button>
+                </div>
+
+                <p class="admin-status">관리자만 게시물을 등록할 수 있어.</p>
+            </div>
+
+            <div id="adminFormBox" class="admin-form">
+                <input type="hidden" id="editId">
+
+                <input type="text" id="projectTitle" placeholder="제목">
+
+                <select id="projectCategory">
+                    <option value="brand">브랜드</option>
+                    <option value="graphic">그래픽</option>
+                    <option value="ui">UI</option>
+                    <option value="artwork">아트웍</option>
+                </select>
+
+                <input type="text" id="projectShortDesc" placeholder="짧은 설명 예: Logo / Identity">
+
+                <textarea id="projectContent" placeholder="상세 설명"></textarea>
+
+                <input type="text" id="projectRole" placeholder="역할 예: Design / Visual">
+
+                <input type="text" id="projectYear" placeholder="연도 예: 2026">
+
+                <input type="file" id="projectImage" accept="image/*">
+
+                <div class="admin-btn-row">
+                    <button class="admin-btn" id="saveBtn">저장하기</button>
+                    <button class="admin-btn sub" id="resetBtn">새 글</button>
+                    <button class="admin-btn sub" id="deleteBtn">삭제</button>
+                    <button class="admin-btn sub" id="logoutBtn">로그아웃</button>
+                </div>
+
+                <p class="admin-status" id="adminStatus"></p>
             </div>
         </div>
 
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
 const SUPABASE_URL = "https://cwnfcrokfkhmguvsqcgs.supabase.co";
 const SUPABASE_KEY = "sb_publishable_nlc6fsuk7kscuECiLoZImg_P_-Psp_S";
@@ -1400,6 +1327,7 @@ const groups = document.querySelectorAll(".product-group");
 const productList = document.querySelector(".product-list");
 const backZone = document.querySelector(".back-home-zone");
 const categoryBackBtn = document.querySelector(".category-back-btn");
+const categoryAddBtn = document.querySelector(".category-add-btn");
 const scrollArea = document.querySelector(".scroll-area");
 
 const detailOverlay = document.querySelector(".detail-overlay");
@@ -1409,8 +1337,38 @@ const detailImg = document.getElementById("detailImg");
 const detailTitle = document.getElementById("detailTitle");
 const detailDesc = document.getElementById("detailDesc");
 const detailType = document.getElementById("detailType");
+const detailRole = document.getElementById("detailRole");
+const detailYear = document.getElementById("detailYear");
+const detailStory = document.getElementById("detailStory");
+const detailEditBtn = document.querySelector(".detail-edit-btn");
+
+const adminOverlay = document.querySelector(".admin-overlay");
+const adminPanel = document.querySelector(".admin-panel");
+const adminClose = document.querySelector(".admin-close");
+const adminTitle = document.getElementById("adminTitle");
+const adminStatus = document.getElementById("adminStatus");
+
+const editId = document.getElementById("editId");
+const projectTitle = document.getElementById("projectTitle");
+const projectCategory = document.getElementById("projectCategory");
+const projectShortDesc = document.getElementById("projectShortDesc");
+const projectContent = document.getElementById("projectContent");
+const projectRole = document.getElementById("projectRole");
+const projectYear = document.getElementById("projectYear");
+const projectImage = document.getElementById("projectImage");
 
 let allProjects = [];
+let currentProject = null;
+
+async function checkLogin(){
+    const { data } = await client.auth.getSession();
+
+    if(data.session){
+        document.body.classList.add("logged-in");
+    }else{
+        document.body.classList.remove("logged-in");
+    }
+}
 
 function closeDetail(){
     detailOverlay.classList.remove("show");
@@ -1419,18 +1377,15 @@ function closeDetail(){
 }
 
 function openDetail(project){
+    currentProject = project;
+
     detailImg.src = project.image_url || "";
     detailTitle.innerText = project.title || "Untitled";
     detailDesc.innerText = project.short_desc || "";
     detailType.innerText = project.category || "";
-
-    const roleBox = document.querySelector(".detail-meta div:nth-child(2) strong");
-    const yearBox = document.querySelector(".detail-meta div:nth-child(3) strong");
-    const storyBox = document.querySelector(".detail-long p");
-
-    roleBox.innerText = project.role || "Design / Visual";
-    yearBox.innerText = project.project_year || "2026";
-    storyBox.innerText = project.content || "상세 설명이 아직 없습니다.";
+    detailRole.innerText = project.role || "Design / Visual";
+    detailYear.innerText = project.project_year || "2026";
+    detailStory.innerText = project.content || "상세 설명이 아직 없습니다.";
 
     detailPanel.scrollTop = 0;
     detailOverlay.classList.remove("full");
@@ -1543,6 +1498,14 @@ detailPanel.addEventListener("scroll",()=>{
     }
 });
 
+adminPanel.addEventListener("scroll",()=>{
+    if(adminPanel.scrollTop > 35){
+        adminOverlay.classList.add("full");
+    }else{
+        adminOverlay.classList.remove("full");
+    }
+});
+
 detailClose.addEventListener("click",closeDetail);
 
 detailOverlay.addEventListener("click",(e)=>{
@@ -1551,7 +1514,187 @@ detailOverlay.addEventListener("click",(e)=>{
     }
 });
 
+function openAdmin(){
+    adminOverlay.classList.add("show");
+    adminOverlay.classList.remove("full");
+    adminPanel.scrollTop = 0;
+}
+
+function closeAdmin(){
+    adminOverlay.classList.remove("show");
+    adminOverlay.classList.remove("full");
+    adminPanel.scrollTop = 0;
+}
+
+categoryAddBtn.addEventListener("click",()=>{
+    resetForm();
+    openAdmin();
+});
+
+adminClose.addEventListener("click",closeAdmin);
+
+adminOverlay.addEventListener("click",(e)=>{
+    if(e.target === adminOverlay){
+        closeAdmin();
+    }
+});
+
+document.getElementById("loginBtn").addEventListener("click",async()=>{
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+
+    const { error } = await client.auth.signInWithPassword({
+        email,
+        password
+    });
+
+    if(error){
+        alert("로그인 실패: " + error.message);
+        return;
+    }
+
+    await checkLogin();
+    resetForm();
+});
+
+document.getElementById("logoutBtn").addEventListener("click",async()=>{
+    await client.auth.signOut();
+    document.body.classList.remove("logged-in");
+    closeAdmin();
+});
+
+async function uploadImage(){
+    const file = projectImage.files[0];
+
+    if(!file) return null;
+
+    const fileName = `${Date.now()}-${file.name}`;
+
+    const { error } = await client.storage
+        .from("portfolio")
+        .upload(fileName, file);
+
+    if(error){
+        alert("이미지 업로드 실패: " + error.message);
+        return null;
+    }
+
+    const { data } = client.storage
+        .from("portfolio")
+        .getPublicUrl(fileName);
+
+    return data.publicUrl;
+}
+
+document.getElementById("saveBtn").addEventListener("click",async()=>{
+    if(!projectTitle.value){
+        alert("제목을 입력해줘");
+        return;
+    }
+
+    adminStatus.innerText = "저장 중...";
+
+    const imageUrl = await uploadImage();
+
+    const projectData = {
+        title:projectTitle.value,
+        category:projectCategory.value,
+        short_desc:projectShortDesc.value,
+        content:projectContent.value,
+        role:projectRole.value,
+        project_year:projectYear.value
+    };
+
+    if(imageUrl){
+        projectData.image_url = imageUrl;
+    }
+
+    let result;
+
+    if(editId.value){
+        result = await client
+            .from("projects")
+            .update(projectData)
+            .eq("id", editId.value);
+    }else{
+        result = await client
+            .from("projects")
+            .insert(projectData);
+    }
+
+    if(result.error){
+        adminStatus.innerText = "";
+        alert("저장 실패: " + result.error.message);
+        return;
+    }
+
+    adminStatus.innerText = "저장 완료!";
+    await loadProjects();
+    resetForm();
+});
+
+document.getElementById("resetBtn").addEventListener("click",resetForm);
+
+document.getElementById("deleteBtn").addEventListener("click",async()=>{
+    if(!editId.value){
+        alert("삭제할 게시물이 없어");
+        return;
+    }
+
+    if(!confirm("정말 삭제할까?")) return;
+
+    const { error } = await client
+        .from("projects")
+        .delete()
+        .eq("id", editId.value);
+
+    if(error){
+        alert("삭제 실패: " + error.message);
+        return;
+    }
+
+    alert("삭제 완료");
+    resetForm();
+    closeAdmin();
+    closeDetail();
+    await loadProjects();
+});
+
+function resetForm(){
+    adminTitle.innerText = "ADD PROJECT";
+    editId.value = "";
+    projectTitle.value = "";
+    projectCategory.value = "brand";
+    projectShortDesc.value = "";
+    projectContent.value = "";
+    projectRole.value = "";
+    projectYear.value = "";
+    projectImage.value = "";
+    adminStatus.innerText = "";
+}
+
+function fillForm(project){
+    adminTitle.innerText = "EDIT PROJECT";
+    editId.value = project.id;
+    projectTitle.value = project.title || "";
+    projectCategory.value = project.category || "brand";
+    projectShortDesc.value = project.short_desc || "";
+    projectContent.value = project.content || "";
+    projectRole.value = project.role || "";
+    projectYear.value = project.project_year || "";
+    projectImage.value = "";
+}
+
+detailEditBtn.addEventListener("click",()=>{
+    if(!currentProject) return;
+    fillForm(currentProject);
+    closeDetail();
+    openAdmin();
+});
+
+checkLogin();
 loadProjects();
 </script>
+
 </body>
 </html>
