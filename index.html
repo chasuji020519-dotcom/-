@@ -3,1018 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio</title>
+<title>Portfolio Admin</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
-html{
-    scroll-behavior:smooth;
-    scroll-snap-type:y mandatory;
-}
-
 body{
-    background:#fff;
     font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;
+    background:#f4f4f4;
     color:#111;
-    overflow-x:hidden;
-    overscroll-behavior-y:contain;
+    padding:40px;
 }
 
-body.category-mode{
-    overflow:hidden;
+.admin-wrap{
+    max-width:1100px;
+    margin:auto;
 }
 
-body.category-mode .main-fixed,
-body.category-mode .about-panel,
-body.category-mode .about-hold{
-    display:none;
-}
-
-body.category-mode .scroll-area{
-    position:fixed;
-    inset:0;
-    z-index:1000;
-    margin-top:0;
-    overflow-y:auto;
-    background:#fff;
-}
-
-body.category-mode .category-panel{
-    min-height:100vh;
-    padding-top:70px;
-    box-shadow:none;
-    border-top:none;
-    scroll-snap-align:none;
-}
-
-.back-home-zone{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:105px;
-    z-index:900;
-    pointer-events:none;
-    cursor:pointer;
-}
-
-.back-home-zone.active{
-    pointer-events:auto;
-}
-
-body.category-mode .back-home-zone{
-    display:none;
-}
-
-.main-fixed{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100vh;
-    z-index:1;
-    background:#fff;
-    overflow:hidden;
-    scroll-snap-align:start;
-}
-
-.nav{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:32px 40px;
-    z-index:999;
-}
-
-body.category-mode .nav{
-    display:none;
-}
-
-.logo{
-    font-size:24px;
-    font-weight:700;
-    letter-spacing:.12em;
-    color:#111;
-    text-decoration:none;
-}
-
-.menu{
-    display:flex;
-    gap:24px;
-}
-
-.menu a{
-    text-decoration:none;
-    color:#111;
-    font-size:16px;
-    font-weight:400;
-    letter-spacing:.08em;
-}
-
-.hero{
-    width:100%;
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    padding:90px 0 0;
-}
-
-.hero-content{
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    width:100%;
-    padding:0 40px;
-}
-
-.title{
-    width:min(1500px,100%);
-    display:grid;
-    grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
-    align-items:center;
-    font-size:clamp(70px,7.5vw,130px);
-    font-weight:700;
-    letter-spacing:-0.08em;
-    line-height:1;
-}
-
-.fixed{
-    white-space:nowrap;
-    text-align:center;
-    padding:0 .2em;
+h1{
+    font-size:44px;
+    letter-spacing:-.06em;
+    margin-bottom:24px;
 }
 
 .box{
-    width:100%;
-    height:1.1em;
-    overflow:hidden;
-}
-
-.slider{
-    display:flex;
-    flex-direction:column;
-    animation:slideText 14s infinite ease-in-out;
-}
-
-.word{
-    height:1.1em;
-    line-height:1.1em;
-    white-space:nowrap;
-}
-
-.left .word{
-    text-align:right;
-    padding-right:.08em;
-}
-
-.right .word{
-    text-align:left;
-    padding-left:.08em;
-}
-
-.subtitle{
-    margin-top:30px;
-    font-size:18px;
-    color:#8a8a8a;
-    letter-spacing:-0.02em;
-}
-
-@keyframes slideText{
-    0%,16%{transform:translateY(0)}
-    22%,38%{transform:translateY(-1.1em)}
-    44%,60%{transform:translateY(-2.2em)}
-    66%,82%{transform:translateY(-3.3em)}
-    88%,100%{transform:translateY(-4.4em)}
-}
-
-.image-marquee{
-    position:relative;
-    width:100%;
-    overflow:hidden;
-}
-
-.image-marquee::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    z-index:2;
-    pointer-events:none;
-    background:linear-gradient(
-        to bottom,
-        rgba(255,255,255,1) 0%,
-        rgba(255,255,255,.65) 18%,
-        rgba(255,255,255,.12) 42%,
-        rgba(0,0,0,.18) 100%
-    );
-}
-
-.marquee-track{
-    display:flex;
-    width:max-content;
-    animation:marquee 38s linear infinite;
-}
-
-.project{
-    flex-shrink:0;
-    width:300px;
-    height:200px;
-    overflow:hidden;
-}
-
-.project img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-    filter:saturate(.9) contrast(1.05);
-}
-
-@keyframes marquee{
-    from{transform:translateX(0)}
-    to{transform:translateX(-50%)}
-}
-
-.scroll-area{
-    position:relative;
-    z-index:5;
-    margin-top:100vh;
-}
-
-.about-panel,
-.category-panel{
-    width:100%;
-    padding:70px 40px;
-    background:rgba(255,255,255,.58);
-    backdrop-filter:blur(32px);
-    -webkit-backdrop-filter:blur(32px);
-    border-top:1px solid rgba(255,255,255,.8);
-    box-shadow:0 -30px 90px rgba(0,0,0,.12);
-    scroll-snap-align:start;
-    scroll-snap-stop:always;
-}
-
-.about-panel{
-    position:sticky;
-    top:105px;
-    z-index:1;
-    min-height:calc(100vh - 105px);
-}
-
-.about-hold{
-    height:calc(100vh - 105px);
-    scroll-snap-align:none;
-}
-
-.category-panel{
-    position:relative;
-    z-index:3;
-    min-height:calc(100vh - 105px);
-    background:rgba(255,255,255,.72);
-    display:flex;
-    align-items:center;
-}
-
-.category-panel.opened{
-    align-items:flex-start;
-}
-
-.panel-inner{
-    max-width:1180px;
-    width:100%;
-    margin:0 auto;
-}
-
-.about-layout{
-    display:grid;
-    grid-template-columns:300px 1fr;
-    gap:48px;
-    align-items:start;
-}
-
-.profile-card{
-    border-radius:16px;
-    overflow:hidden;
-    background:rgba(255,255,255,.45);
-    border:1px solid rgba(255,255,255,.75);
-    box-shadow:0 18px 50px rgba(0,0,0,.08);
-}
-
-.profile-img{
-    width:100%;
-    height:360px;
-    background:#eee;
-    overflow:hidden;
-}
-
-.profile-img img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-}
-
-.profile-info{
-    padding:22px;
-}
-
-.profile-info h3{
-    font-size:22px;
-    letter-spacing:-.04em;
-    margin-bottom:8px;
-}
-
-.profile-info p{
-    font-size:13px;
-    line-height:1.65;
-    color:rgba(0,0,0,.55);
-}
-
-.panel-title{
-    font-size:clamp(28px,4vw,60px);
-    line-height:.95;
-    letter-spacing:-.075em;
-    margin-bottom:16px;
-}
-
-.panel-desc{
-    max-width:650px;
-    font-size:16px;
-    line-height:1.75;
-    color:rgba(0,0,0,.58);
-}
-
-.keyword-row{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:24px;
-}
-
-.keyword{
-    padding:8px 14px;
-    border-radius:999px;
-    background:rgba(255,255,255,.48);
-    border:1px solid rgba(0,0,0,.08);
-    font-size:12px;
-    color:rgba(0,0,0,.62);
-}
-
-.panel-cards{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-    margin-top:28px;
-}
-
-.card{
-    min-height:145px;
-    padding:22px;
-    border-radius:24px;
-    background:rgba(255,255,255,.42);
-    border:1px solid rgba(255,255,255,.7);
+    background:#fff;
+    border-radius:28px;
+    padding:28px;
+    margin-bottom:24px;
     box-shadow:0 14px 40px rgba(0,0,0,.06);
 }
 
-.card span{
-    display:block;
-    font-size:11px;
-    color:rgba(0,0,0,.38);
-    margin-bottom:22px;
-}
-
-.card h3{
-    font-size:21px;
-    letter-spacing:-.04em;
-    margin-bottom:10px;
-}
-
-.card p{
-    font-size:13px;
-    line-height:1.6;
-    color:rgba(0,0,0,.52);
-}
-
-/* CATEGORY */
-.category-head{
-    text-align:center;
-    transition:.65s cubic-bezier(.22,1,.36,1);
-}
-
-.category-panel.opened .category-head{
-    text-align:left;
-}
-
-.category-title-row{
-    display:flex;
-    align-items:center;
-    width:max-content;
-    margin-left:50%;
-    transform:translateX(-50%);
-    transition:.75s cubic-bezier(.22,1,.36,1);
-}
-
-.category-panel.opened .category-title-row{
+input,select,textarea{
     width:100%;
-    margin-left:0;
-    transform:translateX(0);
-    justify-content:space-between;
+    padding:14px 16px;
+    border:1px solid #ddd;
+    border-radius:14px;
+    margin-bottom:12px;
+    font-size:15px;
 }
 
-.category-title-row .panel-title{
-    margin-bottom:0;
+textarea{
+    min-height:150px;
+    resize:vertical;
 }
 
-.category-back-btn{
-    display:none;
-    width:56px;
-    height:56px;
+button{
     border:none;
-    background:transparent;
-    cursor:pointer;
-    flex-shrink:0;
-    transition:.3s ease;
-}
-
-.category-panel.opened .category-back-btn{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.category-back-btn svg{
-    width:44px;
-    height:44px;
-    overflow:visible;
-}
-
-.category-back-btn path{
-    fill:none;
-    stroke:#111;
-    stroke-width:3.2;
-    stroke-linecap:square;
-    stroke-linejoin:miter;
-}
-
-.category-back-btn:hover{
-    transform:translateX(-4px);
-}
-
-.category-head .panel-desc{
-    margin:16px auto 0;
-}
-
-.category-panel.opened .category-head .panel-desc{
-    margin-left:0;
-}
-
-.category-small{
-    margin-top:16px;
-    font-size:13px;
-    color:rgba(0,0,0,.45);
-    letter-spacing:.08em;
-}
-
-.category-buttons{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    flex-wrap:wrap;
-    width:max-content;
-    margin-top:34px;
-    margin-left:50%;
-    transform:translateX(-50%);
-    transition:.75s cubic-bezier(.22,1,.36,1);
-}
-
-.category-panel.opened .category-buttons{
-    margin-left:0;
-    transform:translateX(0);
-}
-
-.category-btn{
-    border:1px solid rgba(255,255,255,.75);
-    outline:none;
-    cursor:pointer;
-    padding:15px 30px;
     border-radius:999px;
-    background:linear-gradient(145deg,rgba(255,255,255,.72),rgba(255,255,255,.28));
-    color:#222;
-    font-size:16px;
-    font-weight:600;
-    letter-spacing:-.03em;
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-    box-shadow:inset 0 1px 1px rgba(255,255,255,.9),0 10px 28px rgba(0,0,0,.12);
-    transition:.35s cubic-bezier(.22,1,.36,1);
-}
-
-.category-btn:hover{
-    transform:translateY(-3px);
-}
-
-.category-btn.active{
-    background:rgba(17,17,17,.9);
+    padding:13px 22px;
+    background:#111;
     color:#fff;
+    cursor:pointer;
+    font-size:15px;
 }
 
-.category-preview{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:22px;
-    margin-top:56px;
-    opacity:.72;
-    filter:saturate(.85);
-    transition:.5s ease;
-}
-
-.category-panel.opened .category-preview{
-    opacity:0;
-    visibility:hidden;
-    transform:translateY(20px);
-    height:0;
-    margin-top:0;
-    overflow:hidden;
-}
-
-.preview-item{
-    height:260px;
-    border-radius:30px;
-    overflow:hidden;
-    position:relative;
-    background:rgba(255,255,255,.35);
-    border:1px solid rgba(255,255,255,.7);
-    box-shadow:0 18px 55px rgba(0,0,0,.09);
-}
-
-.preview-item img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-    filter:blur(1px) brightness(.88);
-    transform:scale(1.04);
-}
-
-.preview-item span{
-    position:absolute;
-    left:22px;
-    bottom:20px;
-    color:#fff;
-    font-size:22px;
-    font-weight:600;
-    letter-spacing:-.04em;
-    z-index:2;
-}
-
-.preview-item::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(to top,rgba(0,0,0,.48),rgba(0,0,0,.04));
-}
-
-.product-list{
-    position:relative;
-    margin-top:40px;
-    min-height:620px;
-}
-
-.category-panel:not(.opened) .product-list{
-    display:none;
-}
-
-.product-group{
-    position:absolute;
-    inset:0;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:28px;
-    opacity:0;
-    visibility:hidden;
-    transform:translateY(32px);
-    pointer-events:none;
-    transition:.65s cubic-bezier(.22,1,.36,1);
-}
-
-.product-group.active{
-    opacity:1;
-    visibility:visible;
-    transform:translateY(0);
-    pointer-events:auto;
-}
-
-.product-list.all-active{
-    min-height:0;
-}
-
-.product-list.all-active .product-group{
-    position:relative;
-    inset:auto;
-    margin-bottom:28px;
-}
-
-.product-list.all-active .product-group:last-child{
-    margin-bottom:0;
-}
-
-.product-item{
-    height:310px;
-    border-radius:30px;
-    overflow:hidden;
-    position:relative;
+button.sub{
     background:#eee;
-    box-shadow:0 20px 55px rgba(0,0,0,.09);
-    cursor:pointer;
+    color:#111;
 }
 
-.product-item img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-    transition:.45s ease;
-}
-
-.product-item:hover img{
-    transform:scale(1.06);
-}
-
-.product-info{
-    position:absolute;
-    left:0;
-    bottom:0;
-    width:100%;
-    padding:22px;
-    color:#fff;
-    background:linear-gradient(to top,rgba(0,0,0,.58),transparent);
-}
-
-.product-info h4{
-    font-size:20px;
-    letter-spacing:-.04em;
-}
-
-.product-info p{
-    margin-top:5px;
-    font-size:13px;
-    opacity:.8;
-}
-
-/* 상세 패드창 */
-.detail-overlay{
-    position:fixed;
-    inset:0;
-    z-index:5000;
+.btn-row{
     display:flex;
-    align-items:flex-end;
-    background:rgba(0,0,0,.22);
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
-    opacity:0;
-    visibility:hidden;
-    transition:.35s ease;
+    gap:8px;
+    flex-wrap:wrap;
 }
 
-.detail-overlay.show{
-    opacity:1;
-    visibility:visible;
-}
-
-.detail-panel{
-    width:100%;
-    height:88vh;
-    max-height:100vh;
-    background:rgba(255,255,255,.96);
-    border-radius:38px 38px 0 0;
-    overflow-y:auto;
-    transform:translateY(100%);
-    transition:
-        transform .7s cubic-bezier(.22,1,.36,1),
-        height .45s cubic-bezier(.22,1,.36,1),
-        border-radius .45s cubic-bezier(.22,1,.36,1);
-    box-shadow:0 -30px 90px rgba(0,0,0,.18);
-    scroll-behavior:smooth;
-}
-
-.detail-overlay.show .detail-panel{
-    transform:translateY(0);
-}
-
-.detail-overlay.full{
-    background:rgba(0,0,0,.08);
-}
-
-.detail-overlay.full .detail-panel{
-    height:100vh;
-    border-radius:0;
-}
-
-.detail-close{
-    position:sticky;
-    top:22px;
-    margin:22px 24px 0 auto;
-    width:48px;
-    height:48px;
-    border:none;
-    border-radius:50%;
-    background:rgba(255,255,255,.9);
-    box-shadow:0 8px 24px rgba(0,0,0,.1);
-    cursor:pointer;
-    display:flex;
+.project-card{
+    display:grid;
+    grid-template-columns:160px 1fr auto;
+    gap:18px;
     align-items:center;
-    justify-content:center;
-    z-index:20;
+    padding:18px 0;
+    border-bottom:1px solid #eee;
 }
 
-.detail-close svg{
-    width:22px;
-    height:22px;
-}
-
-.detail-close path{
-    stroke:#111;
-    stroke-width:2;
-    fill:none;
-    stroke-linecap:round;
-}
-
-.detail-image{
-    width:100%;
-    height:430px;
-    margin-top:-48px;
+.project-card img{
+    width:160px;
+    height:110px;
+    object-fit:cover;
+    border-radius:18px;
     background:#eee;
 }
 
-.detail-image img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
+.project-card h3{
+    font-size:22px;
+    letter-spacing:-.04em;
 }
 
-.detail-content{
-    max-width:1050px;
-    margin:0 auto;
-    padding:58px 40px 120px;
+.project-card p{
+    margin-top:6px;
+    color:#777;
+    font-size:14px;
 }
 
-.detail-category{
-    display:block;
-    margin-bottom:16px;
-    font-size:12px;
-    letter-spacing:.16em;
-    color:rgba(0,0,0,.45);
-}
-
-.detail-content h2{
-    font-size:clamp(38px,5vw,72px);
-    line-height:.95;
-    letter-spacing:-.07em;
-}
-
-.detail-content p{
-    max-width:720px;
-    margin-top:24px;
-    font-size:17px;
-    line-height:1.8;
-    color:rgba(0,0,0,.62);
-}
-
-.detail-meta{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:14px;
-    margin-top:42px;
-}
-
-.detail-meta div{
-    padding:22px;
-    border-radius:24px;
-    background:rgba(255,255,255,.65);
-    border:1px solid rgba(0,0,0,.06);
-}
-
-.detail-meta span{
-    display:block;
-    font-size:12px;
-    color:rgba(0,0,0,.38);
-    margin-bottom:10px;
-}
-
-.detail-meta strong{
-    font-size:16px;
-    letter-spacing:-.03em;
-}
-
-.detail-long{
-    margin-top:46px;
-    padding-top:40px;
-    border-top:1px solid rgba(0,0,0,.08);
-}
-
-.detail-long h3{
-    font-size:26px;
-    letter-spacing:-.05em;
-    margin-bottom:16px;
-}
-
-.detail-long p{
-    margin-top:0;
-    margin-bottom:22px;
-}
-
-#contact{
+.hidden{
     display:none;
-}
-
-@media(max-width:900px){
-    .about-layout{
-        grid-template-columns:1fr;
-        gap:34px;
-    }
-
-    .profile-card{
-        max-width:360px;
-    }
-
-    .panel-cards{
-        grid-template-columns:1fr;
-    }
-
-    .product-group{
-        grid-template-columns:repeat(2,1fr);
-        gap:20px;
-    }
-
-    .product-list{
-        min-height:900px;
-    }
-
-    .product-list.all-active{
-        min-height:0;
-    }
-
-    .detail-meta{
-        grid-template-columns:1fr;
-    }
 }
 
 @media(max-width:768px){
-    .back-home-zone{
-        height:86px;
+    body{padding:20px}
+    .project-card{
+        grid-template-columns:1fr;
     }
-
-    .nav{
-        padding:28px 24px;
-    }
-
-    .logo{
-        font-size:15px;
-    }
-
-    .menu{
-        gap:15px;
-    }
-
-    .menu a{
-        font-size:10px;
-    }
-
-    .hero{
-        padding:80px 0 0;
-    }
-
-    .hero-content{
-        padding:0 24px;
-    }
-
-    .title{
-        font-size:clamp(44px,11vw,76px);
-    }
-
-    .subtitle{
-        font-size:15px;
-        text-align:center;
-        margin-top:24px;
-    }
-
-    .project{
-        width:280px;
-        height:180px;
-    }
-
-    .about-panel{
-        top:86px;
-        min-height:calc(100vh - 86px);
-        padding:42px 24px 48px;
-    }
-
-    .about-hold{
-        height:calc(100vh - 86px);
-    }
-
-    .category-panel{
-        min-height:calc(100vh - 86px);
-        padding:42px 24px 48px;
-    }
-
-    body.category-mode .category-panel{
-        min-height:100vh;
-        padding:42px 24px 48px;
-    }
-
-    .panel-title{
-        font-size:clamp(42px,12vw,68px);
-    }
-
-    .panel-desc{
-        font-size:15px;
-    }
-
-    .profile-img{
-        height:390px;
-    }
-
-    .category-buttons{
-        margin-left:0;
-        transform:none;
+    .project-card img{
         width:100%;
-        flex-wrap:nowrap;
-        overflow-x:auto;
-        padding-bottom:10px;
-    }
-
-    .category-panel.opened .category-buttons{
-        transform:none;
-    }
-
-    .category-btn{
-        flex:0 0 auto;
-        padding:12px 22px;
-        font-size:15px;
-    }
-
-    .category-back-btn{
-        width:44px;
-        height:44px;
-    }
-
-    .category-preview{
-        grid-template-columns:1fr;
-        gap:18px;
-        margin-top:36px;
-    }
-
-    .preview-item{
-        height:210px;
-    }
-
-    .product-list{
-        margin-top:34px;
-        min-height:1120px;
-    }
-
-    .product-list.all-active{
-        min-height:0;
-    }
-
-    .product-group{
-        grid-template-columns:1fr;
-        gap:22px;
-    }
-
-    .product-item{
-        height:260px;
-    }
-
-    .detail-panel{
-        height:90vh;
-        border-radius:30px 30px 0 0;
-    }
-
-    .detail-overlay.full .detail-panel{
-        height:100vh;
-        border-radius:0;
-    }
-
-    .detail-image{
-        height:300px;
-    }
-
-    .detail-content{
-        padding:42px 24px 90px;
-    }
-
-    .detail-content p{
-        font-size:15px;
+        height:220px;
     }
 }
 </style>
@@ -1022,485 +118,255 @@ body.category-mode .nav{
 
 <body>
 
-<div class="back-home-zone"></div>
+<div class="admin-wrap">
 
-<div class="main-fixed" id="top">
+    <h1>Portfolio Admin</h1>
 
-    <nav class="nav">
-        <a href="#top" class="logo">Portfolio</a>
+    <div class="box" id="loginBox">
+        <h2>관리자 로그인</h2><br>
 
-        <div class="menu">
-            <a href="#top">HOME</a>
-            <a href="#about">ABOUT</a>
-            <a href="#category">CATEGORY</a>
-            <a href="#contact">CONTACT</a>
-        </div>
-    </nav>
+        <input type="email" id="email" placeholder="이메일">
+        <input type="password" id="password" placeholder="비밀번호">
 
-    <section class="hero">
+        <button onclick="login()">로그인</button>
+    </div>
 
-        <div class="hero-content">
-            <h1 class="title">
+    <div id="adminArea" class="hidden">
 
-                <div class="box left">
-                    <div class="slider">
-                        <div class="word">감각을</div>
-                        <div class="word">가치를</div>
-                        <div class="word">경험을</div>
-                        <div class="word">생각을</div>
-                        <div class="word">감각을</div>
-                    </div>
-                </div>
+        <div class="box">
+            <h2 id="formTitle">게시물 등록</h2><br>
 
-                <span class="fixed">담은</span>
+            <input type="hidden" id="editId">
 
-                <div class="box right">
-                    <div class="slider">
-                        <div class="word">디자인</div>
-                        <div class="word">퀄리티</div>
-                        <div class="word">임팩트</div>
-                        <div class="word">디테일</div>
-                        <div class="word">디자인</div>
-                    </div>
-                </div>
+            <input type="text" id="title" placeholder="제목">
 
-            </h1>
+            <select id="category">
+                <option value="brand">브랜드</option>
+                <option value="graphic">그래픽</option>
+                <option value="ui">UI</option>
+                <option value="artwork">아트웍</option>
+            </select>
 
-            <p class="subtitle">
-                작은 브랜드라도 온라인에서는 단단하게 보여야 하니까요.
-            </p>
-        </div>
+            <input type="text" id="shortDesc" placeholder="짧은 설명 예: Logo / Identity">
 
-        <div class="image-marquee">
-            <div class="marquee-track">
+            <textarea id="content" placeholder="상세 설명"></textarea>
 
-                <div class="project"><img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg"></div>
-                <div class="project"><img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg"></div>
-                <div class="project"><img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg"></div>
-                <div class="project"><img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg"></div>
-                <div class="project"><img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg"></div>
+            <input type="text" id="role" placeholder="작업 역할 예: Design / Visual">
+            <input type="text" id="projectYear" placeholder="연도 예: 2026">
 
-                <div class="project"><img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg"></div>
-                <div class="project"><img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg"></div>
-                <div class="project"><img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg"></div>
-                <div class="project"><img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg"></div>
-                <div class="project"><img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg"></div>
+            <input type="file" id="imageFile" accept="image/*">
 
+            <div class="btn-row">
+                <button onclick="saveProject()">저장하기</button>
+                <button class="sub" onclick="resetForm()">새 글 작성</button>
+                <button class="sub" onclick="logout()">로그아웃</button>
             </div>
         </div>
 
-    </section>
-
-</div>
-
-<div class="scroll-area">
-
-    <section class="about-panel" id="about">
-
-        <div class="panel-inner">
-
-            <div class="about-layout">
-
-                <div class="profile-card">
-                    <div class="profile-img">
-                        <img src="https://i.pinimg.com/736x/ff/0d/2a/ff0d2a921264637b1268a56fae27867c.jpg" alt="profile image">
-                    </div>
-
-                    <div class="profile-info">
-                        <h3>CHA SUJI _ 차수지</h3>
-                        <p>
-                            01080195019<br>
-                            suji020519@kakao.com
-                        </p>
-                    </div>
-                </div>
-
-                <div class="about-content">
-
-                    <h2 class="panel-title">ABOUT</h2>
-
-                    <p class="panel-desc">
-                        감각적인 비주얼과 섬세한 디테일을 바탕으로 브랜드의 분위기를 정리하고,<br>
-                        보는 사람이 오래 기억할 수 있는 디자인을 만듭니다.
-                    </p>
-
-                    <div class="keyword-row">
-                        <span class="keyword">불꽃같은 열정으로 꽃피우는</span>
-                        <span class="keyword">디자이너 차수지입니다.</span>
-                        <span class="keyword">Detail</span>
-                        <span class="keyword">Layout</span>
-                        <span class="keyword">Portfolio</span>
-                    </div>
-
-                    <div class="panel-cards">
-
-                        <div class="card">
-                            <span>01</span>
-                            <h3>Brand Design</h3>
-                            <p>브랜드의 방향성과 분위기를 시각적으로 정리하는 작업입니다.</p>
-                        </div>
-
-                        <div class="card">
-                            <span>02</span>
-                            <h3>Graphic Design</h3>
-                            <p>포스터, 콘텐츠, 편집 디자인 등 인상적인 비주얼을 만듭니다.</p>
-                        </div>
-
-                        <div class="card">
-                            <span>03</span>
-                            <h3>UI Concept</h3>
-                            <p>웹과 모바일 화면에서 보기 좋은 구조와 흐름을 설계합니다.</p>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <div class="about-hold"></div>
-
-    <section class="category-panel" id="category">
-
-        <div class="panel-inner">
-
-            <div class="category-head">
-
-                <div class="category-title-row">
-                    <h2 class="panel-title">CATEGORY</h2>
-
-                    <button class="category-back-btn" aria-label="Back">
-                        <svg viewBox="0 0 48 48" aria-hidden="true">
-                            <path d="M28 12 L16 24 L28 36" />
-                            <path d="M17 24 H38" />
-                        </svg>
-                    </button>
-                </div>
-
-                <p class="panel-desc">
-                    작업 유형별로 포트폴리오를 볼 수 있도록 정리했습니다.
-                </p>
-
-                <p class="category-small">SELECT YOUR PROJECT</p>
-
-            </div>
-
-            <div class="category-buttons">
-                <button class="category-btn" data-tab="all">전체</button>
-                <button class="category-btn" data-tab="brand">브랜드</button>
-                <button class="category-btn" data-tab="graphic">그래픽</button>
-                <button class="category-btn" data-tab="ui">UI</button>
-                <button class="category-btn" data-tab="artwork">아트웍</button>
-            </div>
-
-            <div class="category-preview">
-                <div class="preview-item">
-                    <img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg">
-                    <span>Brand</span>
-                </div>
-                <div class="preview-item">
-                    <img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg">
-                    <span>Graphic</span>
-                </div>
-                <div class="preview-item">
-                    <img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg">
-                    <span>UI Concept</span>
-                </div>
-            </div>
-
-            <div class="product-list">
-
-                <div class="product-group" data-category="brand">
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg">
-                        <div class="product-info">
-                            <h4>Brand Project 01</h4>
-                            <p>Logo / Identity</p>
-                        </div>
-                    </div>
-
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg">
-                        <div class="product-info">
-                            <h4>Brand Project 02</h4>
-                            <p>Mood / Package</p>
-                        </div>
-                    </div>
-
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg">
-                        <div class="product-info">
-                            <h4>Brand Project 03</h4>
-                            <p>Visual System</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-group" data-category="graphic">
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg">
-                        <div class="product-info">
-                            <h4>Graphic Project 01</h4>
-                            <p>Poster / Layout</p>
-                        </div>
-                    </div>
-
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg">
-                        <div class="product-info">
-                            <h4>Graphic Project 02</h4>
-                            <p>Banner / Contents</p>
-                        </div>
-                    </div>
-
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/ff/0d/2a/ff0d2a921264637b1268a56fae27867c.jpg">
-                        <div class="product-info">
-                            <h4>Graphic Project 03</h4>
-                            <p>Editorial / Visual</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-group" data-category="ui">
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg">
-                        <div class="product-info">
-                            <h4>UI Project 01</h4>
-                            <p>Website / UI</p>
-                        </div>
-                    </div>
-
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg">
-                        <div class="product-info">
-                            <h4>UI Project 02</h4>
-                            <p>Mobile / App</p>
-                        </div>
-                    </div>
-
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg">
-                        <div class="product-info">
-                            <h4>UI Project 03</h4>
-                            <p>Landing / Web</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-group" data-category="artwork">
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg">
-                        <div class="product-info">
-                            <h4>Artwork 01</h4>
-                            <p>Visual / Mood</p>
-                        </div>
-                    </div>
-
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg">
-                        <div class="product-info">
-                            <h4>Artwork 02</h4>
-                            <p>Art Direction</p>
-                        </div>
-                    </div>
-
-                    <div class="product-item">
-                        <img src="https://i.pinimg.com/736x/ff/0d/2a/ff0d2a921264637b1268a56fae27867c.jpg">
-                        <div class="product-info">
-                            <h4>Artwork 03</h4>
-                            <p>Concept Visual</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <section id="contact"></section>
-
-</div>
-
-<div class="detail-overlay">
-    <div class="detail-panel">
-
-        <button class="detail-close" aria-label="Close">
-            <svg viewBox="0 0 24 24">
-                <path d="M6 6L18 18M18 6L6 18"/>
-            </svg>
-        </button>
-
-        <div class="detail-image">
-            <img id="detailImg" src="" alt="project detail image">
-        </div>
-
-        <div class="detail-content">
-            <span class="detail-category">PORTFOLIO PROJECT</span>
-
-            <h2 id="detailTitle">Project Title</h2>
-
-            <p id="detailDesc">
-                프로젝트 상세 설명이 들어갑니다.
-            </p>
-
-            <div class="detail-meta">
-                <div>
-                    <span>TYPE</span>
-                    <strong id="detailType">Brand Design</strong>
-                </div>
-
-                <div>
-                    <span>ROLE</span>
-                    <strong>Design / Visual</strong>
-                </div>
-
-                <div>
-                    <span>YEAR</span>
-                    <strong>2026</strong>
-                </div>
-            </div>
-
-            <div class="detail-long">
-                <h3>Project Story</h3>
-                <p>
-                    이 영역은 상세 설명이 길어질 때 사용하는 공간입니다. 프로젝트의 목적, 디자인 방향,
-                    작업 과정, 사용한 컬러와 레이아웃, 완성 결과까지 자연스럽게 작성할 수 있습니다.
-                </p>
-
-                <p>
-                    상세 내용이 길어지면 이 패널 안에서 스크롤할 수 있고, 스크롤을 조금 내리면 패널이
-                    화면 위까지 확장되어 더 넓게 볼 수 있도록 설정했습니다.
-                </p>
-
-                <p>
-                    실제 포트폴리오에서는 이곳에 작업 의도, 문제 해결 과정, 디자인 포인트, 결과물 설명을
-                    넣으면 좋아요.
-                </p>
-            </div>
+        <div class="box">
+            <h2>게시물 목록</h2>
+            <div id="projectList"></div>
         </div>
 
     </div>
+
 </div>
 
 <script>
-const categoryPanel = document.querySelector(".category-panel");
-const buttons = document.querySelectorAll(".category-btn");
-const groups = document.querySelectorAll(".product-group");
-const productList = document.querySelector(".product-list");
-const backZone = document.querySelector(".back-home-zone");
-const categoryBackBtn = document.querySelector(".category-back-btn");
-const scrollArea = document.querySelector(".scroll-area");
+const SUPABASE_URL = "https://cwnfcrokfkhmguvsqcgs.supabase.co";
+const SUPABASE_KEY = "sb_publishable_nlc6fsuk7kscuECiLoZImg_P_-Psp_S";
 
-buttons.forEach(button=>{
-    button.addEventListener("click",()=>{
-        const target = button.dataset.tab;
+const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        document.body.classList.add("category-mode");
-        categoryPanel.classList.add("opened");
+const loginBox = document.getElementById("loginBox");
+const adminArea = document.getElementById("adminArea");
+const projectList = document.getElementById("projectList");
 
-        scrollArea.scrollTo({
-            top:0,
-            behavior:"smooth"
-        });
+async function checkLogin(){
+    const { data } = await client.auth.getSession();
 
-        buttons.forEach(btn=>btn.classList.remove("active"));
-        groups.forEach(group=>group.classList.remove("active"));
-        productList.classList.remove("all-active");
-
-        button.classList.add("active");
-
-        if(target === "all"){
-            productList.classList.add("all-active");
-            groups.forEach(group=>group.classList.add("active"));
-        }else{
-            const selected = document.querySelector(`[data-category="${target}"]`);
-            if(selected) selected.classList.add("active");
-        }
-    });
-});
-
-categoryBackBtn.addEventListener("click",()=>{
-    document.body.classList.remove("category-mode");
-    categoryPanel.classList.remove("opened");
-
-    buttons.forEach(btn=>btn.classList.remove("active"));
-    groups.forEach(group=>group.classList.remove("active"));
-    productList.classList.remove("all-active");
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-});
-
-window.addEventListener("scroll",()=>{
-    backZone.classList.toggle("active", window.scrollY > 300);
-});
-
-backZone.addEventListener("click",()=>{
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-});
-
-/* 상세 패널 */
-const detailOverlay = document.querySelector(".detail-overlay");
-const detailPanel = document.querySelector(".detail-panel");
-const detailClose = document.querySelector(".detail-close");
-const detailImg = document.getElementById("detailImg");
-const detailTitle = document.getElementById("detailTitle");
-const detailDesc = document.getElementById("detailDesc");
-const detailType = document.getElementById("detailType");
-
-function closeDetail(){
-    detailOverlay.classList.remove("show");
-    detailOverlay.classList.remove("full");
-    detailPanel.scrollTop = 0;
+    if(data.session){
+        loginBox.classList.add("hidden");
+        adminArea.classList.remove("hidden");
+        loadProjects();
+    }
 }
 
-document.querySelectorAll(".product-item").forEach(item=>{
-    item.addEventListener("click",()=>{
+async function login(){
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
 
-        const img = item.querySelector("img").getAttribute("src");
-        const title = item.querySelector("h4").innerText;
-        const type = item.querySelector("p").innerText;
-
-        detailImg.setAttribute("src", img);
-        detailTitle.innerText = title;
-        detailType.innerText = type;
-
-        detailDesc.innerText =
-        "이 프로젝트는 브랜드의 분위기와 시각적 완성도를 높이기 위해 구성한 작업입니다. 메인 비주얼, 컬러감, 레이아웃, 디테일 요소를 중심으로 전체적인 무드를 정리했습니다.";
-
-        detailPanel.scrollTop = 0;
-        detailOverlay.classList.remove("full");
-        detailOverlay.classList.add("show");
+    const { error } = await client.auth.signInWithPassword({
+        email,
+        password
     });
-});
 
-detailPanel.addEventListener("scroll",()=>{
-    if(detailPanel.scrollTop > 35){
-        detailOverlay.classList.add("full");
+    if(error){
+        alert("로그인 실패: " + error.message);
+        return;
+    }
+
+    checkLogin();
+}
+
+async function logout(){
+    await client.auth.signOut();
+    location.reload();
+}
+
+async function uploadImage(){
+    const file = document.getElementById("imageFile").files[0];
+
+    if(!file) return null;
+
+    const fileName = `${Date.now()}-${file.name}`;
+
+    const { error } = await client.storage
+        .from("portfolio")
+        .upload(fileName, file);
+
+    if(error){
+        alert("이미지 업로드 실패: " + error.message);
+        return null;
+    }
+
+    const { data } = client.storage
+        .from("portfolio")
+        .getPublicUrl(fileName);
+
+    return data.publicUrl;
+}
+
+async function saveProject(){
+    const editId = document.getElementById("editId").value;
+
+    const title = document.getElementById("title").value;
+    const category = document.getElementById("category").value;
+    const shortDesc = document.getElementById("shortDesc").value;
+    const content = document.getElementById("content").value;
+    const role = document.getElementById("role").value;
+    const projectYear = document.getElementById("projectYear").value;
+
+    if(!title){
+        alert("제목을 입력해줘");
+        return;
+    }
+
+    const imageUrl = await uploadImage();
+
+    const projectData = {
+        title:title,
+        category:category,
+        short_desc:shortDesc,
+        content:content,
+        role:role,
+        project_year:projectYear
+    };
+
+    if(imageUrl){
+        projectData.image_url = imageUrl;
+    }
+
+    let result;
+
+    if(editId){
+        result = await client
+            .from("projects")
+            .update(projectData)
+            .eq("id", editId);
     }else{
-        detailOverlay.classList.remove("full");
+        result = await client
+            .from("projects")
+            .insert(projectData);
     }
-});
 
-detailClose.addEventListener("click",closeDetail);
-
-detailOverlay.addEventListener("click",(e)=>{
-    if(e.target === detailOverlay){
-        closeDetail();
+    if(result.error){
+        alert("저장 실패: " + result.error.message);
+        return;
     }
-});
+
+    alert("저장 완료!");
+    resetForm();
+    loadProjects();
+}
+
+async function loadProjects(){
+    const { data, error } = await client
+        .from("projects")
+        .select("*")
+        .order("created_at", { ascending:false });
+
+    if(error){
+        projectList.innerHTML = "불러오기 실패";
+        return;
+    }
+
+    if(!data.length){
+        projectList.innerHTML = "<p>아직 게시물이 없어.</p>";
+        return;
+    }
+
+    projectList.innerHTML = data.map(project=>`
+        <div class="project-card">
+            <img src="${project.image_url || ""}">
+            <div>
+                <h3>${project.title}</h3>
+                <p>${project.category} / ${project.short_desc || ""}</p>
+            </div>
+            <div class="btn-row">
+                <button onclick='editProject(${JSON.stringify(project)})'>수정</button>
+                <button class="sub" onclick="deleteProject(${project.id})">삭제</button>
+            </div>
+        </div>
+    `).join("");
+}
+
+function editProject(project){
+    document.getElementById("formTitle").innerText = "게시물 수정";
+    document.getElementById("editId").value = project.id;
+    document.getElementById("title").value = project.title || "";
+    document.getElementById("category").value = project.category || "brand";
+    document.getElementById("shortDesc").value = project.short_desc || "";
+    document.getElementById("content").value = project.content || "";
+    document.getElementById("role").value = project.role || "";
+    document.getElementById("projectYear").value = project.project_year || "";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+async function deleteProject(id){
+    if(!confirm("정말 삭제할까?")) return;
+
+    const { error } = await client
+        .from("projects")
+        .delete()
+        .eq("id", id);
+
+    if(error){
+        alert("삭제 실패: " + error.message);
+        return;
+    }
+
+    alert("삭제 완료!");
+    loadProjects();
+}
+
+function resetForm(){
+    document.getElementById("formTitle").innerText = "게시물 등록";
+    document.getElementById("editId").value = "";
+    document.getElementById("title").value = "";
+    document.getElementById("category").value = "brand";
+    document.getElementById("shortDesc").value = "";
+    document.getElementById("content").value = "";
+    document.getElementById("role").value = "";
+    document.getElementById("projectYear").value = "";
+    document.getElementById("imageFile").value = "";
+}
+
+checkLogin();
 </script>
 
 </body>
