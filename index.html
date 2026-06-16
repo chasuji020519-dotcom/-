@@ -1015,6 +1015,43 @@ body.logged-in #loginBox{display:none}
 
     .detail-content p{font-size:15px}
 }
+    /* 전체 보기일 때 게시물 3열로 정렬 */
+.product-list.all-active{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:28px;
+}
+
+.product-list.all-active .product-group{
+    display:contents;
+}
+
+.product-list.all-active .product-item{
+    width:100%;
+}
+
+/* 개별 카테고리일 때 3열 */
+.product-group.active{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:28px;
+}
+
+/* 태블릿 */
+@media(max-width:900px){
+    .product-list.all-active,
+    .product-group.active{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+}
+
+/* 모바일 */
+@media(max-width:768px){
+    .product-list.all-active,
+    .product-group.active{
+        grid-template-columns:1fr;
+    }
+}
 </style>
 </head>
 
