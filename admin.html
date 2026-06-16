@@ -36,6 +36,13 @@ h1{
     box-shadow:0 14px 40px rgba(0,0,0,.06);
 }
 
+label{
+    display:block;
+    margin:16px 0 8px;
+    font-size:13px;
+    color:#777;
+}
+
 input,select,textarea{
     width:100%;
     padding:14px 16px;
@@ -46,7 +53,7 @@ input,select,textarea{
 }
 
 textarea{
-    min-height:150px;
+    min-height:180px;
     resize:vertical;
 }
 
@@ -97,6 +104,12 @@ button.sub{
     margin-top:6px;
     color:#777;
     font-size:14px;
+}
+
+.notice{
+    font-size:13px;
+    color:#777;
+    margin:-4px 0 12px;
 }
 
 .hidden{
@@ -154,7 +167,13 @@ button.sub{
             <input type="text" id="role" placeholder="작업 역할 예: Design / Visual">
             <input type="text" id="projectYear" placeholder="연도 예: 2026">
 
+            <label>대표 이미지 1장</label>
             <input type="file" id="imageFile" accept="image/*">
+            <p class="notice">카테고리 카드와 상세 상단에 보이는 대표 이미지야.</p>
+
+            <label>상세 이미지 여러 장</label>
+            <input type="file" id="detailImageFiles" accept="image/*" multiple>
+            <p class="notice">상세 페이지 아래에 세로로 여러 장 보여질 이미지야.</p>
 
             <div class="btn-row">
                 <button onclick="saveProject()">저장하기</button>
@@ -214,7 +233,7 @@ async function logout(){
     location.reload();
 }
 
-async function uploadImage(){
+async function uploadSingleImage(){
     const file = document.getElementById("imageFile").files[0];
 
     if(!file) return null;
@@ -226,7 +245,7 @@ async function uploadImage(){
         .upload(fileName, file);
 
     if(error){
-        alert("이미지 업로드 실패: " + error.message);
+        alert("대표 이미지 업로드 실패: " + error.message);
         return null;
     }
 
@@ -235,6 +254,35 @@ async function uploadImage(){
         .getPublicUrl(fileName);
 
     return data.publicUrl;
+}
+
+async function uploadDetailImages(){
+    const files = document.getElementById("detailImageFiles").files;
+
+    if(!files || files.length === 0) return null;
+
+    const urls = [];
+
+    for(const file of files){
+        const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}-${file.name}`;
+
+        const { error } = await client.storage
+            .from("portfolio")
+            .upload(fileName, file);
+
+        if(error){
+            alert("상세 이미지 업로드 실패: " + error.message);
+            return null;
+        }
+
+        const { data } = client.storage
+            .from("portfolio")
+            .getPublicUrl(fileName);
+
+        urls.push(data.publicUrl);
+    }
+
+    return urls;
 }
 
 async function saveProject(){
@@ -252,7 +300,8 @@ async function saveProject(){
         return;
     }
 
-    const imageUrl = await uploadImage();
+    const imageUrl = await uploadSingleImage();
+    const detailImages = await uploadDetailImages();
 
     const projectData = {
         title:title,
@@ -265,6 +314,10 @@ async function saveProject(){
 
     if(imageUrl){
         projectData.image_url = imageUrl;
+    }
+
+    if(detailImages){
+        projectData.detail_images = detailImages;
     }
 
     let result;
@@ -312,6 +365,7 @@ async function loadProjects(){
             <div>
                 <h3>${project.title}</h3>
                 <p>${project.category} / ${project.short_desc || ""}</p>
+                <p>상세 이미지 ${(project.detail_images || []).length}장</p>
             </div>
             <div class="btn-row">
                 <button onclick='editProject(${JSON.stringify(project)})'>수정</button>
@@ -330,6 +384,9 @@ function editProject(project){
     document.getElementById("content").value = project.content || "";
     document.getElementById("role").value = project.role || "";
     document.getElementById("projectYear").value = project.project_year || "";
+
+    document.getElementById("imageFile").value = "";
+    document.getElementById("detailImageFiles").value = "";
 
     window.scrollTo({
         top:0,
@@ -364,6 +421,7 @@ function resetForm(){
     document.getElementById("role").value = "";
     document.getElementById("projectYear").value = "";
     document.getElementById("imageFile").value = "";
+    document.getElementById("detailImageFiles").value = "";
 }
 
 checkLogin();
