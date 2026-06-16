@@ -164,18 +164,199 @@ body.logged-in #loginBox{display:none}
 .product-list{min-height:900px}.product-list.all-active{min-height:0}.detail-meta{grid-template-columns:1fr}.detail-preview-list{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:768px){
-.back-home-zone{height:86px}.nav{padding:28px 24px}.logo{font-size:15px}.menu{gap:15px}.menu a{font-size:10px}.hero{padding:80px 0 0}.hero-content{padding:0 24px}.title{font-size:clamp(44px,11vw,76px)}.subtitle{font-size:15px;text-align:center;margin-top:24px}.project{width:280px;height:180px}
-.about-panel{top:86px;min-height:calc(100vh - 86px);padding:42px 24px 48px}.about-hold{
-  height:1px;
-  scroll-snap-align:none;
-}
-}.category-panel{min-height:calc(100vh - 86px);padding:42px 24px 48px}body.category-mode .category-panel{min-height:100vh;padding:42px 24px 48px}
-.panel-title{font-size:clamp(42px,12vw,68px)}.panel-desc{font-size:15px}.profile-img{height:390px}
-.category-buttons{margin-left:0;transform:none;width:100%;flex-wrap:nowrap;overflow-x:auto;padding-bottom:10px}.category-panel.opened .category-buttons{transform:none}.category-btn{flex:0 0 auto;padding:12px 22px;font-size:15px}
-.category-back-btn,.category-add-btn{width:44px;height:44px}.category-add-btn{font-size:28px}.category-preview{grid-template-columns:1fr;gap:18px;margin-top:36px}.preview-item{height:210px}
-.product-list{margin-top:34px;min-height:1120px}.product-list.all-active{min-height:0}.product-list.all-active,.product-group.active{grid-template-columns:1fr}.product-item{height:260px}
-.detail-panel,.admin-panel{height:90vh;border-radius:30px 30px 0 0}.detail-overlay.full .detail-panel,.admin-overlay.full .admin-panel{height:100vh;border-radius:0}
-.detail-image{padding:0 24px}.detail-image img{max-height:360px;border-radius:22px}.detail-content,.admin-content{padding:42px 24px 90px}.detail-content p{font-size:15px}.detail-preview-list{grid-template-columns:1fr}
+
+  html{
+
+    scroll-padding-top:86px;
+
+  }
+
+  .back-home-zone{height:86px}
+
+  .nav{padding:28px 24px}
+
+  .logo{font-size:15px}
+
+  .menu{gap:15px}
+
+  .menu a{font-size:10px}
+
+  .hero{padding:80px 0 0}
+
+  .hero-content{padding:0 24px}
+
+  .title{font-size:clamp(44px,11vw,76px)}
+
+  .subtitle{font-size:15px;text-align:center;margin-top:24px}
+
+  .project{width:280px;height:180px}
+
+  .about-panel{
+
+    top:86px;
+
+    min-height:calc(100vh - 86px);
+
+    padding:42px 24px 48px;
+
+  }
+
+  .about-hold{
+
+    height:1px;
+
+    scroll-snap-align:none;
+
+  }
+
+  .category-panel{
+
+    min-height:calc(100vh - 86px);
+
+    padding:42px 24px 48px;
+
+  }
+
+  body.category-mode .category-panel{
+
+    min-height:100vh;
+
+    padding:42px 24px 48px;
+
+  }
+
+  .panel-title{font-size:clamp(42px,12vw,68px)}
+
+  .panel-desc{font-size:15px}
+
+  .profile-img{height:390px}
+
+  .category-buttons{
+
+    margin-left:0;
+
+    transform:none;
+
+    width:100%;
+
+    flex-wrap:nowrap;
+
+    overflow-x:auto;
+
+    padding-bottom:10px;
+
+  }
+
+  .category-panel.opened .category-buttons{
+
+    transform:none;
+
+  }
+
+  .category-btn{
+
+    flex:0 0 auto;
+
+    padding:12px 22px;
+
+    font-size:15px;
+
+  }
+
+  .category-back-btn,
+
+  .category-add-btn{
+
+    width:44px;
+
+    height:44px;
+
+  }
+
+  .category-add-btn{
+
+    font-size:28px;
+
+  }
+
+  .category-preview{
+
+    grid-template-columns:1fr;
+
+    gap:18px;
+
+    margin-top:36px;
+
+  }
+
+  .preview-item{height:210px}
+
+  .product-list{
+
+    margin-top:34px;
+
+    min-height:1120px;
+
+  }
+
+  .product-list.all-active{
+
+    min-height:0;
+
+  }
+
+  .product-list.all-active,
+
+  .product-group.active{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .product-item{height:260px}
+
+  .detail-panel,
+
+  .admin-panel{
+
+    height:90vh;
+
+    border-radius:30px 30px 0 0;
+
+  }
+
+  .detail-overlay.full .detail-panel,
+
+  .admin-overlay.full .admin-panel{
+
+    height:100vh;
+
+    border-radius:0;
+
+  }
+
+  .detail-image{padding:0 24px}
+
+  .detail-image img{
+
+    max-height:360px;
+
+    border-radius:22px;
+
+  }
+
+  .detail-content,
+
+  .admin-content{
+
+    padding:42px 24px 90px;
+
+  }
+
+  .detail-content p{font-size:15px}
+
+  .detail-preview-list{grid-template-columns:1fr}
+
 }
 </style>
 </head>
