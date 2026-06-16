@@ -175,6 +175,14 @@ button.sub{
             <input type="file" id="detailImageFiles" accept="image/*" multiple>
             <p class="notice">상세 페이지 아래에 세로로 여러 장 보여질 이미지야.</p>
 
+            <label>영상 / 움짤 링크</label>
+            <input type="text" id="videoUrl" placeholder="유튜브, 비메오, 인스타 릴스, GIF 링크 등">
+            <p class="notice">링크를 넣으면 상세페이지에서 영상/링크로 보여줄 수 있어.</p>
+
+            <label>PDF / 외부 링크</label>
+            <input type="text" id="pdfUrl" placeholder="PDF, Behance, Figma, Notion 링크 등">
+            <p class="notice">포트폴리오 PDF나 외부 작업 링크를 넣는 곳이야.</p>
+
             <div class="btn-row">
                 <button onclick="saveProject()">저장하기</button>
                 <button class="sub" onclick="resetForm()">새 글 작성</button>
@@ -294,6 +302,8 @@ async function saveProject(){
     const content = document.getElementById("content").value;
     const role = document.getElementById("role").value;
     const projectYear = document.getElementById("projectYear").value;
+    const videoUrl = document.getElementById("videoUrl").value;
+    const pdfUrl = document.getElementById("pdfUrl").value;
 
     if(!title){
         alert("제목을 입력해줘");
@@ -309,7 +319,9 @@ async function saveProject(){
         short_desc:shortDesc,
         content:content,
         role:role,
-        project_year:projectYear
+        project_year:projectYear,
+        video_url:videoUrl,
+        pdf_url:pdfUrl
     };
 
     if(imageUrl){
@@ -366,6 +378,7 @@ async function loadProjects(){
                 <h3>${project.title}</h3>
                 <p>${project.category} / ${project.short_desc || ""}</p>
                 <p>상세 이미지 ${(project.detail_images || []).length}장</p>
+                <p>${project.video_url ? "영상 링크 있음" : "영상 링크 없음"} / ${project.pdf_url ? "PDF·외부 링크 있음" : "PDF·외부 링크 없음"}</p>
             </div>
             <div class="btn-row">
                 <button onclick='editProject(${JSON.stringify(project)})'>수정</button>
@@ -384,6 +397,8 @@ function editProject(project){
     document.getElementById("content").value = project.content || "";
     document.getElementById("role").value = project.role || "";
     document.getElementById("projectYear").value = project.project_year || "";
+    document.getElementById("videoUrl").value = project.video_url || "";
+    document.getElementById("pdfUrl").value = project.pdf_url || "";
 
     document.getElementById("imageFile").value = "";
     document.getElementById("detailImageFiles").value = "";
@@ -420,6 +435,8 @@ function resetForm(){
     document.getElementById("content").value = "";
     document.getElementById("role").value = "";
     document.getElementById("projectYear").value = "";
+    document.getElementById("videoUrl").value = "";
+    document.getElementById("pdfUrl").value = "";
     document.getElementById("imageFile").value = "";
     document.getElementById("detailImageFiles").value = "";
 }
