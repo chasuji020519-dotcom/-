@@ -739,16 +739,19 @@ body.category-mode .nav{display:none}
 
 .detail-image{
     width:100%;
-    height:430px;
-    margin-top:-48px;
-    background:#eee;
+    max-width:1050px;
+    height:auto;
+    margin:40px auto 0;
+    padding:0 40px;
+    background:transparent;
 }
 
 .detail-image img{
     width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
+    max-height:520px;
+    object-fit:contain;
+    border-radius:32px;
+    background:#f3f3f3;
 }
 
 .detail-content,
