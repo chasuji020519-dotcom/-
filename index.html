@@ -9,7 +9,11 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+html{
+  scroll-behavior:smooth;
+  scroll-snap-type:y mandatory;
+  scroll-padding-top:105px;
+}
 body{background:#fff;font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;color:#111;overflow-x:hidden;overscroll-behavior-y:contain}
 body.category-mode{overflow:hidden}
 body.category-mode .main-fixed,body.category-mode .about-panel,body.category-mode .about-hold{display:none}
@@ -44,7 +48,11 @@ body.category-mode .nav{display:none}
 .scroll-area{position:relative;z-index:5;margin-top:100vh}
 .about-panel,.category-panel{width:100%;padding:70px 40px;background:rgba(255,255,255,.58);backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);border-top:1px solid rgba(255,255,255,.8);box-shadow:0 -30px 90px rgba(0,0,0,.12);scroll-snap-align:start;scroll-snap-stop:always}
 .about-panel{position:sticky;top:105px;z-index:1;min-height:calc(100vh - 105px)}
-.about-hold{height:calc(100vh - 105px);scroll-snap-align:none}
+.about-hold{
+  height:calc((100vh - 105px) * 1.8);
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+}
 .category-panel{position:relative;z-index:3;min-height:calc(100vh - 105px);background:rgba(255,255,255,.72);display:flex;align-items:center}
 .category-panel.opened{align-items:flex-start}
 .panel-inner{max-width:1180px;width:100%;margin:0 auto}
@@ -158,7 +166,11 @@ body.logged-in #loginBox{display:none}
 }
 @media(max-width:768px){
 .back-home-zone{height:86px}.nav{padding:28px 24px}.logo{font-size:15px}.menu{gap:15px}.menu a{font-size:10px}.hero{padding:80px 0 0}.hero-content{padding:0 24px}.title{font-size:clamp(44px,11vw,76px)}.subtitle{font-size:15px;text-align:center;margin-top:24px}.project{width:280px;height:180px}
-.about-panel{top:86px;min-height:calc(100vh - 86px);padding:42px 24px 48px}.about-hold{height:calc(100vh - 86px)}.category-panel{min-height:calc(100vh - 86px);padding:42px 24px 48px}body.category-mode .category-panel{min-height:100vh;padding:42px 24px 48px}
+.about-panel{top:86px;min-height:calc(100vh - 86px);padding:42px 24px 48px}.about-hold{
+  height:calc((100vh - 86px) * 1.8);
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+}.category-panel{min-height:calc(100vh - 86px);padding:42px 24px 48px}body.category-mode .category-panel{min-height:100vh;padding:42px 24px 48px}
 .panel-title{font-size:clamp(42px,12vw,68px)}.panel-desc{font-size:15px}.profile-img{height:390px}
 .category-buttons{margin-left:0;transform:none;width:100%;flex-wrap:nowrap;overflow-x:auto;padding-bottom:10px}.category-panel.opened .category-buttons{transform:none}.category-btn{flex:0 0 auto;padding:12px 22px;font-size:15px}
 .category-back-btn,.category-add-btn{width:44px;height:44px}.category-add-btn{font-size:28px}.category-preview{grid-template-columns:1fr;gap:18px;margin-top:36px}.preview-item{height:210px}
