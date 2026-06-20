@@ -14,7 +14,7 @@
   --bg:#ffffff;
   --text:#111111;
   --sub:#8a8a8a;
-  --panel-bg:rgba(255,255,255,.72);
+  --panel-bg:rgba(255,255,255,.58);
   --panel-border:rgba(255,255,255,.8);
   --card-bg:rgba(255,255,255,.48);
   --card-border:rgba(0,0,0,.08);
@@ -28,7 +28,7 @@ body.dark-mode{
   --bg:#111111;
   --text:#f5f5f5;
   --sub:rgba(255,255,255,.55);
-  --panel-bg:rgba(20,20,20,.78);
+  --panel-bg:rgba(20,20,20,.62);
   --panel-border:rgba(255,255,255,.12);
   --card-bg:rgba(255,255,255,.08);
   --card-border:rgba(255,255,255,.14);
@@ -292,6 +292,17 @@ body.category-mode .nav{display:none}
   display:flex;
   align-items:center;
   justify-content:center;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,.55), transparent 28%),
+    radial-gradient(circle at 80% 70%, rgba(180,180,180,.18), transparent 32%),
+    var(--panel-bg);
+}
+
+body.dark-mode .category-panel{
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,.08), transparent 28%),
+    radial-gradient(circle at 80% 70%, rgba(255,255,255,.05), transparent 32%),
+    var(--panel-bg);
 }
 
 .category-panel:not(.opened) .panel-inner{
@@ -299,6 +310,7 @@ body.category-mode .nav{display:none}
   flex-direction:column;
   align-items:center;
   justify-content:center;
+  text-align:center;
   min-height:calc(100vh - 245px);
 }
 
@@ -431,6 +443,14 @@ body.category-mode .nav{display:none}
   text-align:left;
 }
 
+.category-panel:not(.opened) .category-head{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
 .category-title-row{
   display:flex;
   align-items:center;
@@ -438,6 +458,13 @@ body.category-mode .nav{display:none}
   margin-left:50%;
   transform:translateX(-50%);
   transition:.75s cubic-bezier(.22,1,.36,1);
+}
+
+.category-panel:not(.opened) .category-title-row{
+  width:100%;
+  margin-left:0;
+  transform:none;
+  justify-content:center;
 }
 
 .category-panel.opened .category-title-row{
@@ -512,6 +539,11 @@ body.category-mode .nav{display:none}
   margin-left:0;
 }
 
+.category-panel:not(.opened) .category-head .panel-desc{
+  margin:16px auto 0;
+  text-align:center;
+}
+
 .category-small{
   margin-top:16px;
   font-size:13px;
@@ -519,8 +551,12 @@ body.category-mode .nav{display:none}
   letter-spacing:.08em;
 }
 
+.category-panel:not(.opened) .category-small{
+  text-align:center;
+}
+
 /* ========================= */
-/* Liquid Glass Category Tab */
+/* Real Liquid Glass Category */
 /* ========================= */
 
 .category-buttons{
@@ -533,38 +569,91 @@ body.category-mode .nav{display:none}
   margin-top:34px;
   margin-left:50%;
   transform:translateX(-50%);
-  padding:8px;
+  padding:9px;
   border-radius:999px;
   overflow:hidden;
 
   background:
-    linear-gradient(135deg,rgba(255,255,255,.74),rgba(255,255,255,.25)),
-    rgba(255,255,255,.18);
+    linear-gradient(135deg,
+      rgba(255,255,255,.72) 0%,
+      rgba(255,255,255,.28) 38%,
+      rgba(255,255,255,.12) 100%
+    );
 
-  border:1px solid rgba(255,255,255,.62);
+  border:1px solid rgba(255,255,255,.78);
 
-  backdrop-filter:blur(30px) saturate(190%);
-  -webkit-backdrop-filter:blur(30px) saturate(190%);
+  backdrop-filter:blur(38px) saturate(220%) contrast(1.08);
+  -webkit-backdrop-filter:blur(38px) saturate(220%) contrast(1.08);
 
   box-shadow:
     inset 0 1px 1px rgba(255,255,255,.95),
-    inset 0 -1px 1px rgba(255,255,255,.25),
-    0 18px 45px rgba(0,0,0,.14);
+    inset 0 -1px 2px rgba(255,255,255,.32),
+    inset 0 -18px 35px rgba(255,255,255,.12),
+    0 20px 60px rgba(0,0,0,.18);
 
-  transition:.75s cubic-bezier(.22,1,.36,1);
+  transition:
+    margin .75s cubic-bezier(.22,1,.36,1),
+    transform .75s cubic-bezier(.22,1,.36,1),
+    background .35s ease,
+    box-shadow .35s ease,
+    border-color .35s ease,
+    padding .35s ease;
+}
+
+.category-buttons::before{
+  content:"";
+  position:absolute;
+  inset:1px;
+  border-radius:inherit;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255,255,255,.95), transparent 26%),
+    radial-gradient(circle at 82% 88%, rgba(255,255,255,.28), transparent 30%),
+    linear-gradient(135deg, rgba(255,255,255,.42), transparent 48%);
+  opacity:.9;
+  z-index:0;
+  transition:.35s ease;
+}
+
+.category-buttons::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  background:
+    linear-gradient(120deg,
+      transparent 0%,
+      rgba(255,255,255,.55) 18%,
+      transparent 34%,
+      transparent 100%
+    );
+  transform:translateX(-55%);
+  opacity:.55;
+  z-index:0;
+  transition:.35s ease;
 }
 
 body.dark-mode .category-buttons{
   background:
-    linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.04)),
-    rgba(255,255,255,.04);
+    linear-gradient(135deg,
+      rgba(255,255,255,.18) 0%,
+      rgba(255,255,255,.08) 42%,
+      rgba(255,255,255,.03) 100%
+    );
 
-  border:1px solid rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.22);
 
   box-shadow:
-    inset 0 1px 1px rgba(255,255,255,.18),
-    inset 0 -1px 1px rgba(255,255,255,.05),
-    0 18px 45px rgba(0,0,0,.34);
+    inset 0 1px 1px rgba(255,255,255,.26),
+    inset 0 -1px 2px rgba(255,255,255,.08),
+    inset 0 -18px 35px rgba(255,255,255,.03),
+    0 22px 65px rgba(0,0,0,.46);
+}
+
+.category-panel:not(.opened) .category-buttons{
+  margin-left:0;
+  transform:none;
 }
 
 .category-panel.opened .category-buttons{
@@ -572,64 +661,107 @@ body.dark-mode .category-buttons{
   transform:translateX(0);
 }
 
+body.category-mode .category-buttons{
+  position:sticky;
+  top:18px;
+  z-index:100;
+  margin-bottom:22px;
+}
+
 .glass-indicator{
   position:absolute;
-  top:8px;
-  left:8px;
+  top:9px;
+  left:9px;
   width:70px;
   height:46px;
   border-radius:999px;
-  z-index:0;
+  z-index:1;
   pointer-events:none;
 
   background:
-    radial-gradient(circle at 30% 18%, rgba(255,255,255,.98), rgba(255,255,255,.2) 36%, transparent 70%),
-    linear-gradient(135deg, rgba(255,255,255,.82), rgba(255,255,255,.28));
+    radial-gradient(circle at 28% 18%,
+      rgba(255,255,255,1) 0%,
+      rgba(255,255,255,.72) 14%,
+      rgba(255,255,255,.28) 42%,
+      rgba(255,255,255,.08) 100%
+    ),
+    linear-gradient(145deg,
+      rgba(255,255,255,.88) 0%,
+      rgba(255,255,255,.38) 44%,
+      rgba(255,255,255,.18) 100%
+    );
 
-  backdrop-filter:blur(18px) saturate(220%);
-  -webkit-backdrop-filter:blur(18px) saturate(220%);
+  border:1px solid rgba(255,255,255,.82);
+
+  backdrop-filter:blur(24px) saturate(260%) contrast(1.15);
+  -webkit-backdrop-filter:blur(24px) saturate(260%) contrast(1.15);
 
   box-shadow:
-    inset 0 1px 1px rgba(255,255,255,.96),
-    inset 0 -8px 16px rgba(255,255,255,.18),
-    0 10px 26px rgba(0,0,0,.16);
+    inset 0 1px 2px rgba(255,255,255,1),
+    inset 0 -1px 2px rgba(255,255,255,.5),
+    inset 8px 8px 18px rgba(255,255,255,.22),
+    inset -8px -10px 20px rgba(0,0,0,.05),
+    0 10px 28px rgba(0,0,0,.2);
 
   transform:translateX(0);
   transition:
-    transform .45s cubic-bezier(.22,1,.36,1),
-    width .45s cubic-bezier(.22,1,.36,1);
+    transform .48s cubic-bezier(.22,1,.36,1),
+    width .48s cubic-bezier(.22,1,.36,1),
+    background .35s ease,
+    box-shadow .35s ease,
+    border-color .35s ease;
+}
+
+.glass-indicator::before{
+  content:"";
+  position:absolute;
+  top:7px;
+  left:17px;
+  width:34px;
+  height:9px;
+  border-radius:999px;
+  background:rgba(255,255,255,.88);
+  filter:blur(.3px);
 }
 
 .glass-indicator::after{
   content:"";
   position:absolute;
-  top:8px;
-  left:18px;
-  width:28px;
+  right:9px;
+  bottom:7px;
+  width:22px;
   height:8px;
   border-radius:999px;
-  background:rgba(255,255,255,.72);
-  filter:blur(.2px);
+  background:rgba(255,255,255,.34);
+  filter:blur(1px);
 }
 
 body.dark-mode .glass-indicator{
   background:
-    radial-gradient(circle at 30% 18%, rgba(255,255,255,.45), rgba(255,255,255,.08) 42%, transparent 70%),
-    linear-gradient(135deg, rgba(255,255,255,.2), rgba(255,255,255,.06));
+    radial-gradient(circle at 28% 18%,
+      rgba(255,255,255,.62) 0%,
+      rgba(255,255,255,.22) 34%,
+      rgba(255,255,255,.06) 100%
+    ),
+    linear-gradient(145deg,
+      rgba(255,255,255,.2) 0%,
+      rgba(255,255,255,.08) 52%,
+      rgba(255,255,255,.04) 100%
+    );
+
+  border:1px solid rgba(255,255,255,.28);
 
   box-shadow:
-    inset 0 1px 1px rgba(255,255,255,.28),
-    inset 0 -8px 16px rgba(255,255,255,.04),
-    0 10px 28px rgba(0,0,0,.36);
-}
-
-body.dark-mode .glass-indicator::after{
-  background:rgba(255,255,255,.28);
+    inset 0 1px 2px rgba(255,255,255,.36),
+    inset 0 -1px 2px rgba(255,255,255,.08),
+    inset 8px 8px 18px rgba(255,255,255,.04),
+    inset -8px -10px 20px rgba(0,0,0,.18),
+    0 10px 32px rgba(0,0,0,.42);
 }
 
 .category-btn{
   position:relative;
-  z-index:1;
+  z-index:2;
   border:none;
   outline:none;
   cursor:pointer;
@@ -658,6 +790,57 @@ body.dark-mode .glass-indicator::after{
 
 body.dark-mode .category-btn.active{
   color:#fff;
+}
+
+/* 스크롤 후 버튼만 남는 컴팩트 모드 */
+body.category-mode.tabs-compact .category-buttons{
+  background:transparent;
+  border-color:transparent;
+  box-shadow:none;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  padding:6px;
+}
+
+body.category-mode.tabs-compact .category-buttons::before,
+body.category-mode.tabs-compact .category-buttons::after{
+  opacity:0;
+}
+
+body.category-mode.tabs-compact .glass-indicator{
+  top:6px;
+  left:6px;
+  height:46px;
+  background:var(--button-bg);
+  border:1px solid var(--button-bg);
+  box-shadow:0 8px 24px rgba(0,0,0,.16);
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+
+body.category-mode.tabs-compact .glass-indicator::before,
+body.category-mode.tabs-compact .glass-indicator::after{
+  display:none;
+}
+
+body.category-mode.tabs-compact .category-btn{
+  color:var(--text);
+  opacity:.55;
+}
+
+body.category-mode.tabs-compact .category-btn.active{
+  color:var(--button-text);
+  opacity:1;
+}
+
+body.dark-mode.category-mode.tabs-compact .glass-indicator{
+  background:var(--button-bg);
+  border-color:var(--button-bg);
+  box-shadow:0 8px 26px rgba(0,0,0,.35);
+}
+
+body.dark-mode.category-mode.tabs-compact .category-btn.active{
+  color:var(--button-text);
 }
 
 /* ========================= */
@@ -1207,6 +1390,10 @@ body.logged-in #loginBox{
     transform:none;
   }
 
+  body.category-mode .category-buttons{
+    top:14px;
+  }
+
   .category-btn{
     flex:0 0 auto;
     padding:12px 22px;
@@ -1214,6 +1401,10 @@ body.logged-in #loginBox{
   }
 
   .glass-indicator{
+    height:43px;
+  }
+
+  body.category-mode.tabs-compact .glass-indicator{
     height:43px;
   }
 
@@ -1334,9 +1525,11 @@ body.logged-in #loginBox{
 
 <section class="category-panel" id="category">
 <div class="panel-inner">
+
 <div class="category-head">
 <div class="category-title-row">
 <h2 class="panel-title" id="categoryTitle"></h2>
+
 <div class="category-actions">
 <button class="category-add-btn" aria-label="Add Project">+</button>
 <button class="category-back-btn" aria-label="Back">
@@ -1347,6 +1540,7 @@ body.logged-in #loginBox{
 </button>
 </div>
 </div>
+
 <p class="panel-desc" id="categoryDesc"></p>
 <p class="category-small" id="categorySmall"></p>
 </div>
@@ -1366,6 +1560,7 @@ body.logged-in #loginBox{
 <div class="product-group" data-category="ui"></div>
 <div class="product-group" data-category="artwork"></div>
 </div>
+
 </div>
 </section>
 
@@ -1377,16 +1572,20 @@ body.logged-in #loginBox{
 <button class="detail-close" aria-label="Close">
 <svg viewBox="0 0 24 24"><path d="M6 6L18 18M18 6L6 18"/></svg>
 </button>
+
 <div class="detail-image"><img id="detailImg" src="" alt="project detail image"></div>
+
 <div class="detail-content">
 <span class="detail-category">PORTFOLIO PROJECT</span>
 <h2 id="detailTitle">Project Title</h2>
 <p id="detailDesc">프로젝트 상세 설명이 들어갑니다.</p>
+
 <div class="detail-meta">
 <div><span>TYPE</span><strong id="detailType">Brand Design</strong></div>
 <div><span>ROLE</span><strong id="detailRole">Design / Visual</strong></div>
 <div><span>YEAR</span><strong id="detailYear">2026</strong></div>
 </div>
+
 <div class="detail-long">
 <h3>Project Story</h3>
 <p id="detailStory">상세 설명이 들어갑니다.</p>
@@ -1394,6 +1593,7 @@ body.logged-in #loginBox{
 <div class="detail-media" id="detailMedia"></div>
 <div class="detail-links" id="detailLinks"></div>
 </div>
+
 <button class="detail-edit-btn">수정하기</button>
 </div>
 </div>
@@ -1404,6 +1604,7 @@ body.logged-in #loginBox{
 <button class="admin-close" aria-label="Close">
 <svg viewBox="0 0 24 24"><path d="M6 6L18 18M18 6L6 18"/></svg>
 </button>
+
 <div class="admin-content">
 <h2 id="adminTitle">ADD PROJECT</h2>
 
@@ -1452,6 +1653,7 @@ body.logged-in #loginBox{
 <button class="admin-btn sub" id="deleteBtn">삭제</button>
 <button class="admin-btn sub" id="logoutBtn">로그아웃</button>
 </div>
+
 <p class="admin-status" id="adminStatus"></p>
 </div>
 </div>
@@ -1565,12 +1767,31 @@ function moveGlassIndicator(target){
   const tabsRect=glassTabs.getBoundingClientRect();
   const btnRect=target.getBoundingClientRect();
 
+  const offset=document.body.classList.contains("tabs-compact") ? 6 : 9;
   const left=btnRect.left-tabsRect.left;
   const width=btnRect.width;
 
-  glassIndicator.style.transform=`translateX(${left-8}px)`;
+  glassIndicator.style.transform=`translateX(${left-offset}px)`;
   glassIndicator.style.width=`${width}px`;
 }
+
+function updateCategoryCompactMode(){
+  if(!document.body.classList.contains("category-mode")){
+    document.body.classList.remove("tabs-compact");
+    return;
+  }
+
+  if(scrollArea.scrollTop > 90){
+    document.body.classList.add("tabs-compact");
+  }else{
+    document.body.classList.remove("tabs-compact");
+  }
+
+  const activeBtn=document.querySelector(".category-btn.active") || buttons[0];
+  moveGlassIndicator(activeBtn);
+}
+
+scrollArea.addEventListener("scroll",updateCategoryCompactMode);
 
 window.addEventListener("load",()=>{
   const activeBtn=document.querySelector(".category-btn.active") || buttons[0];
@@ -1811,6 +2032,7 @@ buttons.forEach(button=>{
     const target=button.dataset.tab;
 
     document.body.classList.add("category-mode");
+    document.body.classList.remove("tabs-compact");
     categoryPanel.classList.add("opened");
     scrollArea.scrollTo({top:0,behavior:"smooth"});
 
@@ -1834,12 +2056,14 @@ buttons.forEach(button=>{
 
     setTimeout(()=>{
       moveGlassIndicator(button);
+      updateCategoryCompactMode();
     },120);
   });
 });
 
 categoryBackBtn.addEventListener("click",()=>{
   document.body.classList.remove("category-mode");
+  document.body.classList.remove("tabs-compact");
   categoryPanel.classList.remove("opened");
 
   buttons.forEach(btn=>btn.classList.remove("active"));
