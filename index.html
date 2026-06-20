@@ -54,9 +54,12 @@ body{
 }
 
 body.category-mode{overflow:hidden}
+
 body.category-mode .main-fixed,
 body.category-mode .about-panel,
-body.category-mode .about-hold{display:none}
+body.category-mode .about-hold{
+  display:none;
+}
 
 body.category-mode .scroll-area{
   position:fixed;
@@ -299,7 +302,9 @@ body.category-mode .nav{display:none}
   min-height:calc(100vh - 245px);
 }
 
-.category-panel.opened{align-items:flex-start}
+.category-panel.opened{
+  align-items:flex-start;
+}
 
 .panel-inner{
   max-width:1180px;
@@ -422,7 +427,9 @@ body.category-mode .nav{display:none}
   transition:.65s cubic-bezier(.22,1,.36,1);
 }
 
-.category-panel.opened .category-head{text-align:left}
+.category-panel.opened .category-head{
+  text-align:left;
+}
 
 .category-title-row{
   display:flex;
@@ -440,7 +447,9 @@ body.category-mode .nav{display:none}
   justify-content:space-between;
 }
 
-.category-title-row .panel-title{margin-bottom:0}
+.category-title-row .panel-title{
+  margin-bottom:0;
+}
 
 .category-actions{
   display:none;
@@ -448,7 +457,9 @@ body.category-mode .nav{display:none}
   gap:10px;
 }
 
-.category-panel.opened .category-actions{display:flex}
+.category-panel.opened .category-actions{
+  display:flex;
+}
 
 .category-back-btn,
 .category-add-btn{
@@ -474,7 +485,16 @@ body.category-mode .nav{display:none}
   box-shadow:0 12px 30px rgba(0,0,0,.16);
 }
 
-.category-back-btn svg{width:44px;height:44px;overflow:visible}
+.category-add-btn:hover,
+.category-back-btn:hover{
+  transform:translateY(-2px);
+}
+
+.category-back-btn svg{
+  width:44px;
+  height:44px;
+  overflow:visible;
+}
 
 .category-back-btn path{
   fill:none;
@@ -484,8 +504,13 @@ body.category-mode .nav{display:none}
   stroke-linejoin:miter;
 }
 
-.category-head .panel-desc{margin:16px auto 0}
-.category-panel.opened .category-head .panel-desc{margin-left:0}
+.category-head .panel-desc{
+  margin:16px auto 0;
+}
+
+.category-panel.opened .category-head .panel-desc{
+  margin-left:0;
+}
 
 .category-small{
   margin-top:16px;
@@ -494,16 +519,52 @@ body.category-mode .nav{display:none}
   letter-spacing:.08em;
 }
 
+/* ========================= */
+/* Liquid Glass Category Tab */
+/* ========================= */
+
 .category-buttons{
+  position:relative;
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:8px;
   flex-wrap:wrap;
   width:max-content;
   margin-top:34px;
   margin-left:50%;
   transform:translateX(-50%);
+  padding:8px;
+  border-radius:999px;
+  overflow:hidden;
+
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.74),rgba(255,255,255,.25)),
+    rgba(255,255,255,.18);
+
+  border:1px solid rgba(255,255,255,.62);
+
+  backdrop-filter:blur(30px) saturate(190%);
+  -webkit-backdrop-filter:blur(30px) saturate(190%);
+
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.95),
+    inset 0 -1px 1px rgba(255,255,255,.25),
+    0 18px 45px rgba(0,0,0,.14);
+
   transition:.75s cubic-bezier(.22,1,.36,1);
+}
+
+body.dark-mode .category-buttons{
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.04)),
+    rgba(255,255,255,.04);
+
+  border:1px solid rgba(255,255,255,.16);
+
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.18),
+    inset 0 -1px 1px rgba(255,255,255,.05),
+    0 18px 45px rgba(0,0,0,.34);
 }
 
 .category-panel.opened .category-buttons{
@@ -511,25 +572,95 @@ body.category-mode .nav{display:none}
   transform:translateX(0);
 }
 
-.category-btn{
-  border:1px solid var(--panel-border);
-  outline:none;
-  cursor:pointer;
-  padding:15px 30px;
+.glass-indicator{
+  position:absolute;
+  top:8px;
+  left:8px;
+  width:70px;
+  height:46px;
   border-radius:999px;
-  background:var(--card-bg);
-  color:var(--text);
-  font-size:16px;
-  font-weight:600;
-  letter-spacing:-.03em;
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-  box-shadow:inset 0 1px 1px rgba(255,255,255,.2),0 10px 28px rgba(0,0,0,.12);
-  transition:.35s cubic-bezier(.22,1,.36,1);
+  z-index:0;
+  pointer-events:none;
+
+  background:
+    radial-gradient(circle at 30% 18%, rgba(255,255,255,.98), rgba(255,255,255,.2) 36%, transparent 70%),
+    linear-gradient(135deg, rgba(255,255,255,.82), rgba(255,255,255,.28));
+
+  backdrop-filter:blur(18px) saturate(220%);
+  -webkit-backdrop-filter:blur(18px) saturate(220%);
+
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.96),
+    inset 0 -8px 16px rgba(255,255,255,.18),
+    0 10px 26px rgba(0,0,0,.16);
+
+  transform:translateX(0);
+  transition:
+    transform .45s cubic-bezier(.22,1,.36,1),
+    width .45s cubic-bezier(.22,1,.36,1);
 }
 
-.category-btn:hover{transform:translateY(-3px)}
-.category-btn.active{background:var(--button-bg);color:var(--button-text)}
+.glass-indicator::after{
+  content:"";
+  position:absolute;
+  top:8px;
+  left:18px;
+  width:28px;
+  height:8px;
+  border-radius:999px;
+  background:rgba(255,255,255,.72);
+  filter:blur(.2px);
+}
+
+body.dark-mode .glass-indicator{
+  background:
+    radial-gradient(circle at 30% 18%, rgba(255,255,255,.45), rgba(255,255,255,.08) 42%, transparent 70%),
+    linear-gradient(135deg, rgba(255,255,255,.2), rgba(255,255,255,.06));
+
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.28),
+    inset 0 -8px 16px rgba(255,255,255,.04),
+    0 10px 28px rgba(0,0,0,.36);
+}
+
+body.dark-mode .glass-indicator::after{
+  background:rgba(255,255,255,.28);
+}
+
+.category-btn{
+  position:relative;
+  z-index:1;
+  border:none;
+  outline:none;
+  cursor:pointer;
+  padding:13px 26px;
+  border-radius:999px;
+  background:transparent;
+  color:var(--text);
+  font-size:15px;
+  font-weight:700;
+  letter-spacing:-.035em;
+  white-space:nowrap;
+
+  transition:
+    color .28s ease,
+    transform .28s cubic-bezier(.22,1,.36,1),
+    opacity .28s ease;
+}
+
+.category-btn:hover{
+  transform:translateY(-1px);
+}
+
+.category-btn.active{
+  color:#111;
+}
+
+body.dark-mode .category-btn.active{
+  color:#fff;
+}
+
+/* ========================= */
 
 .product-list{
   position:relative;
@@ -537,7 +668,9 @@ body.category-mode .nav{display:none}
   min-height:620px;
 }
 
-.category-panel:not(.opened) .product-list{display:none}
+.category-panel:not(.opened) .product-list{
+  display:none;
+}
 
 .product-group{
   position:absolute;
@@ -566,8 +699,13 @@ body.category-mode .nav{display:none}
   gap:28px;
 }
 
-.product-list.all-active .product-group{display:contents}
-.product-list.all-active .product-item{width:100%}
+.product-list.all-active .product-group{
+  display:contents;
+}
+
+.product-list.all-active .product-item{
+  width:100%;
+}
 
 .product-item{
   height:310px;
@@ -587,7 +725,9 @@ body.category-mode .nav{display:none}
   transition:.45s ease;
 }
 
-.product-item:hover img{transform:scale(1.06)}
+.product-item:hover img{
+  transform:scale(1.06);
+}
 
 .product-info{
   position:absolute;
@@ -647,7 +787,9 @@ body.category-mode .nav{display:none}
 }
 
 .detail-overlay.show .detail-panel,
-.admin-overlay.show .admin-panel{transform:translateY(0)}
+.admin-overlay.show .admin-panel{
+  transform:translateY(0);
+}
 
 .detail-overlay.full .detail-panel,
 .admin-overlay.full .admin-panel{
@@ -675,7 +817,10 @@ body.category-mode .nav{display:none}
 }
 
 .detail-close svg,
-.admin-close svg{width:22px;height:22px}
+.admin-close svg{
+  width:22px;
+  height:22px;
+}
 
 .detail-close path,
 .admin-close path{
@@ -811,9 +956,13 @@ body.category-mode .nav{display:none}
   margin-top:34px;
 }
 
-body.logged-in .detail-edit-btn{display:inline-flex}
+body.logged-in .detail-edit-btn{
+  display:inline-flex;
+}
 
-.admin-form{margin-top:34px}
+.admin-form{
+  margin-top:34px;
+}
 
 .admin-form input,
 .admin-form select,
@@ -859,10 +1008,21 @@ body.logged-in .detail-edit-btn{display:inline-flex}
   font-size:14px;
 }
 
-#adminFormBox{display:none}
-#loginBox{display:block}
-body.logged-in #adminFormBox{display:block}
-body.logged-in #loginBox{display:none}
+#adminFormBox{
+  display:none;
+}
+
+#loginBox{
+  display:block;
+}
+
+body.logged-in #adminFormBox{
+  display:block;
+}
+
+body.logged-in #loginBox{
+  display:none;
+}
 
 .detail-preview-list{
   display:grid;
@@ -880,7 +1040,9 @@ body.logged-in #loginBox{display:none}
   border:1px solid var(--card-border);
 }
 
-.detail-preview-item.dragging{opacity:.4}
+.detail-preview-item.dragging{
+  opacity:.4;
+}
 
 .detail-preview-item img{
   width:100%;
@@ -913,96 +1075,209 @@ body.logged-in #loginBox{display:none}
   color:#111;
 }
 
-#contact{display:none}
+#contact{
+  display:none;
+}
 
 @media(max-width:900px){
-  .about-layout{grid-template-columns:1fr;gap:34px}
-  .profile-card{max-width:360px}
-  .panel-cards{grid-template-columns:1fr}
+  .about-layout{
+    grid-template-columns:1fr;
+    gap:34px;
+  }
+
+  .profile-card{
+    max-width:360px;
+  }
+
+  .panel-cards{
+    grid-template-columns:1fr;
+  }
+
   .product-list.all-active,
-  .product-group.active{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .product-list{min-height:900px}
-  .product-list.all-active{min-height:0}
-  .detail-meta{grid-template-columns:1fr}
-  .detail-preview-list{grid-template-columns:repeat(2,1fr)}
+  .product-group.active{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .product-list{
+    min-height:900px;
+  }
+
+  .product-list.all-active{
+    min-height:0;
+  }
+
+  .detail-meta{
+    grid-template-columns:1fr;
+  }
+
+  .detail-preview-list{
+    grid-template-columns:repeat(2,1fr);
+  }
 }
 
 @media(max-width:768px){
-  html{scroll-padding-top:86px}
-  .back-home-zone{height:86px}
-  .nav{padding:28px 24px}
-  .logo{font-size:15px}
-  .dark-toggle{width:42px;height:42px;font-size:19px}
-  .hero{padding:80px 0 0}
-  .hero-content{padding:0 24px}
-  .title{font-size:clamp(44px,11vw,76px)}
-  .subtitle{font-size:15px;text-align:center;margin-top:24px}
-  .project{width:280px;height:180px}
+  html{
+    scroll-padding-top:86px;
+  }
+
+  .back-home-zone{
+    height:86px;
+  }
+
+  .nav{
+    padding:28px 24px;
+  }
+
+  .logo{
+    font-size:15px;
+  }
+
+  .dark-toggle{
+    width:42px;
+    height:42px;
+    font-size:19px;
+  }
+
+  .hero{
+    padding:80px 0 0;
+  }
+
+  .hero-content{
+    padding:0 24px;
+  }
+
+  .title{
+    font-size:clamp(44px,11vw,76px);
+  }
+
+  .subtitle{
+    font-size:15px;
+    text-align:center;
+    margin-top:24px;
+  }
+
+  .project{
+    width:280px;
+    height:180px;
+  }
+
   .about-panel{
     top:86px;
     min-height:calc(100vh - 86px);
     padding:42px 24px 48px;
   }
+
   .category-panel{
     min-height:calc(100vh - 86px);
     padding:42px 24px 48px;
   }
+
   body.category-mode .category-panel{
     min-height:100vh;
     padding:42px 24px 48px;
   }
-  .panel-title{font-size:clamp(42px,12vw,68px)}
-  .panel-desc{font-size:15px}
-  .profile-img{height:390px}
+
+  .panel-title{
+    font-size:clamp(42px,12vw,68px);
+  }
+
+  .panel-desc{
+    font-size:15px;
+  }
+
+  .profile-img{
+    height:390px;
+  }
+
   .category-buttons{
     margin-left:0;
     transform:none;
     width:100%;
     flex-wrap:nowrap;
     overflow-x:auto;
-    padding-bottom:10px;
+    padding:8px;
+    justify-content:flex-start;
   }
-  .category-panel.opened .category-buttons{transform:none}
+
+  .category-buttons::-webkit-scrollbar{
+    display:none;
+  }
+
+  .category-panel.opened .category-buttons{
+    transform:none;
+  }
+
   .category-btn{
     flex:0 0 auto;
     padding:12px 22px;
     font-size:15px;
   }
+
+  .glass-indicator{
+    height:43px;
+  }
+
   .category-back-btn,
   .category-add-btn{
     width:44px;
     height:44px;
   }
-  .category-add-btn{font-size:28px}
+
+  .category-add-btn{
+    font-size:28px;
+  }
+
   .product-list{
     margin-top:34px;
     min-height:1120px;
   }
-  .product-list.all-active{min-height:0}
+
+  .product-list.all-active{
+    min-height:0;
+  }
+
   .product-list.all-active,
-  .product-group.active{grid-template-columns:1fr}
-  .product-item{height:260px}
+  .product-group.active{
+    grid-template-columns:1fr;
+  }
+
+  .product-item{
+    height:260px;
+  }
+
   .detail-panel,
   .admin-panel{
     height:90vh;
     border-radius:30px 30px 0 0;
   }
+
   .detail-overlay.full .detail-panel,
   .admin-overlay.full .admin-panel{
     height:100vh;
     border-radius:0;
   }
-  .detail-image{padding:0 24px}
+
+  .detail-image{
+    padding:0 24px;
+  }
+
   .detail-image img{
     max-height:360px;
     border-radius:22px;
   }
+
   .detail-content,
   .admin-content{
     padding:42px 24px 90px;
   }
-  .detail-content p{font-size:15px}
-  .detail-preview-list{grid-template-columns:1fr}
+
+  .detail-content p{
+    font-size:15px;
+  }
+
+  .detail-preview-list{
+    grid-template-columns:1fr;
+  }
 }
 </style>
 </head>
@@ -1076,12 +1351,13 @@ body.logged-in #loginBox{display:none}
 <p class="category-small" id="categorySmall"></p>
 </div>
 
-<div class="category-buttons">
-<button class="category-btn" data-tab="all">전체</button>
-<button class="category-btn" data-tab="brand">브랜드</button>
-<button class="category-btn" data-tab="graphic">그래픽</button>
-<button class="category-btn" data-tab="ui">UI</button>
-<button class="category-btn" data-tab="artwork">아트웍</button>
+<div class="category-buttons glass-tabs">
+  <span class="glass-indicator"></span>
+  <button class="category-btn active" data-tab="all">전체</button>
+  <button class="category-btn" data-tab="brand">브랜드</button>
+  <button class="category-btn" data-tab="graphic">그래픽</button>
+  <button class="category-btn" data-tab="ui">UI</button>
+  <button class="category-btn" data-tab="artwork">아트웍</button>
 </div>
 
 <div class="product-list">
@@ -1221,6 +1497,7 @@ function renderSiteText(){
   document.getElementById("rightWords").innerHTML=SITE_TEXT.heroRight.map(w=>`<div class="word">${w}</div>`).join("");
 
   const imgs=[...SITE_TEXT.marqueeImages,...SITE_TEXT.marqueeImages];
+
   document.getElementById("marqueeTrack").innerHTML=imgs.map(src=>`
     <div class="project"><img src="${src}" alt="portfolio image"></div>
   `).join("");
@@ -1257,6 +1534,11 @@ function updateDarkIcon(){
 darkToggle.addEventListener("click",()=>{
   document.body.classList.toggle("dark-mode");
   updateDarkIcon();
+
+  setTimeout(()=>{
+    const activeBtn=document.querySelector(".category-btn.active") || buttons[0];
+    moveGlassIndicator(activeBtn);
+  },50);
 });
 
 updateDarkIcon();
@@ -1273,6 +1555,54 @@ const backZone=document.querySelector(".back-home-zone");
 const categoryBackBtn=document.querySelector(".category-back-btn");
 const categoryAddBtn=document.querySelector(".category-add-btn");
 const scrollArea=document.querySelector(".scroll-area");
+
+const glassTabs=document.querySelector(".glass-tabs");
+const glassIndicator=document.querySelector(".glass-indicator");
+
+function moveGlassIndicator(target){
+  if(!glassTabs || !glassIndicator || !target)return;
+
+  const tabsRect=glassTabs.getBoundingClientRect();
+  const btnRect=target.getBoundingClientRect();
+
+  const left=btnRect.left-tabsRect.left;
+  const width=btnRect.width;
+
+  glassIndicator.style.transform=`translateX(${left-8}px)`;
+  glassIndicator.style.width=`${width}px`;
+}
+
+window.addEventListener("load",()=>{
+  const activeBtn=document.querySelector(".category-btn.active") || buttons[0];
+  moveGlassIndicator(activeBtn);
+});
+
+window.addEventListener("resize",()=>{
+  const activeBtn=document.querySelector(".category-btn.active") || buttons[0];
+  moveGlassIndicator(activeBtn);
+});
+
+buttons.forEach(btn=>{
+  btn.addEventListener("pointerenter",()=>{
+    moveGlassIndicator(btn);
+  });
+
+  btn.addEventListener("pointermove",()=>{
+    moveGlassIndicator(btn);
+  });
+});
+
+if(glassTabs){
+  glassTabs.addEventListener("pointerleave",()=>{
+    const activeBtn=document.querySelector(".category-btn.active") || buttons[0];
+    moveGlassIndicator(activeBtn);
+  });
+
+  glassTabs.addEventListener("scroll",()=>{
+    const activeBtn=document.querySelector(".category-btn.active") || buttons[0];
+    moveGlassIndicator(activeBtn);
+  });
+}
 
 const detailOverlay=document.querySelector(".detail-overlay");
 const detailPanel=document.querySelector(".detail-panel");
@@ -1316,18 +1646,28 @@ let draggedIndex=null;
 
 async function checkLogin(){
   const {data}=await client.auth.getSession();
-  if(data.session){document.body.classList.add("logged-in")}
-  else{document.body.classList.remove("logged-in")}
+
+  if(data.session){
+    document.body.classList.add("logged-in");
+  }else{
+    document.body.classList.remove("logged-in");
+  }
 }
 
 function renderDetailPreview(){
   detailPreviewList.innerHTML="";
+
   detailItems.forEach((item,index)=>{
     const div=document.createElement("div");
     div.className="detail-preview-item";
     div.draggable=true;
     div.dataset.index=index;
-    div.innerHTML=`<img src="${item.preview}"><button type="button">×</button><span>${index+1}</span>`;
+
+    div.innerHTML=`
+      <img src="${item.preview}">
+      <button type="button">×</button>
+      <span>${index+1}</span>
+    `;
 
     div.querySelector("button").addEventListener("click",()=>{
       detailItems.splice(index,1);
@@ -1348,9 +1688,13 @@ function renderDetailPreview(){
 
     div.addEventListener("drop",(e)=>{
       e.preventDefault();
+
       const targetIndex=Number(div.dataset.index);
-      if(draggedIndex===null||draggedIndex===targetIndex)return;
+
+      if(draggedIndex===null || draggedIndex===targetIndex)return;
+
       const movedItem=detailItems.splice(draggedIndex,1)[0];
+
       detailItems.splice(targetIndex,0,movedItem);
       renderDetailPreview();
     });
@@ -1361,6 +1705,7 @@ function renderDetailPreview(){
 
 projectDetailImages.addEventListener("change",(e)=>{
   const files=Array.from(e.target.files);
+
   files.forEach(file=>{
     detailItems.push({
       type:"file",
@@ -1369,6 +1714,7 @@ projectDetailImages.addEventListener("change",(e)=>{
       url:null
     });
   });
+
   projectDetailImages.value="";
   renderDetailPreview();
 });
@@ -1381,6 +1727,7 @@ function closeDetail(){
 
 function openDetail(project){
   currentProject=project;
+
   detailImg.src=project.image_url||"";
   detailTitle.innerText=project.title||"Untitled";
   detailDesc.innerText=project.short_desc||"";
@@ -1429,21 +1776,32 @@ function makeCard(project){
 
 async function loadProjects(){
   const {data,error}=await client.from("projects").select("*").order("created_at",{ascending:false});
-  if(error){console.log(error);return}
+
+  if(error){
+    console.log(error);
+    return;
+  }
+
   allProjects=data||[];
 
   groups.forEach(group=>group.innerHTML="");
 
   allProjects.forEach(project=>{
     const group=document.querySelector(`[data-category="${project.category}"]`);
-    if(group){group.innerHTML+=makeCard(project)}
+
+    if(group){
+      group.innerHTML+=makeCard(project);
+    }
   });
 
   document.querySelectorAll(".product-item").forEach(item=>{
     item.addEventListener("click",()=>{
       const id=Number(item.dataset.id);
       const project=allProjects.find(p=>p.id===id);
-      if(project)openDetail(project);
+
+      if(project){
+        openDetail(project);
+      }
     });
   });
 }
@@ -1451,6 +1809,7 @@ async function loadProjects(){
 buttons.forEach(button=>{
   button.addEventListener("click",()=>{
     const target=button.dataset.tab;
+
     document.body.classList.add("category-mode");
     categoryPanel.classList.add("opened");
     scrollArea.scrollTo({top:0,behavior:"smooth"});
@@ -1460,24 +1819,40 @@ buttons.forEach(button=>{
     productList.classList.remove("all-active");
 
     button.classList.add("active");
+    moveGlassIndicator(button);
 
     if(target==="all"){
       productList.classList.add("all-active");
       groups.forEach(group=>group.classList.add("active"));
     }else{
       const selected=document.querySelector(`[data-category="${target}"]`);
-      if(selected)selected.classList.add("active");
+
+      if(selected){
+        selected.classList.add("active");
+      }
     }
+
+    setTimeout(()=>{
+      moveGlassIndicator(button);
+    },120);
   });
 });
 
 categoryBackBtn.addEventListener("click",()=>{
   document.body.classList.remove("category-mode");
   categoryPanel.classList.remove("opened");
+
   buttons.forEach(btn=>btn.classList.remove("active"));
   groups.forEach(group=>group.classList.remove("active"));
   productList.classList.remove("all-active");
+
+  buttons[0].classList.add("active");
+
   window.scrollTo({top:0,behavior:"smooth"});
+
+  setTimeout(()=>{
+    moveGlassIndicator(buttons[0]);
+  },400);
 });
 
 window.addEventListener("scroll",()=>{
@@ -1497,8 +1872,11 @@ adminPanel.addEventListener("scroll",()=>{
 });
 
 detailClose.addEventListener("click",closeDetail);
+
 detailOverlay.addEventListener("click",(e)=>{
-  if(e.target===detailOverlay)closeDetail();
+  if(e.target===detailOverlay){
+    closeDetail();
+  }
 });
 
 function openAdmin(){
@@ -1519,15 +1897,24 @@ categoryAddBtn.addEventListener("click",()=>{
 });
 
 adminClose.addEventListener("click",closeAdmin);
+
 adminOverlay.addEventListener("click",(e)=>{
-  if(e.target===adminOverlay)closeAdmin();
+  if(e.target===adminOverlay){
+    closeAdmin();
+  }
 });
 
 document.getElementById("loginBtn").addEventListener("click",async()=>{
   const email=document.getElementById("loginEmail").value;
   const password=document.getElementById("loginPassword").value;
+
   const {error}=await client.auth.signInWithPassword({email,password});
-  if(error){alert("로그인 실패: "+error.message);return}
+
+  if(error){
+    alert("로그인 실패: "+error.message);
+    return;
+  }
+
   await checkLogin();
   resetForm();
 });
@@ -1540,26 +1927,45 @@ document.getElementById("logoutBtn").addEventListener("click",async()=>{
 
 async function uploadImage(){
   const file=projectImage.files[0];
+
   if(!file)return null;
+
   const fileName=`${Date.now()}-${file.name}`;
+
   const {error}=await client.storage.from("portfolio").upload(fileName,file);
-  if(error){alert("대표 이미지 업로드 실패: "+error.message);return null}
+
+  if(error){
+    alert("대표 이미지 업로드 실패: "+error.message);
+    return null;
+  }
+
   const {data}=client.storage.from("portfolio").getPublicUrl(fileName);
+
   return data.publicUrl;
 }
 
 async function uploadVideoFile(){
   const file=projectVideoFile.files[0];
+
   if(!file)return null;
+
   const fileName=`${Date.now()}-${file.name}`;
+
   const {error}=await client.storage.from("portfolio").upload(fileName,file);
-  if(error){alert("영상/움짤 업로드 실패: "+error.message);return null}
+
+  if(error){
+    alert("영상/움짤 업로드 실패: "+error.message);
+    return null;
+  }
+
   const {data}=client.storage.from("portfolio").getPublicUrl(fileName);
+
   return data.publicUrl;
 }
 
 async function uploadDetailImages(){
   if(!detailItems.length)return null;
+
   const urls=[];
 
   for(const item of detailItems){
@@ -1570,6 +1976,7 @@ async function uploadDetailImages(){
 
     const file=item.file;
     const fileName=`${Date.now()}-${Math.random().toString(36).slice(2)}-${file.name}`;
+
     const {error}=await client.storage.from("portfolio").upload(fileName,file);
 
     if(error){
@@ -1578,6 +1985,7 @@ async function uploadDetailImages(){
     }
 
     const {data}=client.storage.from("portfolio").getPublicUrl(fileName);
+
     urls.push(data.publicUrl);
   }
 
@@ -1607,8 +2015,13 @@ document.getElementById("saveBtn").addEventListener("click",async()=>{
     pdf_url:projectPdfUrl.value
   };
 
-  if(imageUrl){projectData.image_url=imageUrl}
-  if(detailImages){projectData.detail_images=detailImages}
+  if(imageUrl){
+    projectData.image_url=imageUrl;
+  }
+
+  if(detailImages){
+    projectData.detail_images=detailImages;
+  }
 
   let result;
 
@@ -1647,6 +2060,7 @@ document.getElementById("deleteBtn").addEventListener("click",async()=>{
   }
 
   alert("삭제 완료");
+
   resetForm();
   closeAdmin();
   closeDetail();
@@ -1699,6 +2113,7 @@ function fillForm(project){
 
 detailEditBtn.addEventListener("click",()=>{
   if(!currentProject)return;
+
   fillForm(currentProject);
   closeDetail();
   openAdmin();
@@ -1706,6 +2121,11 @@ detailEditBtn.addEventListener("click",()=>{
 
 checkLogin();
 loadProjects();
+
+setTimeout(()=>{
+  const activeBtn=document.querySelector(".category-btn.active") || buttons[0];
+  moveGlassIndicator(activeBtn);
+},300);
 </script>
 
 </body>
