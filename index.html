@@ -53,7 +53,9 @@ body{
   transition:background .35s ease,color .35s ease;
 }
 
-body.category-mode{overflow:hidden}
+body.category-mode{
+  overflow:hidden;
+}
 
 body.category-mode .main-fixed,
 body.category-mode .about-panel,
@@ -72,10 +74,26 @@ body.category-mode .scroll-area{
 
 body.category-mode .category-panel{
   min-height:100vh;
-  padding-top:70px;
+  padding:0 40px 80px;
   box-shadow:none;
   border-top:none;
   scroll-snap-align:none;
+  align-items:flex-start;
+  background:
+    radial-gradient(circle at 18% 8%, rgba(255,255,255,.5), transparent 30%),
+    radial-gradient(circle at 85% 35%, rgba(180,180,180,.16), transparent 35%),
+    var(--bg);
+}
+
+body.dark-mode.category-mode .category-panel{
+  background:
+    radial-gradient(circle at 18% 8%, rgba(255,255,255,.08), transparent 30%),
+    radial-gradient(circle at 85% 35%, rgba(255,255,255,.05), transparent 35%),
+    var(--bg);
+}
+
+body.category-mode .category-panel .panel-inner{
+  padding-top:34px;
 }
 
 .back-home-zone{
@@ -555,10 +573,6 @@ body.dark-mode .category-panel{
   text-align:center;
 }
 
-/* ========================= */
-/* Real Liquid Glass Category */
-/* ========================= */
-
 .category-buttons{
   position:relative;
   display:flex;
@@ -572,32 +586,16 @@ body.dark-mode .category-panel{
   padding:9px;
   border-radius:999px;
   overflow:hidden;
-
-  background:
-    linear-gradient(135deg,
-      rgba(255,255,255,.72) 0%,
-      rgba(255,255,255,.28) 38%,
-      rgba(255,255,255,.12) 100%
-    );
-
+  background:linear-gradient(135deg,rgba(255,255,255,.72) 0%,rgba(255,255,255,.28) 38%,rgba(255,255,255,.12) 100%);
   border:1px solid rgba(255,255,255,.78);
-
   backdrop-filter:blur(38px) saturate(220%) contrast(1.08);
   -webkit-backdrop-filter:blur(38px) saturate(220%) contrast(1.08);
-
   box-shadow:
     inset 0 1px 1px rgba(255,255,255,.95),
     inset 0 -1px 2px rgba(255,255,255,.32),
     inset 0 -18px 35px rgba(255,255,255,.12),
     0 20px 60px rgba(0,0,0,.18);
-
-  transition:
-    margin .75s cubic-bezier(.22,1,.36,1),
-    transform .75s cubic-bezier(.22,1,.36,1),
-    background .35s ease,
-    box-shadow .35s ease,
-    border-color .35s ease,
-    padding .35s ease;
+  transition:.45s ease;
 }
 
 .category-buttons::before{
@@ -621,13 +619,7 @@ body.dark-mode .category-panel{
   inset:0;
   border-radius:inherit;
   pointer-events:none;
-  background:
-    linear-gradient(120deg,
-      transparent 0%,
-      rgba(255,255,255,.55) 18%,
-      transparent 34%,
-      transparent 100%
-    );
+  background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.55) 18%,transparent 34%,transparent 100%);
   transform:translateX(-55%);
   opacity:.55;
   z-index:0;
@@ -635,15 +627,8 @@ body.dark-mode .category-panel{
 }
 
 body.dark-mode .category-buttons{
-  background:
-    linear-gradient(135deg,
-      rgba(255,255,255,.18) 0%,
-      rgba(255,255,255,.08) 42%,
-      rgba(255,255,255,.03) 100%
-    );
-
+  background:linear-gradient(135deg,rgba(255,255,255,.18) 0%,rgba(255,255,255,.08) 42%,rgba(255,255,255,.03) 100%);
   border:1px solid rgba(255,255,255,.22);
-
   box-shadow:
     inset 0 1px 1px rgba(255,255,255,.26),
     inset 0 -1px 2px rgba(255,255,255,.08),
@@ -661,11 +646,61 @@ body.dark-mode .category-buttons{
   transform:translateX(0);
 }
 
+body.category-mode .category-title-row{
+  padding-top:0;
+}
+
+body.category-mode .category-head{
+  padding:0;
+}
+
+body.category-mode .category-head .panel-desc{
+  max-width:520px;
+  font-size:15px;
+}
+
+body.category-mode .category-small{
+  margin-top:12px;
+  opacity:.7;
+}
+
 body.category-mode .category-buttons{
   position:sticky;
-  top:18px;
+  top:14px;
   z-index:100;
+  margin-top:28px;
+  margin-left:0;
   margin-bottom:22px;
+  transform:none;
+  width:max-content;
+  max-width:100%;
+  padding:7px;
+  gap:7px;
+  border-radius:999px;
+}
+
+body.category-mode:not(.tabs-compact) .category-buttons{
+  background:linear-gradient(135deg,rgba(255,255,255,.72),rgba(255,255,255,.24));
+  border:1px solid rgba(255,255,255,.72);
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.9),
+    0 18px 50px rgba(0,0,0,.12);
+}
+
+body.category-mode.tabs-compact .category-buttons{
+  top:12px;
+  background:transparent;
+  border-color:transparent;
+  box-shadow:none;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  padding:6px;
+  gap:8px;
+}
+
+body.category-mode.tabs-compact .category-buttons::before,
+body.category-mode.tabs-compact .category-buttons::after{
+  opacity:0;
 }
 
 .glass-indicator{
@@ -677,39 +712,20 @@ body.category-mode .category-buttons{
   border-radius:999px;
   z-index:1;
   pointer-events:none;
-
   background:
-    radial-gradient(circle at 28% 18%,
-      rgba(255,255,255,1) 0%,
-      rgba(255,255,255,.72) 14%,
-      rgba(255,255,255,.28) 42%,
-      rgba(255,255,255,.08) 100%
-    ),
-    linear-gradient(145deg,
-      rgba(255,255,255,.88) 0%,
-      rgba(255,255,255,.38) 44%,
-      rgba(255,255,255,.18) 100%
-    );
-
+    radial-gradient(circle at 28% 18%,rgba(255,255,255,1) 0%,rgba(255,255,255,.72) 14%,rgba(255,255,255,.28) 42%,rgba(255,255,255,.08) 100%),
+    linear-gradient(145deg,rgba(255,255,255,.88) 0%,rgba(255,255,255,.38) 44%,rgba(255,255,255,.18) 100%);
   border:1px solid rgba(255,255,255,.82);
-
   backdrop-filter:blur(24px) saturate(260%) contrast(1.15);
   -webkit-backdrop-filter:blur(24px) saturate(260%) contrast(1.15);
-
   box-shadow:
     inset 0 1px 2px rgba(255,255,255,1),
     inset 0 -1px 2px rgba(255,255,255,.5),
     inset 8px 8px 18px rgba(255,255,255,.22),
     inset -8px -10px 20px rgba(0,0,0,.05),
     0 10px 28px rgba(0,0,0,.2);
-
   transform:translateX(0);
-  transition:
-    transform .48s cubic-bezier(.22,1,.36,1),
-    width .48s cubic-bezier(.22,1,.36,1),
-    background .35s ease,
-    box-shadow .35s ease,
-    border-color .35s ease;
+  transition:.48s cubic-bezier(.22,1,.36,1);
 }
 
 .glass-indicator::before{
@@ -738,19 +754,9 @@ body.category-mode .category-buttons{
 
 body.dark-mode .glass-indicator{
   background:
-    radial-gradient(circle at 28% 18%,
-      rgba(255,255,255,.62) 0%,
-      rgba(255,255,255,.22) 34%,
-      rgba(255,255,255,.06) 100%
-    ),
-    linear-gradient(145deg,
-      rgba(255,255,255,.2) 0%,
-      rgba(255,255,255,.08) 52%,
-      rgba(255,255,255,.04) 100%
-    );
-
+    radial-gradient(circle at 28% 18%,rgba(255,255,255,.62) 0%,rgba(255,255,255,.22) 34%,rgba(255,255,255,.06) 100%),
+    linear-gradient(145deg,rgba(255,255,255,.2) 0%,rgba(255,255,255,.08) 52%,rgba(255,255,255,.04) 100%);
   border:1px solid rgba(255,255,255,.28);
-
   box-shadow:
     inset 0 1px 2px rgba(255,255,255,.36),
     inset 0 -1px 2px rgba(255,255,255,.08),
@@ -773,11 +779,7 @@ body.dark-mode .glass-indicator{
   font-weight:700;
   letter-spacing:-.035em;
   white-space:nowrap;
-
-  transition:
-    color .28s ease,
-    transform .28s cubic-bezier(.22,1,.36,1),
-    opacity .28s ease;
+  transition:.28s ease;
 }
 
 .category-btn:hover{
@@ -792,49 +794,25 @@ body.dark-mode .category-btn.active{
   color:#fff;
 }
 
-/* 스크롤 후 버튼만 남는 컴팩트 모드 */
-body.category-mode.tabs-compact .category-buttons{
-  background:transparent;
-  border-color:transparent;
-  box-shadow:none;
-  backdrop-filter:none;
-  -webkit-backdrop-filter:none;
-  padding:6px;
-  gap:8px;
+body.category-mode .category-btn{
+  padding:12px 23px;
+  font-size:14px;
 }
 
-body.category-mode.tabs-compact .category-buttons::before,
-body.category-mode.tabs-compact .category-buttons::after{
-  opacity:0;
-}
-
-/* 현재 선택된 버튼: 흰색 유리 */
 body.category-mode.tabs-compact .glass-indicator{
   top:6px;
   left:6px;
   height:46px;
-
   background:
-    radial-gradient(circle at 30% 18%,
-      rgba(255,255,255,.95) 0%,
-      rgba(255,255,255,.62) 36%,
-      rgba(255,255,255,.34) 100%
-    ),
-    linear-gradient(145deg,
-      rgba(255,255,255,.72),
-      rgba(255,255,255,.34)
-    );
-
+    radial-gradient(circle at 30% 18%,rgba(255,255,255,.95) 0%,rgba(255,255,255,.62) 36%,rgba(255,255,255,.34) 100%),
+    linear-gradient(145deg,rgba(255,255,255,.72),rgba(255,255,255,.34));
   border:1px solid rgba(255,255,255,.85);
-
   backdrop-filter:blur(22px) saturate(220%);
   -webkit-backdrop-filter:blur(22px) saturate(220%);
-
   box-shadow:
     inset 0 1px 1px rgba(255,255,255,.95),
     inset 0 -1px 2px rgba(255,255,255,.4),
     0 10px 28px rgba(0,0,0,.18);
-
   opacity:1;
 }
 
@@ -855,46 +833,28 @@ body.category-mode.tabs-compact .glass-indicator::after{
   display:none;
 }
 
-/* 나머지 버튼: 어두운 유리 */
 body.category-mode.tabs-compact .category-btn{
-  background:
-    linear-gradient(145deg,
-      rgba(0,0,0,.42),
-      rgba(0,0,0,.22)
-    );
-
+  background:linear-gradient(145deg,rgba(0,0,0,.42),rgba(0,0,0,.22));
   border:1px solid rgba(255,255,255,.16);
-
   backdrop-filter:blur(18px) saturate(160%);
   -webkit-backdrop-filter:blur(18px) saturate(160%);
-
   box-shadow:
     inset 0 1px 1px rgba(255,255,255,.18),
     0 8px 22px rgba(0,0,0,.14);
-
   color:rgba(255,255,255,.72);
   opacity:1;
 }
 
-/* 선택된 버튼 글씨 */
 body.category-mode.tabs-compact .category-btn.active{
   background:transparent;
   color:#111;
   opacity:1;
 }
 
-/* 다크모드에서도 동일 */
 body.dark-mode.category-mode.tabs-compact .category-btn{
-  background:
-    linear-gradient(145deg,
-      rgba(255,255,255,.13),
-      rgba(255,255,255,.05)
-    );
-
+  background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.05));
   border:1px solid rgba(255,255,255,.14);
-
   color:rgba(255,255,255,.62);
-
   box-shadow:
     inset 0 1px 1px rgba(255,255,255,.12),
     0 8px 24px rgba(0,0,0,.32);
@@ -902,18 +862,9 @@ body.dark-mode.category-mode.tabs-compact .category-btn{
 
 body.dark-mode.category-mode.tabs-compact .glass-indicator{
   background:
-    radial-gradient(circle at 30% 18%,
-      rgba(255,255,255,.95) 0%,
-      rgba(255,255,255,.62) 36%,
-      rgba(255,255,255,.34) 100%
-    ),
-    linear-gradient(145deg,
-      rgba(255,255,255,.72),
-      rgba(255,255,255,.34)
-    );
-
+    radial-gradient(circle at 30% 18%,rgba(255,255,255,.95) 0%,rgba(255,255,255,.62) 36%,rgba(255,255,255,.34) 100%),
+    linear-gradient(145deg,rgba(255,255,255,.72),rgba(255,255,255,.34));
   border:1px solid rgba(255,255,255,.85);
-
   box-shadow:
     inset 0 1px 1px rgba(255,255,255,.95),
     inset 0 -1px 2px rgba(255,255,255,.4),
@@ -925,12 +876,14 @@ body.dark-mode.category-mode.tabs-compact .category-btn.active{
   color:#111;
 }
 
-/* ========================= */
-
 .product-list{
   position:relative;
   margin-top:40px;
   min-height:620px;
+}
+
+body.category-mode .product-list{
+  margin-top:28px;
 }
 
 .category-panel:not(.opened) .product-list{
@@ -974,7 +927,7 @@ body.dark-mode.category-mode.tabs-compact .category-btn.active{
 
 .product-item{
   height:310px;
-  border-radius:10px;
+  border-radius:14px;
   overflow:hidden;
   position:relative;
   background:#eee;
@@ -1095,27 +1048,11 @@ body.dark-mode.category-mode.tabs-compact .category-btn.active{
   stroke-linecap:round;
 }
 
-.detail-image{
-  width:100%;
-  max-width:1050px;
-  margin:40px auto 0;
-  padding:0 40px;
-}
-
-.detail-image img{
-  width:100%;
-  max-height:520px;
-  object-fit:contain;
-  border-radius:32px;
-  background:#f3f3f3;
-  display:block;
-}
-
 .detail-content,
 .admin-content{
   max-width:1050px;
   margin:0 auto;
-  padding:58px 40px 120px;
+  padding:36px 40px 120px;
 }
 
 .detail-category{
@@ -1273,21 +1210,11 @@ body.logged-in .detail-edit-btn{
   font-size:14px;
 }
 
-#adminFormBox{
-  display:none;
-}
+#adminFormBox{display:none}
+#loginBox{display:block}
 
-#loginBox{
-  display:block;
-}
-
-body.logged-in #adminFormBox{
-  display:block;
-}
-
-body.logged-in #loginBox{
-  display:none;
-}
+body.logged-in #adminFormBox{display:block}
+body.logged-in #loginBox{display:none}
 
 .detail-preview-list{
   display:grid;
@@ -1305,9 +1232,7 @@ body.logged-in #loginBox{
   border:1px solid var(--card-border);
 }
 
-.detail-preview-item.dragging{
-  opacity:.4;
-}
+.detail-preview-item.dragging{opacity:.4}
 
 .detail-preview-item img{
   width:100%;
@@ -1340,9 +1265,7 @@ body.logged-in #loginBox{
   color:#111;
 }
 
-#contact{
-  display:none;
-}
+#contact{display:none}
 
 @media(max-width:900px){
   .about-layout{
@@ -1439,7 +1362,11 @@ body.logged-in #loginBox{
 
   body.category-mode .category-panel{
     min-height:100vh;
-    padding:42px 24px 48px;
+    padding:0 24px 64px;
+  }
+
+  body.category-mode .category-panel .panel-inner{
+    padding-top:28px;
   }
 
   .panel-title{
@@ -1452,6 +1379,14 @@ body.logged-in #loginBox{
 
   .profile-img{
     height:390px;
+  }
+
+  .category-title-row{
+    align-items:flex-start;
+  }
+
+  .category-actions{
+    gap:4px;
   }
 
   .category-buttons{
@@ -1473,7 +1408,8 @@ body.logged-in #loginBox{
   }
 
   body.category-mode .category-buttons{
-    top:14px;
+    top:10px;
+    margin-top:24px;
   }
 
   .category-btn{
@@ -1530,18 +1466,9 @@ body.logged-in #loginBox{
     border-radius:0;
   }
 
-  .detail-image{
-    padding:0 24px;
-  }
-
-  .detail-image img{
-    max-height:360px;
-    border-radius:22px;
-  }
-
   .detail-content,
   .admin-content{
-    padding:42px 24px 90px;
+    padding:30px 24px 90px;
   }
 
   .detail-content p{
@@ -1654,8 +1581,6 @@ body.logged-in #loginBox{
 <button class="detail-close" aria-label="Close">
 <svg viewBox="0 0 24 24"><path d="M6 6L18 18M18 6L6 18"/></svg>
 </button>
-
-<div class="detail-image"><img id="detailImg" src="" alt="project detail image"></div>
 
 <div class="detail-content">
 <span class="detail-category">PORTFOLIO PROJECT</span>
@@ -1910,7 +1835,6 @@ if(glassTabs){
 const detailOverlay=document.querySelector(".detail-overlay");
 const detailPanel=document.querySelector(".detail-panel");
 const detailClose=document.querySelector(".detail-close");
-const detailImg=document.getElementById("detailImg");
 const detailTitle=document.getElementById("detailTitle");
 const detailDesc=document.getElementById("detailDesc");
 const detailType=document.getElementById("detailType");
@@ -2031,7 +1955,6 @@ function closeDetail(){
 function openDetail(project){
   currentProject=project;
 
-  detailImg.src=project.image_url||"";
   detailTitle.innerText=project.title||"Untitled";
   detailDesc.innerText=project.short_desc||"";
   detailType.innerText=project.category||"";
