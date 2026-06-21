@@ -2272,3 +2272,295 @@ body.dark-mode .cert-list p{
     min-height:76px;
   }
 }
+/* =========================
+   DREAM GLASS DETAIL UPGRADE
+   유리감 + 여백 개선
+========================= */
+
+/* 소개창 전체 여백 넉넉하게 */
+.about-panel{
+  padding:54px 40px 76px !important;
+  align-items:center !important;
+  overflow:visible !important;
+}
+
+/* 전체 소개 레이아웃 높이 여유 */
+.about-dream{
+  gap:28px !important;
+  align-items:stretch !important;
+}
+
+/* 왼쪽 프로필 카드 유리감 강화 */
+.about-photo-card{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.76),
+      rgba(255,255,255,.34) 42%,
+      rgba(255,255,255,.16)
+    ) !important;
+  border:1px solid rgba(255,255,255,.9) !important;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.9),
+    inset 0 -1px 2px rgba(255,255,255,.38),
+    0 28px 80px rgba(0,0,0,.1) !important;
+  backdrop-filter:blur(42px) saturate(210%) !important;
+  -webkit-backdrop-filter:blur(42px) saturate(210%) !important;
+}
+
+/* 오른쪽 카드들 유리감 강화 */
+.about-glass-main,
+.about-glass-card{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.68),
+      rgba(255,255,255,.28) 44%,
+      rgba(255,255,255,.12)
+    ) !important;
+  border:1px solid rgba(255,255,255,.82) !important;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.92),
+    inset 0 -1px 2px rgba(255,255,255,.32),
+    0 24px 70px rgba(0,0,0,.085) !important;
+  backdrop-filter:blur(42px) saturate(210%) !important;
+  -webkit-backdrop-filter:blur(42px) saturate(210%) !important;
+}
+
+/* 카드 위에 은은한 빛 번짐 */
+.about-glass-main::after,
+.about-glass-card::after,
+.about-photo-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  border-radius:inherit;
+  background:
+    radial-gradient(circle at 16% 12%,rgba(255,255,255,.85),transparent 23%),
+    radial-gradient(circle at 88% 82%,rgba(255,255,255,.28),transparent 28%),
+    linear-gradient(135deg,rgba(255,255,255,.28),transparent 42%);
+  opacity:.72;
+}
+
+/* 내용이 빛 효과 위로 올라오게 */
+.about-glass-main > *,
+.about-glass-card > *,
+.about-photo-card > *{
+  position:relative;
+  z-index:2;
+}
+
+/* ABOUT 메인 카드 조금 더 여유 */
+.about-glass-main{
+  padding:34px 38px !important;
+  min-height:190px;
+}
+
+/* 중간 카드 여백 */
+.about-info-grid{
+  gap:16px !important;
+}
+
+.about-glass-card{
+  padding:25px !important;
+}
+
+/* 아래 툴 영역 여백 확보 */
+.about-tool-section{
+  gap:16px !important;
+  margin-bottom:10px !important;
+}
+
+/* 툴 카드 자체를 더 여유 있게 */
+.tool-wide-card{
+  padding:26px !important;
+}
+
+/* 툴 아이콘 유리 버튼 느낌 */
+.tool-icon-grid{
+  gap:11px !important;
+}
+
+.tool-item{
+  min-height:82px !important;
+  border-radius:22px !important;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.62),
+      rgba(255,255,255,.25)
+    ) !important;
+  border:1px solid rgba(255,255,255,.8) !important;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.82),
+    inset 0 -1px 1px rgba(255,255,255,.25),
+    0 12px 30px rgba(0,0,0,.055) !important;
+  backdrop-filter:blur(26px) saturate(190%) !important;
+  -webkit-backdrop-filter:blur(26px) saturate(190%) !important;
+  transition:.28s ease;
+}
+
+.tool-item:hover{
+  transform:translateY(-3px);
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.9),
+    0 18px 38px rgba(0,0,0,.09) !important;
+}
+
+/* 아이콘 안쪽도 그냥 검정 박스 말고 유리 느낌 */
+.tool-item span{
+  width:36px !important;
+  height:36px !important;
+  border-radius:14px !important;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(0,0,0,.88),
+      rgba(0,0,0,.58)
+    ) !important;
+  color:#fff !important;
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.22),
+    0 10px 24px rgba(0,0,0,.16) !important;
+}
+
+/* 추천 자격증 카드도 덜 답답하게 */
+.cert-card{
+  padding:26px 22px !important;
+}
+
+.cert-list{
+  gap:10px !important;
+}
+
+.cert-list p{
+  padding:10px 13px !important;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.58),
+      rgba(255,255,255,.22)
+    ) !important;
+  border:1px solid rgba(255,255,255,.74) !important;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.72),
+    0 8px 20px rgba(0,0,0,.045);
+}
+
+/* 텍스트 약간 더 정돈 */
+.about-timeline{
+  gap:10px !important;
+}
+
+.about-timeline p{
+  font-size:12.5px !important;
+  line-height:1.5 !important;
+}
+
+.about-card-title,
+.about-label{
+  color:rgba(0,0,0,.42) !important;
+}
+
+/* 다크모드용 유리감 */
+body.dark-mode .about-photo-card,
+body.dark-mode .about-glass-main,
+body.dark-mode .about-glass-card{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.14),
+      rgba(255,255,255,.065) 46%,
+      rgba(255,255,255,.025)
+    ) !important;
+  border-color:rgba(255,255,255,.18) !important;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.18),
+    inset 0 -1px 2px rgba(255,255,255,.06),
+    0 28px 80px rgba(0,0,0,.38) !important;
+}
+
+body.dark-mode .tool-item{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.12),
+      rgba(255,255,255,.045)
+    ) !important;
+  border-color:rgba(255,255,255,.15) !important;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.12),
+    0 12px 34px rgba(0,0,0,.28) !important;
+}
+
+body.dark-mode .tool-item span{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.92),
+      rgba(255,255,255,.62)
+    ) !important;
+  color:#111 !important;
+  border-color:rgba(255,255,255,.25);
+}
+
+body.dark-mode .cert-list p{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.1),
+      rgba(255,255,255,.035)
+    ) !important;
+  border-color:rgba(255,255,255,.14) !important;
+}
+
+body.dark-mode .about-card-title,
+body.dark-mode .about-label{
+  color:rgba(255,255,255,.5) !important;
+}
+
+/* 화면 높이가 낮을 때 아래 여백 확보 */
+@media(max-height:820px){
+  .about-panel{
+    align-items:flex-start !important;
+    padding-top:46px !important;
+    padding-bottom:90px !important;
+  }
+
+  .about-photo{
+    height:330px !important;
+  }
+
+  .about-glass-main{
+    padding:28px 34px !important;
+    min-height:auto;
+  }
+
+  .tool-item{
+    min-height:76px !important;
+  }
+}
+
+/* 모바일 여백 */
+@media(max-width:768px){
+  .about-panel{
+    padding:38px 22px 88px !important;
+  }
+
+  .about-glass-main,
+  .about-glass-card,
+  .tool-wide-card,
+  .cert-card{
+    padding:24px !important;
+  }
+
+  .tool-icon-grid{
+    gap:10px !important;
+  }
+
+  .tool-item{
+    min-height:82px !important;
+  }
+}
