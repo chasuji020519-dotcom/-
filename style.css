@@ -1790,3 +1790,57 @@ html{
     min-height:calc(100vh - 120px) !important;
   }
 }
+/* =========================
+   ABOUT → CATEGORY OVERLAP FIX
+   카테고리 패널이 소개 패널을 덮게 하기
+========================= */
+
+/* 스냅 다시 켜기 */
+html{
+  scroll-snap-type:y mandatory !important;
+}
+
+/* 소개 패널은 화면에 붙어있게 */
+.about-panel{
+  position:sticky !important;
+  top:105px !important;
+  z-index:1 !important;
+  min-height:calc(100vh - 105px) !important;
+  overflow:hidden !important;
+  scroll-snap-align:start !important;
+  scroll-snap-stop:always !important;
+}
+
+/* 소개 패널 뒤에 아주 짧은 공간 */
+.about-hold{
+  display:block !important;
+  height:1px !important;
+}
+
+/* 카테고리가 소개 패널보다 위에 올라오게 */
+.category-panel{
+  position:relative !important;
+  z-index:5 !important;
+  min-height:calc(100vh - 105px) !important;
+  scroll-snap-align:start !important;
+  scroll-snap-stop:always !important;
+}
+
+/* 카테고리 클릭 전 중앙 정렬 */
+.category-panel:not(.opened){
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+
+/* 모바일 */
+@media(max-width:768px){
+  .about-panel{
+    top:86px !important;
+    min-height:calc(100vh - 86px) !important;
+  }
+
+  .category-panel{
+    min-height:calc(100vh - 86px) !important;
+  }
+}
