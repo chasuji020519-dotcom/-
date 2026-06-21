@@ -3,9 +3,9 @@
    SITE TEXT
 ========================= */
 const SITE_TEXT={
-  logo:"포트폴리오",
+  logo:"PORTFOLIO",
   heroLeft:["감각을","가치를","경험을","생각을","감각을"],
-  heroCenter:"ㅋㅋㅋ",
+  heroCenter:"담은",
   heroRight:["디자인","퀄리티","임팩트","디테일","디자인"],
   subtitle:"작은 브랜드라도 온라인에서는 단단하게 보여야 하니까요.",
 
