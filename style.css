@@ -1344,10 +1344,10 @@ body.logged-in #loginBox{
     padding:42px 24px 48px;
   }
 
-  body.category-mode .category-panel{
-    min-height:100vh;
-    padding:42px 24px 48px;
-  }
+body.category-mode .category-panel{
+  min-height:100vh;
+  padding:28px 24px 56px;
+}
 
   .panel-title{
     font-size:clamp(42px,12vw,68px);
