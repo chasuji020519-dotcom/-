@@ -819,3 +819,16 @@ loadProjects();
 setTimeout(()=>{
   moveGlassIndicator(getActiveCategoryButton());
 },300);
+const logoText = document.getElementById("logoText");
+
+logoText.addEventListener("click", function(e){
+  e.preventDefault();
+
+  // 메인 위치로 이동
+  window.location.hash = "top";
+
+  // 강력 새로고침 느낌으로 캐시 우회
+  const url = window.location.origin + window.location.pathname + "?v=" + Date.now();
+
+  window.location.replace(url);
+});
