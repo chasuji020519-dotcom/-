@@ -2564,3 +2564,36 @@ body.dark-mode .about-label{
     min-height:82px !important;
   }
 }
+/* =========================
+   RECOMMENDED 2 COLUMN FIX
+========================= */
+.cert-list{
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:10px !important;
+}
+
+.cert-list p{
+  width:100% !important;
+  text-align:center !important;
+  white-space:nowrap;
+  padding:10px 11px !important;
+  font-size:10.5px !important;
+}
+
+/* 추천 카드 세로 길이 줄이기 */
+.cert-card{
+  padding:24px 20px !important;
+}
+
+/* 화면이 너무 좁으면 다시 1열 */
+@media(max-width:768px){
+  .cert-list{
+    grid-template-columns:1fr !important;
+  }
+
+  .cert-list p{
+    text-align:left !important;
+    white-space:normal;
+  }
+}
