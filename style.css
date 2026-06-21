@@ -1706,3 +1706,87 @@ body.logged-in #loginBox{
     grid-template-columns:1fr;
   }
 }
+/* =========================
+   CATEGORY PANEL FORCE FIX
+   카테고리 패널 다시 보이게 강제 수정
+========================= */
+
+/* 스크롤 스냅 때문에 패널이 안 넘어가는 문제 방지 */
+html{
+  scroll-snap-type:none !important;
+}
+
+/* ABOUT이 CATEGORY를 덮지 못하게 */
+.about-panel{
+  position:relative !important;
+  top:auto !important;
+  height:auto !important;
+  min-height:auto !important;
+  overflow:visible !important;
+  scroll-snap-align:none !important;
+}
+
+/* 불필요한 hold 영역 제거 */
+.about-hold{
+  display:none !important;
+  height:0 !important;
+}
+
+/* CATEGORY 패널 강제로 보이게 */
+.category-panel{
+  display:flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  position:relative !important;
+  z-index:10 !important;
+  min-height:100vh !important;
+  padding:70px 40px !important;
+  background:
+    radial-gradient(circle at 18% 20%,rgba(255,255,255,.55),transparent 28%),
+    radial-gradient(circle at 82% 72%,rgba(180,180,180,.18),transparent 34%),
+    var(--panel) !important;
+}
+
+/* 카테고리 클릭 전에도 가운데에 보이게 */
+.category-panel:not(.opened) .panel-inner{
+  min-height:calc(100vh - 140px) !important;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:center !important;
+  align-items:center !important;
+  text-align:center !important;
+}
+
+/* 카테고리 제목/버튼 보이게 */
+.category-head,
+.category-buttons{
+  display:flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+
+.category-head{
+  flex-direction:column !important;
+  align-items:center !important;
+}
+
+.category-buttons{
+  margin-top:34px !important;
+}
+
+/* 카테고리 클릭 전에는 작품 리스트 숨김 유지 */
+.category-panel:not(.opened) .product-list{
+  display:none !important;
+}
+
+/* 모바일 */
+@media(max-width:768px){
+  .category-panel{
+    min-height:100vh !important;
+    padding:42px 24px 48px !important;
+  }
+
+  .category-panel:not(.opened) .panel-inner{
+    min-height:calc(100vh - 120px) !important;
+  }
+}
