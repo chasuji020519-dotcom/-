@@ -374,14 +374,14 @@ body.dark-mode .dark-toggle{
    COMPACT ABOUT DESIGN
 ========================= */
 .about-panel{
-  position:sticky;
-  top:105px;
+  position:relative;
+  top:auto;
   z-index:1;
   min-height:calc(100vh - 105px);
   padding:44px 40px;
   display:flex;
   align-items:center;
-  overflow:hidden;
+  overflow:visible;
   background:
     radial-gradient(circle at 12% 12%,rgba(255,255,255,.88),transparent 28%),
     radial-gradient(circle at 92% 82%,rgba(0,0,0,.06),transparent 34%),
@@ -396,7 +396,7 @@ body.dark-mode .about-panel{
 }
 
 .about-hold{
-  height:1px;
+  display:none;
 }
 
 .about-fit{
@@ -941,6 +941,7 @@ body.category-mode .category-buttons{
   color:#111;
 }
 
+/* compact tabs after scroll */
 body.category-mode.tabs-compact .category-buttons{
   padding:6px;
   gap:8px;
@@ -1530,7 +1531,6 @@ body.logged-in #loginBox{
   }
 
   .about-panel{
-    top:86px;
     min-height:calc(100vh - 86px);
     padding:36px 22px;
     align-items:flex-start;
