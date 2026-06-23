@@ -1,6 +1,5 @@
 /* =========================
    FIRST SCREEN FIX
-   새로고침해도 무조건 메인에서 시작
 ========================= */
 history.scrollRestoration = "manual";
 
@@ -10,31 +9,18 @@ if(location.hash){
 
 window.scrollTo(0, 0);
 
+window.addEventListener("pageshow", () => {
+  window.scrollTo(0, 0);
+});
+
 window.addEventListener("load", () => {
   window.scrollTo(0, 0);
 
   setTimeout(() => {
     document.body.classList.remove("page-loading");
     window.scrollTo(0, 0);
-  }, 80);
+  }, 120);
 });
-
-/* =========================
-   IMAGE MARQUEE
-========================= */
-function initMarquee(){
-  const marqueeTrack = document.getElementById("marqueeTrack");
-  if(!marqueeTrack) return;
-
-  const originalItems = Array.from(marqueeTrack.children);
-
-  originalItems.forEach(item => {
-    marqueeTrack.appendChild(item.cloneNode(true));
-  });
-}
-
-initMarquee();
-
 /* =========================
    DARK MODE
 ========================= */

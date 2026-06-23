@@ -4,16 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio</title>
-<head>
 
-<meta charset="UTF-8">
+<script>
+  history.scrollRestoration = "manual";
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  if (location.hash) {
+    history.replaceState(null, "", location.pathname + location.search);
+  }
 
-<title>Portfolio</title>
+  window.scrollTo(0, 0);
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<link rel="stylesheet" href="style.css?v=6">
+<link rel="stylesheet" href="style.css?v=7">
 </head>
 
 <body class="page-loading">
@@ -405,6 +408,6 @@
   </div>
 </div>
 
-<script src="./script.js?v=6"></script>
+<script src="./script.js?v=7"></script>
 </body>
 </html>
