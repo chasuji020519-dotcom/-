@@ -1493,3 +1493,212 @@ body.logged-in #loginBox{
     grid-template-columns:1fr;
   }
 }
+/* =========================
+   RESPONSIVE RATIO OPTIMIZE
+========================= */
+
+:root{
+  --nav-h:clamp(82px, 9vh, 120px);
+  --page-x:clamp(22px, 4vw, 56px);
+  --panel-radius:clamp(28px, 3vw, 46px);
+  --about-img-h:clamp(220px, 32vh, 340px);
+  --about-gap:clamp(18px, 2vw, 32px);
+  --about-card-padding:clamp(24px, 3vw, 42px);
+}
+
+/* 소개 패널 높이 자동 보정 */
+.about-panel{
+  min-height:100svh;
+  padding:
+    calc(var(--nav-h) + 24px)
+    var(--page-x)
+    clamp(70px, 8vh, 120px);
+  align-items:center;
+  border-radius:var(--panel-radius) var(--panel-radius) 0 0;
+}
+
+/* 소개 내용이 화면 안에서 자연스럽게 맞도록 */
+.about-editorial{
+  max-width:min(1240px, 100%);
+  display:grid;
+  grid-template-columns:
+    minmax(240px, 300px)
+    minmax(0, 1fr);
+  gap:var(--about-gap);
+  align-items:start;
+  transform:none;
+}
+
+/* 왼쪽 프로필 이미지 */
+.about-portrait{
+  height:var(--about-img-h);
+}
+
+/* 오른쪽 소개 카드 */
+.about-main-canvas{
+  padding:var(--about-card-padding);
+}
+
+/* 큰 제목 화면별 자동 조절 */
+.about-hero-copy h2{
+  font-size:clamp(36px, 5.2vw, 64px);
+}
+
+/* 설명 글 */
+.about-hero-copy p{
+  font-size:clamp(13px, 1.15vw, 14.5px);
+  line-height:1.7;
+}
+
+/* 하단 정보 영역 */
+.about-info-board{
+  grid-template-columns:
+    minmax(0, 1.12fr)
+    minmax(0, .9fr)
+    minmax(0, .86fr);
+  gap:clamp(14px, 1.6vw, 22px);
+}
+
+/* 카테고리 패널도 화면 기준으로 보정 */
+.category-panel{
+  min-height:calc(100svh + 100px);
+  padding:
+    calc(var(--nav-h) + 12px)
+    var(--page-x)
+    clamp(100px, 12vh, 150px);
+  border-radius:var(--panel-radius) var(--panel-radius) 0 0;
+}
+
+/* 노트북처럼 세로가 낮은 화면 */
+@media(max-height:820px) and (min-width:901px){
+  .about-panel{
+    padding-top:96px;
+    padding-bottom:70px;
+  }
+
+  .about-editorial{
+    grid-template-columns:270px minmax(0, 1fr);
+  }
+
+  .about-portrait{
+    height:260px;
+  }
+
+  .about-main-canvas{
+    padding:30px 36px;
+  }
+
+  .about-hero-copy h2{
+    font-size:clamp(38px, 4.4vw, 56px);
+  }
+
+  .about-hero-copy p{
+    margin-top:16px;
+    line-height:1.6;
+  }
+
+  .about-keyword-line span{
+    height:30px;
+    padding:0 12px;
+    font-size:11px;
+  }
+
+  .board-title{
+    margin-bottom:12px;
+  }
+
+  .board-title h4{
+    font-size:21px;
+  }
+
+  .board-list{
+    gap:7px;
+  }
+
+  .board-list p{
+    font-size:11.4px;
+    line-height:1.35;
+  }
+
+  .soft-tool-list b{
+    width:40px;
+    height:40px;
+  }
+}
+
+/* 태블릿 */
+@media(max-width:1100px){
+  .about-editorial{
+    grid-template-columns:1fr;
+  }
+
+  .about-visual-card{
+    display:grid;
+    grid-template-columns:minmax(180px, 240px) 1fr;
+    gap:22px;
+  }
+
+  .about-portrait{
+    height:260px;
+  }
+
+  .about-info-board{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .about-tool-section{
+    grid-column:1 / -1;
+  }
+
+  .soft-tool-list{
+    grid-template-columns:repeat(6, 1fr);
+  }
+}
+
+/* 모바일 */
+@media(max-width:768px){
+  :root{
+    --nav-h:84px;
+    --page-x:22px;
+  }
+
+  .about-panel{
+    min-height:auto;
+    padding:105px var(--page-x) 70px;
+    align-items:flex-start;
+  }
+
+  .about-editorial{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+
+  .about-visual-card{
+    display:block;
+  }
+
+  .about-portrait{
+    height:min(340px, 48vh);
+  }
+
+  .about-main-canvas{
+    padding:28px 24px;
+  }
+
+  .about-hero-copy h2{
+    font-size:clamp(38px, 11vw, 52px);
+  }
+
+  .about-info-board{
+    grid-template-columns:1fr;
+  }
+
+  .soft-tool-list{
+    grid-template-columns:repeat(3, 1fr);
+  }
+
+  .category-panel{
+    min-height:auto;
+    padding:96px var(--page-x) 90px;
+  }
+}
