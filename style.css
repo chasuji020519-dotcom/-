@@ -13,28 +13,33 @@
   --sub:rgba(0,0,0,.45);
   --muted:rgba(0,0,0,.58);
 
-  --panel:rgba(255,255,255,.58);
-  --panel-border:rgba(255,255,255,.72);
+  --panel:rgba(255,255,255,.62);
+  --panel-border:rgba(255,255,255,.75);
 
-  --card:rgba(255,255,255,.42);
-  --card-border:rgba(255,255,255,.62);
+  --card:rgba(255,255,255,.46);
+  --card-border:rgba(255,255,255,.68);
 
   --button:#111111;
   --button-text:#ffffff;
 
+  --radius-big:34px;
+  --radius-mid:26px;
+  --radius-small:18px;
+
   --glass-bg:
     linear-gradient(
       145deg,
-      rgba(255,255,255,.62),
-      rgba(255,255,255,.28) 48%,
-      rgba(255,255,255,.14)
+      rgba(255,255,255,.72),
+      rgba(255,255,255,.36) 48%,
+      rgba(255,255,255,.20)
     );
 
-  --glass-border:rgba(255,255,255,.72);
+  --glass-border:rgba(255,255,255,.78);
+
   --glass-shadow:
-    inset 0 1px 1px rgba(255,255,255,.88),
-    inset 0 -1px 2px rgba(255,255,255,.18),
-    0 24px 70px rgba(0,0,0,.10);
+    inset 0 1px 1px rgba(255,255,255,.95),
+    inset 0 -1px 2px rgba(255,255,255,.22),
+    0 28px 80px rgba(0,0,0,.11);
 
   --marquee-gradient:
     linear-gradient(
@@ -52,11 +57,11 @@ body.dark-mode{
   --sub:rgba(255,255,255,.52);
   --muted:rgba(255,255,255,.62);
 
-  --panel:rgba(18,18,18,.62);
-  --panel-border:rgba(255,255,255,.12);
+  --panel:rgba(18,18,18,.68);
+  --panel-border:rgba(255,255,255,.14);
 
   --card:rgba(255,255,255,.08);
-  --card-border:rgba(255,255,255,.14);
+  --card-border:rgba(255,255,255,.16);
 
   --button:#ffffff;
   --button-text:#111111;
@@ -64,16 +69,17 @@ body.dark-mode{
   --glass-bg:
     linear-gradient(
       145deg,
-      rgba(255,255,255,.13),
-      rgba(255,255,255,.055) 48%,
-      rgba(255,255,255,.025)
+      rgba(255,255,255,.14),
+      rgba(255,255,255,.065) 48%,
+      rgba(255,255,255,.035)
     );
 
-  --glass-border:rgba(255,255,255,.16);
+  --glass-border:rgba(255,255,255,.18);
+
   --glass-shadow:
     inset 0 1px 1px rgba(255,255,255,.16),
     inset 0 -1px 2px rgba(255,255,255,.05),
-    0 28px 80px rgba(0,0,0,.36);
+    0 30px 90px rgba(0,0,0,.38);
 
   --marquee-gradient:
     linear-gradient(
@@ -87,7 +93,7 @@ body.dark-mode{
 
 html{
   scroll-behavior:smooth;
-  scroll-snap-type:y mandatory;
+  scroll-snap-type:y proximity;
   scroll-padding-top:105px;
 }
 
@@ -164,7 +170,7 @@ body.category-mode .back-home-zone{
   inset:0;
   width:100%;
   height:100vh;
-  z-index:1;
+  z-index:auto;
   background:
     radial-gradient(circle at 12% 12%,rgba(255,255,255,.95),transparent 26%),
     radial-gradient(circle at 84% 76%,rgba(220,224,255,.32),transparent 34%),
@@ -189,7 +195,13 @@ body.dark-mode .main-fixed{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  z-index:999;
+  z-index:9999;
+  pointer-events:none;
+}
+
+.nav a,
+.nav button{
+  pointer-events:auto;
 }
 
 .logo{
@@ -203,9 +215,9 @@ body.dark-mode .main-fixed{
 .dark-toggle{
   width:46px;
   height:46px;
-  border:1px solid rgba(255,255,255,.62);
+  border:1px solid rgba(255,255,255,.66);
   border-radius:999px;
-  background:rgba(255,255,255,.45);
+  background:rgba(255,255,255,.5);
   color:#111;
   display:flex;
   align-items:center;
@@ -215,7 +227,7 @@ body.dark-mode .main-fixed{
   backdrop-filter:blur(22px) saturate(170%);
   -webkit-backdrop-filter:blur(22px) saturate(170%);
   box-shadow:
-    inset 0 1px 1px rgba(255,255,255,.8),
+    inset 0 1px 1px rgba(255,255,255,.85),
     0 14px 34px rgba(0,0,0,.10);
   transition:.3s ease;
 }
@@ -363,7 +375,7 @@ body.dark-mode .dark-toggle{
 ========================= */
 .scroll-area{
   position:relative;
-  z-index:5;
+  z-index:2;
   margin-top:100vh;
   background:var(--bg);
 }
@@ -374,11 +386,11 @@ body.dark-mode .dark-toggle{
   padding:70px 40px;
   background:var(--panel);
   border-top:1px solid var(--panel-border);
-  backdrop-filter:blur(28px);
-  -webkit-backdrop-filter:blur(28px);
-  box-shadow:0 -28px 80px rgba(0,0,0,.10);
+  backdrop-filter:blur(26px);
+  -webkit-backdrop-filter:blur(26px);
+  box-shadow:0 -24px 70px rgba(0,0,0,.08);
   scroll-snap-align:start;
-  scroll-snap-stop:always;
+  scroll-snap-stop:normal;
 }
 
 .panel-inner{
@@ -406,32 +418,31 @@ body.dark-mode .dark-toggle{
    ABOUT PANEL
 ========================= */
 .about-panel{
-  position:sticky;
-  top:105px;
+  position:relative;
+  top:auto;
   z-index:1;
   min-height:calc(100vh - 105px);
-  padding:54px 40px 84px;
+  padding:64px 40px 84px;
   display:flex;
   align-items:center;
   overflow:hidden;
   background:
-    radial-gradient(circle at 10% 10%,rgba(255,255,255,.95),transparent 24%),
-    radial-gradient(circle at 74% 18%,rgba(218,224,255,.34),transparent 32%),
-    radial-gradient(circle at 90% 90%,rgba(0,0,0,.06),transparent 34%),
-    linear-gradient(135deg,rgba(250,250,252,.92),rgba(238,239,244,.76));
+    radial-gradient(circle at 12% 10%,rgba(255,255,255,.95),transparent 26%),
+    radial-gradient(circle at 75% 18%,rgba(218,224,255,.30),transparent 34%),
+    radial-gradient(circle at 90% 88%,rgba(0,0,0,.045),transparent 34%),
+    linear-gradient(135deg,rgba(250,250,252,.94),rgba(238,239,244,.80));
 }
 
 body.dark-mode .about-panel{
   background:
-    radial-gradient(circle at 10% 10%,rgba(255,255,255,.07),transparent 24%),
-    radial-gradient(circle at 74% 18%,rgba(170,180,255,.12),transparent 32%),
-    radial-gradient(circle at 90% 90%,rgba(255,255,255,.05),transparent 34%),
-    linear-gradient(135deg,rgba(18,18,18,.94),rgba(28,28,30,.86));
+    radial-gradient(circle at 12% 10%,rgba(255,255,255,.07),transparent 26%),
+    radial-gradient(circle at 75% 18%,rgba(170,180,255,.12),transparent 34%),
+    radial-gradient(circle at 90% 88%,rgba(255,255,255,.05),transparent 34%),
+    linear-gradient(135deg,rgba(18,18,18,.95),rgba(28,28,30,.88));
 }
 
 .about-hold{
-  display:block;
-  height:1px;
+  display:none;
 }
 
 .about-editorial{
@@ -451,7 +462,7 @@ body.dark-mode .about-panel{
 .about-main-canvas{
   position:relative;
   overflow:hidden;
-  border-radius:10px;
+  border-radius:var(--radius-big);
   background:var(--glass-bg);
   border:1px solid var(--glass-border);
   box-shadow:var(--glass-shadow);
@@ -469,12 +480,12 @@ body.dark-mode .about-panel{
   background:
     linear-gradient(
       135deg,
-      rgba(255,255,255,.56) 0%,
-      rgba(255,255,255,.15) 36%,
+      rgba(255,255,255,.60) 0%,
+      rgba(255,255,255,.16) 36%,
       transparent 68%
     ),
-    radial-gradient(circle at 88% 88%,rgba(255,255,255,.18),transparent 30%);
-  opacity:.68;
+    radial-gradient(circle at 88% 88%,rgba(255,255,255,.20),transparent 30%);
+  opacity:.72;
 }
 
 .about-visual-card::after,
@@ -482,13 +493,13 @@ body.dark-mode .about-panel{
   content:"";
   position:absolute;
   top:1px;
-  left:18px;
-  right:18px;
+  left:28px;
+  right:28px;
   height:1px;
   border-radius:999px;
-  background:linear-gradient(to right,transparent,rgba(255,255,255,.86),transparent);
+  background:linear-gradient(to right,transparent,rgba(255,255,255,.9),transparent);
   pointer-events:none;
-  opacity:.72;
+  opacity:.75;
 }
 
 .about-visual-card > *,
@@ -499,19 +510,19 @@ body.dark-mode .about-panel{
 
 /* LEFT PROFILE */
 .about-visual-card{
-  padding:16px 16px 26px;
+  padding:18px 18px 28px;
 }
 
 .about-portrait{
   width:100%;
   height:390px;
   overflow:hidden;
-  border-radius:10px;
-  background:rgba(255,255,255,.28);
-  border:1px solid rgba(255,255,255,.52);
+  border-radius:var(--radius-mid);
+  background:rgba(255,255,255,.30);
+  border:1px solid rgba(255,255,255,.58);
   box-shadow:
-    inset 0 1px 1px rgba(255,255,255,.58),
-    0 12px 34px rgba(0,0,0,.06);
+    inset 0 1px 1px rgba(255,255,255,.65),
+    0 14px 36px rgba(0,0,0,.07);
 }
 
 .about-portrait img{
@@ -519,7 +530,7 @@ body.dark-mode .about-panel{
   height:100%;
   object-fit:cover;
   display:block;
-  border-radius:10px;
+  border-radius:var(--radius-mid);
   filter:saturate(.92) contrast(1.04);
 }
 
@@ -529,7 +540,7 @@ body.dark-mode .about-panel{
 
 .about-profile-text h3{
   color:var(--text);
-  font-size:30px;
+  font-size:31px;
   line-height:1;
   letter-spacing:-.07em;
 }
@@ -570,7 +581,7 @@ body.dark-mode .about-panel{
 
 /* RIGHT CANVAS */
 .about-main-canvas{
-  padding:42px;
+  padding:44px;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
@@ -579,7 +590,7 @@ body.dark-mode .about-panel{
 
 .about-hero-copy h2{
   color:var(--text);
-  font-size:clamp(38px,3.4vw,50px);
+  font-size:clamp(38px,3.4vw,52px);
   line-height:.95;
   letter-spacing:-.08em;
 }
@@ -603,8 +614,8 @@ body.dark-mode .about-panel{
   height:32px;
   padding:0 13px;
   border-radius:999px;
-  background:rgba(255,255,255,.38);
-  border:1px solid rgba(255,255,255,.58);
+  background:rgba(255,255,255,.40);
+  border:1px solid rgba(255,255,255,.62);
   color:rgba(0,0,0,.52);
   font-size:11.5px;
   font-weight:720;
@@ -614,7 +625,7 @@ body.dark-mode .about-panel{
   backdrop-filter:blur(16px) saturate(160%);
   -webkit-backdrop-filter:blur(16px) saturate(160%);
   box-shadow:
-    inset 0 1px 1px rgba(255,255,255,.55),
+    inset 0 1px 1px rgba(255,255,255,.58),
     0 8px 22px rgba(0,0,0,.04);
 }
 
@@ -724,11 +735,11 @@ body.dark-mode .about-contact-minimal{
   height:42px;
   border-radius:16px;
   background:
-    linear-gradient(145deg,rgba(255,255,255,.62),rgba(255,255,255,.22));
+    linear-gradient(145deg,rgba(255,255,255,.66),rgba(255,255,255,.26));
   color:rgba(0,0,0,.72);
-  border:1px solid rgba(255,255,255,.68);
+  border:1px solid rgba(255,255,255,.72);
   box-shadow:
-    inset 0 1px 1px rgba(255,255,255,.82),
+    inset 0 1px 1px rgba(255,255,255,.86),
     inset 0 -1px 2px rgba(255,255,255,.16),
     0 10px 24px rgba(0,0,0,.07);
   display:flex;
@@ -771,22 +782,22 @@ body.dark-mode .soft-tool-list b{
 ========================= */
 .category-panel{
   position:relative;
-  z-index:5;
+  z-index:2;
   min-height:calc(100vh - 105px);
   display:flex;
   align-items:center;
   justify-content:center;
   background:
-    radial-gradient(circle at 18% 20%,rgba(255,255,255,.55),transparent 28%),
-    radial-gradient(circle at 82% 72%,rgba(180,180,180,.18),transparent 34%),
-    var(--panel);
+    radial-gradient(circle at 18% 20%,rgba(255,255,255,.60),transparent 28%),
+    radial-gradient(circle at 82% 72%,rgba(190,194,220,.18),transparent 34%),
+    linear-gradient(135deg,rgba(250,250,252,.90),rgba(240,240,244,.78));
 }
 
 body.dark-mode .category-panel{
   background:
     radial-gradient(circle at 18% 20%,rgba(255,255,255,.08),transparent 28%),
     radial-gradient(circle at 82% 72%,rgba(255,255,255,.05),transparent 34%),
-    var(--panel);
+    linear-gradient(135deg,rgba(18,18,18,.94),rgba(28,28,30,.86));
 }
 
 .category-panel.opened{
@@ -913,8 +924,8 @@ body.dark-mode .category-panel{
   overflow:hidden;
   border-radius:999px;
   background:
-    linear-gradient(135deg,rgba(255,255,255,.72),rgba(255,255,255,.26) 42%,rgba(255,255,255,.12));
-  border:1px solid rgba(255,255,255,.72);
+    linear-gradient(135deg,rgba(255,255,255,.74),rgba(255,255,255,.28) 42%,rgba(255,255,255,.14));
+  border:1px solid rgba(255,255,255,.75);
   backdrop-filter:blur(34px) saturate(200%);
   -webkit-backdrop-filter:blur(34px) saturate(200%);
   box-shadow:
@@ -1103,7 +1114,7 @@ body.dark-mode.category-mode.tabs-compact .category-btn.active{
   position:relative;
   height:310px;
   overflow:hidden;
-  border-radius:18px;
+  border-radius:24px;
   background:#eee;
   box-shadow:0 20px 55px rgba(0,0,0,.10);
   cursor:pointer;
@@ -1593,7 +1604,6 @@ body.logged-in #loginBox{
   }
 
   .about-panel{
-    top:86px;
     min-height:calc(100vh - 86px);
     padding:36px 22px 88px;
     align-items:flex-start;
@@ -1602,16 +1612,20 @@ body.logged-in #loginBox{
 
   .about-visual-card{
     display:block;
-    border-radius:10px;
+    border-radius:28px;
   }
 
   .about-portrait{
     height:340px;
-    border-radius:10px;
+    border-radius:22px;
+  }
+
+  .about-portrait img{
+    border-radius:22px;
   }
 
   .about-main-canvas{
-    border-radius:10px;
+    border-radius:28px;
     padding:30px 24px;
   }
 
@@ -1722,6 +1736,7 @@ body.logged-in #loginBox{
 
   .product-item{
     height:260px;
+    border-radius:22px;
   }
 
   .detail-panel,
@@ -1756,60 +1771,5 @@ body.logged-in #loginBox{
 
   .detail-preview-list{
     grid-template-columns:1fr;
-  }
-}
-/* =========================
-   SCROLL / PANEL OVERLAP FIX
-   패널 스크롤 겹침 오류 수정
-========================= */
-
-/* main-fixed가 nav까지 가두고 있어서 패널이 nav를 덮는 문제 해결 */
-.main-fixed{
-  z-index:auto !important;
-}
-
-/* 상단 Portfolio / 다크모드 버튼은 항상 제일 위 */
-.nav{
-  z-index:9999 !important;
-}
-
-/* 패널 영역은 nav 아래에서만 움직이게 */
-.scroll-area{
-  position:relative !important;
-  z-index:10 !important;
-}
-
-/* ABOUT 패널 sticky 때문에 생기는 겹침 느낌 제거 */
-.about-panel{
-  position:relative !important;
-  top:auto !important;
-  min-height:calc(100vh - 105px) !important;
-  z-index:1 !important;
-}
-
-/* sticky 보정용 빈 공간 제거 */
-.about-hold{
-  display:none !important;
-}
-
-/* CATEGORY가 위로 올라올 때 이상한 빈 바디처럼 보이는 현상 방지 */
-.category-panel{
-  position:relative !important;
-  z-index:2 !important;
-  min-height:calc(100vh - 105px) !important;
-}
-
-/* 스크롤 스냅 위치 자연스럽게 */
-.about-panel,
-.category-panel{
-  scroll-snap-align:start !important;
-  scroll-snap-stop:always !important;
-}
-
-/* 모바일에서도 동일하게 자연스럽게 */
-@media(max-width:768px){
-  .about-panel,
-  .category-panel{
-    min-height:calc(100vh - 86px) !important;
   }
 }
