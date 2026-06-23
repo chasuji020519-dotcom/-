@@ -5,18 +5,17 @@
 
 <script>
   history.scrollRestoration = "manual";
+  if(location.hash){
+    history.replaceState(null, "", location.pathname + location.search);
+  }
   window.scrollTo(0, 0);
-
-  window.addEventListener("pageshow", function(){
-    window.scrollTo(0, 0);
-  });
 </script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<link rel="stylesheet" href="style.css?v=30">
+<link rel="stylesheet" href="style.css?v=31">
 </head>
 
 <body class="page-loading">
@@ -58,9 +57,7 @@
         </div>
       </h1>
 
-      <p class="subtitle">
-        작은 브랜드라도 온라인에서는 단단하게 보여야 하니까요.
-      </p>
+      <p class="subtitle">작은 브랜드라도 온라인에서는 단단하게 보여야 하니까요.</p>
     </div>
 
     <div class="scroll-hint">
@@ -70,21 +67,11 @@
 
     <div class="image-marquee">
       <div class="marquee-track" id="marqueeTrack">
-        <div class="project">
-          <img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg" alt="portfolio image">
-        </div>
-        <div class="project">
-          <img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg" alt="portfolio image">
-        </div>
-        <div class="project">
-          <img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg" alt="portfolio image">
-        </div>
-        <div class="project">
-          <img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg" alt="portfolio image">
-        </div>
-        <div class="project">
-          <img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg" alt="portfolio image">
-        </div>
+        <div class="project"><img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg" alt=""></div>
+        <div class="project"><img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg" alt=""></div>
+        <div class="project"><img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg" alt=""></div>
+        <div class="project"><img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg" alt=""></div>
+        <div class="project"><img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg" alt=""></div>
       </div>
     </div>
   </section>
@@ -97,7 +84,7 @@
 
     <div class="about-visual-card motion-card" data-delay="0">
       <div class="about-portrait">
-        <img src="https://i.pinimg.com/736x/ff/0d/2a/ff0d2a921264637b1268a56fae27867c.jpg" alt="profile image">
+        <img src="https://i.pinimg.com/736x/ff/0d/2a/ff0d2a921264637b1268a56fae27867c.jpg" alt="">
       </div>
 
       <div class="about-profile-text">
@@ -113,7 +100,6 @@
     </div>
 
     <div class="about-main-canvas motion-card" data-delay="1">
-
       <div class="about-hero-copy">
         <p class="mini-label">ABOUT ME</p>
         <h2>차분하지만<br>분명한 감각.</h2>
@@ -134,76 +120,29 @@
       </div>
 
       <div class="about-info-board">
-
         <div class="about-board-section">
-          <div class="board-title">
-            <span>01</span>
-            <h4>Experience</h4>
-          </div>
-
+          <div class="board-title"><span>01</span><h4>Experience</h4></div>
           <div class="board-list">
-            <p>
-              <strong>2026</strong>
-              <span>경희사이버대학교<br>IT·디자인융합학부 재학중</span>
-            </p>
-
-            <p>
-              <strong>2025</strong>
-              <span>(주)뿌쥬아 웹디자이너<br>카페24 / 스마트스토어 / 프로모션 기획 / 블로그 포스팅</span>
-            </p>
-
-            <p>
-              <strong>2020 - 2024</strong>
-              <span>(주)뿌유 웹디자이너<br>쇼핑몰 관리 / 상세페이지 / 프로모션 디자인 / 상품 편집 및 등록</span>
-            </p>
-
-            <p>
-              <strong>2020</strong>
-              <span>문학정보고등학교<br>스마트미디어과 졸업</span>
-            </p>
+            <p><strong>2026</strong><span>경희사이버대학교<br>IT·디자인융합학부 재학중</span></p>
+            <p><strong>2025</strong><span>(주)뿌쥬아 웹디자이너<br>카페24 / 스마트스토어 / 프로모션 기획 / 블로그 포스팅</span></p>
+            <p><strong>2020 - 2024</strong><span>(주)뿌유 웹디자이너<br>쇼핑몰 관리 / 상세페이지 / 프로모션 디자인 / 상품 편집 및 등록</span></p>
+            <p><strong>2020</strong><span>문학정보고등학교<br>스마트미디어과 졸업</span></p>
           </div>
         </div>
 
         <div class="about-board-section">
-          <div class="board-title">
-            <span>02</span>
-            <h4>Certificate</h4>
-          </div>
-
+          <div class="board-title"><span>02</span><h4>Certificate</h4></div>
           <div class="board-list">
-            <p>
-              <strong>GTQ</strong>
-              <span>그래픽기술자격 1급</span>
-            </p>
-
-            <p>
-              <strong>영상</strong>
-              <span>디지털영상편집 1급</span>
-            </p>
-
-            <p>
-              <strong>웹</strong>
-              <span>웹디자인기능사 준비중</span>
-            </p>
-
-            <p>
-              <strong>운전</strong>
-              <span>운전면허 2종 보통</span>
-            </p>
-
-            <p>
-              <strong>OA</strong>
-              <span>엑셀 / PowerPoint</span>
-            </p>
+            <p><strong>GTQ</strong><span>그래픽기술자격 1급</span></p>
+            <p><strong>영상</strong><span>디지털영상편집 1급</span></p>
+            <p><strong>웹</strong><span>웹디자인기능사 준비중</span></p>
+            <p><strong>운전</strong><span>운전면허 2종 보통</span></p>
+            <p><strong>OA</strong><span>엑셀 / PowerPoint</span></p>
           </div>
         </div>
 
         <div class="about-board-section about-tool-section">
-          <div class="board-title">
-            <span>03</span>
-            <h4>Tools</h4>
-          </div>
-
+          <div class="board-title"><span>03</span><h4>Tools</h4></div>
           <div class="soft-tool-list">
             <div><b>Ps</b><span>Photoshop</span></div>
             <div><b>Ai</b><span>Illustrator</span></div>
@@ -213,7 +152,6 @@
             <div><b>Pr</b><span>Premiere</span></div>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -231,10 +169,9 @@
         </div>
 
         <div class="category-actions">
-          <button class="category-add-btn" type="button" aria-label="Add Project">+</button>
-
+          <button class="category-add-btn" type="button">+</button>
           <button class="category-back-btn" type="button" aria-label="Back">
-            <svg viewBox="0 0 48 48" aria-hidden="true">
+            <svg viewBox="0 0 48 48">
               <path d="M28 12 L16 24 L28 36"/>
               <path d="M17 24 H38"/>
             </svg>
@@ -247,14 +184,11 @@
         버튼을 선택하면 해당 프로젝트 카드가 부드럽게 나타납니다.
       </p>
 
-      <p class="category-small">
-        SELECT YOUR PROJECT
-      </p>
+      <p class="category-small">SELECT YOUR PROJECT</p>
     </div>
 
     <div class="category-buttons glass-tabs motion-card" data-delay="1">
       <span class="glass-indicator"></span>
-
       <button class="category-btn active" type="button" data-tab="all">전체</button>
       <button class="category-btn" type="button" data-tab="brand">브랜드</button>
       <button class="category-btn" type="button" data-tab="graphic">그래픽</button>
@@ -272,49 +206,32 @@
   </div>
 </section>
 
-<section id="contact"></section>
-
 </div>
 
 <div class="detail-overlay">
   <div class="detail-panel">
     <button class="detail-close" type="button" aria-label="Close">
-      <svg viewBox="0 0 24 24">
-        <path d="M6 6L18 18M18 6L6 18"/>
-      </svg>
+      <svg viewBox="0 0 24 24"><path d="M6 6L18 18M18 6L6 18"/></svg>
     </button>
 
     <div class="detail-image">
-      <img id="detailImg" src="" alt="project detail image">
+      <img id="detailImg" src="" alt="">
     </div>
 
     <div class="detail-content">
       <span class="detail-category">PORTFOLIO PROJECT</span>
-
       <h2 id="detailTitle">Project Title</h2>
       <p id="detailDesc">프로젝트 상세 설명이 들어갑니다.</p>
 
       <div class="detail-meta">
-        <div>
-          <span>TYPE</span>
-          <strong id="detailType">Brand Design</strong>
-        </div>
-
-        <div>
-          <span>ROLE</span>
-          <strong id="detailRole">Design / Visual</strong>
-        </div>
-
-        <div>
-          <span>YEAR</span>
-          <strong id="detailYear">2026</strong>
-        </div>
+        <div><span>TYPE</span><strong id="detailType">Brand Design</strong></div>
+        <div><span>ROLE</span><strong id="detailRole">Design / Visual</strong></div>
+        <div><span>YEAR</span><strong id="detailYear">2026</strong></div>
       </div>
 
       <div class="detail-long">
         <h3>Project Story</h3>
         <p id="detailStory">상세 설명이 들어갑니다.</p>
-
         <div class="detail-gallery" id="detailGallery"></div>
         <div class="detail-media" id="detailMedia"></div>
         <div class="detail-links" id="detailLinks"></div>
@@ -328,9 +245,7 @@
 <div class="admin-overlay">
   <div class="admin-panel">
     <button class="admin-close" type="button" aria-label="Close">
-      <svg viewBox="0 0 24 24">
-        <path d="M6 6L18 18M18 6L6 18"/>
-      </svg>
+      <svg viewBox="0 0 24 24"><path d="M6 6L18 18M18 6L6 18"/></svg>
     </button>
 
     <div class="admin-content">
@@ -339,11 +254,9 @@
       <div id="loginBox" class="admin-form">
         <input type="email" id="loginEmail" placeholder="관리자 이메일">
         <input type="password" id="loginPassword" placeholder="비밀번호">
-
         <div class="admin-btn-row">
           <button class="admin-btn" type="button" id="loginBtn">로그인</button>
         </div>
-
         <p class="admin-status">관리자만 게시물을 등록할 수 있어.</p>
       </div>
 
@@ -359,10 +272,10 @@
           <option value="artwork">아트웍</option>
         </select>
 
-        <input type="text" id="projectShortDesc" placeholder="짧은 설명 예: Logo / Identity">
+        <input type="text" id="projectShortDesc" placeholder="짧은 설명">
         <textarea id="projectContent" placeholder="상세 설명"></textarea>
-        <input type="text" id="projectRole" placeholder="역할 예: Design / Visual">
-        <input type="text" id="projectYear" placeholder="연도 예: 2026">
+        <input type="text" id="projectRole" placeholder="역할">
+        <input type="text" id="projectYear" placeholder="연도">
 
         <label class="admin-label">대표 이미지</label>
         <input type="file" id="projectImage" accept="image/*">
@@ -375,10 +288,10 @@
         <input type="file" id="projectVideoFile" accept="video/*,.gif">
 
         <label class="admin-label">영상 / 움짤 링크</label>
-        <input type="text" id="projectVideoUrl" placeholder="유튜브, 비메오, GIF 링크 등">
+        <input type="text" id="projectVideoUrl" placeholder="유튜브, GIF 링크 등">
 
         <label class="admin-label">PDF / 외부 링크</label>
-        <input type="text" id="projectPdfUrl" placeholder="PDF, Behance, Figma, Notion 링크 등">
+        <input type="text" id="projectPdfUrl" placeholder="PDF, Behance, Figma 링크 등">
 
         <div class="admin-btn-row">
           <button class="admin-btn" type="button" id="saveBtn">저장하기</button>
@@ -393,6 +306,6 @@
   </div>
 </div>
 
-<script src="./script.js?v=30"></script>
+<script src="./script.js?v=31"></script>
 </body>
 </html>
