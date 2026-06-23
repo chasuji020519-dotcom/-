@@ -798,7 +798,7 @@ function setPanelActive(){
   }
 
   if(categoryPanelSnap){
-    const categoryActive = y > panelTops.category - vh * 0.62;
+    const categoryActive = y > panelTops.category - vh * 0.85;
     categoryPanelSnap.classList.toggle("panel-active", categoryActive);
   }
 
@@ -821,14 +821,17 @@ function magneticSnap(){
   const y = window.scrollY;
   const vh = window.innerHeight;
 
+  const aboutPoint = panelTops.about;
+  const categoryPoint = panelTops.category - 72;
+
+  let nearest = panelTops.main;
+  let minDistance = Math.abs(y - nearest);
+
   const points = [
     panelTops.main,
-    panelTops.about,
-    panelTops.category
+    aboutPoint,
+    categoryPoint
   ];
-
-  let nearest = points[0];
-  let minDistance = Math.abs(y - nearest);
 
   points.forEach(point => {
     const distance = Math.abs(y - point);
@@ -839,7 +842,7 @@ function magneticSnap(){
     }
   });
 
-  if(minDistance < vh * 0.42){
+  if(minDistance < vh * 0.55){
     isSnapping = true;
 
     window.scrollTo({
@@ -849,7 +852,7 @@ function magneticSnap(){
 
     setTimeout(() => {
       isSnapping = false;
-    }, 700);
+    }, 720);
   }
 }
 
