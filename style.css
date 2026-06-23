@@ -1494,152 +1494,209 @@ body.logged-in #loginBox{
   }
 }
 /* =========================
-   RESPONSIVE RATIO OPTIMIZE
+   FINAL RESPONSIVE ABOUT FIX
 ========================= */
 
 :root{
-  --nav-h:clamp(82px, 9vh, 120px);
-  --page-x:clamp(22px, 4vw, 56px);
-  --panel-radius:clamp(28px, 3vw, 46px);
-  --about-img-h:clamp(220px, 32vh, 340px);
-  --about-gap:clamp(18px, 2vw, 32px);
-  --about-card-padding:clamp(24px, 3vw, 42px);
+  --nav-h:96px;
+  --page-x:clamp(28px, 4vw, 56px);
+  --panel-radius:clamp(34px, 3vw, 46px);
 }
 
-/* 소개 패널 높이 자동 보정 */
+/* 소개 패널 */
 .about-panel{
-  min-height:100svh;
-  padding:
-    calc(var(--nav-h) + 24px)
-    var(--page-x)
-    clamp(70px, 8vh, 120px);
-  align-items:center;
+  min-height:auto;
+  padding:120px var(--page-x) 90px;
+  align-items:flex-start;
   border-radius:var(--panel-radius) var(--panel-radius) 0 0;
+  overflow:visible;
 }
 
-/* 소개 내용이 화면 안에서 자연스럽게 맞도록 */
+/* 소개 전체 레이아웃 */
 .about-editorial{
+  width:100%;
   max-width:min(1240px, 100%);
+  margin:0 auto;
   display:grid;
-  grid-template-columns:
-    minmax(240px, 300px)
-    minmax(0, 1fr);
-  gap:var(--about-gap);
+  grid-template-columns:minmax(250px, 300px) minmax(0, 1fr);
+  gap:clamp(22px, 2.2vw, 32px);
   align-items:start;
-  transform:none;
+  transform:none !important;
 }
 
-/* 왼쪽 프로필 이미지 */
+/* 왼쪽 카드 */
+.about-visual-card{
+  height:auto;
+}
+
 .about-portrait{
-  height:var(--about-img-h);
+  height:clamp(250px, 30vh, 320px);
 }
 
-/* 오른쪽 소개 카드 */
+/* 오른쪽 카드 */
 .about-main-canvas{
-  padding:var(--about-card-padding);
+  padding:clamp(30px, 3vw, 42px);
+  gap:clamp(18px, 2vh, 26px);
 }
 
-/* 큰 제목 화면별 자동 조절 */
+/* ABOUT 제목 */
 .about-hero-copy h2{
-  font-size:clamp(36px, 5.2vw, 64px);
+  font-size:clamp(44px, 4.4vw, 64px);
+  line-height:.9;
 }
 
-/* 설명 글 */
+/* 설명 */
 .about-hero-copy p{
-  font-size:clamp(13px, 1.15vw, 14.5px);
-  line-height:1.7;
+  margin-top:clamp(16px, 2vh, 22px);
+  font-size:clamp(13px, .9vw, 14.5px);
+  line-height:1.65;
 }
 
-/* 하단 정보 영역 */
+/* 키워드 */
+.about-keyword-line{
+  gap:8px;
+}
+
+.about-keyword-line span{
+  height:clamp(30px, 3.4vh, 34px);
+  padding:0 clamp(11px, 1.2vw, 14px);
+  font-size:clamp(10.5px, .8vw, 11.5px);
+}
+
+/* 하단 정보 */
 .about-info-board{
-  grid-template-columns:
-    minmax(0, 1.12fr)
-    minmax(0, .9fr)
-    minmax(0, .86fr);
-  gap:clamp(14px, 1.6vw, 22px);
+  grid-template-columns:1.1fr .85fr .85fr;
+  gap:clamp(14px, 1.5vw, 20px);
 }
 
-/* 카테고리 패널도 화면 기준으로 보정 */
-.category-panel{
-  min-height:calc(100svh + 100px);
-  padding:
-    calc(var(--nav-h) + 12px)
-    var(--page-x)
-    clamp(100px, 12vh, 150px);
-  border-radius:var(--panel-radius) var(--panel-radius) 0 0;
+.board-title{
+  margin-bottom:clamp(10px, 1.4vh, 16px);
 }
 
-/* 노트북처럼 세로가 낮은 화면 */
+.board-title h4{
+  font-size:clamp(20px, 1.7vw, 24px);
+}
+
+.board-list{
+  gap:clamp(6px, 1vh, 9px);
+}
+
+.board-list p{
+  grid-template-columns:62px 1fr;
+  font-size:clamp(11px, .8vw, 12.2px);
+  line-height:1.38;
+}
+
+/* 툴 아이콘 */
+.soft-tool-list{
+  gap:clamp(10px, 1.3vw, 14px);
+}
+
+.soft-tool-list b{
+  width:clamp(38px, 3.3vw, 44px);
+  height:clamp(38px, 3.3vw, 44px);
+}
+
+/* 세로가 낮은 노트북/맥북 화면 */
 @media(max-height:820px) and (min-width:901px){
   .about-panel{
-    padding-top:96px;
-    padding-bottom:70px;
+    padding-top:110px;
+    padding-bottom:80px;
   }
 
   .about-editorial{
-    grid-template-columns:270px minmax(0, 1fr);
+    grid-template-columns:260px minmax(0, 1fr);
+    max-width:1160px;
   }
 
   .about-portrait{
-    height:260px;
+    height:250px;
   }
 
   .about-main-canvas{
-    padding:30px 36px;
+    padding:28px 34px;
   }
 
   .about-hero-copy h2{
-    font-size:clamp(38px, 4.4vw, 56px);
+    font-size:48px;
   }
 
   .about-hero-copy p{
-    margin-top:16px;
-    line-height:1.6;
+    margin-top:14px;
+    line-height:1.55;
   }
 
-  .about-keyword-line span{
-    height:30px;
-    padding:0 12px;
-    font-size:11px;
-  }
-
-  .board-title{
-    margin-bottom:12px;
-  }
-
-  .board-title h4{
-    font-size:21px;
-  }
-
-  .board-list{
-    gap:7px;
+  .about-info-board{
+    gap:14px;
   }
 
   .board-list p{
-    font-size:11.4px;
-    line-height:1.35;
+    font-size:11px;
+    line-height:1.32;
+  }
+}
+
+/* 더 낮은 화면 */
+@media(max-height:720px) and (min-width:901px){
+  .about-panel{
+    padding-top:100px;
+  }
+
+  .about-editorial{
+    grid-template-columns:240px minmax(0, 1fr);
+    max-width:1080px;
+  }
+
+  .about-portrait{
+    height:220px;
+  }
+
+  .about-profile-text h3{
+    font-size:26px;
+  }
+
+  .about-main-canvas{
+    padding:24px 30px;
+  }
+
+  .about-hero-copy h2{
+    font-size:42px;
+  }
+
+  .about-keyword-line span{
+    height:28px;
+    font-size:10px;
+  }
+
+  .board-title h4{
+    font-size:19px;
   }
 
   .soft-tool-list b{
-    width:40px;
-    height:40px;
+    width:36px;
+    height:36px;
   }
 }
 
 /* 태블릿 */
 @media(max-width:1100px){
+  .about-panel{
+    padding-top:110px;
+  }
+
   .about-editorial{
     grid-template-columns:1fr;
   }
 
   .about-visual-card{
     display:grid;
-    grid-template-columns:minmax(180px, 240px) 1fr;
+    grid-template-columns:220px 1fr;
     gap:22px;
+    align-items:center;
   }
 
   .about-portrait{
-    height:260px;
+    height:250px;
   }
 
   .about-info-board{
@@ -1651,21 +1708,14 @@ body.logged-in #loginBox{
   }
 
   .soft-tool-list{
-    grid-template-columns:repeat(6, 1fr);
+    grid-template-columns:repeat(6,1fr);
   }
 }
 
 /* 모바일 */
 @media(max-width:768px){
-  :root{
-    --nav-h:84px;
-    --page-x:22px;
-  }
-
   .about-panel{
-    min-height:auto;
-    padding:105px var(--page-x) 70px;
-    align-items:flex-start;
+    padding:105px 22px 70px;
   }
 
   .about-editorial{
@@ -1678,7 +1728,7 @@ body.logged-in #loginBox{
   }
 
   .about-portrait{
-    height:min(340px, 48vh);
+    height:min(340px, 46vh);
   }
 
   .about-main-canvas{
@@ -1694,11 +1744,6 @@ body.logged-in #loginBox{
   }
 
   .soft-tool-list{
-    grid-template-columns:repeat(3, 1fr);
-  }
-
-  .category-panel{
-    min-height:auto;
-    padding:96px var(--page-x) 90px;
+    grid-template-columns:repeat(3,1fr);
   }
 }
