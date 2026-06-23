@@ -560,7 +560,7 @@ body.dark-mode .about-panel{
 
 .about-hero-copy h2{
   color:#111;
-  font-size:clamp(54px,6vw,88px);
+  font-size:clamp(38px,4.8vw,66px);
   line-height:.88;
   letter-spacing:-.105em;
 }
@@ -1759,7 +1759,7 @@ body.logged-in #loginBox{
   }
 
   .about-hero-copy h2{
-    font-size:clamp(42px,13vw,62px);
+    font-size:clamp(34px,10vw,48px);
   }
 
   .about-info-board{
