@@ -3376,112 +3376,128 @@ body.dark-mode .about-panel{
   gap:10px;
 }
 
+/* =========================
+   TOOL ICON DESIGN UPGRADE
+   유리 느낌 아이콘 디자인 변경
+========================= */
+
 .soft-tool-list div{
-  min-height:82px;
-  border-radius:24px;
+  position:relative;
+  overflow:hidden;
+  min-height:86px;
+  border-radius:26px;
   background:
     linear-gradient(
       145deg,
-      rgba(255,255,255,.54),
-      rgba(255,255,255,.2)
-    );
-  border:1px solid rgba(255,255,255,.72);
+      rgba(255,255,255,.62),
+      rgba(255,255,255,.24) 48%,
+      rgba(255,255,255,.1)
+    ) !important;
+  border:1px solid rgba(255,255,255,.78) !important;
   box-shadow:
-    inset 0 1px 1px rgba(255,255,255,.82),
-    0 12px 30px rgba(0,0,0,.055);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-  backdrop-filter:blur(24px) saturate(180%);
-  -webkit-backdrop-filter:blur(24px) saturate(180%);
+    inset 0 1px 1px rgba(255,255,255,.9),
+    inset 0 -1px 2px rgba(255,255,255,.24),
+    0 14px 34px rgba(0,0,0,.065) !important;
+  backdrop-filter:blur(28px) saturate(190%);
+  -webkit-backdrop-filter:blur(28px) saturate(190%);
+  transition:
+    transform .28s ease,
+    box-shadow .28s ease,
+    background .28s ease;
 }
 
-.soft-tool-list b{
-  width:36px;
-  height:36px;
-  border-radius:15px;
+.soft-tool-list div::before{
+  content:"";
+  position:absolute;
+  inset:1px;
+  border-radius:inherit;
+  pointer-events:none;
   background:
-    linear-gradient(145deg,rgba(0,0,0,.88),rgba(0,0,0,.55));
-  color:#fff;
+    radial-gradient(circle at 24% 12%,rgba(255,255,255,.82),transparent 28%),
+    linear-gradient(135deg,rgba(255,255,255,.26),transparent 46%);
+  opacity:.75;
+}
+
+.soft-tool-list div:hover{
+  transform:translateY(-4px);
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.95),
+    0 20px 44px rgba(0,0,0,.105) !important;
+}
+
+/* 아이콘 안쪽 */
+.soft-tool-list b{
+  position:relative;
+  z-index:2;
+  width:40px !important;
+  height:40px !important;
+  border-radius:16px !important;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.74),
+      rgba(255,255,255,.28)
+    ) !important;
+  color:rgba(0,0,0,.72) !important;
+  border:1px solid rgba(255,255,255,.86);
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.95),
+    inset 0 -1px 2px rgba(255,255,255,.3),
+    0 10px 24px rgba(0,0,0,.08) !important;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:14px;
+  font-size:13px;
+  font-weight:900;
   letter-spacing:-.05em;
-  box-shadow:
-    inset 0 1px 1px rgba(255,255,255,.2),
-    0 10px 24px rgba(0,0,0,.14);
 }
 
+/* 아이콘 텍스트 */
 .soft-tool-list span{
-  color:rgba(0,0,0,.48);
+  position:relative;
+  z-index:2;
+  margin-top:1px;
+  color:rgba(0,0,0,.5) !important;
   font-size:9.5px;
-  font-weight:750;
-  text-align:center;
+  font-weight:800;
+  letter-spacing:-.035em;
 }
 
-.soft-chip-list{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-}
-
-.soft-chip-list span{
-  min-height:34px;
-  padding:0 13px;
-  border-radius:999px;
-  background:rgba(255,255,255,.42);
-  border:1px solid rgba(255,255,255,.68);
-  color:rgba(0,0,0,.52);
-  font-size:11.5px;
-  font-weight:720;
-  letter-spacing:-.03em;
-  display:flex;
-  align-items:center;
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-}
-
-/* 다크모드 */
-body.dark-mode .about-visual-card,
-body.dark-mode .about-main-canvas{
+/* 다크모드 아이콘 */
+body.dark-mode .soft-tool-list div{
   background:
     linear-gradient(
       145deg,
       rgba(255,255,255,.13),
-      rgba(255,255,255,.055) 46%,
-      rgba(255,255,255,.022)
-    );
-  border-color:rgba(255,255,255,.17);
+      rgba(255,255,255,.055) 48%,
+      rgba(255,255,255,.025)
+    ) !important;
+  border-color:rgba(255,255,255,.16) !important;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.14),
+    0 16px 38px rgba(0,0,0,.32) !important;
+}
+
+body.dark-mode .soft-tool-list div::before{
+  opacity:.18;
+}
+
+body.dark-mode .soft-tool-list b{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.22),
+      rgba(255,255,255,.08)
+    ) !important;
+  color:rgba(255,255,255,.86) !important;
+  border-color:rgba(255,255,255,.18);
   box-shadow:
     inset 0 1px 1px rgba(255,255,255,.16),
-    inset 0 -1px 2px rgba(255,255,255,.05),
-    0 28px 90px rgba(0,0,0,.38);
+    0 10px 28px rgba(0,0,0,.28) !important;
 }
 
-body.dark-mode .about-profile-text span,
-body.dark-mode .about-mini-label,
-body.dark-mode .about-contact-minimal span{
-  color:rgba(255,255,255,.46);
-}
-
-body.dark-mode .about-profile-text h3,
-body.dark-mode .about-hero-copy h2,
-body.dark-mode .board-title h4,
-body.dark-mode .board-list strong,
-body.dark-mode .about-contact-minimal p{
-  color:#f5f5f5;
-}
-
-body.dark-mode .about-profile-text p,
-body.dark-mode .about-hero-copy p,
-body.dark-mode .about-keyword-line span,
-body.dark-mode .board-list p,
-body.dark-mode .soft-chip-list span,
 body.dark-mode .soft-tool-list span{
-  color:rgba(255,255,255,.58);
+  color:rgba(255,255,255,.56) !important;
 }
 
 body.dark-mode .about-keyword-line span,
