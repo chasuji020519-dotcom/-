@@ -1,14 +1,34 @@
+history.scrollRestoration = "manual";
+
+if(location.hash){
+  history.replaceState(null, "", location.pathname + location.search);
+}
+
+window.scrollTo(0, 0);
+
+window.addEventListener("pageshow", () => {
+  window.scrollTo(0, 0);
+});
+
+window.addEventListener("load", () => {
+  window.scrollTo(0, 0);
+
+  setTimeout(() => {
+    document.body.classList.remove("page-loading");
+    refreshPanelPositions();
+    requestPanelUpdate();
+  }, 450);
+});
 
 /* =========================
-   IMAGE MARQUEE
+   MARQUEE
 ========================= */
 function initMarquee(){
   const marqueeTrack = document.getElementById("marqueeTrack");
   if(!marqueeTrack) return;
 
-  const originalItems = Array.from(marqueeTrack.children);
-
-  originalItems.forEach(item => {
+  const items = Array.from(marqueeTrack.children);
+  items.forEach(item => {
     marqueeTrack.appendChild(item.cloneNode(true));
   });
 }
@@ -19,7 +39,6 @@ initMarquee();
    DARK MODE
 ========================= */
 const darkToggle = document.getElementById("darkToggle");
-
 const savedTheme = localStorage.getItem("portfolioTheme");
 
 if(savedTheme === "dark"){
@@ -50,7 +69,7 @@ darkToggle?.addEventListener("click", () => {
 
   setTimeout(() => {
     moveGlassIndicator(getActiveCategoryButton());
-  }, 60);
+  }, 80);
 });
 
 /* =========================
@@ -65,7 +84,7 @@ const revealObserver = new IntersectionObserver((entries) => {
     }
   });
 }, {
-  threshold:0.22
+  threshold:0.18
 });
 
 stackPanels.forEach(panel => {
@@ -173,19 +192,14 @@ function updateCategoryCompactMode(){
   moveGlassIndicator(getActiveCategoryButton());
 }
 
-window.addEventListener("load", () => {
-  moveGlassIndicator(getActiveCategoryButton());
-});
-
 window.addEventListener("resize", () => {
   moveGlassIndicator(getActiveCategoryButton());
 });
 
-scrollArea?.addEventListener("scroll", updateCategoryCompactMode);
+scrollArea?.addEventListener("scroll", updateCategoryCompactMode, {passive:true});
 
 buttons.forEach(button => {
   button.addEventListener("pointerenter", () => moveGlassIndicator(button));
-  button.addEventListener("pointermove", () => moveGlassIndicator(button));
 });
 
 glassTabs?.addEventListener("pointerleave", () => {
@@ -194,7 +208,7 @@ glassTabs?.addEventListener("pointerleave", () => {
 
 glassTabs?.addEventListener("scroll", () => {
   moveGlassIndicator(getActiveCategoryButton());
-});
+}, {passive:true});
 
 /* =========================
    CATEGORY
@@ -212,12 +226,17 @@ function openCategory(tabButton){
   document.body.classList.remove("tabs-compact");
 
   categoryPanel?.classList.add("opened", "is-visible");
-  scrollArea?.scrollTo({top:0, behavior:"smooth"});
+
+  if(scrollArea){
+    scrollArea.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
+  }
 
   resetCategoryView();
 
   tabButton.classList.add("active");
-  moveGlassIndicator(tabButton);
 
   if(target === "all"){
     productList?.classList.add("all-active");
@@ -246,19 +265,23 @@ categoryBackBtn?.addEventListener("click", () => {
   resetCategoryView();
   buttons[0]?.classList.add("active");
 
-  window.scrollTo({top:0, behavior:"smooth"});
+  window.scrollTo({
+    top:panelTops.category,
+    behavior:"smooth"
+  });
 
   setTimeout(() => {
     moveGlassIndicator(buttons[0]);
-  }, 400);
-});
-
-window.addEventListener("scroll", () => {
-  backZone?.classList.toggle("active", window.scrollY > 300);
+    refreshPanelPositions();
+    requestPanelUpdate();
+  }, 450);
 });
 
 backZone?.addEventListener("click", () => {
-  window.scrollTo({top:0, behavior:"smooth"});
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 });
 
 /* =========================
@@ -285,41 +308,32 @@ function openDetail(project){
   detailLinks.innerHTML = "";
 
   (project.detail_images || []).forEach(url => {
-    detailGallery.innerHTML += `
-      <img src="${url}" alt="detail image">
-    `;
+    detailGallery.innerHTML += `<img src="${url}" alt="">`;
   });
 
   if(project.video_url){
     if(/\.(gif)(\?.*)?$/i.test(project.video_url)){
-      detailMedia.innerHTML += `
-        <img src="${project.video_url}" alt="gif image">
-      `;
+      detailMedia.innerHTML += `<img src="${project.video_url}" alt="">`;
     }else if(/\.(mp4|webm|mov|m4v)(\?.*)?$/i.test(project.video_url)){
-      detailMedia.innerHTML += `
-        <video src="${project.video_url}" controls muted loop playsinline></video>
-      `;
+      detailMedia.innerHTML += `<video src="${project.video_url}" controls muted loop playsinline></video>`;
     }else{
-      detailLinks.innerHTML += `
-        <a href="${project.video_url}" target="_blank">영상 보기</a>
-      `;
+      detailLinks.innerHTML += `<a href="${project.video_url}" target="_blank">영상 보기</a>`;
     }
   }
 
   if(project.pdf_url){
-    detailLinks.innerHTML += `
-      <a href="${project.pdf_url}" target="_blank">PDF / 외부 링크</a>
-    `;
+    detailLinks.innerHTML += `<a href="${project.pdf_url}" target="_blank">PDF / 외부 링크</a>`;
   }
 
-  detailPanel.scrollTop = 0;
-  detailOverlay.classList.remove("full");
-  detailOverlay.classList.add("show");
+  if(detailPanel) detailPanel.scrollTop = 0;
+
+  detailOverlay?.classList.remove("full");
+  detailOverlay?.classList.add("show");
 }
 
 detailPanel?.addEventListener("scroll", () => {
   detailOverlay?.classList.toggle("full", detailPanel.scrollTop > 35);
-});
+}, {passive:true});
 
 detailClose?.addEventListener("click", closeDetail);
 
@@ -343,7 +357,7 @@ function closeAdmin(){
 
 adminPanel?.addEventListener("scroll", () => {
   adminOverlay?.classList.toggle("full", adminPanel.scrollTop > 35);
-});
+}, {passive:true});
 
 categoryAddBtn?.addEventListener("click", () => {
   resetForm();
@@ -427,20 +441,14 @@ async function loadProjects(){
 
   allProjects.forEach(project => {
     const group = document.querySelector(`[data-category="${project.category}"]`);
-
-    if(group){
-      group.innerHTML += makeCard(project);
-    }
+    if(group) group.innerHTML += makeCard(project);
   });
 
   document.querySelectorAll(".product-item").forEach(item => {
     item.addEventListener("click", () => {
       const id = Number(item.dataset.id);
       const project = allProjects.find(project => project.id === id);
-
-      if(project){
-        openDetail(project);
-      }
+      if(project) openDetail(project);
     });
   });
 }
@@ -454,8 +462,7 @@ async function uploadImage(){
 
   const fileName = `${Date.now()}-${file.name}`;
 
-  const {error} = await client
-    .storage
+  const {error} = await client.storage
     .from("portfolio")
     .upload(fileName, file);
 
@@ -464,8 +471,7 @@ async function uploadImage(){
     return null;
   }
 
-  const {data} = client
-    .storage
+  const {data} = client.storage
     .from("portfolio")
     .getPublicUrl(fileName);
 
@@ -478,8 +484,7 @@ async function uploadVideoFile(){
 
   const fileName = `${Date.now()}-${file.name}`;
 
-  const {error} = await client
-    .storage
+  const {error} = await client.storage
     .from("portfolio")
     .upload(fileName, file);
 
@@ -488,8 +493,7 @@ async function uploadVideoFile(){
     return null;
   }
 
-  const {data} = client
-    .storage
+  const {data} = client.storage
     .from("portfolio")
     .getPublicUrl(fileName);
 
@@ -510,8 +514,7 @@ async function uploadDetailImages(){
     const file = item.file;
     const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}-${file.name}`;
 
-    const {error} = await client
-      .storage
+    const {error} = await client.storage
       .from("portfolio")
       .upload(fileName, file);
 
@@ -520,8 +523,7 @@ async function uploadDetailImages(){
       return null;
     }
 
-    const {data} = client
-      .storage
+    const {data} = client.storage
       .from("portfolio")
       .getPublicUrl(fileName);
 
@@ -546,7 +548,7 @@ function renderDetailPreview(){
     div.dataset.index = index;
 
     div.innerHTML = `
-      <img src="${item.preview}" alt="preview image">
+      <img src="${item.preview}" alt="">
       <button type="button">×</button>
       <span>${index + 1}</span>
     `;
@@ -572,7 +574,6 @@ function renderDetailPreview(){
       e.preventDefault();
 
       const targetIndex = Number(div.dataset.index);
-
       if(draggedIndex === null || draggedIndex === targetIndex) return;
 
       const movedItem = detailItems.splice(draggedIndex, 1)[0];
@@ -627,13 +628,8 @@ document.getElementById("saveBtn")?.addEventListener("click", async () => {
     pdf_url:projectPdfUrl.value
   };
 
-  if(imageUrl){
-    projectData.image_url = imageUrl;
-  }
-
-  if(detailImages){
-    projectData.detail_images = detailImages;
-  }
+  if(imageUrl) projectData.image_url = imageUrl;
+  if(detailImages) projectData.detail_images = detailImages;
 
   let result;
 
@@ -757,18 +753,8 @@ logoText?.addEventListener("click", function(e){
 });
 
 /* =========================
-   INIT
+   OPTIMIZED MAGNET SNAP
 ========================= */
-checkLogin();
-loadProjects();
-
-setTimeout(() => {
-  moveGlassIndicator(getActiveCategoryButton());
-}, 300);
-/* =========================
-   OPTIMIZED MAGNET PANEL SNAP
-========================= */
-
 const aboutPanel = document.querySelector(".about-panel");
 const categoryPanelSnap = document.querySelector(".category-panel");
 
@@ -788,24 +774,6 @@ function refreshPanelPositions(){
   panelTops.category = categoryPanelSnap ? categoryPanelSnap.offsetTop : 0;
 }
 
-function setPanelActive(){
-  const y = window.scrollY;
-  const vh = window.innerHeight;
-
-  if(aboutPanel){
-    const aboutActive =
-      y > panelTops.about - vh * 0.58 &&
-      y < panelTops.category - vh * 0.35;
-
-    aboutPanel.classList.toggle("panel-active", aboutActive);
-  }
-
-  if(categoryPanelSnap){
-    const categoryActive = y > panelTops.category - vh * 0.62;
-    categoryPanelSnap.classList.toggle("panel-active", categoryActive);
-  }
-}
-
 function requestPanelUpdate(){
   if(ticking) return;
 
@@ -815,6 +783,28 @@ function requestPanelUpdate(){
     setPanelActive();
     ticking = false;
   });
+}
+
+function setPanelActive(){
+  const y = window.scrollY;
+  const vh = window.innerHeight;
+
+  if(aboutPanel){
+    const aboutActive =
+      y > panelTops.about - vh * 0.58 &&
+      y < panelTops.category - vh * 0.32;
+
+    aboutPanel.classList.toggle("panel-active", aboutActive);
+  }
+
+  if(categoryPanelSnap){
+    const categoryActive = y > panelTops.category - vh * 0.62;
+    categoryPanelSnap.classList.toggle("panel-active", categoryActive);
+  }
+
+  if(backZone){
+    backZone.classList.toggle("active", y > 300);
+  }
 }
 
 function canSnap(){
@@ -881,4 +871,14 @@ window.addEventListener("resize", () => {
 window.addEventListener("load", () => {
   refreshPanelPositions();
   requestPanelUpdate();
+
+  setTimeout(() => {
+    moveGlassIndicator(getActiveCategoryButton());
+  }, 300);
 });
+
+/* =========================
+   INIT
+========================= */
+checkLogin();
+loadProjects();
