@@ -1796,3 +1796,182 @@ body.logged-in #loginBox{
     grid-template-columns:1fr;
   }
 }
+/* =========================
+   ABOUT + CATEGORY STACK CARD TENSION
+   소개패널 / 카테고리패널 카드형 텐션감 통일
+========================= */
+
+/* 스크롤 텐션을 부드럽게 */
+html{
+  scroll-behavior:smooth !important;
+  scroll-snap-type:y proximity !important;
+  scroll-padding-top:0 !important;
+}
+
+/* 메인 뒤에 고정 */
+.main-fixed{
+  position:fixed !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100vh !important;
+  z-index:1 !important;
+}
+
+/* 패널들이 메인 위로 올라오는 영역 */
+.scroll-area{
+  position:relative !important;
+  z-index:5 !important;
+  margin-top:100vh !important;
+  background:transparent !important;
+}
+
+/* 예전에 넣었던 움직이는 ABOUT 배경 제거 */
+.about-bg-motion,
+.about-bg-track{
+  display:none !important;
+}
+
+/* =========================
+   ABOUT PANEL
+   카테고리 패널처럼 카드형으로 변경
+========================= */
+.about-panel{
+  position:relative !important;
+  top:auto !important;
+  z-index:2 !important;
+
+  width:100% !important;
+  min-height:100vh !important;
+
+  /* 메인 화면 위를 살짝 덮으면서 올라오게 */
+  margin-top:-88px !important;
+
+  padding:120px 40px 96px !important;
+  display:flex !important;
+  align-items:center !important;
+  overflow:hidden !important;
+
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255,255,255,.72), transparent 28%),
+    radial-gradient(circle at 82% 72%, rgba(190,194,220,.18), transparent 34%),
+    linear-gradient(135deg, rgba(250,250,252,.96), rgba(239,240,245,.88)) !important;
+
+  border-radius:42px 42px 0 0 !important;
+  border-top:1px solid rgba(255,255,255,.84) !important;
+
+  box-shadow:
+    0 -28px 90px rgba(0,0,0,.12),
+    inset 0 1px 1px rgba(255,255,255,.85) !important;
+
+  backdrop-filter:blur(26px) saturate(170%) !important;
+  -webkit-backdrop-filter:blur(26px) saturate(170%) !important;
+
+  scroll-snap-align:start !important;
+}
+
+/* ABOUT 뒤에 필요 없는 보정 공간 제거 */
+.about-hold{
+  display:none !important;
+}
+
+/* 다크모드 ABOUT */
+body.dark-mode .about-panel{
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255,255,255,.08), transparent 28%),
+    radial-gradient(circle at 82% 72%, rgba(255,255,255,.05), transparent 34%),
+    linear-gradient(135deg, rgba(20,20,20,.96), rgba(28,28,30,.90)) !important;
+
+  border-top-color:rgba(255,255,255,.14) !important;
+
+  box-shadow:
+    0 -28px 90px rgba(0,0,0,.46),
+    inset 0 1px 1px rgba(255,255,255,.12) !important;
+}
+
+/* ABOUT 안쪽 카드 정리 */
+.about-visual-card,
+.about-main-canvas{
+  border-radius:34px !important;
+}
+
+/* =========================
+   CATEGORY PANEL
+   ABOUT 위를 다시 덮는 카드형
+========================= */
+.category-panel{
+  position:relative !important;
+  z-index:3 !important;
+
+  width:100% !important;
+  min-height:100vh !important;
+
+  /* ABOUT 패널 위를 살짝 덮으면서 올라오게 */
+  margin-top:-88px !important;
+
+  padding:120px 40px 96px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255,255,255,.72), transparent 28%),
+    radial-gradient(circle at 82% 72%, rgba(190,194,220,.18), transparent 34%),
+    linear-gradient(135deg, rgba(250,250,252,.96), rgba(239,240,245,.88)) !important;
+
+  border-radius:42px 42px 0 0 !important;
+  border-top:1px solid rgba(255,255,255,.84) !important;
+
+  box-shadow:
+    0 -28px 90px rgba(0,0,0,.12),
+    inset 0 1px 1px rgba(255,255,255,.85) !important;
+
+  backdrop-filter:blur(26px) saturate(170%) !important;
+  -webkit-backdrop-filter:blur(26px) saturate(170%) !important;
+
+  scroll-snap-align:start !important;
+}
+
+/* 다크모드 CATEGORY */
+body.dark-mode .category-panel{
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255,255,255,.08), transparent 28%),
+    radial-gradient(circle at 82% 72%, rgba(255,255,255,.05), transparent 34%),
+    linear-gradient(135deg, rgba(20,20,20,.96), rgba(28,28,30,.90)) !important;
+
+  border-top-color:rgba(255,255,255,.14) !important;
+
+  box-shadow:
+    0 -28px 90px rgba(0,0,0,.46),
+    inset 0 1px 1px rgba(255,255,255,.12) !important;
+}
+
+/* 카테고리 오픈 상태에서는 전체 페이지처럼 */
+body.category-mode .category-panel{
+  margin-top:0 !important;
+  border-radius:0 !important;
+  min-height:100vh !important;
+  padding-top:70px !important;
+}
+
+/* 모바일 */
+@media(max-width:768px){
+  .about-panel{
+    margin-top:-66px !important;
+    padding:104px 22px 96px !important;
+    border-radius:34px 34px 0 0 !important;
+    align-items:flex-start !important;
+    overflow:visible !important;
+  }
+
+  .category-panel{
+    margin-top:-66px !important;
+    padding:100px 24px 72px !important;
+    border-radius:34px 34px 0 0 !important;
+  }
+
+  body.category-mode .category-panel{
+    margin-top:0 !important;
+    border-radius:0 !important;
+    padding:28px 24px 56px !important;
+  }
+}
