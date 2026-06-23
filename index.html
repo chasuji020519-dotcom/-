@@ -5,27 +5,10 @@
 
 <script>
   history.scrollRestoration = "manual";
-
-  document.documentElement.classList.add("force-top");
-
   window.scrollTo(0, 0);
 
   window.addEventListener("pageshow", function(){
     window.scrollTo(0, 0);
-  });
-
-  window.addEventListener("DOMContentLoaded", function(){
-    window.scrollTo(0, 0);
-  });
-
-  window.addEventListener("load", function(){
-    window.scrollTo(0, 0);
-
-    setTimeout(function(){
-      window.scrollTo(0, 0);
-      document.body.classList.remove("page-loading");
-      document.documentElement.classList.remove("force-top");
-    }, 300);
   });
 </script>
 
@@ -33,7 +16,7 @@
 <title>Portfolio</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<link rel="stylesheet" href="style.css?v=9">
+<link rel="stylesheet" href="style.css?v=20">
 </head>
 
 <body class="page-loading">
@@ -50,7 +33,7 @@
     <div class="hero-content">
       <h1 class="title">
         <div class="box left">
-          <div class="slider" id="leftWords">
+          <div class="slider">
             <div class="word">감각을</div>
             <div class="word">가치를</div>
             <div class="word">경험을</div>
@@ -59,10 +42,10 @@
           </div>
         </div>
 
-        <span class="fixed" id="centerWord">담은</span>
+        <span class="fixed">담은</span>
 
         <div class="box right">
-          <div class="slider" id="rightWords">
+          <div class="slider">
             <div class="word">디자인</div>
             <div class="word">퀄리티</div>
             <div class="word">임팩트</div>
@@ -72,7 +55,7 @@
         </div>
       </h1>
 
-      <p class="subtitle" id="mainSubtitle">
+      <p class="subtitle">
         작은 브랜드라도 온라인에서는 단단하게 보여야 하니까요.
       </p>
     </div>
@@ -82,19 +65,15 @@
         <div class="project">
           <img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg" alt="portfolio image">
         </div>
-
         <div class="project">
           <img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg" alt="portfolio image">
         </div>
-
         <div class="project">
           <img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg" alt="portfolio image">
         </div>
-
         <div class="project">
           <img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg" alt="portfolio image">
         </div>
-
         <div class="project">
           <img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg" alt="portfolio image">
         </div>
@@ -110,10 +89,7 @@
 
     <div class="about-visual-card">
       <div class="about-portrait">
-        <img
-          src="https://i.pinimg.com/736x/ff/0d/2a/ff0d2a921264637b1268a56fae27867c.jpg"
-          alt="profile image"
-        >
+        <img src="https://i.pinimg.com/736x/ff/0d/2a/ff0d2a921264637b1268a56fae27867c.jpg" alt="profile image">
       </div>
 
       <div class="about-profile-text">
@@ -131,7 +107,6 @@
 
       <div class="about-hero-copy">
         <h2>ABOUT</h2>
-
         <p>
           섬세한 시선으로 디테일을 피워내는, 디자이너 차수지입니다.<br>
           보는 사람이 편하게 느낄 수 있도록 균형과 분위기를 중요하게 생각하며,<br>
@@ -217,40 +192,16 @@
           </div>
 
           <div class="soft-tool-list">
-            <div>
-              <b>Ps</b>
-              <span>Photoshop</span>
-            </div>
-
-            <div>
-              <b>Ai</b>
-              <span>Illustrator</span>
-            </div>
-
-            <div>
-              <b>Ae</b>
-              <span>After Effects</span>
-            </div>
-
-            <div>
-              <b>Fg</b>
-              <span>Figma</span>
-            </div>
-
-            <div>
-              <b>Id</b>
-              <span>InDesign</span>
-            </div>
-
-            <div>
-              <b>Pr</b>
-              <span>Premiere</span>
-            </div>
+            <div><b>Ps</b><span>Photoshop</span></div>
+            <div><b>Ai</b><span>Illustrator</span></div>
+            <div><b>Ae</b><span>After Effects</span></div>
+            <div><b>Fg</b><span>Figma</span></div>
+            <div><b>Id</b><span>InDesign</span></div>
+            <div><b>Pr</b><span>Premiere</span></div>
           </div>
         </div>
 
       </div>
-
     </div>
 
   </div>
@@ -261,7 +212,7 @@
 
     <div class="category-head">
       <div class="category-title-row">
-        <h2 class="panel-title" id="categoryTitle">CATEGORY</h2>
+        <h2 class="panel-title">CATEGORY</h2>
 
         <div class="category-actions">
           <button class="category-add-btn" type="button" aria-label="Add Project">+</button>
@@ -275,11 +226,11 @@
         </div>
       </div>
 
-      <p class="panel-desc" id="categoryDesc">
+      <p class="panel-desc">
         작업 유형별로 포트폴리오를 볼 수 있도록 정리했습니다.
       </p>
 
-      <p class="category-small" id="categorySmall">
+      <p class="category-small">
         SELECT YOUR PROJECT
       </p>
     </div>
@@ -425,6 +376,6 @@
   </div>
 </div>
 
-<script src="./script.js?v=7"></script>
+<script src="./script.js?v=20"></script>
 </body>
 </html>

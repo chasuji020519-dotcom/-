@@ -1,14 +1,46 @@
 /* =========================
    FIRST SCREEN FIX
 ========================= */
+history.scrollRestoration = "manual";
 
 if(location.hash){
   history.replaceState(null, "", location.pathname + location.search);
 }
 
+window.scrollTo(0, 0);
+
 window.addEventListener("pageshow", () => {
   window.scrollTo(0, 0);
 });
+
+window.addEventListener("load", () => {
+  window.scrollTo(0, 0);
+
+  setTimeout(() => {
+    window.scrollTo(0, 0);
+    document.body.classList.remove("page-loading");
+  }, 500);
+
+  setTimeout(() => {
+    window.scrollTo(0, 0);
+  }, 800);
+});
+
+/* =========================
+   IMAGE MARQUEE
+========================= */
+function initMarquee(){
+  const marqueeTrack = document.getElementById("marqueeTrack");
+  if(!marqueeTrack) return;
+
+  const originalItems = Array.from(marqueeTrack.children);
+
+  originalItems.forEach(item => {
+    marqueeTrack.appendChild(item.cloneNode(true));
+  });
+}
+
+initMarquee();
 
 /* =========================
    DARK MODE
@@ -140,7 +172,7 @@ function updateCategoryCompactMode(){
     return;
   }
 
-  if(scrollArea.scrollTop > 90){
+  if(scrollArea && scrollArea.scrollTop > 90){
     document.body.classList.add("tabs-compact");
   }else{
     document.body.classList.remove("tabs-compact");
@@ -728,10 +760,7 @@ const logoText = document.getElementById("logoText");
 logoText?.addEventListener("click", function(e){
   e.preventDefault();
 
-  window.location.hash = "top";
-
   const url = window.location.origin + window.location.pathname + "?v=" + Date.now();
-
   window.location.replace(url);
 });
 
