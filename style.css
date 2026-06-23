@@ -1802,3 +1802,143 @@ body.logged-in #loginBox{
     grid-template-columns:1fr;
   }
 }
+/* =========================
+   FROSTED GLASS PANEL EFFECT
+   패널 유리 블러 효과 강화
+========================= */
+
+/* ABOUT 오른쪽 큰 패널 */
+.about-main-canvas{
+  background:
+    radial-gradient(circle at 12% 10%, rgba(255,255,255,.92), transparent 26%),
+    radial-gradient(circle at 82% 18%, rgba(218,224,255,.42), transparent 34%),
+    radial-gradient(circle at 90% 92%, rgba(255,255,255,.26), transparent 32%),
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.58),
+      rgba(255,255,255,.24) 52%,
+      rgba(255,255,255,.10)
+    ) !important;
+
+  border:1px solid rgba(255,255,255,.78) !important;
+
+  backdrop-filter:blur(42px) saturate(220%) brightness(1.06) !important;
+  -webkit-backdrop-filter:blur(42px) saturate(220%) brightness(1.06) !important;
+
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.95),
+    inset 0 -1px 2px rgba(255,255,255,.22),
+    0 24px 80px rgba(0,0,0,.10) !important;
+}
+
+/* 왼쪽 프로필 사진 패널 */
+.about-visual-card{
+  background:
+    radial-gradient(circle at 18% 8%, rgba(255,255,255,.95), transparent 30%),
+    radial-gradient(circle at 88% 88%, rgba(225,228,255,.34), transparent 34%),
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.62),
+      rgba(255,255,255,.26) 50%,
+      rgba(255,255,255,.10)
+    ) !important;
+
+  border:1px solid rgba(255,255,255,.78) !important;
+
+  backdrop-filter:blur(42px) saturate(220%) brightness(1.06) !important;
+  -webkit-backdrop-filter:blur(42px) saturate(220%) brightness(1.06) !important;
+
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.95),
+    inset 0 -1px 2px rgba(255,255,255,.22),
+    0 24px 80px rgba(0,0,0,.10) !important;
+}
+
+/* 패널 안쪽 유리 반사광 */
+.about-main-canvas::before,
+.about-visual-card::before{
+  content:"";
+  position:absolute;
+  inset:1px;
+  border-radius:inherit;
+  pointer-events:none;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.72) 0%,
+      rgba(255,255,255,.20) 28%,
+      transparent 56%
+    ),
+    radial-gradient(circle at 85% 90%, rgba(255,255,255,.28), transparent 28%);
+  opacity:.72;
+}
+
+/* 패널 위쪽 은은한 라인 */
+.about-main-canvas::after,
+.about-visual-card::after{
+  content:"";
+  position:absolute;
+  left:18px;
+  right:18px;
+  top:1px;
+  height:1px;
+  border-radius:999px;
+  background:linear-gradient(
+    to right,
+    transparent,
+    rgba(255,255,255,.9),
+    transparent
+  );
+  pointer-events:none;
+  opacity:.85;
+}
+
+/* 사진 영역도 살짝 유리 느낌 */
+.about-portrait{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.48),
+      rgba(255,255,255,.16)
+    ) !important;
+  border:1px solid rgba(255,255,255,.58);
+  backdrop-filter:blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter:blur(20px) saturate(180%) !important;
+}
+
+/* 다크모드 유리 패널 */
+body.dark-mode .about-main-canvas,
+body.dark-mode .about-visual-card{
+  background:
+    radial-gradient(circle at 12% 10%, rgba(255,255,255,.12), transparent 28%),
+    radial-gradient(circle at 82% 18%, rgba(160,170,255,.14), transparent 34%),
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.12),
+      rgba(255,255,255,.055) 52%,
+      rgba(255,255,255,.025)
+    ) !important;
+
+  border-color:rgba(255,255,255,.16) !important;
+
+  backdrop-filter:blur(42px) saturate(200%) brightness(1.04) !important;
+  -webkit-backdrop-filter:blur(42px) saturate(200%) brightness(1.04) !important;
+
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.14),
+    inset 0 -1px 2px rgba(255,255,255,.05),
+    0 28px 90px rgba(0,0,0,.38) !important;
+}
+
+body.dark-mode .about-main-canvas::before,
+body.dark-mode .about-visual-card::before{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.14) 0%,
+      rgba(255,255,255,.04) 32%,
+      transparent 58%
+    ),
+    radial-gradient(circle at 85% 90%, rgba(255,255,255,.08), transparent 28%);
+  opacity:.7;
+}
