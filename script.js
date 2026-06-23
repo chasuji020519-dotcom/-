@@ -1,3 +1,15 @@
+history.scrollRestoration = "manual";
+
+window.addEventListener("beforeunload", () => {
+  window.scrollTo(0, 0);
+});
+
+window.addEventListener("load", () => {
+  if(!document.body.classList.contains("category-mode")){
+    window.scrollTo(0, 0);
+  }
+});
+
 /* =========================
    IMAGE MARQUEE
 ========================= */

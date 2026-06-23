@@ -375,6 +375,7 @@ body.dark-mode .dark-toggle{
   z-index:5;
   margin-top:100vh;
   background:transparent;
+  transform:translateZ(0);
 }
 
 /* =========================
