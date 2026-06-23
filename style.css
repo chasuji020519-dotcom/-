@@ -109,12 +109,6 @@ select{
   font-family:inherit;
 }
 
-/* 예전에 넣었던 움직이는 ABOUT 배경 제거 */
-.about-bg-motion,
-.about-bg-track{
-  display:none !important;
-}
-
 /* =========================
    CATEGORY MODE
 ========================= */
@@ -124,7 +118,6 @@ body.category-mode{
 
 body.category-mode .main-fixed,
 body.category-mode .about-panel,
-body.category-mode .about-hold,
 body.category-mode .nav{
   display:none;
 }
@@ -384,16 +377,16 @@ body.dark-mode .dark-toggle{
   background:transparent;
 }
 
-/* ABOUT 패널 */
+/* =========================
+   ABOUT PANEL
+========================= */
 .about-panel{
   position:relative;
   z-index:2;
   width:100%;
   min-height:100vh;
-
   margin-top:0;
   padding:92px 40px 110px;
-
   display:flex;
   align-items:center;
   overflow:hidden;
@@ -430,21 +423,16 @@ body.dark-mode .about-panel{
     inset 0 1px 1px rgba(255,255,255,.12);
 }
 
-.about-hold{
-  display:none;
-}
-
-/* CATEGORY 패널 */
+/* =========================
+   CATEGORY PANEL
+========================= */
 .category-panel{
   position:relative;
   z-index:3;
   width:100%;
   min-height:100vh;
-
-  /* 내용 가리지 않게 살짝만 겹침 */
   margin-top:-28px;
   padding:92px 40px 110px;
-
   display:flex;
   align-items:center;
   justify-content:center;
@@ -504,7 +492,7 @@ body.dark-mode .category-panel{
 }
 
 /* =========================
-   ABOUT PANEL CONTENT
+   ABOUT CONTENT
 ========================= */
 .about-editorial{
   width:100%;
@@ -516,7 +504,6 @@ body.dark-mode .category-panel{
   align-items:stretch;
 }
 
-/* 안쪽 카드 */
 .about-visual-card,
 .about-main-canvas{
   position:relative;
@@ -567,7 +554,6 @@ body.dark-mode .category-panel{
   z-index:2;
 }
 
-/* LEFT PROFILE */
 .about-visual-card{
   padding:18px 18px 26px;
 }
@@ -638,7 +624,6 @@ body.dark-mode .category-panel{
   letter-spacing:.14em;
 }
 
-/* RIGHT CANVAS */
 .about-main-canvas{
   padding:40px;
   display:flex;
@@ -694,9 +679,6 @@ body.dark-mode .about-keyword-line span{
   color:rgba(255,255,255,.58);
 }
 
-/* =========================
-   ABOUT INFO
-========================= */
 .about-info-board{
   display:grid;
   grid-template-columns:1.16fr .88fr .9fr;
@@ -781,10 +763,6 @@ body.dark-mode .about-contact-minimal{
   transition:transform .28s ease;
 }
 
-.soft-tool-list div::before{
-  display:none;
-}
-
 .soft-tool-list div:hover{
   transform:translateY(-2px);
 }
@@ -830,14 +808,8 @@ body.dark-mode .soft-tool-list b{
     0 10px 28px rgba(0,0,0,.28);
 }
 
-/* 기존 PLUS 영역 숨김 */
-.about-tool-board,
-.soft-chip-list{
-  display:none;
-}
-
 /* =========================
-   CATEGORY PANEL CONTENT
+   CATEGORY CONTENT
 ========================= */
 .category-panel.opened{
   align-items:flex-start;

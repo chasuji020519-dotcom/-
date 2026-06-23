@@ -1,6 +1,5 @@
 /* =========================
-   INDEX TEXT SUPPORT
-   텍스트는 index.html에서 수정
+   IMAGE MARQUEE
 ========================= */
 function initMarquee(){
   const marqueeTrack = document.getElementById("marqueeTrack");
@@ -20,7 +19,6 @@ initMarquee();
 ========================= */
 const darkToggle = document.getElementById("darkToggle");
 
-/* 저장된 테마 불러오기 */
 const savedTheme = localStorage.getItem("portfolioTheme");
 
 if(savedTheme === "dark"){
@@ -517,6 +515,8 @@ async function uploadDetailImages(){
    DETAIL IMAGE PREVIEW
 ========================= */
 function renderDetailPreview(){
+  if(!detailPreviewList) return;
+
   detailPreviewList.innerHTML = "";
 
   detailItems.forEach((item, index) => {
