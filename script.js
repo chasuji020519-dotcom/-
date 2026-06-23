@@ -769,3 +769,46 @@ loadProjects();
 setTimeout(() => {
   moveGlassIndicator(getActiveCategoryButton());
 }, 300);
+<script>
+/* =========================
+   FIRST LOAD: 무조건 메인부터 시작
+========================= */
+document.body.classList.add("page-loading");
+
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+window.addEventListener("load", () => {
+  window.scrollTo(0, 0);
+
+  setTimeout(() => {
+    document.body.classList.remove("page-loading");
+  }, 120);
+});
+
+
+/* =========================
+   PANEL TENSION ACTIVE
+========================= */
+const tensionPanels = document.querySelectorAll(".about-panel, .category-panel");
+
+const panelObserver = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-active");
+      } else {
+        entry.target.classList.remove("is-active");
+      }
+    });
+  },
+  {
+    threshold: 0.42
+  }
+);
+
+tensionPanels.forEach(panel => {
+  panelObserver.observe(panel);
+});
+</script>
