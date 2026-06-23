@@ -452,18 +452,13 @@ body.dark-mode .category-panel{
 }
 
 .about-panel .panel-inner{
-  transform:translate3d(0,56px,0) scale(.975);
-  opacity:.45;
-  filter:blur(12px);
-  transition:.75s var(--ease);
-  will-change:transform,opacity,filter;
-}
 
-.about-panel.panel-active .panel-inner,
-.about-panel.is-visible .panel-inner{
   transform:translate3d(0,0,0) scale(1);
+
   opacity:1;
-  filter:blur(0);
+
+  filter:none;
+
 }
 
 .category-panel{
@@ -482,11 +477,9 @@ body.dark-mode .category-panel{
 }
 
 .category-panel .panel-inner{
-  transform:translate3d(0,48px,0);
-  opacity:.4;
-  filter:blur(12px);
-  transition:.75s var(--ease);
-  will-change:transform,opacity,filter;
+  transform:translate3d(0,0,0);
+  opacity:1;
+  filter:none;
 }
 
 .category-panel.panel-active .panel-inner,
