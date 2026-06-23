@@ -1887,3 +1887,78 @@ body.logged-in #loginBox{
     grid-template-columns:1fr;
   }
 }
+/* =========================
+   REMOVE TOOL ICON OUTER BOX
+   아이콘 바깥 둥근 박스 제거
+========================= */
+
+.soft-tool-list div{
+  min-height:auto !important;
+  padding:0 !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  overflow:visible !important;
+}
+
+.soft-tool-list div::before{
+  display:none !important;
+}
+
+.soft-tool-list div:hover{
+  transform:translateY(-2px);
+  box-shadow:none !important;
+}
+
+/* 아이콘 자체는 유지 */
+.soft-tool-list b{
+  width:42px !important;
+  height:42px !important;
+  border-radius:16px !important;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.74),
+      rgba(255,255,255,.28)
+    ) !important;
+  color:rgba(0,0,0,.72) !important;
+  border:1px solid rgba(255,255,255,.86) !important;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.95),
+    inset 0 -1px 2px rgba(255,255,255,.3),
+    0 10px 24px rgba(0,0,0,.08) !important;
+}
+
+/* 아이콘 아래 글씨 */
+.soft-tool-list span{
+  margin-top:7px !important;
+  color:rgba(0,0,0,.5) !important;
+}
+
+/* 다크모드 */
+body.dark-mode .soft-tool-list div{
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+
+body.dark-mode .soft-tool-list b{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.22),
+      rgba(255,255,255,.08)
+    ) !important;
+  color:rgba(255,255,255,.86) !important;
+  border-color:rgba(255,255,255,.18) !important;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.16),
+    0 10px 28px rgba(0,0,0,.28) !important;
+}
+
+body.dark-mode .soft-tool-list span{
+  color:rgba(255,255,255,.56) !important;
+}
