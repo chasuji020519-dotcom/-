@@ -1,30 +1,3 @@
-/* =========================
-   FIRST SCREEN FIX
-========================= */
-history.scrollRestoration = "manual";
-
-if(location.hash){
-  history.replaceState(null, "", location.pathname + location.search);
-}
-
-window.scrollTo(0, 0);
-
-window.addEventListener("pageshow", () => {
-  window.scrollTo(0, 0);
-});
-
-window.addEventListener("load", () => {
-  window.scrollTo(0, 0);
-
-  setTimeout(() => {
-    window.scrollTo(0, 0);
-    document.body.classList.remove("page-loading");
-  }, 500);
-
-  setTimeout(() => {
-    window.scrollTo(0, 0);
-  }, 800);
-});
 
 /* =========================
    IMAGE MARQUEE
@@ -793,74 +766,91 @@ setTimeout(() => {
   moveGlassIndicator(getActiveCategoryButton());
 }, 300);
 /* =========================
-   MAGNET PANEL SNAP
+   OPTIMIZED MAGNET PANEL SNAP
 ========================= */
 
 const aboutPanel = document.querySelector(".about-panel");
 const categoryPanelSnap = document.querySelector(".category-panel");
 
-let snapTimer = null;
-let isAutoSnapping = false;
+let panelTops = {
+  main:0,
+  about:0,
+  category:0
+};
 
-function getPanelTop(el){
-  if(!el) return 0;
-  return el.getBoundingClientRect().top + window.scrollY;
+let ticking = false;
+let snapTimer = null;
+let isSnapping = false;
+
+function refreshPanelPositions(){
+  panelTops.main = 0;
+  panelTops.about = aboutPanel ? aboutPanel.offsetTop : 0;
+  panelTops.category = categoryPanelSnap ? categoryPanelSnap.offsetTop : 0;
 }
 
-function updatePanelActive(){
+function setPanelActive(){
   const y = window.scrollY;
   const vh = window.innerHeight;
 
-  const aboutTop = getPanelTop(aboutPanel);
-  const categoryTop = getPanelTop(categoryPanelSnap);
-
   if(aboutPanel){
-    aboutPanel.classList.toggle(
-      "panel-active",
-      y > aboutTop - vh * .55 && y < categoryTop - vh * .35
-    );
+    const aboutActive =
+      y > panelTops.about - vh * 0.58 &&
+      y < panelTops.category - vh * 0.35;
+
+    aboutPanel.classList.toggle("panel-active", aboutActive);
   }
 
   if(categoryPanelSnap){
-    categoryPanelSnap.classList.toggle(
-      "panel-active",
-      y > categoryTop - vh * .62
-    );
+    const categoryActive = y > panelTops.category - vh * 0.62;
+    categoryPanelSnap.classList.toggle("panel-active", categoryActive);
   }
 }
 
+function requestPanelUpdate(){
+  if(ticking) return;
+
+  ticking = true;
+
+  requestAnimationFrame(() => {
+    setPanelActive();
+    ticking = false;
+  });
+}
+
+function canSnap(){
+  if(document.body.classList.contains("category-mode")) return false;
+  if(document.querySelector(".detail-overlay.show")) return false;
+  if(document.querySelector(".admin-overlay.show")) return false;
+  if(isSnapping) return false;
+  return true;
+}
+
 function magneticSnap(){
-  if(document.body.classList.contains("category-mode")) return;
-  if(document.querySelector(".detail-overlay.show")) return;
-  if(document.querySelector(".admin-overlay.show")) return;
+  if(!canSnap()) return;
 
   const y = window.scrollY;
   const vh = window.innerHeight;
 
-  const mainTop = 0;
-  const aboutTop = getPanelTop(aboutPanel);
-  const categoryTop = getPanelTop(categoryPanelSnap);
-
-  const snapPoints = [
-    mainTop,
-    aboutTop,
-    categoryTop
+  const points = [
+    panelTops.main,
+    panelTops.about,
+    panelTops.category
   ];
 
-  let nearest = snapPoints[0];
-  let nearestDistance = Math.abs(y - nearest);
+  let nearest = points[0];
+  let minDistance = Math.abs(y - nearest);
 
-  snapPoints.forEach(point => {
+  points.forEach(point => {
     const distance = Math.abs(y - point);
 
-    if(distance < nearestDistance){
+    if(distance < minDistance){
       nearest = point;
-      nearestDistance = distance;
+      minDistance = distance;
     }
   });
 
-  if(nearestDistance < vh * .48){
-    isAutoSnapping = true;
+  if(minDistance < vh * 0.42){
+    isSnapping = true;
 
     window.scrollTo({
       top:nearest,
@@ -868,23 +858,27 @@ function magneticSnap(){
     });
 
     setTimeout(() => {
-      isAutoSnapping = false;
-    }, 850);
+      isSnapping = false;
+    }, 700);
   }
 }
 
 window.addEventListener("scroll", () => {
-  updatePanelActive();
-
-  if(isAutoSnapping) return;
+  requestPanelUpdate();
 
   clearTimeout(snapTimer);
 
   snapTimer = setTimeout(() => {
     magneticSnap();
-  }, 120);
+  }, 180);
+}, {passive:true});
+
+window.addEventListener("resize", () => {
+  refreshPanelPositions();
+  requestPanelUpdate();
 });
 
 window.addEventListener("load", () => {
-  updatePanelActive();
+  refreshPanelPositions();
+  requestPanelUpdate();
 });
