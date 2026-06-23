@@ -1801,3 +1801,261 @@ body.page-loading .main-fixed{
   visibility:visible;
   opacity:1;
 }
+/* =========================
+   MAIN → ABOUT → CATEGORY
+   PANEL ORDER / TENSION FIX
+========================= */
+
+/* 처음 진입 시 무조건 메인 먼저 */
+html{
+  scroll-behavior:smooth;
+  scroll-snap-type:y mandatory;
+  scroll-padding-top:0;
+}
+
+body{
+  min-height:300vh;
+}
+
+/* 메인 고정 */
+.main-fixed{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100vh;
+  z-index:1;
+}
+
+/* 패널 영역은 메인 1페이지 뒤에서 시작 */
+.scroll-area{
+  position:relative;
+  z-index:5;
+  margin-top:100vh;
+  background:transparent;
+}
+
+/* =========================
+   ABOUT PANEL
+   하단 고정 느낌 + 텐션감
+========================= */
+
+.about-panel{
+  position:relative;
+  z-index:2;
+  width:100%;
+  min-height:100vh;
+
+  margin-top:0;
+  padding:0 40px 72px;
+
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+
+  overflow:hidden;
+
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+
+  border-radius:44px 44px 0 0;
+
+  transform:translateY(0);
+}
+
+/* 소개 내용이 상단에 붙지 않고 하단에 묵직하게 잡히도록 */
+.about-editorial{
+  width:100%;
+  max-width:1240px;
+  margin:0 auto;
+
+  display:grid;
+  grid-template-columns:300px minmax(0,1fr);
+  gap:28px;
+  align-items:stretch;
+
+  transform:translateY(34px) scale(.985);
+  opacity:.88;
+
+  transition:
+    transform .9s cubic-bezier(.16,1,.3,1),
+    opacity .65s ease;
+}
+
+/* 스크롤로 소개패널에 들어오면 착 붙는 텐션 */
+.about-panel.is-active .about-editorial{
+  transform:translateY(0) scale(1);
+  opacity:1;
+}
+
+/* 패널 위쪽에 살짝 여백감 */
+.about-panel::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:130px;
+  pointer-events:none;
+  background:linear-gradient(
+    to bottom,
+    rgba(255,255,255,.28),
+    transparent
+  );
+  z-index:1;
+}
+
+body.dark-mode .about-panel::before{
+  background:linear-gradient(
+    to bottom,
+    rgba(255,255,255,.04),
+    transparent
+  );
+}
+
+/* =========================
+   CATEGORY PANEL
+   소개 다음에 자연스럽게 등장
+========================= */
+
+.category-panel{
+  position:relative;
+  z-index:3;
+  width:100%;
+  min-height:100vh;
+
+  margin-top:0;
+  padding:92px 40px 110px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  overflow:hidden;
+
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+
+  border-radius:44px 44px 0 0;
+}
+
+/* 카테고리 패널도 들어올 때 텐션 */
+.category-panel .panel-inner{
+  transform:translateY(34px) scale(.985);
+  opacity:.88;
+
+  transition:
+    transform .9s cubic-bezier(.16,1,.3,1),
+    opacity .65s ease;
+}
+
+.category-panel.is-active .panel-inner{
+  transform:translateY(0) scale(1);
+  opacity:1;
+}
+
+/* 카테고리 열렸을 때는 위에서 시작 */
+.category-panel.opened{
+  align-items:flex-start;
+}
+
+/* =========================
+   CATEGORY MODE FIX
+========================= */
+
+body.category-mode{
+  overflow:hidden;
+}
+
+body.category-mode .main-fixed,
+body.category-mode .about-panel,
+body.category-mode .nav{
+  display:none;
+}
+
+body.category-mode .scroll-area{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  margin-top:0;
+  overflow-y:auto;
+  background:var(--bg);
+  scroll-snap-type:none;
+}
+
+body.category-mode .category-panel{
+  min-height:100vh;
+  margin-top:0;
+  padding:70px 40px 80px;
+  border-radius:0;
+  box-shadow:none;
+  border-top:none;
+  scroll-snap-align:none;
+}
+
+/* =========================
+   FIRST LOAD FIX
+========================= */
+
+body.page-loading{
+  overflow:hidden;
+}
+
+body.page-loading .scroll-area{
+  visibility:hidden;
+  pointer-events:none;
+}
+
+body.page-loading .main-fixed{
+  visibility:visible;
+  opacity:1;
+}
+
+/* =========================
+   MOBILE FIX
+========================= */
+
+@media(max-width:1100px){
+  .about-editorial{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:768px){
+  body{
+    min-height:300vh;
+  }
+
+  .scroll-area{
+    margin-top:100vh;
+  }
+
+  .about-panel{
+    min-height:100vh;
+    padding:86px 22px 72px;
+    align-items:flex-end;
+    border-radius:34px 34px 0 0;
+    overflow:visible;
+  }
+
+  .about-editorial{
+    display:block;
+    transform:translateY(26px) scale(.99);
+  }
+
+  .about-panel.is-active .about-editorial{
+    transform:translateY(0) scale(1);
+  }
+
+  .category-panel{
+    min-height:100vh;
+    margin-top:0;
+    padding:88px 24px 80px;
+    border-radius:34px 34px 0 0;
+  }
+
+  body.category-mode .category-panel{
+    margin-top:0;
+    padding:28px 24px 56px;
+    border-radius:0;
+  }
+}
