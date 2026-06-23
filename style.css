@@ -2113,3 +2113,237 @@ body.dark-mode .soft-tool-list b{
 
   border-color:rgba(255,255,255,.16) !important;
 }
+/* =========================
+   ABOUT BACKGROUND MOTION + GLASS DEPTH
+   움직이는 이미지 배경 + 입체 유리 박스
+========================= */
+
+/* ABOUT 패널 자체 */
+.about-panel{
+  position:sticky;
+  isolation:isolate;
+  overflow:hidden;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.62),
+      rgba(255,255,255,.36) 46%,
+      rgba(255,255,255,.22)
+    ) !important;
+}
+
+/* 뒤에 깔리는 움직이는 이미지 영역 */
+.about-bg-motion{
+  position:absolute;
+  inset:-80px;
+  z-index:0;
+  pointer-events:none;
+  overflow:hidden;
+  opacity:.42;
+  filter:blur(14px) saturate(1.18) contrast(1.04);
+  transform:scale(1.04);
+}
+
+/* 이미지가 움직이는 트랙 */
+.about-bg-track{
+  width:max-content;
+  height:100%;
+  display:flex;
+  align-items:center;
+  gap:26px;
+  animation:aboutBgMove 46s linear infinite;
+}
+
+/* 배경 이미지들 */
+.about-bg-track img{
+  width:360px;
+  height:520px;
+  object-fit:cover;
+  border-radius:18px;
+  opacity:.9;
+}
+
+/* ABOUT 전체에 흰 유리막 한 겹 */
+.about-panel::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 12% 8%,rgba(255,255,255,.72),transparent 28%),
+    radial-gradient(circle at 78% 18%,rgba(220,225,255,.38),transparent 34%),
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.56),
+      rgba(255,255,255,.22) 48%,
+      rgba(255,255,255,.12)
+    );
+}
+
+/* 실제 내용은 배경 위로 */
+.about-panel .panel-inner{
+  position:relative;
+  z-index:2;
+}
+
+/* 배경 움직임 */
+@keyframes aboutBgMove{
+  from{
+    transform:translateX(0);
+  }
+  to{
+    transform:translateX(-50%);
+  }
+}
+
+/* 왼쪽/오른쪽 큰 둥근 박스: 진짜 유리처럼 */
+.about-visual-card,
+.about-main-canvas{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.36),
+      rgba(255,255,255,.14) 44%,
+      rgba(255,255,255,.06)
+    ) !important;
+
+  border:1px solid rgba(255,255,255,.72) !important;
+  border-radius:10px !important;
+
+  backdrop-filter:blur(34px) saturate(190%) brightness(1.05) !important;
+  -webkit-backdrop-filter:blur(34px) saturate(190%) brightness(1.05) !important;
+
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.9),
+    inset 0 -1px 2px rgba(255,255,255,.2),
+    0 22px 70px rgba(0,0,0,.12),
+    0 2px 8px rgba(255,255,255,.18) !important;
+}
+
+/* 유리 표면 빛 */
+.about-visual-card::before,
+.about-main-canvas::before{
+  content:"";
+  position:absolute;
+  inset:1px;
+  border-radius:inherit;
+  pointer-events:none;
+  z-index:1;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.72) 0%,
+      rgba(255,255,255,.22) 28%,
+      transparent 58%
+    ),
+    radial-gradient(
+      circle at 86% 88%,
+      rgba(255,255,255,.24),
+      transparent 32%
+    );
+  opacity:.7;
+}
+
+/* 유리 윗부분 반사선 */
+.about-visual-card::after,
+.about-main-canvas::after{
+  content:"";
+  position:absolute;
+  left:16px;
+  right:16px;
+  top:1px;
+  height:1px;
+  border-radius:999px;
+  pointer-events:none;
+  z-index:2;
+  background:linear-gradient(
+    to right,
+    transparent,
+    rgba(255,255,255,.95),
+    transparent
+  );
+  opacity:.85;
+}
+
+/* 안쪽 내용은 유리효과 위로 */
+.about-visual-card > *,
+.about-main-canvas > *{
+  position:relative;
+  z-index:3;
+}
+
+/* 사진 영역도 유리 박스 안에 들어간 느낌 */
+.about-portrait{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.28),
+      rgba(255,255,255,.08)
+    ) !important;
+  border:1px solid rgba(255,255,255,.58) !important;
+  border-radius:10px !important;
+  backdrop-filter:blur(18px) saturate(170%) !important;
+  -webkit-backdrop-filter:blur(18px) saturate(170%) !important;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.64),
+    0 12px 34px rgba(0,0,0,.08) !important;
+}
+
+.about-portrait img{
+  border-radius:10px !important;
+}
+
+/* 키워드도 얇은 유리칩 */
+.about-keyword-line span{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.42),
+      rgba(255,255,255,.14)
+    ) !important;
+  border:1px solid rgba(255,255,255,.6) !important;
+  backdrop-filter:blur(18px) saturate(180%) !important;
+  -webkit-backdrop-filter:blur(18px) saturate(180%) !important;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.68),
+    0 8px 22px rgba(0,0,0,.05) !important;
+}
+
+/* 다크모드 */
+body.dark-mode .about-panel{
+  background:#111 !important;
+}
+
+body.dark-mode .about-bg-motion{
+  opacity:.28;
+  filter:blur(16px) saturate(1.1) brightness(.82);
+}
+
+body.dark-mode .about-panel::after{
+  background:
+    radial-gradient(circle at 12% 8%,rgba(255,255,255,.08),transparent 28%),
+    radial-gradient(circle at 78% 18%,rgba(160,170,255,.12),transparent 34%),
+    linear-gradient(
+      135deg,
+      rgba(17,17,17,.62),
+      rgba(17,17,17,.36) 48%,
+      rgba(17,17,17,.22)
+    );
+}
+
+body.dark-mode .about-visual-card,
+body.dark-mode .about-main-canvas{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.12),
+      rgba(255,255,255,.055) 48%,
+      rgba(255,255,255,.025)
+    ) !important;
+  border-color:rgba(255,255,255,.18) !important;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.18),
+    inset 0 -1px 2px rgba(255,255,255,.05),
+    0 24px 80px rgba(0,0,0,.36) !important;
+}
