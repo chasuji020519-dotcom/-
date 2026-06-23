@@ -2,21 +2,38 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio</title>
 
 <script>
   history.scrollRestoration = "manual";
 
-  if (location.hash) {
-    history.replaceState(null, "", location.pathname + location.search);
-  }
+  document.documentElement.classList.add("force-top");
 
   window.scrollTo(0, 0);
+
+  window.addEventListener("pageshow", function(){
+    window.scrollTo(0, 0);
+  });
+
+  window.addEventListener("DOMContentLoaded", function(){
+    window.scrollTo(0, 0);
+  });
+
+  window.addEventListener("load", function(){
+    window.scrollTo(0, 0);
+
+    setTimeout(function(){
+      window.scrollTo(0, 0);
+      document.body.classList.remove("page-loading");
+      document.documentElement.classList.remove("force-top");
+    }, 300);
+  });
 </script>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=9">
 </head>
 
 <body class="page-loading">

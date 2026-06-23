@@ -1,26 +1,15 @@
 /* =========================
    FIRST SCREEN FIX
 ========================= */
-history.scrollRestoration = "manual";
 
 if(location.hash){
   history.replaceState(null, "", location.pathname + location.search);
 }
 
-window.scrollTo(0, 0);
-
 window.addEventListener("pageshow", () => {
   window.scrollTo(0, 0);
 });
 
-window.addEventListener("load", () => {
-  window.scrollTo(0, 0);
-
-  setTimeout(() => {
-    document.body.classList.remove("page-loading");
-    window.scrollTo(0, 0);
-  }, 120);
-});
 /* =========================
    DARK MODE
 ========================= */

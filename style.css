@@ -2059,3 +2059,29 @@ body.page-loading .main-fixed{
     border-radius:0;
   }
 }
+/* =========================
+   FORCE FIRST SCREEN
+========================= */
+
+html.force-top,
+html.force-top body{
+  overflow:hidden !important;
+  height:100%;
+}
+
+body.page-loading{
+  overflow:hidden !important;
+}
+
+body.page-loading .main-fixed{
+  display:block !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  transform:none !important;
+}
+
+body.page-loading .scroll-area{
+  visibility:hidden !important;
+  opacity:0 !important;
+  pointer-events:none !important;
+}
