@@ -162,7 +162,7 @@ body.category-mode .back-home-zone{
 
 .logo{
   font-size:24px;
-  font-weight:700;
+  font-weight:800;
   letter-spacing:.12em;
   color:var(--text);
   text-decoration:none;
@@ -416,7 +416,7 @@ body.dark-mode .about-panel{
 .about-visual-card{
   position:relative;
   overflow:hidden;
-  border-radius:42px;
+  border-radius:10px;
   padding:16px 16px 26px;
   background:
     linear-gradient(
@@ -457,7 +457,7 @@ body.dark-mode .about-panel{
   width:100%;
   height:390px;
   overflow:hidden;
-  border-radius:30px;
+  border-radius:10px;
   background:rgba(255,255,255,.35);
 }
 
@@ -466,6 +466,7 @@ body.dark-mode .about-panel{
   height:100%;
   object-fit:cover;
   display:block;
+  border-radius:10px;
   filter:saturate(.92) contrast(1.04);
 }
 
@@ -484,9 +485,9 @@ body.dark-mode .about-panel{
 
 .about-profile-text h3{
   color:#111;
-  font-size:42px;
-  line-height:.95;
-  letter-spacing:-.09em;
+  font-size:30px;
+  line-height:1;
+  letter-spacing:-.07em;
 }
 
 .about-profile-text p{
@@ -527,7 +528,7 @@ body.dark-mode .about-panel{
 .about-main-canvas{
   position:relative;
   overflow:hidden;
-  border-radius:46px;
+  border-radius:10px;
   padding:42px;
   background:
     linear-gradient(
@@ -560,17 +561,17 @@ body.dark-mode .about-panel{
 
 .about-hero-copy h2{
   color:#111;
-  font-size:clamp(38px,4.8vw,66px);
-  line-height:.88;
-  letter-spacing:-.105em;
+  font-size:clamp(38px,3.4vw,50px);
+  line-height:.95;
+  letter-spacing:-.08em;
 }
 
 .about-hero-copy p{
   max-width:760px;
-  margin-top:24px;
+  margin-top:18px;
   color:rgba(0,0,0,.56);
-  font-size:15px;
-  line-height:1.78;
+  font-size:14.5px;
+  line-height:1.72;
   letter-spacing:-.03em;
 }
 
@@ -581,13 +582,13 @@ body.dark-mode .about-panel{
 }
 
 .about-keyword-line span{
-  height:34px;
-  padding:0 14px;
+  height:32px;
+  padding:0 13px;
   border-radius:999px;
   background:rgba(255,255,255,.42);
   border:1px solid rgba(255,255,255,.7);
   color:rgba(0,0,0,.52);
-  font-size:12px;
+  font-size:11.5px;
   font-weight:720;
   letter-spacing:-.03em;
   display:flex;
@@ -629,7 +630,7 @@ body.dark-mode .about-panel{
 
 .board-title h4{
   color:#111;
-  font-size:22px;
+  font-size:24px;
   line-height:1;
   letter-spacing:-.06em;
 }
@@ -676,58 +677,37 @@ body.dark-mode .about-panel{
 
 .soft-tool-list div{
   position:relative;
-  overflow:hidden;
-  min-height:86px;
-  border-radius:26px;
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.62),
-      rgba(255,255,255,.24) 48%,
-      rgba(255,255,255,.1)
-    );
-  border:1px solid rgba(255,255,255,.78);
-  box-shadow:
-    inset 0 1px 1px rgba(255,255,255,.9),
-    inset 0 -1px 2px rgba(255,255,255,.24),
-    0 14px 34px rgba(0,0,0,.065);
+  overflow:visible;
+  min-height:auto;
+  padding:0;
+  border-radius:0;
+  background:transparent;
+  border:0;
+  box-shadow:none;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
   gap:7px;
-  backdrop-filter:blur(28px) saturate(190%);
-  -webkit-backdrop-filter:blur(28px) saturate(190%);
-  transition:
-    transform .28s ease,
-    box-shadow .28s ease,
-    background .28s ease;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  transition:transform .28s ease;
 }
 
 .soft-tool-list div::before{
-  content:"";
-  position:absolute;
-  inset:1px;
-  border-radius:inherit;
-  pointer-events:none;
-  background:
-    radial-gradient(circle at 24% 12%,rgba(255,255,255,.82),transparent 28%),
-    linear-gradient(135deg,rgba(255,255,255,.26),transparent 46%);
-  opacity:.75;
+  display:none;
 }
 
 .soft-tool-list div:hover{
-  transform:translateY(-4px);
-  box-shadow:
-    inset 0 1px 1px rgba(255,255,255,.95),
-    0 20px 44px rgba(0,0,0,.105);
+  transform:translateY(-2px);
+  box-shadow:none;
 }
 
 .soft-tool-list b{
   position:relative;
   z-index:2;
-  width:40px;
-  height:40px;
+  width:42px;
+  height:42px;
   border-radius:16px;
   background:
     linear-gradient(
@@ -752,7 +732,7 @@ body.dark-mode .about-panel{
 .soft-tool-list span{
   position:relative;
   z-index:2;
-  margin-top:1px;
+  margin-top:7px;
   color:rgba(0,0,0,.5);
   font-size:9.5px;
   font-weight:800;
@@ -830,21 +810,9 @@ body.dark-mode .soft-chip-list span{
 }
 
 body.dark-mode .soft-tool-list div{
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.13),
-      rgba(255,255,255,.055) 48%,
-      rgba(255,255,255,.025)
-    );
-  border-color:rgba(255,255,255,.16);
-  box-shadow:
-    inset 0 1px 1px rgba(255,255,255,.14),
-    0 16px 38px rgba(0,0,0,.32);
-}
-
-body.dark-mode .soft-tool-list div::before{
-  opacity:.18;
+  background:transparent;
+  border:0;
+  box-shadow:none;
 }
 
 body.dark-mode .soft-tool-list b{
@@ -1704,7 +1672,7 @@ body.logged-in #loginBox{
   }
 
   .logo{
-    font-size:15px;
+    font-size:20px;
   }
 
   .dark-toggle{
@@ -1746,20 +1714,29 @@ body.logged-in #loginBox{
 
   .about-visual-card{
     display:block;
-    border-radius:34px;
+    border-radius:10px;
   }
 
   .about-portrait{
     height:340px;
+    border-radius:10px;
   }
 
   .about-main-canvas{
-    border-radius:36px;
+    border-radius:10px;
     padding:30px 24px;
   }
 
   .about-hero-copy h2{
-    font-size:clamp(34px,10vw,48px);
+    font-size:clamp(34px,8vw,44px);
+  }
+
+  .about-profile-text h3{
+    font-size:28px;
+  }
+
+  .board-title h4{
+    font-size:22px;
   }
 
   .about-info-board{
@@ -1886,79 +1863,4 @@ body.logged-in #loginBox{
   .detail-preview-list{
     grid-template-columns:1fr;
   }
-}
-/* =========================
-   REMOVE TOOL ICON OUTER BOX
-   아이콘 바깥 둥근 박스 제거
-========================= */
-
-.soft-tool-list div{
-  min-height:auto !important;
-  padding:0 !important;
-  border-radius:0 !important;
-  background:transparent !important;
-  border:0 !important;
-  box-shadow:none !important;
-  backdrop-filter:none !important;
-  -webkit-backdrop-filter:none !important;
-  overflow:visible !important;
-}
-
-.soft-tool-list div::before{
-  display:none !important;
-}
-
-.soft-tool-list div:hover{
-  transform:translateY(-2px);
-  box-shadow:none !important;
-}
-
-/* 아이콘 자체는 유지 */
-.soft-tool-list b{
-  width:42px !important;
-  height:42px !important;
-  border-radius:16px !important;
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.74),
-      rgba(255,255,255,.28)
-    ) !important;
-  color:rgba(0,0,0,.72) !important;
-  border:1px solid rgba(255,255,255,.86) !important;
-  box-shadow:
-    inset 0 1px 1px rgba(255,255,255,.95),
-    inset 0 -1px 2px rgba(255,255,255,.3),
-    0 10px 24px rgba(0,0,0,.08) !important;
-}
-
-/* 아이콘 아래 글씨 */
-.soft-tool-list span{
-  margin-top:7px !important;
-  color:rgba(0,0,0,.5) !important;
-}
-
-/* 다크모드 */
-body.dark-mode .soft-tool-list div{
-  background:transparent !important;
-  border:0 !important;
-  box-shadow:none !important;
-}
-
-body.dark-mode .soft-tool-list b{
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.22),
-      rgba(255,255,255,.08)
-    ) !important;
-  color:rgba(255,255,255,.86) !important;
-  border-color:rgba(255,255,255,.18) !important;
-  box-shadow:
-    inset 0 1px 1px rgba(255,255,255,.16),
-    0 10px 28px rgba(0,0,0,.28) !important;
-}
-
-body.dark-mode .soft-tool-list span{
-  color:rgba(255,255,255,.56) !important;
 }
