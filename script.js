@@ -1,13 +1,22 @@
+/* =========================
+   FIRST SCREEN FIX
+   새로고침해도 무조건 메인에서 시작
+========================= */
 history.scrollRestoration = "manual";
 
-window.addEventListener("beforeunload", () => {
-  window.scrollTo(0, 0);
-});
+if(location.hash){
+  history.replaceState(null, "", location.pathname + location.search);
+}
+
+window.scrollTo(0, 0);
 
 window.addEventListener("load", () => {
-  if(!document.body.classList.contains("category-mode")){
+  window.scrollTo(0, 0);
+
+  setTimeout(() => {
+    document.body.classList.remove("page-loading");
     window.scrollTo(0, 0);
-  }
+  }, 80);
 });
 
 /* =========================

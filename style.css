@@ -1785,3 +1785,19 @@ body.logged-in #loginBox{
     grid-template-columns:1fr;
   }
 }
+/* =========================
+   FIRST LOAD FIX
+   처음에는 무조건 메인 화면부터 보이게 고정
+========================= */
+body.page-loading{
+  overflow:hidden;
+}
+
+body.page-loading .scroll-area{
+  visibility:hidden;
+}
+
+body.page-loading .main-fixed{
+  visibility:visible;
+  opacity:1;
+}
