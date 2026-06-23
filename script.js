@@ -792,3 +792,99 @@ loadProjects();
 setTimeout(() => {
   moveGlassIndicator(getActiveCategoryButton());
 }, 300);
+/* =========================
+   MAGNET PANEL SNAP
+========================= */
+
+const aboutPanel = document.querySelector(".about-panel");
+const categoryPanelSnap = document.querySelector(".category-panel");
+
+let snapTimer = null;
+let isAutoSnapping = false;
+
+function getPanelTop(el){
+  if(!el) return 0;
+  return el.getBoundingClientRect().top + window.scrollY;
+}
+
+function updatePanelActive(){
+  const y = window.scrollY;
+  const vh = window.innerHeight;
+
+  const aboutTop = getPanelTop(aboutPanel);
+  const categoryTop = getPanelTop(categoryPanelSnap);
+
+  if(aboutPanel){
+    aboutPanel.classList.toggle(
+      "panel-active",
+      y > aboutTop - vh * .55 && y < categoryTop - vh * .35
+    );
+  }
+
+  if(categoryPanelSnap){
+    categoryPanelSnap.classList.toggle(
+      "panel-active",
+      y > categoryTop - vh * .62
+    );
+  }
+}
+
+function magneticSnap(){
+  if(document.body.classList.contains("category-mode")) return;
+  if(document.querySelector(".detail-overlay.show")) return;
+  if(document.querySelector(".admin-overlay.show")) return;
+
+  const y = window.scrollY;
+  const vh = window.innerHeight;
+
+  const mainTop = 0;
+  const aboutTop = getPanelTop(aboutPanel);
+  const categoryTop = getPanelTop(categoryPanelSnap);
+
+  const snapPoints = [
+    mainTop,
+    aboutTop,
+    categoryTop
+  ];
+
+  let nearest = snapPoints[0];
+  let nearestDistance = Math.abs(y - nearest);
+
+  snapPoints.forEach(point => {
+    const distance = Math.abs(y - point);
+
+    if(distance < nearestDistance){
+      nearest = point;
+      nearestDistance = distance;
+    }
+  });
+
+  if(nearestDistance < vh * .48){
+    isAutoSnapping = true;
+
+    window.scrollTo({
+      top:nearest,
+      behavior:"smooth"
+    });
+
+    setTimeout(() => {
+      isAutoSnapping = false;
+    }, 850);
+  }
+}
+
+window.addEventListener("scroll", () => {
+  updatePanelActive();
+
+  if(isAutoSnapping) return;
+
+  clearTimeout(snapTimer);
+
+  snapTimer = setTimeout(() => {
+    magneticSnap();
+  }, 120);
+});
+
+window.addEventListener("load", () => {
+  updatePanelActive();
+});
