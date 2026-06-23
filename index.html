@@ -16,11 +16,12 @@
 <title>Portfolio</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<link rel="stylesheet" href="style.css?v=20">
+<link rel="stylesheet" href="style.css?v=30">
 </head>
 
 <body class="page-loading">
 
+<div class="noise-layer"></div>
 <div class="back-home-zone"></div>
 
 <div class="main-fixed" id="top">
@@ -30,7 +31,9 @@
   </nav>
 
   <section class="hero">
-    <div class="hero-content">
+    <div class="hero-content reveal-item">
+      <p class="hero-kicker">WEB · VISUAL · BRAND DESIGN</p>
+
       <h1 class="title">
         <div class="box left">
           <div class="slider">
@@ -60,6 +63,11 @@
       </p>
     </div>
 
+    <div class="scroll-hint">
+      <span></span>
+      Scroll
+    </div>
+
     <div class="image-marquee">
       <div class="marquee-track" id="marqueeTrack">
         <div class="project">
@@ -84,15 +92,16 @@
 
 <div class="scroll-area">
 
-<section class="about-panel" id="about">
+<section class="about-panel stack-panel" id="about">
   <div class="panel-inner about-editorial">
 
-    <div class="about-visual-card">
+    <div class="about-visual-card motion-card" data-delay="0">
       <div class="about-portrait">
         <img src="https://i.pinimg.com/736x/ff/0d/2a/ff0d2a921264637b1268a56fae27867c.jpg" alt="profile image">
       </div>
 
       <div class="about-profile-text">
+        <p class="mini-label">PROFILE</p>
         <h3>차수지</h3>
         <p>2002.05.19</p>
       </div>
@@ -103,30 +112,32 @@
       </div>
     </div>
 
-    <div class="about-main-canvas">
+    <div class="about-main-canvas motion-card" data-delay="1">
 
       <div class="about-hero-copy">
-        <h2>ABOUT</h2>
+        <p class="mini-label">ABOUT ME</p>
+        <h2>차분하지만<br>분명한 감각.</h2>
         <p>
-          섬세한 시선으로 디테일을 피워내는, 디자이너 차수지입니다.<br>
+          섬세한 시선으로 디테일을 피워내는 디자이너 차수지입니다.<br>
           보는 사람이 편하게 느낄 수 있도록 균형과 분위기를 중요하게 생각하며,<br>
-          차분하지만 분명한 감각으로 완성도 있는 디자인을 만들어갑니다.
+          온라인에서 브랜드가 더 단단해 보이도록 시각적인 흐름을 정리합니다.
         </p>
       </div>
 
       <div class="about-keyword-line">
-        <span>감각형 / 비주얼 중심형</span>
-        <span>디테일 집착형</span>
-        <span>현실 고민형</span>
-        <span>실행형 / 바로 해보는 타입</span>
-        <span>감정 솔직형</span>
-        <span>성장 욕구형</span>
+        <span>Visual Mood</span>
+        <span>Detail Focused</span>
+        <span>Web Design</span>
+        <span>Cafe24</span>
+        <span>Smartstore</span>
+        <span>Promotion</span>
       </div>
 
       <div class="about-info-board">
 
         <div class="about-board-section">
           <div class="board-title">
+            <span>01</span>
             <h4>Experience</h4>
           </div>
 
@@ -155,6 +166,7 @@
 
         <div class="about-board-section">
           <div class="board-title">
+            <span>02</span>
             <h4>Certificate</h4>
           </div>
 
@@ -188,6 +200,7 @@
 
         <div class="about-board-section about-tool-section">
           <div class="board-title">
+            <span>03</span>
             <h4>Tools</h4>
           </div>
 
@@ -207,12 +220,15 @@
   </div>
 </section>
 
-<section class="category-panel" id="category">
+<section class="category-panel stack-panel" id="category">
   <div class="panel-inner">
 
-    <div class="category-head">
+    <div class="category-head motion-card" data-delay="0">
       <div class="category-title-row">
-        <h2 class="panel-title">CATEGORY</h2>
+        <div>
+          <p class="mini-label">PROJECT ARCHIVE</p>
+          <h2 class="panel-title">CATEGORY</h2>
+        </div>
 
         <div class="category-actions">
           <button class="category-add-btn" type="button" aria-label="Add Project">+</button>
@@ -228,6 +244,7 @@
 
       <p class="panel-desc">
         작업 유형별로 포트폴리오를 볼 수 있도록 정리했습니다.
+        버튼을 선택하면 해당 프로젝트 카드가 부드럽게 나타납니다.
       </p>
 
       <p class="category-small">
@@ -235,7 +252,7 @@
       </p>
     </div>
 
-    <div class="category-buttons glass-tabs">
+    <div class="category-buttons glass-tabs motion-card" data-delay="1">
       <span class="glass-indicator"></span>
 
       <button class="category-btn active" type="button" data-tab="all">전체</button>
@@ -376,6 +393,6 @@
   </div>
 </div>
 
-<script src="./script.js?v=20"></script>
+<script src="./script.js?v=30"></script>
 </body>
 </html>

@@ -81,6 +81,25 @@ darkToggle?.addEventListener("click", () => {
 });
 
 /* =========================
+   SCROLL REVEAL
+========================= */
+const stackPanels = document.querySelectorAll(".stack-panel");
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add("is-visible");
+    }
+  });
+}, {
+  threshold:0.22
+});
+
+stackPanels.forEach(panel => {
+  revealObserver.observe(panel);
+});
+
+/* =========================
    SUPABASE
 ========================= */
 const SUPABASE_URL = "https://cwnfcrokfkhmguvsqcgs.supabase.co";
@@ -219,7 +238,7 @@ function openCategory(tabButton){
   document.body.classList.add("category-mode");
   document.body.classList.remove("tabs-compact");
 
-  categoryPanel?.classList.add("opened");
+  categoryPanel?.classList.add("opened", "is-visible");
   scrollArea?.scrollTo({top:0, behavior:"smooth"});
 
   resetCategoryView();
