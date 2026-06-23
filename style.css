@@ -448,9 +448,9 @@ body.dark-mode .category-panel{
 
 .about-panel{
 
-  min-height:100vh;
+  min-height:auto;
 
-  padding:125px 40px 56px;
+  padding:125px 40px 100px;
 
   align-items:center;
 
@@ -513,10 +513,14 @@ body.dark-mode .category-panel{
   width:100%;
   max-width:1240px;
   margin:0 auto;
+
   display:grid;
   grid-template-columns:300px minmax(0,1fr);
   gap:28px;
-  align-items:stretch;
+
+  align-items:start;
+
+  transform:translateY(-70px);
 }
 
 .about-visual-card,
@@ -601,7 +605,7 @@ body.dark-mode .about-main-canvas{
 }
 
 .about-main-canvas{
-  padding:42px;
+  padding:34px 42px;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
