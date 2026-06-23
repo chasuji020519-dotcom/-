@@ -13,33 +13,29 @@
   --sub:rgba(0,0,0,.45);
   --muted:rgba(0,0,0,.58);
 
-  --panel:rgba(255,255,255,.62);
-  --panel-border:rgba(255,255,255,.75);
+  --panel:rgba(255,255,255,.72);
+  --panel-border:rgba(255,255,255,.78);
 
-  --card:rgba(255,255,255,.46);
+  --card:rgba(255,255,255,.48);
   --card-border:rgba(255,255,255,.68);
 
   --button:#111111;
   --button-text:#ffffff;
 
-  --radius-big:34px;
-  --radius-mid:26px;
-  --radius-small:18px;
-
   --glass-bg:
     linear-gradient(
       145deg,
-      rgba(255,255,255,.72),
-      rgba(255,255,255,.36) 48%,
-      rgba(255,255,255,.20)
+      rgba(255,255,255,.76),
+      rgba(255,255,255,.38) 48%,
+      rgba(255,255,255,.18)
     );
 
   --glass-border:rgba(255,255,255,.78);
 
   --glass-shadow:
-    inset 0 1px 1px rgba(255,255,255,.95),
+    inset 0 1px 1px rgba(255,255,255,.92),
     inset 0 -1px 2px rgba(255,255,255,.22),
-    0 28px 80px rgba(0,0,0,.11);
+    0 28px 80px rgba(0,0,0,.10);
 
   --marquee-gradient:
     linear-gradient(
@@ -57,7 +53,7 @@ body.dark-mode{
   --sub:rgba(255,255,255,.52);
   --muted:rgba(255,255,255,.62);
 
-  --panel:rgba(18,18,18,.68);
+  --panel:rgba(18,18,18,.78);
   --panel-border:rgba(255,255,255,.14);
 
   --card:rgba(255,255,255,.08);
@@ -71,7 +67,7 @@ body.dark-mode{
       145deg,
       rgba(255,255,255,.14),
       rgba(255,255,255,.065) 48%,
-      rgba(255,255,255,.035)
+      rgba(255,255,255,.03)
     );
 
   --glass-border:rgba(255,255,255,.18);
@@ -94,7 +90,7 @@ body.dark-mode{
 html{
   scroll-behavior:smooth;
   scroll-snap-type:y proximity;
-  scroll-padding-top:105px;
+  scroll-padding-top:0;
 }
 
 body{
@@ -111,6 +107,12 @@ input,
 textarea,
 select{
   font-family:inherit;
+}
+
+/* 예전에 넣었던 움직이는 ABOUT 배경 강제 제거 */
+.about-bg-motion,
+.about-bg-track{
+  display:none !important;
 }
 
 /* =========================
@@ -141,6 +143,7 @@ body.category-mode .category-panel{
   padding-top:70px;
   box-shadow:none;
   border-top:none;
+  border-radius:0;
   scroll-snap-align:none;
 }
 
@@ -170,13 +173,12 @@ body.category-mode .back-home-zone{
   inset:0;
   width:100%;
   height:100vh;
-  z-index:auto;
+  z-index:1;
   background:
     radial-gradient(circle at 12% 12%,rgba(255,255,255,.95),transparent 26%),
     radial-gradient(circle at 84% 76%,rgba(220,224,255,.32),transparent 34%),
     var(--bg);
   overflow:hidden;
-  scroll-snap-align:start;
 }
 
 body.dark-mode .main-fixed{
@@ -371,26 +373,94 @@ body.dark-mode .dark-toggle{
 }
 
 /* =========================
-   PANELS
+   PANEL STACK TENSION
 ========================= */
 .scroll-area{
   position:relative;
-  z-index:2;
+  z-index:5;
   margin-top:100vh;
-  background:var(--bg);
+  background:transparent;
 }
 
-.about-panel,
-.category-panel{
+/* 소개 패널은 바깥 프레임 없이 깨끗하게 */
+.about-panel{
+  position:sticky;
+  top:0;
+  z-index:1;
   width:100%;
-  padding:70px 40px;
-  background:var(--panel);
-  border-top:1px solid var(--panel-border);
-  backdrop-filter:blur(26px);
-  -webkit-backdrop-filter:blur(26px);
-  box-shadow:0 -24px 70px rgba(0,0,0,.08);
+  min-height:100vh;
+  padding:116px 40px 96px;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+
+  background:
+    radial-gradient(circle at 12% 10%,rgba(255,255,255,.95),transparent 26%),
+    radial-gradient(circle at 75% 18%,rgba(218,224,255,.24),transparent 34%),
+    radial-gradient(circle at 92% 88%,rgba(0,0,0,.04),transparent 34%),
+    linear-gradient(135deg,rgba(250,250,252,.98),rgba(239,240,245,.86));
+
+  border:0;
+  box-shadow:none;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
   scroll-snap-align:start;
-  scroll-snap-stop:normal;
+}
+
+body.dark-mode .about-panel{
+  background:
+    radial-gradient(circle at 12% 10%,rgba(255,255,255,.07),transparent 26%),
+    radial-gradient(circle at 75% 18%,rgba(170,180,255,.12),transparent 34%),
+    radial-gradient(circle at 92% 88%,rgba(255,255,255,.05),transparent 34%),
+    linear-gradient(135deg,rgba(18,18,18,.96),rgba(28,28,30,.90));
+}
+
+.about-hold{
+  display:block;
+  height:0;
+}
+
+/* 카테고리 패널이 소개 패널 위를 덮듯 올라오는 카드 */
+.category-panel{
+  position:relative;
+  z-index:3;
+  width:100%;
+  min-height:100vh;
+  margin-top:-88px;
+  padding:120px 40px 96px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:
+    radial-gradient(circle at 18% 20%,rgba(255,255,255,.72),transparent 28%),
+    radial-gradient(circle at 82% 72%,rgba(190,194,220,.18),transparent 34%),
+    linear-gradient(135deg,rgba(250,250,252,.96),rgba(239,240,245,.88));
+
+  border-radius:42px 42px 0 0;
+  border-top:1px solid rgba(255,255,255,.84);
+
+  box-shadow:
+    0 -28px 90px rgba(0,0,0,.12),
+    inset 0 1px 1px rgba(255,255,255,.85);
+
+  backdrop-filter:blur(26px) saturate(170%);
+  -webkit-backdrop-filter:blur(26px) saturate(170%);
+
+  scroll-snap-align:start;
+}
+
+body.dark-mode .category-panel{
+  background:
+    radial-gradient(circle at 18% 20%,rgba(255,255,255,.08),transparent 28%),
+    radial-gradient(circle at 82% 72%,rgba(255,255,255,.05),transparent 34%),
+    linear-gradient(135deg,rgba(20,20,20,.96),rgba(28,28,30,.90));
+
+  border-top-color:rgba(255,255,255,.14);
+
+  box-shadow:
+    0 -28px 90px rgba(0,0,0,.46),
+    inset 0 1px 1px rgba(255,255,255,.12);
 }
 
 .panel-inner{
@@ -415,36 +485,8 @@ body.dark-mode .dark-toggle{
 }
 
 /* =========================
-   ABOUT PANEL
+   ABOUT PANEL CONTENT
 ========================= */
-.about-panel{
-  position:relative;
-  top:auto;
-  z-index:1;
-  min-height:calc(100vh - 105px);
-  padding:64px 40px 84px;
-  display:flex;
-  align-items:center;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 12% 10%,rgba(255,255,255,.95),transparent 26%),
-    radial-gradient(circle at 75% 18%,rgba(218,224,255,.30),transparent 34%),
-    radial-gradient(circle at 90% 88%,rgba(0,0,0,.045),transparent 34%),
-    linear-gradient(135deg,rgba(250,250,252,.94),rgba(238,239,244,.80));
-}
-
-body.dark-mode .about-panel{
-  background:
-    radial-gradient(circle at 12% 10%,rgba(255,255,255,.07),transparent 26%),
-    radial-gradient(circle at 75% 18%,rgba(170,180,255,.12),transparent 34%),
-    radial-gradient(circle at 90% 88%,rgba(255,255,255,.05),transparent 34%),
-    linear-gradient(135deg,rgba(18,18,18,.95),rgba(28,28,30,.88));
-}
-
-.about-hold{
-  display:none;
-}
-
 .about-editorial{
   width:100%;
   max-width:1240px;
@@ -455,14 +497,12 @@ body.dark-mode .about-panel{
   align-items:stretch;
 }
 
-/* =========================
-   GLASS CARD BASE
-========================= */
+/* 안쪽 카드만 동글동글하게 */
 .about-visual-card,
 .about-main-canvas{
   position:relative;
   overflow:hidden;
-  border-radius:var(--radius-big);
+  border-radius:34px;
   background:var(--glass-bg);
   border:1px solid var(--glass-border);
   box-shadow:var(--glass-shadow);
@@ -517,7 +557,7 @@ body.dark-mode .about-panel{
   width:100%;
   height:390px;
   overflow:hidden;
-  border-radius:var(--radius-mid);
+  border-radius:26px;
   background:rgba(255,255,255,.30);
   border:1px solid rgba(255,255,255,.58);
   box-shadow:
@@ -530,7 +570,7 @@ body.dark-mode .about-panel{
   height:100%;
   object-fit:cover;
   display:block;
-  border-radius:var(--radius-mid);
+  border-radius:26px;
   filter:saturate(.92) contrast(1.04);
 }
 
@@ -780,32 +820,12 @@ body.dark-mode .soft-tool-list b{
 /* =========================
    CATEGORY PANEL
 ========================= */
-.category-panel{
-  position:relative;
-  z-index:2;
-  min-height:calc(100vh - 105px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:
-    radial-gradient(circle at 18% 20%,rgba(255,255,255,.60),transparent 28%),
-    radial-gradient(circle at 82% 72%,rgba(190,194,220,.18),transparent 34%),
-    linear-gradient(135deg,rgba(250,250,252,.90),rgba(240,240,244,.78));
-}
-
-body.dark-mode .category-panel{
-  background:
-    radial-gradient(circle at 18% 20%,rgba(255,255,255,.08),transparent 28%),
-    radial-gradient(circle at 82% 72%,rgba(255,255,255,.05),transparent 34%),
-    linear-gradient(135deg,rgba(18,18,18,.94),rgba(28,28,30,.86));
-}
-
 .category-panel.opened{
   align-items:flex-start;
 }
 
 .category-panel:not(.opened) .panel-inner{
-  min-height:calc(100vh - 245px);
+  min-height:calc(100vh - 220px);
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -1559,7 +1579,7 @@ body.logged-in #loginBox{
 
 @media(max-width:768px){
   html{
-    scroll-padding-top:86px;
+    scroll-padding-top:0;
   }
 
   .back-home-zone{
@@ -1604,8 +1624,8 @@ body.logged-in #loginBox{
   }
 
   .about-panel{
-    min-height:calc(100vh - 86px);
-    padding:36px 22px 88px;
+    min-height:100vh;
+    padding:104px 22px 96px;
     align-items:flex-start;
     overflow:visible;
   }
@@ -1660,13 +1680,16 @@ body.logged-in #loginBox{
   }
 
   .category-panel{
-    min-height:calc(100vh - 86px);
-    padding:42px 24px 48px;
+    min-height:100vh;
+    margin-top:-66px;
+    padding:100px 24px 72px;
+    border-radius:34px 34px 0 0;
   }
 
   body.category-mode .category-panel{
     min-height:100vh;
     padding:28px 24px 56px;
+    border-radius:0;
   }
 
   .panel-title{
