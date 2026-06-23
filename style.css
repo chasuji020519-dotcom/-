@@ -459,7 +459,8 @@ body.dark-mode .category-panel{
   will-change:transform,opacity,filter;
 }
 
-.about-panel.panel-active .panel-inner{
+.about-panel.panel-active .panel-inner,
+.about-panel.is-visible .panel-inner{
   transform:translate3d(0,0,0) scale(1);
   opacity:1;
   filter:blur(0);
@@ -488,7 +489,8 @@ body.dark-mode .category-panel{
   will-change:transform,opacity,filter;
 }
 
-.category-panel.panel-active .panel-inner{
+.category-panel.panel-active .panel-inner,
+.category-panel.is-visible .panel-inner{
   transform:translate3d(0,0,0);
   opacity:1;
   filter:blur(0);

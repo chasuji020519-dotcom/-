@@ -882,3 +882,8 @@ window.addEventListener("load", () => {
 ========================= */
 checkLogin();
 loadProjects();
+
+setTimeout(() => {
+  document.querySelector(".about-panel")?.classList.add("is-visible");
+  document.querySelector(".category-panel")?.classList.add("is-visible");
+}, 700);
