@@ -405,7 +405,7 @@ body.dark-mode .image-marquee::before{
 .scroll-area{
   position:relative;
   z-index:5;
-  margin-top:50vh;
+  margin-top:100vh;
   background:transparent;
 }
 
