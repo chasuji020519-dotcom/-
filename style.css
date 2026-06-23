@@ -88,8 +88,8 @@ body.dark-mode{
 }
 
 /* =========================
-   SNAP CARD STACK
-   패널1 / 패널2 딱딱 걸리는 카드형 스크롤
+   SOFT SNAP CARD STACK FIX
+   패널이 딱 걸리되 내용은 안 가리게 수정
 ========================= */
 
 /* 패널마다 딱 걸리게 */
@@ -113,13 +113,13 @@ body{
   overflow:hidden !important;
 }
 
-/* 패널 묶음은 메인 위로 올라오는 구조 */
+/* 패널 묶음 */
 .scroll-area{
   position:relative !important;
   z-index:5 !important;
 
-  /* 메인 끝에서 살짝 위로 걸쳐 시작 */
-  margin-top:calc(100vh - 110px) !important;
+  /* 기존보다 덜 겹치게 */
+  margin-top:100vh !important;
 
   background:transparent !important;
 }
@@ -141,8 +141,10 @@ body{
   width:100% !important;
   min-height:100vh !important;
 
-  margin-top:0 !important;
-  padding:128px 40px 110px !important;
+  /* 상단에 딱 붙지 않게 */
+  margin-top:-48px !important;
+
+  padding:96px 40px 120px !important;
 
   display:flex !important;
   align-items:center !important;
@@ -153,30 +155,46 @@ body{
     radial-gradient(circle at 82% 75%, rgba(200,205,230,.22), transparent 36%),
     linear-gradient(135deg, rgba(250,250,252,.98), rgba(239,240,245,.90)) !important;
 
-  border-radius:48px 48px 0 0 !important;
+  border-radius:44px 44px 0 0 !important;
   border-top:1px solid rgba(255,255,255,.88) !important;
 
   box-shadow:
-    0 -36px 100px rgba(0,0,0,.14),
+    0 -28px 90px rgba(0,0,0,.12),
     inset 0 1px 1px rgba(255,255,255,.9) !important;
 
   backdrop-filter:blur(28px) saturate(175%) !important;
   -webkit-backdrop-filter:blur(28px) saturate(175%) !important;
 
-  /* 여기서 딱 걸림 */
   scroll-snap-align:start !important;
   scroll-snap-stop:always !important;
+}
+
+/* ABOUT 안쪽 카드 크기 안정화 */
+.about-editorial{
+  max-height:calc(100vh - 180px) !important;
+  align-items:stretch !important;
+}
+
+/* 왼쪽/오른쪽 카드가 화면 안에 들어오게 */
+.about-visual-card,
+.about-main-canvas{
+  border-radius:34px !important;
+  max-height:calc(100vh - 180px) !important;
+}
+
+/* 오른쪽 카드 내부 내용 넘침 방지 */
+.about-main-canvas{
+  overflow:hidden !important;
+}
+
+/* 사진 높이 살짝 줄이기 */
+.about-portrait{
+  height:360px !important;
 }
 
 /* ABOUT 뒤 빈 공간 제거 */
 .about-hold{
   display:none !important;
-}
-
-/* ABOUT 내부 카드 */
-.about-visual-card,
-.about-main-canvas{
-  border-radius:34px !important;
 }
 
 /* 다크모드 ABOUT */
@@ -189,7 +207,7 @@ body.dark-mode .about-panel{
   border-top-color:rgba(255,255,255,.14) !important;
 
   box-shadow:
-    0 -36px 100px rgba(0,0,0,.50),
+    0 -28px 90px rgba(0,0,0,.50),
     inset 0 1px 1px rgba(255,255,255,.12) !important;
 }
 
@@ -203,10 +221,10 @@ body.dark-mode .about-panel{
   width:100% !important;
   min-height:100vh !important;
 
-  /* ABOUT 위로 카드처럼 살짝 덮음 */
-  margin-top:-110px !important;
+  /* 여기 때문에 덮였던 거라 훨씬 줄임 */
+  margin-top:-36px !important;
 
-  padding:138px 40px 110px !important;
+  padding:96px 40px 110px !important;
 
   display:flex !important;
   align-items:center !important;
@@ -218,17 +236,16 @@ body.dark-mode .about-panel{
     radial-gradient(circle at 82% 75%, rgba(200,205,230,.24), transparent 36%),
     linear-gradient(135deg, rgba(250,250,252,.98), rgba(239,240,245,.92)) !important;
 
-  border-radius:52px 52px 0 0 !important;
+  border-radius:44px 44px 0 0 !important;
   border-top:1px solid rgba(255,255,255,.9) !important;
 
   box-shadow:
-    0 -42px 120px rgba(0,0,0,.16),
+    0 -30px 100px rgba(0,0,0,.14),
     inset 0 1px 1px rgba(255,255,255,.92) !important;
 
   backdrop-filter:blur(30px) saturate(180%) !important;
   -webkit-backdrop-filter:blur(30px) saturate(180%) !important;
 
-  /* 여기서 딱 걸림 */
   scroll-snap-align:start !important;
   scroll-snap-stop:always !important;
 }
@@ -243,13 +260,13 @@ body.dark-mode .category-panel{
   border-top-color:rgba(255,255,255,.14) !important;
 
   box-shadow:
-    0 -42px 120px rgba(0,0,0,.54),
+    0 -30px 100px rgba(0,0,0,.52),
     inset 0 1px 1px rgba(255,255,255,.12) !important;
 }
 
 /* 카테고리 기본 상태 중앙 정렬 */
 .category-panel:not(.opened) .panel-inner{
-  min-height:calc(100vh - 260px) !important;
+  min-height:calc(100vh - 210px) !important;
   display:flex !important;
   flex-direction:column !important;
   justify-content:center !important;
@@ -262,7 +279,6 @@ body.category-mode .scroll-area{
   margin-top:0 !important;
   z-index:1000 !important;
   background:var(--bg) !important;
-  scroll-snap-type:none !important;
 }
 
 body.category-mode .category-panel{
@@ -277,22 +293,33 @@ body.category-mode .category-panel{
 /* 모바일 */
 @media(max-width:768px){
   .scroll-area{
-    margin-top:calc(100vh - 82px) !important;
+    margin-top:100vh !important;
   }
 
   .about-panel{
     min-height:100vh !important;
-    padding:116px 22px 96px !important;
-    border-radius:38px 38px 0 0 !important;
+    margin-top:-36px !important;
+    padding:86px 22px 92px !important;
+    border-radius:34px 34px 0 0 !important;
     align-items:flex-start !important;
     overflow:visible !important;
   }
 
+  .about-editorial,
+  .about-visual-card,
+  .about-main-canvas{
+    max-height:none !important;
+  }
+
+  .about-portrait{
+    height:340px !important;
+  }
+
   .category-panel{
     min-height:100vh !important;
-    margin-top:-82px !important;
-    padding:118px 24px 80px !important;
-    border-radius:40px 40px 0 0 !important;
+    margin-top:-28px !important;
+    padding:88px 24px 80px !important;
+    border-radius:34px 34px 0 0 !important;
   }
 
   body.category-mode .category-panel{
