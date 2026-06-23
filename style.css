@@ -448,9 +448,9 @@ body.dark-mode .category-panel{
 
 .about-panel{
 
-  margin-top:82vh;
+  margin-top:20vh;
 
-  padding:20px 40px 100px;
+  padding:30px var(--page-x) 90px;
 
   align-items:center;
 
