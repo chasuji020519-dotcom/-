@@ -405,7 +405,7 @@ body.dark-mode .image-marquee::before{
 .scroll-area{
   position:relative;
   z-index:5;
-  margin-top:100vh;
+  margin-top:80vh;
   background:transparent;
 }
 
@@ -448,9 +448,9 @@ body.dark-mode .category-panel{
 
 .about-panel{
 
-  min-height:auto;
+  margin-top:82vh;
 
-  padding:125px 40px 100px;
+  padding:70px var(--page-x) 90px;
 
   align-items:center;
 
