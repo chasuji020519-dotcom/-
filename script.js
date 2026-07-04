@@ -10,17 +10,6 @@ window.addEventListener("pageshow", () => {
   window.scrollTo(0, 0);
 });
 
-window.addEventListener("load", () => {
-  window.scrollTo(0, 0);
-
-  setTimeout(() => {
-    document.body.classList.remove("page-loading");
-    refreshPanelPositions();
-    requestPanelUpdate();
-    moveGlassIndicator(getActiveCategoryButton());
-  }, 300);
-});
-
 /* =========================
    MARQUEE
 ========================= */
@@ -51,10 +40,8 @@ function updateDarkIcon(){
 
   if(document.body.classList.contains("dark-mode")){
     darkToggle.innerText = "☀";
-    darkToggle.setAttribute("aria-label", "light mode");
   }else{
     darkToggle.innerText = "☾";
-    darkToggle.setAttribute("aria-label", "dark mode");
   }
 }
 
@@ -74,25 +61,6 @@ darkToggle?.addEventListener("click", () => {
 });
 
 /* =========================
-   SCROLL REVEAL
-========================= */
-const stackPanels = document.querySelectorAll(".stack-panel");
-
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add("is-visible");
-    }
-  });
-}, {
-  threshold:0.18
-});
-
-stackPanels.forEach(panel => {
-  revealObserver.observe(panel);
-});
-
-/* =========================
    SUPABASE
 ========================= */
 const SUPABASE_URL = "https://cwnfcrokfkhmguvsqcgs.supabase.co";
@@ -102,11 +70,11 @@ const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 /* =========================
    ELEMENTS
 ========================= */
+const aboutPanel = document.querySelector(".about-panel");
 const categoryPanel = document.querySelector(".category-panel");
 const buttons = document.querySelectorAll(".category-btn");
 const groups = document.querySelectorAll(".product-group");
 const productList = document.querySelector(".product-list");
-const backZone = document.querySelector(".back-home-zone");
 const categoryBackBtn = document.querySelector(".category-back-btn");
 const categoryAddBtn = document.querySelector(".category-add-btn");
 const scrollArea = document.querySelector(".scroll-area");
@@ -158,7 +126,45 @@ let detailItems = [];
 let draggedIndex = null;
 
 /* =========================
-   GLASS TAB INDICATOR
+   PANEL MOTION
+========================= */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add("is-visible");
+    }
+  });
+}, {
+  threshold:.18
+});
+
+document.querySelectorAll(".stack-panel").forEach(panel => {
+  revealObserver.observe(panel);
+});
+
+function updatePanels(){
+  const y = window.scrollY;
+  const vh = window.innerHeight;
+
+  if(aboutPanel){
+    const aboutTop = aboutPanel.offsetTop;
+    aboutPanel.classList.toggle("panel-active", y > aboutTop - vh * .85);
+  }
+
+  if(categoryPanel){
+    const categoryTop = categoryPanel.offsetTop;
+    categoryPanel.classList.toggle("panel-active", y > categoryTop - vh * .85);
+  }
+}
+
+window.addEventListener("scroll", updatePanels, {passive:true});
+window.addEventListener("resize", () => {
+  updatePanels();
+  moveGlassIndicator(getActiveCategoryButton());
+});
+
+/* =========================
+   GLASS INDICATOR
 ========================= */
 function getActiveCategoryButton(){
   return document.querySelector(".category-btn.active") || buttons[0];
@@ -171,34 +177,10 @@ function moveGlassIndicator(target){
   const btnRect = target.getBoundingClientRect();
 
   const left = btnRect.left - tabsRect.left + glassTabs.scrollLeft;
-  const width = btnRect.width;
 
   glassIndicator.style.transform = `translateX(${left - 9}px)`;
-  glassIndicator.style.width = `${width}px`;
+  glassIndicator.style.width = `${btnRect.width}px`;
 }
-
-function updateCategoryCompactMode(){
-  if(!document.body.classList.contains("category-mode")){
-    document.body.classList.remove("tabs-compact");
-    return;
-  }
-
-  if(scrollArea && scrollArea.scrollTop > 90){
-    document.body.classList.add("tabs-compact");
-  }else{
-    document.body.classList.remove("tabs-compact");
-  }
-
-  moveGlassIndicator(getActiveCategoryButton());
-}
-
-window.addEventListener("resize", () => {
-  refreshPanelPositions();
-  requestPanelUpdate();
-  moveGlassIndicator(getActiveCategoryButton());
-});
-
-scrollArea?.addEventListener("scroll", updateCategoryCompactMode, {passive:true});
 
 buttons.forEach(button => {
   button.addEventListener("pointerenter", () => moveGlassIndicator(button));
@@ -225,8 +207,7 @@ function openCategory(tabButton){
   const target = tabButton.dataset.tab;
 
   document.body.classList.add("category-mode");
-  categoryPanel?.classList.add("opened");
-  categoryPanel?.classList.add("panel-active");
+  categoryPanel?.classList.add("opened", "panel-active");
 
   if(scrollArea){
     scrollArea.scrollTo({
@@ -249,7 +230,6 @@ function openCategory(tabButton){
 
   setTimeout(() => {
     moveGlassIndicator(tabButton);
-    updateCategoryCompactMode();
   }, 120);
 }
 
@@ -259,7 +239,6 @@ buttons.forEach(button => {
 
 categoryBackBtn?.addEventListener("click", () => {
   document.body.classList.remove("category-mode");
-  document.body.classList.remove("tabs-compact");
 
   categoryPanel?.classList.remove("opened");
 
@@ -267,22 +246,14 @@ categoryBackBtn?.addEventListener("click", () => {
   buttons[0]?.classList.add("active");
 
   window.scrollTo({
-    top:panelTops.category,
+    top:categoryPanel.offsetTop,
     behavior:"smooth"
   });
 
   setTimeout(() => {
     moveGlassIndicator(buttons[0]);
-    refreshPanelPositions();
-    requestPanelUpdate();
+    updatePanels();
   }, 450);
-});
-
-backZone?.addEventListener("click", () => {
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
 });
 
 /* =========================
@@ -326,10 +297,10 @@ function openDetail(project){
     detailLinks.innerHTML += `<a href="${project.pdf_url}" target="_blank">PDF / 외부 링크</a>`;
   }
 
-  if(detailPanel) detailPanel.scrollTop = 0;
-
   detailOverlay?.classList.remove("full");
   detailOverlay?.classList.add("show");
+
+  if(detailPanel) detailPanel.scrollTop = 0;
 }
 
 detailPanel?.addEventListener("scroll", () => {
@@ -409,7 +380,7 @@ document.getElementById("logoutBtn")?.addEventListener("click", async () => {
 });
 
 /* =========================
-   PROJECT LOAD / RENDER
+   PROJECT LOAD
 ========================= */
 function makeCard(project){
   return `
@@ -754,71 +725,16 @@ logoText?.addEventListener("click", function(e){
 });
 
 /* =========================
-   PANEL ACTIVE
-========================= */
-const aboutPanel = document.querySelector(".about-panel");
-const categoryPanelSnap = document.querySelector(".category-panel");
-
-let panelTops = {
-  main:0,
-  about:0,
-  category:0
-};
-
-let ticking = false;
-
-function refreshPanelPositions(){
-  panelTops.main = 0;
-  panelTops.about = aboutPanel ? aboutPanel.offsetTop : 0;
-  panelTops.category = categoryPanelSnap ? categoryPanelSnap.offsetTop : 0;
-}
-
-function requestPanelUpdate(){
-  if(ticking) return;
-
-  ticking = true;
-
-  requestAnimationFrame(() => {
-    setPanelActive();
-    ticking = false;
-  });
-}
-
-function setPanelActive(){
-  const y = window.scrollY;
-  const vh = window.innerHeight;
-
-  if(aboutPanel){
-    const aboutActive =
-      y > panelTops.about - vh * 0.75 &&
-      y < panelTops.category - vh * 0.15;
-
-    aboutPanel.classList.toggle("panel-active", aboutActive);
-  }
-
-  if(categoryPanelSnap){
-    const categoryActive = y > panelTops.category - vh * 0.85;
-    categoryPanelSnap.classList.toggle("panel-active", categoryActive);
-  }
-
-  if(backZone){
-    backZone.classList.toggle("active", y > 300);
-  }
-}
-
-window.addEventListener("scroll", () => {
-  requestPanelUpdate();
-}, {passive:true});
-
-/* =========================
    INIT
 ========================= */
+window.addEventListener("load", () => {
+  window.scrollTo(0, 0);
+
+  setTimeout(() => {
+    updatePanels();
+    moveGlassIndicator(getActiveCategoryButton());
+  }, 300);
+});
+
 checkLogin();
 loadProjects();
-
-setTimeout(() => {
-  document.querySelector(".about-panel")?.classList.add("is-visible");
-  document.querySelector(".category-panel")?.classList.add("is-visible");
-  refreshPanelPositions();
-  requestPanelUpdate();
-}, 700);

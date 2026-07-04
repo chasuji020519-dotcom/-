@@ -2,230 +2,213 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-
-<script>
-  history.scrollRestoration = "manual";
-  if(location.hash){
-    history.replaceState(null, "", location.pathname + location.search);
-  }
-  window.scrollTo(0, 0);
-</script>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<link rel="stylesheet" href="style.css?v=31">
+<link rel="stylesheet" href="style.css?v=100">
 </head>
 
-<body class="page-loading">
-
-<div class="noise-layer"></div>
-<div class="back-home-zone"></div>
+<body>
 
 <div class="main-fixed" id="top">
   <nav class="nav">
     <a href="#top" class="logo" id="logoText">Portfolio</a>
-    <button class="dark-toggle" id="darkToggle" type="button" aria-label="dark mode">☾</button>
+    <button class="dark-toggle" id="darkToggle" type="button">☾</button>
   </nav>
 
   <section class="hero">
     <div class="hero-content reveal-item">
+      <p class="hero-kicker">WEB · VISUAL · BRAND DESIGN</p>
 
       <h1 class="title">
-        <div class="box left">
-          <div class="slider">
-            <div class="word">감각을</div>
-            <div class="word">가치를</div>
-            <div class="word">경험을</div>
-            <div class="word">생각을</div>
-            <div class="word">감각을</div>
-          </div>
-        </div>
+        <span class="box left">
+          <span class="slider">
+            <span class="word">감각을</span>
+            <span class="word">가치를</span>
+            <span class="word">경험을</span>
+            <span class="word">생각을</span>
+            <span class="word">감각을</span>
+          </span>
+        </span>
 
         <span class="fixed">담은</span>
 
-        <div class="box right">
-          <div class="slider">
-            <div class="word">디자인</div>
-            <div class="word">퀄리티</div>
-            <div class="word">임팩트</div>
-            <div class="word">디테일</div>
-            <div class="word">디자인</div>
-          </div>
-        </div>
+        <span class="box right">
+          <span class="slider">
+            <span class="word">디자인</span>
+            <span class="word">퀄리티</span>
+            <span class="word">임팩트</span>
+            <span class="word">디테일</span>
+            <span class="word">디자인</span>
+          </span>
+        </span>
       </h1>
 
       <p class="subtitle">작은 브랜드라도 온라인에서는 단단하게 보여야 하니까요.</p>
     </div>
 
-
     <div class="image-marquee">
       <div class="marquee-track" id="marqueeTrack">
-        <div class="project"><img src="https://i.pinimg.com/736x/19/bb/3b/19bb3beae640b3cce669de47c1169ab7.jpg" alt=""></div>
-        <div class="project"><img src="https://i.pinimg.com/736x/43/cb/59/43cb5931f4cc90e88202d34df8614261.jpg" alt=""></div>
-        <div class="project"><img src="https://i.pinimg.com/736x/8d/62/e9/8d62e9284a322bfcdd273cf361a324d4.jpg" alt=""></div>
-        <div class="project"><img src="https://i.pinimg.com/736x/39/eb/61/39eb6170a2508af0bb7cccc7a28977e5.jpg" alt=""></div>
-        <div class="project"><img src="https://i.pinimg.com/736x/65/14/68/651468f340d841d9a7053d5afef7e5a7.jpg" alt=""></div>
+        <div class="project"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" alt=""></div>
+        <div class="project"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800&auto=format&fit=crop" alt=""></div>
+        <div class="project"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800&auto=format&fit=crop" alt=""></div>
+        <div class="project"><img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=800&auto=format&fit=crop" alt=""></div>
+        <div class="project"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" alt=""></div>
       </div>
     </div>
+
+    <div class="scroll-hint"><span></span> SCROLL</div>
   </section>
 </div>
 
-<div class="scroll-area">
+<main class="scroll-area">
 
-<section class="about-panel stack-panel" id="about">
-  <div class="panel-inner about-editorial">
+  <section class="stack-panel about-panel">
+    <div class="panel-inner about-editorial">
 
-    <div class="about-visual-card motion-card" data-delay="0">
-      <div class="about-portrait">
-        <img src="https://i.pinimg.com/736x/ff/0d/2a/ff0d2a921264637b1268a56fae27867c.jpg" alt="">
+      <aside class="about-visual-card motion-card" data-delay="0">
+        <div class="about-portrait">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800&auto=format&fit=crop" alt="">
+        </div>
+
+        <div class="about-profile-text">
+          <p class="mini-label">PROFILE</p>
+          <h3>차수지</h3>
+          <p>2002.05.19</p>
+        </div>
+
+        <div class="about-contact-minimal">
+          <p><span>EMAIL</span> suji020519@kakao.com</p>
+          <p><span>PHONE</span> Available on request</p>
+        </div>
+      </aside>
+
+      <div class="about-main-canvas motion-card" data-delay="1">
+        <div class="about-hero-copy">
+          <p class="mini-label">ABOUT ME</p>
+          <h2>차분하지만<br>분명한 감각.</h2>
+          <p>
+            온라인에서 브랜드가 더 또렷하게 보이도록 디자인합니다.
+            상세페이지, 프로모션, 쇼핑몰 운영 경험을 바탕으로
+            보기 좋은 화면과 실제로 쓰기 편한 구조를 함께 고민합니다.
+          </p>
+        </div>
+
+        <div class="about-keyword-line">
+          <span>Visual Mood</span>
+          <span>Detail Focused</span>
+          <span>Web Design</span>
+          <span>Cafe24</span>
+          <span>Smartstore</span>
+          <span>Promotion</span>
+        </div>
+
+        <div class="about-info-board">
+          <div class="about-board-section">
+            <div class="board-title"><h4>Experience</h4></div>
+            <div class="board-list">
+              <p><strong>2025</strong> (주)뿌쥬아 웹디자이너</p>
+              <p><strong>2020-2024</strong> (주)뿌유 웹디자이너</p>
+              <p><strong>2020</strong> 문학정보고 스마트미디어과 졸업</p>
+            </div>
+          </div>
+
+          <div class="about-board-section">
+            <div class="board-title"><h4>Certificate</h4></div>
+            <div class="board-list">
+              <p><strong>GTQ</strong> GTQ 1급</p>
+              <p><strong>VIDEO</strong> 디지털영상편집 1급</p>
+              <p><strong>WEB</strong> 웹디자인기능사 준비중</p>
+            </div>
+          </div>
+
+          <div class="about-board-section">
+            <div class="board-title"><h4>Tools</h4></div>
+            <div class="soft-tool-list">
+              <div><b>Ps</b><span>Photoshop</span></div>
+              <div><b>Ai</b><span>Illustrator</span></div>
+              <div><b>Fg</b><span>Figma</span></div>
+              <div><b>Pr</b><span>Premiere</span></div>
+              <div><b>Ae</b><span>After Effects</span></div>
+              <div><b>Id</b><span>InDesign</span></div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="about-profile-text">
-        <h3>차수지</h3>
-        <p>2002.05.19</p>
-      </div>
-
-      <div class="about-contact-minimal">
-        <p><span>PHONE</span>01080195019</p>
-        <p><span>EMAIL</span>suji020519@kakao.com</p>
-      </div>
     </div>
+  </section>
 
-    <div class="about-main-canvas motion-card" data-delay="1">
-      <div class="about-hero-copy">
-        <h2>ABOUT</h2>
-        <p>
-          섬세한 시선으로 디테일을 피워내는 디자이너 차수지입니다.<br>
-          보는 사람이 편하게 느낄 수 있도록 균형과 분위기를 중요하게 생각하며,<br>
-          온라인에서 브랜드가 더 단단해 보이도록 시각적인 흐름을 정리합니다.
-        </p>
-      </div>
+  <section class="stack-panel category-panel">
+    <div class="panel-inner">
 
-      <div class="about-keyword-line">
-        <span>Visual Mood</span>
-        <span>Detail Focused</span>
-        <span>Web Design</span>
-        <span>Cafe24</span>
-        <span>Smartstore</span>
-        <span>Promotion</span>
-      </div>
+      <div class="category-head motion-card" data-delay="0">
+        <div class="category-title-row">
+          <div>
+            <p class="mini-label">PROJECT ARCHIVE</p>
+            <h2 class="panel-title">Selected Works</h2>
+            <p class="panel-desc">
+              작업물을 카테고리별로 정리했습니다.
+              버튼을 누르면 해당 프로젝트만 보기 좋게 펼쳐집니다.
+            </p>
+            <p class="category-small">CHOOSE CATEGORY</p>
+          </div>
 
-      <div class="about-info-board">
-        <div class="about-board-section">
-          <div class="board-title"><h4>Experience</h4></div>
-          <div class="board-list">
-            <p><strong>2026</strong><span>경희사이버대학교<br>IT·디자인융합학부 재학중</span></p>
-            <p><strong>2025</strong><span>(주)뿌쥬아 웹디자이너<br>카페24 / 스마트스토어 / 프로모션 기획 / 블로그 포스팅</span></p>
-            <p><strong>2020 - 2024</strong><span>(주)뿌유 웹디자이너<br>쇼핑몰 관리 / 상세페이지 / 프로모션 디자인 / 상품 편집 및 등록</span></p>
-            <p><strong>2020</strong><span>문학정보고등학교<br>스마트미디어과 졸업</span></p>
+          <div class="category-actions">
+            <button class="category-back-btn" type="button">←</button>
+            <button class="category-add-btn" type="button">＋</button>
           </div>
         </div>
 
-        <div class="about-board-section">
-          <div class="board-title"><h4>Certificate</h4></div>
-          <div class="board-list">
-            <p><strong>GTQ</strong><span>그래픽기술자격 1급</span></p>
-            <p><strong>영상</strong><span>디지털영상편집 1급</span></p>
-            <p><strong>웹</strong><span>웹디자인기능사 준비중</span></p>
-            <p><strong>운전</strong><span>운전면허 2종 보통</span></p>
-            <p><strong>OA</strong><span>엑셀 / PowerPoint</span></p>
-          </div>
-        </div>
-
-        <div class="about-board-section about-tool-section">
-          <div class="board-title"><h4>Tools</h4></div>
-          <div class="soft-tool-list">
-            <div><b>Ps</b><span>Photoshop</span></div>
-            <div><b>Ai</b><span>Illustrator</span></div>
-            <div><b>Ae</b><span>After Effects</span></div>
-            <div><b>Fg</b><span>Figma</span></div>
-            <div><b>Id</b><span>InDesign</span></div>
-            <div><b>Pr</b><span>Premiere</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<section class="category-panel stack-panel" id="category">
-  <div class="panel-inner">
-
-    <div class="category-head motion-card" data-delay="0">
-      <div class="category-title-row">
-        <div>
-          <h2 class="panel-title">CATEGORY</h2>
-        </div>
-
-        <div class="category-actions">
-          <button class="category-add-btn" type="button">+</button>
-          <button class="category-back-btn" type="button" aria-label="Back">
-            <svg viewBox="0 0 48 48">
-              <path d="M28 12 L16 24 L28 36"/>
-              <path d="M17 24 H38"/>
-            </svg>
-          </button>
+        <div class="category-buttons">
+          <span class="glass-indicator"></span>
+          <button class="category-btn active" data-tab="all">전체</button>
+          <button class="category-btn" data-tab="brand">브랜드</button>
+          <button class="category-btn" data-tab="graphic">그래픽</button>
+          <button class="category-btn" data-tab="ui">UI</button>
+          <button class="category-btn" data-tab="artwork">아트웍</button>
         </div>
       </div>
 
-      <p class="panel-desc">
-        작업 유형별로 포트폴리오를 볼 수 있도록 정리했습니다.
-      </p>
+      <div class="product-list motion-card" data-delay="1">
+        <div class="product-group" data-category="brand"></div>
+        <div class="product-group" data-category="graphic"></div>
+        <div class="product-group" data-category="ui"></div>
+        <div class="product-group" data-category="artwork"></div>
+      </div>
 
     </div>
+  </section>
 
-    <div class="category-buttons glass-tabs motion-card" data-delay="1">
-      <span class="glass-indicator"></span>
-      <button class="category-btn active" type="button" data-tab="all">전체</button>
-      <button class="category-btn" type="button" data-tab="brand">브랜드</button>
-      <button class="category-btn" type="button" data-tab="graphic">그래픽</button>
-      <button class="category-btn" type="button" data-tab="ui">UI</button>
-      <button class="category-btn" type="button" data-tab="artwork">아트웍</button>
-    </div>
-
-    <div class="product-list">
-      <div class="product-group" data-category="brand"></div>
-      <div class="product-group" data-category="graphic"></div>
-      <div class="product-group" data-category="ui"></div>
-      <div class="product-group" data-category="artwork"></div>
-    </div>
-
-  </div>
-</section>
-
-</div>
+</main>
 
 <div class="detail-overlay">
   <div class="detail-panel">
-    <button class="detail-close" type="button" aria-label="Close">
-      <svg viewBox="0 0 24 24"><path d="M6 6L18 18M18 6L6 18"/></svg>
-    </button>
+    <button class="detail-close" type="button">×</button>
 
     <div class="detail-image">
       <img id="detailImg" src="" alt="">
     </div>
 
     <div class="detail-content">
-      <span class="detail-category">PORTFOLIO PROJECT</span>
-      <h2 id="detailTitle">Project Title</h2>
-      <p id="detailDesc">프로젝트 상세 설명이 들어갑니다.</p>
+      <span class="detail-category" id="detailType"></span>
+      <h2 id="detailTitle"></h2>
+      <p id="detailDesc"></p>
 
       <div class="detail-meta">
-        <div><span>TYPE</span><strong id="detailType">Brand Design</strong></div>
-        <div><span>ROLE</span><strong id="detailRole">Design / Visual</strong></div>
-        <div><span>YEAR</span><strong id="detailYear">2026</strong></div>
+        <div><strong>ROLE</strong><br><span id="detailRole"></span></div>
+        <div><strong>YEAR</strong><br><span id="detailYear"></span></div>
+        <div><strong>TYPE</strong><br><span id="detailType2">Portfolio</span></div>
       </div>
 
       <div class="detail-long">
-        <h3>Project Story</h3>
-        <p id="detailStory">상세 설명이 들어갑니다.</p>
-        <div class="detail-gallery" id="detailGallery"></div>
-        <div class="detail-media" id="detailMedia"></div>
-        <div class="detail-links" id="detailLinks"></div>
+        <p id="detailStory"></p>
       </div>
+
+      <div class="detail-gallery" id="detailGallery"></div>
+      <div class="detail-media" id="detailMedia"></div>
+      <div class="detail-links" id="detailLinks"></div>
 
       <button class="detail-edit-btn" type="button">수정하기</button>
     </div>
@@ -234,26 +217,21 @@
 
 <div class="admin-overlay">
   <div class="admin-panel">
-    <button class="admin-close" type="button" aria-label="Close">
-      <svg viewBox="0 0 24 24"><path d="M6 6L18 18M18 6L6 18"/></svg>
-    </button>
+    <button class="admin-close" type="button">×</button>
 
     <div class="admin-content">
       <h2 id="adminTitle">ADD PROJECT</h2>
 
       <div id="loginBox" class="admin-form">
-        <input type="email" id="loginEmail" placeholder="관리자 이메일">
-        <input type="password" id="loginPassword" placeholder="비밀번호">
-        <div class="admin-btn-row">
-          <button class="admin-btn" type="button" id="loginBtn">로그인</button>
-        </div>
-        <p class="admin-status">관리자만 게시물을 등록할 수 있어.</p>
+        <input id="loginEmail" type="email" placeholder="Email">
+        <input id="loginPassword" type="password" placeholder="Password">
+        <button id="loginBtn" class="admin-btn" type="button">Login</button>
       </div>
 
       <div id="adminFormBox" class="admin-form">
-        <input type="hidden" id="editId">
+        <input id="editId" type="hidden">
 
-        <input type="text" id="projectTitle" placeholder="제목">
+        <input id="projectTitle" type="text" placeholder="프로젝트 제목">
 
         <select id="projectCategory">
           <option value="brand">브랜드</option>
@@ -262,40 +240,38 @@
           <option value="artwork">아트웍</option>
         </select>
 
-        <input type="text" id="projectShortDesc" placeholder="짧은 설명">
+        <input id="projectShortDesc" type="text" placeholder="짧은 설명">
         <textarea id="projectContent" placeholder="상세 설명"></textarea>
-        <input type="text" id="projectRole" placeholder="역할">
-        <input type="text" id="projectYear" placeholder="연도">
+
+        <input id="projectRole" type="text" placeholder="역할">
+        <input id="projectYear" type="text" placeholder="연도">
 
         <label class="admin-label">대표 이미지</label>
-        <input type="file" id="projectImage" accept="image/*">
+        <input id="projectImage" type="file" accept="image/*">
 
-        <label class="admin-label">상세 이미지 여러 장</label>
-        <input type="file" id="projectDetailImages" accept="image/*" multiple>
+        <label class="admin-label">상세 이미지 여러장</label>
+        <input id="projectDetailImages" type="file" accept="image/*" multiple>
         <div id="detailPreviewList" class="detail-preview-list"></div>
 
-        <label class="admin-label">영상 / 움짤 파일 업로드</label>
-        <input type="file" id="projectVideoFile" accept="video/*,.gif">
+        <label class="admin-label">영상 / 움짤 파일</label>
+        <input id="projectVideoFile" type="file" accept="video/*,image/gif">
 
-        <label class="admin-label">영상 / 움짤 링크</label>
-        <input type="text" id="projectVideoUrl" placeholder="유튜브, GIF 링크 등">
-
-        <label class="admin-label">PDF / 외부 링크</label>
-        <input type="text" id="projectPdfUrl" placeholder="PDF, Behance, Figma 링크 등">
+        <input id="projectVideoUrl" type="text" placeholder="영상 링크">
+        <input id="projectPdfUrl" type="text" placeholder="PDF / 외부 링크">
 
         <div class="admin-btn-row">
-          <button class="admin-btn" type="button" id="saveBtn">저장하기</button>
-          <button class="admin-btn sub" type="button" id="resetBtn">새 글</button>
-          <button class="admin-btn sub" type="button" id="deleteBtn">삭제</button>
-          <button class="admin-btn sub" type="button" id="logoutBtn">로그아웃</button>
+          <button id="saveBtn" class="admin-btn" type="button">저장</button>
+          <button id="resetBtn" class="admin-btn sub" type="button">새 글</button>
+          <button id="deleteBtn" class="admin-btn sub" type="button">삭제</button>
+          <button id="logoutBtn" class="admin-btn sub" type="button">로그아웃</button>
         </div>
 
-        <p class="admin-status" id="adminStatus"></p>
+        <p id="adminStatus" class="admin-status"></p>
       </div>
     </div>
   </div>
 </div>
 
-<script src="./script.js?v=31"></script>
+<script src="script.js?v=100"></script>
 </body>
 </html>
