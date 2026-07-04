@@ -222,10 +222,9 @@ function resetCategoryView(){
 function openCategory(tabButton){
   const target = tabButton.dataset.tab;
 
-  document.body.classList.add("category-mode");
-  document.body.classList.remove("tabs-compact");
-
-  categoryPanel?.classList.add("opened", "is-visible");
+document.body.classList.add("category-mode");
+categoryPanel.classList.add("opened");
+categoryPanel.classList.add("panel-active");
 
   if(scrollArea){
     scrollArea.scrollTo({
