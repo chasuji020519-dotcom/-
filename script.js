@@ -17,6 +17,7 @@ window.addEventListener("load", () => {
     document.body.classList.remove("page-loading");
     refreshPanelPositions();
     requestPanelUpdate();
+    moveGlassIndicator(getActiveCategoryButton());
   }, 450);
 });
 
@@ -193,6 +194,8 @@ function updateCategoryCompactMode(){
 }
 
 window.addEventListener("resize", () => {
+  refreshPanelPositions();
+  requestPanelUpdate();
   moveGlassIndicator(getActiveCategoryButton());
 });
 
@@ -222,14 +225,14 @@ function resetCategoryView(){
 function openCategory(tabButton){
   const target = tabButton.dataset.tab;
 
-document.body.classList.add("category-mode");
-categoryPanel.classList.add("opened");
-categoryPanel.classList.add("panel-active");
+  document.body.classList.add("category-mode");
+  categoryPanel?.classList.add("opened");
+  categoryPanel?.classList.add("panel-active");
 
   if(scrollArea){
     scrollArea.scrollTo({
       top:0,
-      behavior:"smooth"
+      behavior:"auto"
     });
   }
 
@@ -752,7 +755,8 @@ logoText?.addEventListener("click", function(e){
 });
 
 /* =========================
-   OPTIMIZED MAGNET SNAP
+   PANEL ACTIVE ONLY
+   자동 스냅 제거 버전
 ========================= */
 const aboutPanel = document.querySelector(".about-panel");
 const categoryPanelSnap = document.querySelector(".category-panel");
@@ -764,8 +768,6 @@ let panelTops = {
 };
 
 let ticking = false;
-let snapTimer = null;
-let isSnapping = false;
 
 function refreshPanelPositions(){
   panelTops.main = 0;
@@ -790,8 +792,8 @@ function setPanelActive(){
 
   if(aboutPanel){
     const aboutActive =
-      y > panelTops.about - vh * 0.58 &&
-      y < panelTops.category - vh * 0.32;
+      y > panelTops.about - vh * 0.75 &&
+      y < panelTops.category - vh * 0.15;
 
     aboutPanel.classList.toggle("panel-active", aboutActive);
   }
@@ -806,78 +808,9 @@ function setPanelActive(){
   }
 }
 
-function canSnap(){
-  if(document.body.classList.contains("category-mode")) return false;
-  if(document.querySelector(".detail-overlay.show")) return false;
-  if(document.querySelector(".admin-overlay.show")) return false;
-  if(isSnapping) return false;
-  return true;
-}
-
-function magneticSnap(){
-  if(!canSnap()) return;
-
-  const y = window.scrollY;
-  const vh = window.innerHeight;
-
-  const aboutPoint = panelTops.about;
-  const categoryPoint = panelTops.category - 72;
-
-  let nearest = panelTops.main;
-  let minDistance = Math.abs(y - nearest);
-
-  const points = [
-    panelTops.main,
-    aboutPoint,
-    categoryPoint
-  ];
-
-  points.forEach(point => {
-    const distance = Math.abs(y - point);
-
-    if(distance < minDistance){
-      nearest = point;
-      minDistance = distance;
-    }
-  });
-
-  if(minDistance < vh * 0.55){
-    isSnapping = true;
-
-    window.scrollTo({
-      top:nearest,
-      behavior:"smooth"
-    });
-
-    setTimeout(() => {
-      isSnapping = false;
-    }, 720);
-  }
-}
-
 window.addEventListener("scroll", () => {
   requestPanelUpdate();
-
-  clearTimeout(snapTimer);
-
-  snapTimer = setTimeout(() => {
-    magneticSnap();
-  }, 180);
 }, {passive:true});
-
-window.addEventListener("resize", () => {
-  refreshPanelPositions();
-  requestPanelUpdate();
-});
-
-window.addEventListener("load", () => {
-  refreshPanelPositions();
-  requestPanelUpdate();
-
-  setTimeout(() => {
-    moveGlassIndicator(getActiveCategoryButton());
-  }, 300);
-});
 
 /* =========================
    INIT
