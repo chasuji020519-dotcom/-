@@ -805,3 +805,54 @@ window.addEventListener("scroll",()=>{
     snapTimer=setTimeout(autoSnap,80);
 
 });
+
+/* =========================
+   PANEL MAGNET SNAP
+========================= */
+
+const panels = document.querySelectorAll(".about-panel, .category-panel");
+
+let isSnapping = false;
+let snapTimeout;
+
+function snapPanel(){
+
+    if(isSnapping) return;
+
+    const trigger = window.innerHeight * 0.42;
+
+    for(const panel of panels){
+
+        const rect = panel.getBoundingClientRect();
+
+        if(rect.top > 0 && rect.top < trigger){
+
+            isSnapping = true;
+
+            window.scrollTo({
+                top: window.scrollY + rect.top,
+                behavior: "smooth"
+            });
+
+            clearTimeout(snapTimeout);
+
+            snapTimeout = setTimeout(()=>{
+                isSnapping = false;
+            },700);
+
+            break;
+        }
+    }
+}
+
+let scrollTimer;
+
+window.addEventListener("scroll",()=>{
+
+    clearTimeout(scrollTimer);
+
+    scrollTimer = setTimeout(()=>{
+        snapPanel();
+    },70);
+
+});
