@@ -18,7 +18,7 @@ window.addEventListener("load", () => {
     refreshPanelPositions();
     requestPanelUpdate();
     moveGlassIndicator(getActiveCategoryButton());
-  }, 450);
+  }, 300);
 });
 
 /* =========================
@@ -111,7 +111,7 @@ const categoryBackBtn = document.querySelector(".category-back-btn");
 const categoryAddBtn = document.querySelector(".category-add-btn");
 const scrollArea = document.querySelector(".scroll-area");
 
-const glassTabs = document.querySelector(".glass-tabs");
+const glassTabs = document.querySelector(".category-buttons");
 const glassIndicator = document.querySelector(".glass-indicator");
 
 const detailOverlay = document.querySelector(".detail-overlay");
@@ -170,11 +170,10 @@ function moveGlassIndicator(target){
   const tabsRect = glassTabs.getBoundingClientRect();
   const btnRect = target.getBoundingClientRect();
 
-  const offset = document.body.classList.contains("tabs-compact") ? 6 : 9;
-  const left = btnRect.left - tabsRect.left;
+  const left = btnRect.left - tabsRect.left + glassTabs.scrollLeft;
   const width = btnRect.width;
 
-  glassIndicator.style.transform = `translateX(${left - offset}px)`;
+  glassIndicator.style.transform = `translateX(${left - 9}px)`;
   glassIndicator.style.width = `${width}px`;
 }
 
@@ -755,8 +754,7 @@ logoText?.addEventListener("click", function(e){
 });
 
 /* =========================
-   PANEL ACTIVE ONLY
-   자동 스냅 제거 버전
+   PANEL ACTIVE
 ========================= */
 const aboutPanel = document.querySelector(".about-panel");
 const categoryPanelSnap = document.querySelector(".category-panel");
@@ -821,74 +819,6 @@ loadProjects();
 setTimeout(() => {
   document.querySelector(".about-panel")?.classList.add("is-visible");
   document.querySelector(".category-panel")?.classList.add("is-visible");
+  refreshPanelPositions();
+  requestPanelUpdate();
 }, 700);
-
-/* =========================
-   PANEL WHEEL CONTROL
-   ABOUT 내부 스크롤 끝나면 CATEGORY로 이동
-========================= */
-const aboutInnerScroll = document.querySelector(".about-panel .panel-inner");
-
-let wheelLock = false;
-
-function lockWheel(){
-  wheelLock = true;
-  setTimeout(() => {
-    wheelLock = false;
-  }, 850);
-}
-
-window.addEventListener("wheel", (e) => {
-  if(document.body.classList.contains("category-mode")) return;
-  if(document.querySelector(".detail-overlay.show")) return;
-  if(document.querySelector(".admin-overlay.show")) return;
-  if(!aboutPanel || !categoryPanelSnap || !aboutInnerScroll) return;
-  if(wheelLock) return;
-
-  const y = window.scrollY;
-  const aboutTop = aboutPanel.offsetTop;
-  const categoryTop = categoryPanelSnap.offsetTop;
-
-  const isAboutView =
-    y >= aboutTop - 20 &&
-    y < categoryTop - 80;
-
-  if(!isAboutView) return;
-
-  const scrollingDown = e.deltaY > 0;
-  const scrollingUp = e.deltaY < 0;
-
-  const innerAtTop = aboutInnerScroll.scrollTop <= 2;
-  const innerAtBottom =
-    aboutInnerScroll.scrollTop + aboutInnerScroll.clientHeight >=
-    aboutInnerScroll.scrollHeight - 2;
-
-  if(scrollingDown && !innerAtBottom){
-    e.preventDefault();
-    aboutInnerScroll.scrollBy({
-      top:e.deltaY,
-      behavior:"auto"
-    });
-    return;
-  }
-
-  if(scrollingDown && innerAtBottom){
-    e.preventDefault();
-    lockWheel();
-
-    window.scrollTo({
-      top:categoryTop,
-      behavior:"smooth"
-    });
-    return;
-  }
-
-  if(scrollingUp && !innerAtTop){
-    e.preventDefault();
-    aboutInnerScroll.scrollBy({
-      top:e.deltaY,
-      behavior:"auto"
-    });
-    return;
-  }
-}, {passive:false});
