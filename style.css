@@ -342,7 +342,7 @@ body.dark-mode .image-marquee::before{
   align-items:center;
   justify-content:center;
   background:linear-gradient(180deg,rgba(255,255,255,.84),var(--glass));
-  border-radius:64px 64px 0 0;
+  border-radius:0;
   border-top:1px solid rgba(255,255,255,.88);
   box-shadow:0 -38px 120px rgba(0,0,0,.12);
   backdrop-filter:blur(30px) saturate(160%);
@@ -1264,7 +1264,7 @@ body.logged-in #loginBox{
   .category-panel{
     margin-top:-58px;
     padding:96px 22px 110px;
-    border-radius:42px 42px 0 0;
+    border-radius:0;
     transform:translateY(78px) scale(.98);
   }
 
