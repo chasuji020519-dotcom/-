@@ -1560,27 +1560,31 @@ body.dark-mode .about-panel::before{
     rgba(255,255,255,0)
   );
 }
+/* ABOUT 최종 덮어쓰기 */
 .about-panel{
-  position:relative;
+  position:relative !important;
+  top:auto !important;
+  height:auto !important;
+  min-height:140vh !important;
 
-  min-height:140vh;
+  padding-top:110px !important;
+  padding-right:var(--page-x) !important;
+  padding-bottom:180px !important;
+  padding-left:var(--page-x) !important;
 
-  /* 👇 이게 상단 여백 */
-  padding:110px var(--page-x) 180px;
-
-  align-items:flex-start;
-  overflow:visible;
-
-  z-index:6;
+  align-items:flex-start !important;
+  overflow:visible !important;
+  z-index:6 !important;
 }
 
 .about-panel .panel-inner{
-  height:auto;
-  overflow:visible;
+  height:auto !important;
+  overflow:visible !important;
+  padding-bottom:0 !important;
 }
 
 .category-panel{
-  position:relative;
-  margin-top:0;
-  z-index:7;
+  position:relative !important;
+  margin-top:0 !important;
+  z-index:7 !important;
 }
