@@ -128,39 +128,20 @@ let draggedIndex = null;
 /* =========================
    PANEL MOTION
 ========================= */
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add("is-visible");
-    }
-  });
-}, {
-  threshold:.18
-});
-
-const panels = document.querySelectorAll(".stack-panel");
+const stackPanels = document.querySelectorAll(".stack-panel");
 
 const panelObserver = new IntersectionObserver((entries) => {
-
   entries.forEach((entry) => {
-
     if(entry.isIntersecting){
-
       entry.target.classList.add("is-visible");
-
       entry.target.classList.add("panel-active");
-
     }
-
   });
-
 },{
-
   threshold:0.28
-
 });
 
-panels.forEach((panel) => panelObserver.observe(panel));
+stackPanels.forEach((panel) => panelObserver.observe(panel));
 
 function updatePanels(){
   const y = window.scrollY;
@@ -745,6 +726,41 @@ logoText?.addEventListener("click", function(e){
 });
 
 /* =========================
+   PANEL AUTO SNAP
+========================= */
+const snapPanels = document.querySelectorAll(".about-panel, .category-panel");
+let snapping = false;
+let snapTimer;
+
+function autoSnap(){
+  if(snapping) return;
+
+  const trigger = window.innerHeight * 0.45;
+
+  snapPanels.forEach(panel => {
+    const rect = panel.getBoundingClientRect();
+
+    if(rect.top > 0 && rect.top < trigger){
+      snapping = true;
+
+      panel.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
+
+      setTimeout(() => {
+        snapping = false;
+      }, 760);
+    }
+  });
+}
+
+window.addEventListener("scroll", () => {
+  clearTimeout(snapTimer);
+  snapTimer = setTimeout(autoSnap, 90);
+});
+
+/* =========================
    INIT
 ========================= */
 window.addEventListener("load", () => {
@@ -758,51 +774,3 @@ window.addEventListener("load", () => {
 
 checkLogin();
 loadProjects();
-
-/* =========================
-   PANEL AUTO SNAP
-========================= */
-
-const panels = document.querySelectorAll(".about-panel, .category-panel");
-
-let snapping = false;
-
-function autoSnap(){
-
-    if(snapping) return;
-
-    const trigger = window.innerHeight * 0.45;
-
-    panels.forEach(panel=>{
-
-        const rect = panel.getBoundingClientRect();
-
-        if(rect.top > 0 && rect.top < trigger){
-
-            snapping = true;
-
-            panel.scrollIntoView({
-                behavior:"smooth",
-                block:"start"
-            });
-
-            setTimeout(()=>{
-                snapping=false;
-            },700);
-
-        }
-
-    });
-
-}
-
-let snapTimer;
-
-window.addEventListener("scroll",()=>{
-
-    clearTimeout(snapTimer);
-
-    snapTimer=setTimeout(autoSnap,80);
-
-});
-
