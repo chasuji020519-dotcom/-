@@ -1520,3 +1520,37 @@ body.logged-in #loginBox{
     height:340px;
   }
 }
+/* ABOUT 안쪽만 은은한 유리 느낌 복구 */
+.about-main-canvas{
+  padding:clamp(34px,4vw,52px);
+  border-radius:36px;
+  background:rgba(255,255,255,.38);
+  border:1px solid rgba(255,255,255,.62);
+  box-shadow:0 28px 90px rgba(0,0,0,.08);
+  backdrop-filter:blur(24px) saturate(160%);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);
+}
+
+body.dark-mode .about-main-canvas{
+  background:rgba(255,255,255,.07);
+  border-color:rgba(255,255,255,.13);
+  box-shadow:0 28px 90px rgba(0,0,0,.32);
+}
+
+.about-visual-card{
+  padding:18px;
+  border-radius:36px;
+  background:rgba(255,255,255,.30);
+  border:1px solid rgba(255,255,255,.55);
+  backdrop-filter:blur(20px) saturate(150%);
+  -webkit-backdrop-filter:blur(20px) saturate(150%);
+}
+
+body.dark-mode .about-visual-card{
+  background:rgba(255,255,255,.055);
+  border-color:rgba(255,255,255,.12);
+}
+
+.about-portrait{
+  border-radius:26px;
+}
