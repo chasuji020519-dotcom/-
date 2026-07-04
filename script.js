@@ -822,3 +822,73 @@ setTimeout(() => {
   document.querySelector(".about-panel")?.classList.add("is-visible");
   document.querySelector(".category-panel")?.classList.add("is-visible");
 }, 700);
+
+/* =========================
+   PANEL WHEEL CONTROL
+   ABOUT 내부 스크롤 끝나면 CATEGORY로 이동
+========================= */
+const aboutInnerScroll = document.querySelector(".about-panel .panel-inner");
+
+let wheelLock = false;
+
+function lockWheel(){
+  wheelLock = true;
+  setTimeout(() => {
+    wheelLock = false;
+  }, 850);
+}
+
+window.addEventListener("wheel", (e) => {
+  if(document.body.classList.contains("category-mode")) return;
+  if(document.querySelector(".detail-overlay.show")) return;
+  if(document.querySelector(".admin-overlay.show")) return;
+  if(!aboutPanel || !categoryPanelSnap || !aboutInnerScroll) return;
+  if(wheelLock) return;
+
+  const y = window.scrollY;
+  const aboutTop = aboutPanel.offsetTop;
+  const categoryTop = categoryPanelSnap.offsetTop;
+
+  const isAboutView =
+    y >= aboutTop - 20 &&
+    y < categoryTop - 80;
+
+  if(!isAboutView) return;
+
+  const scrollingDown = e.deltaY > 0;
+  const scrollingUp = e.deltaY < 0;
+
+  const innerAtTop = aboutInnerScroll.scrollTop <= 2;
+  const innerAtBottom =
+    aboutInnerScroll.scrollTop + aboutInnerScroll.clientHeight >=
+    aboutInnerScroll.scrollHeight - 2;
+
+  if(scrollingDown && !innerAtBottom){
+    e.preventDefault();
+    aboutInnerScroll.scrollBy({
+      top:e.deltaY,
+      behavior:"auto"
+    });
+    return;
+  }
+
+  if(scrollingDown && innerAtBottom){
+    e.preventDefault();
+    lockWheel();
+
+    window.scrollTo({
+      top:categoryTop,
+      behavior:"smooth"
+    });
+    return;
+  }
+
+  if(scrollingUp && !innerAtTop){
+    e.preventDefault();
+    aboutInnerScroll.scrollBy({
+      top:e.deltaY,
+      behavior:"auto"
+    });
+    return;
+  }
+}, {passive:false});

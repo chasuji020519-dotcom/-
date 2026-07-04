@@ -1560,28 +1560,47 @@ body.dark-mode .about-panel::before{
     rgba(255,255,255,0)
   );
 }
-/* ABOUT 고정 + 내부 스크롤 */
+/* =========================
+   ABOUT FINAL PANEL
+========================= */
 .about-panel{
   position:sticky !important;
   top:110px !important;
   height:calc(100vh - 110px) !important;
   min-height:0 !important;
 
-  padding:88px var(--page-x) 0 !important;
+  padding:72px var(--page-x) 0 !important;
 
+  display:flex !important;
   align-items:flex-start !important;
+  justify-content:center !important;
+
   overflow:hidden !important;
-  z-index:6 !important;
+  z-index:10 !important;
+
+  background:rgba(255,255,255,.68) !important;
+  border-radius:var(--panel-radius) var(--panel-radius) 0 0 !important;
+  border-top:1px solid rgba(255,255,255,.88) !important;
+  box-shadow:0 -36px 100px rgba(0,0,0,.14) !important;
+
+  backdrop-filter:blur(26px) saturate(160%) !important;
+  -webkit-backdrop-filter:blur(26px) saturate(160%) !important;
+}
+
+body.dark-mode .about-panel{
+  background:rgba(24,24,25,.82) !important;
+  border-top-color:rgba(255,255,255,.12) !important;
+  box-shadow:0 -36px 100px rgba(0,0,0,.55) !important;
 }
 
 .about-panel .panel-inner{
   height:100% !important;
   overflow-y:auto !important;
   overflow-x:hidden !important;
-  padding-bottom:140px !important;
+  padding:26px 0 120px !important;
+  scroll-behavior:smooth;
 }
 
-/* 스크롤바 */
 .about-panel .panel-inner::-webkit-scrollbar{
   width:6px;
 }
@@ -1595,9 +1614,15 @@ body.dark-mode .about-panel .panel-inner::-webkit-scrollbar-thumb{
   background:rgba(255,255,255,.25);
 }
 
-/* 카테고리는 ABOUT 위로 덮으면서 올라오게 */
+/* ABOUT 내용 위치 자연스럽게 */
+.about-editorial{
+  align-items:flex-start !important;
+  padding-top:18px;
+}
+
+/* CATEGORY는 ABOUT 위로 올라오게 */
 .category-panel{
   position:relative !important;
+  z-index:30 !important;
   margin-top:0 !important;
-  z-index:20 !important;
 }
