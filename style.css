@@ -1312,13 +1312,6 @@ body.dark-mode .main-fixed{
 
 /* 이미지 위 그라데이션 다시 적용 */
 .image-marquee::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:2;
-  pointer-events:none;
-  display:block;
-  .image-marquee::before{
     content:"";
     position:absolute;
     inset:0;
