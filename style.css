@@ -260,20 +260,43 @@ body.dark-mode .dark-toggle{
 ========================= */
 
 .image-marquee::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    z-index:2;
-    pointer-events:none;
 
-    background:linear-gradient(
-        to bottom,
-        var(--bg) 0%,
-        rgba(245,244,240,.50) 14%,
-        rgba(245,244,240,.18) 34%,
-        rgba(245,244,240,.05) 56%,
-        transparent 76%
-    );
+  content:"";
+
+  position:absolute;
+
+  left:0;
+
+  right:0;
+
+  top:-120px;
+
+  height:260px;
+
+  z-index:2;
+
+  pointer-events:none;
+
+  display:block;
+
+  background:linear-gradient(
+
+    to bottom,
+
+    var(--bg) 0%,
+
+    rgba(245,244,240,.98) 18%,
+
+    rgba(245,244,240,.82) 36%,
+
+    rgba(245,244,240,.48) 58%,
+
+    rgba(245,244,240,.18) 78%,
+
+    transparent 100%
+
+  );
+
 }
 
 body.dark-mode .image-marquee::before{
