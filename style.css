@@ -1560,22 +1560,23 @@ body.dark-mode .about-panel::before{
     rgba(255,255,255,0)
   );
 }
-/* ABOUT 내용이 다 끝난 뒤 CATEGORY가 나오게 */
 .about-panel{
   position:relative;
+
   min-height:140vh;
-  height:auto;
-  top:auto;
+
+  /* 👇 이게 상단 여백 */
+  padding:110px var(--page-x) 180px;
+
   align-items:flex-start;
   overflow:visible;
-  padding:120px var(--page-x) 180px;
+
   z-index:6;
 }
 
 .about-panel .panel-inner{
   height:auto;
   overflow:visible;
-  padding-bottom:0;
 }
 
 .category-panel{
