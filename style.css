@@ -1321,3 +1321,42 @@ body.logged-in #loginBox{
     grid-template-columns:1fr;
   }
 }
+/* =========================
+   DARK MODE CLEAN BACKGROUND
+========================= */
+body.dark-mode .main-fixed{
+  background:#101010;
+}
+
+/* 이미지 위 그라데이션 다시 적용 */
+.image-marquee::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  display:block;
+  background:linear-gradient(
+    to bottom,
+    var(--bg) 0%,
+    rgba(245,244,240,.72) 36%,
+    rgba(245,244,240,.18) 72%,
+    rgba(245,244,240,0) 100%
+  );
+}
+
+body.dark-mode .image-marquee::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  display:block;
+  background:linear-gradient(
+    to bottom,
+    #101010 0%,
+    rgba(16,16,16,.78) 34%,
+    rgba(16,16,16,.28) 72%,
+    rgba(16,16,16,0) 100%
+  );
+}
