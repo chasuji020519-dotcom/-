@@ -758,3 +758,50 @@ window.addEventListener("load", () => {
 
 checkLogin();
 loadProjects();
+
+/* =========================
+   PANEL AUTO SNAP
+========================= */
+
+const panels = document.querySelectorAll(".about-panel, .category-panel");
+
+let snapping = false;
+
+function autoSnap(){
+
+    if(snapping) return;
+
+    const trigger = window.innerHeight * 0.45;
+
+    panels.forEach(panel=>{
+
+        const rect = panel.getBoundingClientRect();
+
+        if(rect.top > 0 && rect.top < trigger){
+
+            snapping = true;
+
+            panel.scrollIntoView({
+                behavior:"smooth",
+                block:"start"
+            });
+
+            setTimeout(()=>{
+                snapping=false;
+            },700);
+
+        }
+
+    });
+
+}
+
+let snapTimer;
+
+window.addEventListener("scroll",()=>{
+
+    clearTimeout(snapTimer);
+
+    snapTimer=setTimeout(autoSnap,80);
+
+});
