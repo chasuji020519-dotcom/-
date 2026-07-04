@@ -567,7 +567,7 @@ body.dark-mode .about-panel::before{
   align-items:center;
   justify-content:center;
   background:linear-gradient(135deg,rgba(250,250,248,.98),rgba(232,230,224,.98));
-  border-radius:64px 64px 0 0;
+  border-radius:0;
   border-top:1px solid rgba(255,255,255,.9);
   box-shadow:0 -46px 130px rgba(0,0,0,.17);
   transform:translateY(108px) scale(.975);
