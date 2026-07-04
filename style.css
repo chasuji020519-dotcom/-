@@ -255,44 +255,42 @@ body.dark-mode .dark-toggle{
   opacity:.72;
 }
 
+/* =========================
+   IMAGE GRADIENT
+========================= */
+
 .image-marquee::before{
-
     content:"";
-
     position:absolute;
-
     inset:0;
-
     z-index:2;
-
     pointer-events:none;
 
     background:linear-gradient(
-
         to bottom,
-
         var(--bg) 0%,
-
-        rgba(245,244,240,.55) 14%,
-
-        rgba(245,244,240,.22) 30%,
-
-        rgba(245,244,240,.08) 46%,
-
+        rgba(245,244,240,.50) 12%,
+        rgba(245,244,240,.18) 28%,
+        rgba(245,244,240,.05) 46%,
         transparent 68%
-
     );
-
 }
 
 body.dark-mode .image-marquee::before{
-  background:linear-gradient(
-    to bottom,
-    #101010 0%,
-    rgba(16,16,16,.72) 36%,
-    rgba(16,16,16,.18) 72%,
-    rgba(16,16,16,0) 100%
-  );
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:2;
+    pointer-events:none;
+
+    background:linear-gradient(
+        to bottom,
+        #101010 0%,
+        rgba(16,16,16,.82) 14%,
+        rgba(16,16,16,.42) 34%,
+        rgba(16,16,16,.12) 56%,
+        transparent 76%
+    );
 }
 
 .marquee-track{
