@@ -359,7 +359,7 @@ body.dark-mode .image-marquee::before{
   position:relative;
   z-index:10;
   min-height:100vh;
-  padding:50px var(--page-x) 100px;
+  padding:50px var(--page-x) 170px;
   display:flex;
   align-items:center;
   justify-content:center;
