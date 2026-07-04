@@ -1560,31 +1560,44 @@ body.dark-mode .about-panel::before{
     rgba(255,255,255,0)
   );
 }
-/* ABOUT 최종 덮어쓰기 */
+/* ABOUT 고정 + 내부 스크롤 */
 .about-panel{
-   position:sticky !important;
-   top:110px !important;
+  position:sticky !important;
+  top:110px !important;
   height:calc(100vh - 110px) !important;
-  min-height:140vh !important;
+  min-height:0 !important;
 
-  padding-top:110px !important;
-  padding-right:var(--page-x) !important;
-  padding-bottom:180px !important;
-  padding-left:var(--page-x) !important;
+  padding:88px var(--page-x) 0 !important;
 
   align-items:flex-start !important;
-  overflow:visible !important;
+  overflow:hidden !important;
   z-index:6 !important;
 }
 
 .about-panel .panel-inner{
-  height:auto !important;
-  overflow:visible !important;
-  padding-bottom:0 !important;
+  height:100% !important;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  padding-bottom:140px !important;
 }
 
+/* 스크롤바 */
+.about-panel .panel-inner::-webkit-scrollbar{
+  width:6px;
+}
+
+.about-panel .panel-inner::-webkit-scrollbar-thumb{
+  background:rgba(0,0,0,.18);
+  border-radius:999px;
+}
+
+body.dark-mode .about-panel .panel-inner::-webkit-scrollbar-thumb{
+  background:rgba(255,255,255,.25);
+}
+
+/* 카테고리는 ABOUT 위로 덮으면서 올라오게 */
 .category-panel{
   position:relative !important;
-  margin-top:-120px !important;
+  margin-top:0 !important;
   z-index:20 !important;
 }
