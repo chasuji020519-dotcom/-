@@ -1318,13 +1318,18 @@ body.dark-mode .main-fixed{
   z-index:2;
   pointer-events:none;
   display:block;
-  background:linear-gradient(
-    to bottom,
-    var(--bg) 0%,
-    rgba(245,244,240,.72) 36%,
-    rgba(245,244,240,.18) 72%,
-    rgba(245,244,240,0) 100%
-  );
+  .image-marquee::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:2;
+    pointer-events:none;
+
+    background:linear-gradient(
+        to bottom,
+        var(--bg) 0%,
+        transparent 42%
+    );
 }
 
 body.dark-mode .image-marquee::before{
