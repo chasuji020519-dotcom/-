@@ -563,26 +563,50 @@ body.dark-mode .about-panel{
 }
 
 .soft-tool-list div{
-  min-width:110px;
-  padding:20px 24px;
-  border-radius:26px;
-  background:var(--card);
-  border:1px solid var(--line);
+    min-width:120px;
+    padding:24px 20px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    background:rgba(255,255,255,.58);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.75);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.06),
+        inset 0 1px 1px rgba(255,255,255,.9);
+
+    border-radius:22px;
+
+    transition:.35s var(--ease);
 }
 
 .soft-tool-list b{
-  display:block;
-  font-size:21px;
-  letter-spacing:-.04em;
+  font-size:30px;
+
+    font-weight:800;
+
+    letter-spacing:-.05em;
+
 }
 
 .soft-tool-list span{
-  display:block;
-  margin-top:4px;
-  color:var(--sub);
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:.08em;
+    margin-top:8px;
+
+    font-size:10px;
+
+    letter-spacing:.18em;
+
+    color:var(--sub);
+
+    font-weight:800;
+
 }
 
 /* =========================
