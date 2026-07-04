@@ -1590,7 +1590,7 @@ body.dark-mode .about-panel::before{
   background:transparent;
 }
 
-/* 카테고리 패널이 자연스럽게 다음에 올라오도록 */
+/* ABOUT 패널이 충분히 보인 뒤 CATEGORY가 올라오게 간격 만들기 */
 .category-panel{
-  margin-top:0;
+  margin-top:45vh;
 }
