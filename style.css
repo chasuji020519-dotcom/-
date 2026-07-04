@@ -10,7 +10,7 @@
   --text:#111;
   --sub:rgba(0,0,0,.42);
   --muted:rgba(0,0,0,.62);
-  --line:rgba(0,0,0,.12);
+  --line:rgba(255,255,255,.38);
   --glass:rgba(255,255,255,.58);
   --glass-strong:rgba(255,255,255,.94);
   --card:rgba(255,255,255,.62);
@@ -256,17 +256,33 @@ body.dark-mode .dark-toggle{
 }
 
 .image-marquee::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:2;
-  pointer-events:none;
-  display:block;
-  background:linear-gradient(
-    to bottom,
-    var(--bg) 0%,
-    transparent 42%
-  );
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:2;
+
+    pointer-events:none;
+
+    background:linear-gradient(
+
+        to bottom,
+
+        var(--bg) 0%,
+
+        rgba(245,244,240,.55) 14%,
+
+        rgba(245,244,240,.22) 30%,
+
+        rgba(245,244,240,.08) 46%,
+
+        transparent 68%
+
+    );
+
 }
 
 body.dark-mode .image-marquee::before{
