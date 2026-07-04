@@ -138,9 +138,29 @@ const revealObserver = new IntersectionObserver((entries) => {
   threshold:.18
 });
 
-document.querySelectorAll(".stack-panel").forEach(panel => {
-  revealObserver.observe(panel);
+const panels = document.querySelectorAll(".stack-panel");
+
+const panelObserver = new IntersectionObserver((entries) => {
+
+  entries.forEach((entry) => {
+
+    if(entry.isIntersecting){
+
+      entry.target.classList.add("is-visible");
+
+      entry.target.classList.add("panel-active");
+
+    }
+
+  });
+
+},{
+
+  threshold:0.28
+
 });
+
+panels.forEach((panel) => panelObserver.observe(panel));
 
 function updatePanels(){
   const y = window.scrollY;
