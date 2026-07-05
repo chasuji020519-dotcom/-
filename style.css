@@ -272,9 +272,9 @@ body.dark-mode .dark-toggle{
   background:linear-gradient(
     to bottom,
     var(--bg) 0%,
-    rgba(245,244,240,.96) 20%,
-    rgba(245,244,240,.72) 45%,
-    rgba(245,244,240,.32) 70%,
+    rgba(245,244,240,.96) 40%,
+    rgba(245,244,240,.72) 65%,
+    rgba(245,244,240,.32) 90%,
     transparent 100%
   );
   pointer-events:none;
