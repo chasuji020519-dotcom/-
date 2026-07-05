@@ -957,14 +957,17 @@ body.dark-mode .glass-indicator{
 }
 
 .product-list.all-active{
-  min-height:0;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:28px;
+  display:block;
 }
 
 .product-list.all-active .product-group{
-  display:contents;
+  position:relative;
+  inset:auto;
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:none;
+  margin-bottom:28px;
 }
 
 .product-item{
