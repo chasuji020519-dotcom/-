@@ -1500,7 +1500,7 @@ body.logged-in #loginBox{
   }
 
   .product-item{
-    height:260px;
+    height:auto;
   }
 
   .detail-image{
