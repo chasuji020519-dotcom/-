@@ -262,7 +262,7 @@ body.dark-mode .dark-toggle{
     );
 }
 
-..image-marquee::before{
+.image-marquee::before{
   content:"";
   position:absolute;
   left:0;
@@ -923,9 +923,6 @@ body.dark-mode .glass-indicator{
 }
 
 /* =========================
-   PRODUCT
-========================= */
-./* =========================
    PRODUCT
 ========================= */
 .product-list{

@@ -413,7 +413,7 @@ async function loadProjects(){
   });
 
   allProjects.forEach(project => {
-    const group = document.querySelector(`[data-category="${project.category}"]`);
+    const group = document.querySelector(`.product-group[data-category="${project.category}"]`);
     if(group) group.innerHTML += makeCard(project);
   });
 
