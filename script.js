@@ -382,7 +382,7 @@ function makeCard(project){
   const image = project.image_url || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop";
 
   return `
-    <div class="product-item ${project.detailImages && project.detailImages.length > 0 ? 'has-multiple' : ''}">
+    <div class="product-item" data-id="${project.id}">
       <img src="${image}" alt="${title}">
       <div class="product-info">
         <h4>${title}</h4>
@@ -395,11 +395,17 @@ function makeCard(project){
 function renderEmptyProject(){
   if(!productList) return;
 
-  productList.classList.add("is-empty");
-
-  document.querySelectorAll(".product-group").forEach(group => {
-    group.innerHTML = "";
-  });
+  productList.innerHTML = `
+    <div style="
+      padding:80px 20px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    ">
+      아직 등록된 작업물이 없어요.<br>
+      오른쪽 위 + 버튼으로 프로젝트를 추가해줘.
+    </div>
+  `;
 }
 
 async function loadProjects(){
@@ -414,19 +420,13 @@ async function loadProjects(){
   return;
 }
 
-allProjects = data || [];
+  allProjects = data || [];
+  console.log("불러온 프로젝트:", allProjects);
 
-console.log("불러온 프로젝트:", allProjects);
-
-productList?.classList.remove("is-empty");
-
-if(!allProjects.length){
-
-  renderEmptyProject();
-
-  return;
-
-}
+  if(!allProjects.length){
+    renderEmptyProject();
+    return;
+  }
 
   groups.forEach(group => {
     group.innerHTML = "";
