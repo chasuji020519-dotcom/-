@@ -268,7 +268,7 @@ body.dark-mode .dark-toggle{
   left:0;
   right:0;
   top:0;
-  height:180px;
+  height:280px;
   background:linear-gradient(
     to bottom,
     var(--bg) 0%,
