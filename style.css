@@ -1028,7 +1028,17 @@ body.dark-mode .glass-indicator{
   font-size:13px;
   opacity:.82;
 }
+.product-item{
+  cursor:pointer;
+  pointer-events:auto;
+}
 
+.product-item img,
+.product-info,
+.product-info h4,
+.product-info p{
+  pointer-events:none;
+}
 /* =========================
    CATEGORY FULL MODE
 ========================= */

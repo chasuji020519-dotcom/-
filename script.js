@@ -382,7 +382,7 @@ function makeCard(project){
   const image = project.image_url || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop";
 
   return `
-    <div class="product-item" data-id="${project.id}">
+    <div class="product-item ${project.detailImages && project.detailImages.length > 0 ? 'has-multiple' : ''}" data-id="${project.id}">
       <img src="${image}" alt="${title}">
       <div class="product-info">
         <h4>${title}</h4>
@@ -797,4 +797,13 @@ window.addEventListener("load", async () => {
     updatePanels();
     moveGlassIndicator(getActiveCategoryButton());
   }, 300);
+});
+document.addEventListener("click", function(e){
+  const item = e.target.closest(".product-item");
+  if(!item) return;
+
+  const id = item.dataset.id;
+  if(!id) return;
+
+  openDetail(id);
 });
