@@ -37,12 +37,7 @@ if(savedTheme === "dark"){
 
 function updateDarkIcon(){
   if(!darkToggle) return;
-
-  if(document.body.classList.contains("dark-mode")){
-    darkToggle.innerText = "☀";
-  }else{
-    darkToggle.innerText = "☾";
-  }
+  darkToggle.innerText = document.body.classList.contains("dark-mode") ? "☀" : "☾";
 }
 
 updateDarkIcon();
@@ -131,7 +126,7 @@ let draggedIndex = null;
 const stackPanels = document.querySelectorAll(".stack-panel");
 
 const panelObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
+  entries.forEach(entry => {
     if(entry.isIntersecting){
       entry.target.classList.add("is-visible");
       entry.target.classList.add("panel-active");
@@ -141,7 +136,7 @@ const panelObserver = new IntersectionObserver((entries) => {
   threshold:0.28
 });
 
-stackPanels.forEach((panel) => panelObserver.observe(panel));
+stackPanels.forEach(panel => panelObserver.observe(panel));
 
 function updatePanels(){
   const y = window.scrollY;
@@ -159,6 +154,7 @@ function updatePanels(){
 }
 
 window.addEventListener("scroll", updatePanels, {passive:true});
+
 window.addEventListener("resize", () => {
   updatePanels();
   moveGlassIndicator(getActiveCategoryButton());
@@ -176,10 +172,9 @@ function moveGlassIndicator(target){
 
   const tabsRect = glassTabs.getBoundingClientRect();
   const btnRect = target.getBoundingClientRect();
-
   const left = btnRect.left - tabsRect.left + glassTabs.scrollLeft;
 
-  glassIndicator.style.transform = `translateX(${left - 9}px)`;
+  glassIndicator.style.transform = `translateX(${left - 8}px)`;
   glassIndicator.style.width = `${btnRect.width}px`;
 }
 
@@ -218,14 +213,13 @@ function openCategory(tabButton){
   }
 
   resetCategoryView();
-
   tabButton.classList.add("active");
 
   if(target === "all"){
     productList?.classList.add("all-active");
     groups.forEach(group => group.classList.add("active"));
   }else{
-   const selected = document.querySelector(`.product-group[data-category="${target}"]`);
+    const selected = document.querySelector(`.product-group[data-category="${target}"]`);
     if(selected) selected.classList.add("active");
   }
 
@@ -240,7 +234,6 @@ buttons.forEach(button => {
 
 categoryBackBtn?.addEventListener("click", () => {
   document.body.classList.remove("category-mode");
-
   categoryPanel?.classList.remove("opened");
 
   resetCategoryView();
@@ -310,7 +303,7 @@ detailPanel?.addEventListener("scroll", () => {
 
 detailClose?.addEventListener("click", closeDetail);
 
-detailOverlay?.addEventListener("click", (e) => {
+detailOverlay?.addEventListener("click", e => {
   if(e.target === detailOverlay) closeDetail();
 });
 
@@ -339,7 +332,7 @@ categoryAddBtn?.addEventListener("click", () => {
 
 adminClose?.addEventListener("click", closeAdmin);
 
-adminOverlay?.addEventListener("click", (e) => {
+adminOverlay?.addEventListener("click", e => {
   if(e.target === adminOverlay) closeAdmin();
 });
 
@@ -384,13 +377,33 @@ document.getElementById("logoutBtn")?.addEventListener("click", async () => {
    PROJECT LOAD
 ========================= */
 function makeCard(project){
+  const title = project.title || "Untitled";
+  const desc = project.short_desc || "";
+  const image = project.image_url || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop";
+
   return `
     <div class="product-item" data-id="${project.id}">
-      <img src="${project.image_url || ""}" alt="${project.title || ""}">
+      <img src="${image}" alt="${title}">
       <div class="product-info">
-        <h4>${project.title || "Untitled"}</h4>
-        <p>${project.short_desc || ""}</p>
+        <h4>${title}</h4>
+        <p>${desc}</p>
       </div>
+    </div>
+  `;
+}
+
+function renderEmptyProject(){
+  if(!productList) return;
+
+  productList.innerHTML = `
+    <div style="
+      padding:80px 20px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    ">
+      아직 등록된 작업물이 없어요.<br>
+      오른쪽 위 + 버튼으로 프로젝트를 추가해줘.
     </div>
   `;
 }
@@ -402,25 +415,35 @@ async function loadProjects(){
     .order("created_at", {ascending:false});
 
   if(error){
-    console.log(error);
+    console.error("Supabase 불러오기 오류:", error);
     return;
   }
 
   allProjects = data || [];
+  console.log("불러온 프로젝트:", allProjects);
+
+  if(!allProjects.length){
+    renderEmptyProject();
+    return;
+  }
 
   groups.forEach(group => {
     group.innerHTML = "";
   });
 
   allProjects.forEach(project => {
-    const group = document.querySelector(`.product-group[data-category="${project.category}"]`);
-    if(group) group.innerHTML += makeCard(project);
+    const category = project.category || "brand";
+    const group = document.querySelector(`.product-group[data-category="${category}"]`);
+
+    if(group){
+      group.innerHTML += makeCard(project);
+    }
   });
 
   document.querySelectorAll(".product-item").forEach(item => {
     item.addEventListener("click", () => {
       const id = Number(item.dataset.id);
-      const project = allProjects.find(project => project.id === id);
+      const project = allProjects.find(project => Number(project.id) === id);
       if(project) openDetail(project);
     });
   });
@@ -541,9 +564,9 @@ function renderDetailPreview(){
       div.classList.remove("dragging");
     });
 
-    div.addEventListener("dragover", (e) => e.preventDefault());
+    div.addEventListener("dragover", e => e.preventDefault());
 
-    div.addEventListener("drop", (e) => {
+    div.addEventListener("drop", e => {
       e.preventDefault();
 
       const targetIndex = Number(div.dataset.index);
@@ -559,7 +582,7 @@ function renderDetailPreview(){
   });
 }
 
-projectDetailImages?.addEventListener("change", (e) => {
+projectDetailImages?.addEventListener("change", e => {
   const files = Array.from(e.target.files);
 
   files.forEach(file => {
@@ -718,7 +741,7 @@ detailEditBtn?.addEventListener("click", () => {
 ========================= */
 const logoText = document.getElementById("logoText");
 
-logoText?.addEventListener("click", function(e){
+logoText?.addEventListener("click", e => {
   e.preventDefault();
 
   const url = window.location.origin + window.location.pathname + "?v=" + Date.now();
@@ -763,14 +786,14 @@ window.addEventListener("scroll", () => {
 /* =========================
    INIT
 ========================= */
-window.addEventListener("load", () => {
+window.addEventListener("load", async () => {
   window.scrollTo(0, 0);
+
+  await checkLogin();
+  await loadProjects();
 
   setTimeout(() => {
     updatePanels();
     moveGlassIndicator(getActiveCategoryButton());
   }, 300);
 });
-
-checkLogin();
-loadProjects();
