@@ -925,6 +925,9 @@ body.dark-mode .glass-indicator{
 /* =========================
    PRODUCT
 ========================= */
+./* =========================
+   PRODUCT
+========================= */
 .product-list{
   position:relative;
   margin-top:42px;
@@ -932,16 +935,19 @@ body.dark-mode .glass-indicator{
   padding-bottom:120px;
 }
 
+/* opened 상태가 아니면 숨김 */
 .category-panel:not(.opened) .product-list{
   display:none;
 }
 
+/* 기본 그룹은 숨김 */
 .product-group{
   position:absolute;
   inset:0;
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:28px;
+
   opacity:0;
   visibility:hidden;
   pointer-events:none;
@@ -949,6 +955,7 @@ body.dark-mode .glass-indicator{
   transition:.6s var(--ease);
 }
 
+/* 선택된 카테고리만 보임 */
 .product-group.active{
   opacity:1;
   visibility:visible;
@@ -956,20 +963,25 @@ body.dark-mode .glass-indicator{
   transform:translateY(0);
 }
 
+/* 전체보기 */
 .product-list.all-active{
-  display:block;
+  min-height:auto;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:28px;
 }
 
 .product-list.all-active .product-group{
-  position:relative;
-  inset:auto;
+  position:static;
+  display:contents;
+
   opacity:1;
   visibility:visible;
   pointer-events:auto;
   transform:none;
-  margin-bottom:28px;
 }
 
+/* 카드 */
 .product-item{
   position:relative;
   height:322px;
