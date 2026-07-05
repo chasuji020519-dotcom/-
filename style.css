@@ -247,12 +247,19 @@ body.dark-mode .dark-toggle{
    MARQUEE
 ========================= */
 .image-marquee{
-  position:absolute;
-  left:0;
-  bottom:0;
-  width:100%;
-  overflow:hidden;
-  opacity:.72;
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 18%,
+        black 100%
+    );
+
+    mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 18%,
+        black 100%
+    );
 }
 
 ..image-marquee::before{
