@@ -395,17 +395,11 @@ function makeCard(project){
 function renderEmptyProject(){
   if(!productList) return;
 
-  productList.innerHTML = `
-    <div style="
-      padding:80px 20px;
-      color:var(--muted);
-      font-size:15px;
-      line-height:1.7;
-    ">
-      아직 등록된 작업물이 없어요.<br>
-      오른쪽 위 + 버튼으로 프로젝트를 추가해줘.
-    </div>
-  `;
+  productList.classList.add("is-empty");
+
+  document.querySelectorAll(".product-group").forEach(group => {
+    group.innerHTML = "";
+  });
 }
 
 async function loadProjects(){
@@ -420,13 +414,19 @@ async function loadProjects(){
   return;
 }
 
-  allProjects = data || [];
-  console.log("불러온 프로젝트:", allProjects);
+allProjects = data || [];
 
-  if(!allProjects.length){
-    renderEmptyProject();
-    return;
-  }
+console.log("불러온 프로젝트:", allProjects);
+
+productList?.classList.remove("is-empty");
+
+if(!allProjects.length){
+
+  renderEmptyProject();
+
+  return;
+
+}
 
   groups.forEach(group => {
     group.innerHTML = "";

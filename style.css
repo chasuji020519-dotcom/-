@@ -1360,3 +1360,22 @@ body.logged-in #loginBox{
     grid-template-columns:1fr;
   }
 }
+.empty-project-text{
+  display:none;
+  padding:80px 20px;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.7;
+}
+
+.product-list.is-empty .empty-project-text{
+  display:block;
+}
+
+.product-list.all-active .empty-project-text{
+  display:none;
+}
+
+body.category-mode .product-list.all-active .product-group{
+  display:contents;
+}
