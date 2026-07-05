@@ -250,14 +250,14 @@ body.dark-mode .dark-toggle{
     -webkit-mask-image: linear-gradient(
         to bottom,
         transparent 0%,
-        black 30%,
+        black 60%,
         black 100%
     );
 
     mask-image: linear-gradient(
         to bottom,
         transparent 0%,
-        black 30%,
+        black 60%,
         black 100%
     );
 }
@@ -268,7 +268,7 @@ body.dark-mode .dark-toggle{
   left:0;
   right:0;
   top:0;
-  height:280px;
+  height:380px;
   background:linear-gradient(
     to bottom,
     var(--bg) 0%,
