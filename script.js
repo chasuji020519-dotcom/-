@@ -225,7 +225,7 @@ function openCategory(tabButton){
     productList?.classList.add("all-active");
     groups.forEach(group => group.classList.add("active"));
   }else{
-    const selected = document.querySelector(`[data-category="${target}"]`);
+   const selected = document.querySelector(`.product-group[data-category="${target}"]`);
     if(selected) selected.classList.add("active");
   }
 
