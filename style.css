@@ -556,7 +556,7 @@ body.dark-mode .about-keyword-line span{
 
   background:rgba(255,255,255,.32);
   border:1px solid rgba(255,255,255,.55);
-  border-radius:24px;
+  border-radius:10px;
 
   box-shadow:
     0 12px 38px rgba(0,0,0,.045),
@@ -620,7 +620,7 @@ body.dark-mode .about-board-section{
   -webkit-backdrop-filter:blur(18px);
 
   border:1px solid rgba(255,255,255,.66);
-  border-radius:18px;
+  border-radius:10px;
 
   box-shadow:
     0 8px 22px rgba(0,0,0,.045),
@@ -698,7 +698,7 @@ body.dark-mode .soft-tool-list div{
 
   .about-portrait{
     height:270px;
-    border-radius:18px;
+    border-radius:10px;
   }
 
   .about-hero-copy h2{
