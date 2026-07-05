@@ -253,9 +253,9 @@ body.dark-mode .dark-toggle{
     -webkit-mask-image: linear-gradient(
         to bottom,
         transparent 0%,
-        rgba(0,0,0,.1) 4%,
-        rgba(0,0,0,.35) 8%,
-        rgba(0,0,0,.7) 12%,
+        rgba(0,0,0,.1) 8%,
+        rgba(0,0,0,.35) 16%,
+        rgba(0,0,0,.7) 24%,
         #000 58%,
         #000 100%
     );
@@ -263,9 +263,9 @@ body.dark-mode .dark-toggle{
     mask-image: linear-gradient(
         to bottom,
         transparent 0%,
-        rgba(0,0,0,.1) 4%,
-        rgba(0,0,0,.35) 8%,
-        rgba(0,0,0,.7) 12%,
+        rgba(0,0,0,.1) 8%,
+        rgba(0,0,0,.35) 16%,
+        rgba(0,0,0,.7) 24%,
         #000 58%,
         #000 100%
     );
