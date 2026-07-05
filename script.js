@@ -414,10 +414,11 @@ async function loadProjects(){
     .select("*")
     .order("created_at", {ascending:false});
 
-  if(error){
-    console.error("Supabase 불러오기 오류:", error);
-    return;
-  }
+ if(error){
+  alert("Supabase 오류: " + error.message);
+  console.error(error);
+  return;
+}
 
   allProjects = data || [];
   console.log("불러온 프로젝트:", allProjects);
