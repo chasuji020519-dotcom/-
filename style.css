@@ -1095,6 +1095,18 @@ body.category-mode .product-list.all-active .product-group{
     font-size:12.5px;
   }
 }
+.product-list:not(.is-empty) .empty-project-text{
+  display:none !important;
+}
+
+.product-list.is-empty .empty-project-text{
+  display:block;
+}
+
+.product-list.all-active .empty-project-text,
+body.category-mode .product-list.all-active .empty-project-text{
+  display:none !important;
+}
 /* =========================
    CATEGORY FULL MODE
 ========================= */
