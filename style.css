@@ -1041,6 +1041,7 @@ body.dark-mode .glass-indicator{
 }
 .product-item{
   cursor:pointer;
+  pointer-events:auto;
 }
 
 .product-item *{

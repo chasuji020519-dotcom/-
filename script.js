@@ -259,6 +259,8 @@ function closeDetail(){
 }
 
 function openDetail(project){
+  if(!project || typeof project !== "object") return;
+
   currentProject = project;
 
   detailImg.src = project.image_url || "";
@@ -380,9 +382,10 @@ function makeCard(project){
   const title = project.title || "Untitled";
   const desc = project.short_desc || "";
   const image = project.image_url || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop";
+  const hasMultiple = project.detail_images && project.detail_images.length > 0;
 
   return `
-    <div class="product-item ${project.detailImages && project.detailImages.length > 0 ? 'has-multiple' : ''}" onclick="openDetail('${project.id}')">
+    <div class="product-item ${hasMultiple ? 'has-multiple' : ''}" data-id="${project.id}">
       <img src="${image}" alt="${title}">
       <div class="product-info">
         <h4>${title}</h4>
@@ -396,12 +399,7 @@ function renderEmptyProject(){
   if(!productList) return;
 
   productList.innerHTML = `
-    <div style="
-      padding:80px 20px;
-      color:var(--muted);
-      font-size:15px;
-      line-height:1.7;
-    ">
+    <div class="empty-project-text">
       아직 등록된 작업물이 없어요.<br>
       오른쪽 위 + 버튼으로 프로젝트를 추가해줘.
     </div>
@@ -414,23 +412,25 @@ async function loadProjects(){
     .select("*")
     .order("created_at", {ascending:false});
 
- if(error){
-  alert("Supabase 오류: " + error.message);
-  console.error(error);
-  return;
-}
+  if(error){
+    alert("Supabase 오류: " + error.message);
+    console.error(error);
+    return;
+  }
 
   allProjects = data || [];
   console.log("불러온 프로젝트:", allProjects);
+
+  groups.forEach(group => {
+    group.innerHTML = "";
+  });
 
   if(!allProjects.length){
     renderEmptyProject();
     return;
   }
 
-  groups.forEach(group => {
-    group.innerHTML = "";
-  });
+  productList?.classList.remove("is-empty");
 
   allProjects.forEach(project => {
     const category = project.category || "brand";
@@ -440,15 +440,20 @@ async function loadProjects(){
       group.innerHTML += makeCard(project);
     }
   });
-
-  document.querySelectorAll(".product-item").forEach(item => {
-    item.addEventListener("click", () => {
-      const id = Number(item.dataset.id);
-      const project = allProjects.find(project => Number(project.id) === id);
-      if(project) openDetail(project);
-    });
-  });
 }
+
+/* 카드 클릭 - 상세 열기 */
+document.addEventListener("click", function(e){
+  const item = e.target.closest(".product-item");
+  if(!item) return;
+
+  const id = item.dataset.id;
+  const project = allProjects.find(p => String(p.id) === String(id));
+
+  if(project){
+    openDetail(project);
+  }
+});
 
 /* =========================
    UPLOAD
@@ -797,13 +802,4 @@ window.addEventListener("load", async () => {
     updatePanels();
     moveGlassIndicator(getActiveCategoryButton());
   }, 300);
-});
-document.addEventListener("click", function(e){
-  const item = e.target.closest(".product-item");
-  if(!item) return;
-
-  const id = item.dataset.id;
-  if(!id) return;
-
-  openDetail(id);
 });
