@@ -465,7 +465,7 @@ body.dark-mode .about-panel{
 
   background:rgba(255,255,255,.36);
   border:1px solid rgba(255,255,255,.56);
-  border-radius:20px;
+  border-radius:10px;
 }
 
 body.dark-mode .about-contact-minimal{
