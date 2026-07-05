@@ -1564,50 +1564,6 @@ body.logged-in #loginBox{
     height:72px;
   }
 
-  .category-panel{
-    margin-top:-58px;
-    padding:96px 22px 110px;
-    transform:translateY(78px) scale(.98);
-  }
-
-  body.category-mode .category-panel{
-    padding:28px 22px 90px;
-  }
-
-  .category-title-row{
-    align-items:flex-start;
-  }
-
-  .category-buttons{
-    width:100%;
-    overflow-x:auto;
-    justify-content:flex-start;
-    padding:8px;
-  }
-
-  .category-buttons::-webkit-scrollbar{
-    display:none;
-  }
-
-  .category-btn{
-    flex:0 0 auto;
-    padding:12px 22px;
-  }
-
-  .product-list{
-    min-height:1120px;
-  }
-
-  .product-list.all-active,
-  .product-group.active,
-  body.category-mode .product-group.active,
-  body.category-mode .product-list.all-active{
-    grid-template-columns:1fr;
-  }
-
-  .product-item{
-    height:260px;
-  }
 
   .detail-image{
     padding:0 24px;
