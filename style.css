@@ -1107,6 +1107,25 @@ body.category-mode .product-list.all-active .product-group{
 body.category-mode .product-list.all-active .empty-project-text{
   display:none !important;
 }
+.product-item{
+  cursor:pointer;
+  pointer-events:auto;
+}
+
+.product-item img,
+.product-info,
+.product-info h4,
+.product-info p{
+  pointer-events:none;
+}
+
+.product-group.active{
+  pointer-events:auto;
+}
+
+.product-list.all-active .product-group{
+  pointer-events:auto;
+}
 /* =========================
    CATEGORY FULL MODE
 ========================= */
