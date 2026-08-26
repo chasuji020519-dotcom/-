@@ -706,6 +706,7 @@ body.dark-mode .soft-tool-list > div{
   background:rgba(255,255,255,.07);
   border-color:rgba(255,255,255,.09);
 }
+
 /* responsive */
 @media(max-width:1100px){
   .about-editorial{
