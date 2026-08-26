@@ -747,245 +747,78 @@ body.dark-mode .soft-tool-list > div{
   background:rgba(255,255,255,.07);
   border-color:rgba(255,255,255,.09);
 }
-/* =========================
-   TOOLS / PLUS+
-========================= */
-
 .tool-plus-wrap{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:14px;
 }
 
+/* Tools / Plus 카드 */
 .tool-plus-wrap .about-board-section{
   display:block;
   padding:24px 28px;
 }
 
+/* 제목은 위에 */
 .tool-plus-wrap .board-title{
   margin-bottom:18px;
 }
 
-
-/* =========================
-   TOOLS
-========================= */
-
-.tools-section .soft-tool-list{
-  width:100%;
+/* 아이콘 영역 */
+.tool-plus-wrap .soft-tool-list{
   display:grid;
-  grid-template-columns:repeat(5,1fr);
+  grid-template-columns:repeat(5, 1fr);
   gap:9px;
+  width:100%;
 }
 
-.tools-section .soft-tool-list > div{
-  position:relative;
-
+/* 아이콘 1:1 정사각형 */
+.tool-plus-wrap .soft-tool-list > div{
   width:100%;
-  min-width:0;
   height:auto;
   aspect-ratio:1 / 1;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  overflow:hidden;
-
-  background:rgba(255,255,255,.46);
-  border:1px solid rgba(255,255,255,.66);
-  border-radius:10px;
-
-  box-shadow:
-    0 8px 22px rgba(0,0,0,.045),
-    inset 0 1px 1px rgba(255,255,255,.82);
-}
-
-.tools-section .soft-tool-list > div b{
-  position:relative;
-  z-index:2;
-
-  width:100%;
-
-  color:var(--text);
-  font-size:17px;
-  line-height:1;
-  font-weight:820;
-  letter-spacing:-.04em;
-
-  text-align:center;
-}
-
-.tools-section .soft-tool-list > div::before{
-  content:"";
-
-  position:absolute;
-  inset:0;
-  z-index:1;
-
-  background:rgba(15,15,15,.72);
-
-  backdrop-filter:blur(7px);
-  -webkit-backdrop-filter:blur(7px);
-
-  opacity:0;
-  transition:opacity .35s ease;
-}
-
-.tools-section .soft-tool-list > div::after{
-  content:attr(data-full);
-
-  position:absolute;
-  left:50%;
-  top:50%;
-  z-index:3;
-
-  width:calc(100% - 10px);
-
-  transform:translate(-50%,-40%);
-
-  color:#fff;
-  font-size:11px;
-  line-height:1.25;
-  font-weight:700;
-
-  white-space:normal;
-  text-align:center;
-  word-break:keep-all;
-
-  opacity:0;
-  filter:blur(4px);
-
-  transition:
-    opacity .3s ease,
-    filter .3s ease,
-    transform .35s ease;
-}
-
-.tools-section .soft-tool-list > div:hover::before{
-  opacity:1;
-}
-
-.tools-section .soft-tool-list > div:hover::after{
-  opacity:1;
-  filter:blur(0);
-  transform:translate(-50%,-50%);
-}
-
-body.dark-mode .tools-section .soft-tool-list > div{
-  background:rgba(255,255,255,.07);
-  border-color:rgba(255,255,255,.09);
-}
-
-
-/* =========================
-   PLUS+
-========================= */
-
-.plus-section{
-  background:rgba(255,255,255,.18);
-  border:1px dashed rgba(0,0,0,.10);
-  box-shadow:none;
+  min-width:0;
 }
 
 .plus-section .soft-tool-list{
   display:flex;
   flex-wrap:wrap;
-  align-items:flex-start;
-  align-content:flex-start;
   gap:10px;
 }
 
 .plus-section .soft-tool-list > div{
   width:auto;
-  min-width:0;
-  height:38px;
-  aspect-ratio:auto;
-
-  padding:0 16px;
+  height:auto;
+  min-width:70px;
+  padding:10px 20px;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  background:rgba(255,255,255,.68);
-  border:1px solid rgba(0,0,0,.08);
+  border:1px solid rgba(255,255,255,.75);
   border-radius:999px;
+  background:rgba(255,255,255,.18);
 
-  box-shadow:0 4px 12px rgba(0,0,0,.035);
-
-  transition:
-    transform .25s ease,
-    background .25s ease,
-    border-color .25s ease;
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
 }
 
 .plus-section .soft-tool-list > div b{
-  width:auto;
-
-  color:var(--muted);
   font-size:12px;
-  font-weight:750;
-  line-height:1;
-
-  white-space:nowrap;
+  line-height:1.2;
+  text-align:center;
+  color:var(--text);
 }
 
-.plus-section .soft-tool-list > div::before,
-.plus-section .soft-tool-list > div::after{
-  display:none;
-}
-
-.plus-section .soft-tool-list > div:hover{
-  transform:translateY(-2px);
-  background:rgba(255,255,255,.9);
-  border-color:rgba(0,0,0,.14);
-}
-
-body.dark-mode .plus-section{
-  background:rgba(255,255,255,.025);
-  border-color:rgba(255,255,255,.10);
-}
-
-body.dark-mode .plus-section .soft-tool-list > div{
-  background:rgba(255,255,255,.08);
-  border-color:rgba(255,255,255,.10);
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
+/* 모바일 */
 @media(max-width:768px){
-
   .tool-plus-wrap{
     grid-template-columns:1fr;
   }
 
   .tool-plus-wrap .about-board-section{
-    padding:22px;
-  }
-
-  .tools-section .soft-tool-list{
-    grid-template-columns:repeat(5,1fr);
-  }
-
-  .tools-section .soft-tool-list > div{
-    width:100%;
-    height:auto;
-    aspect-ratio:1 / 1;
-  }
-
-  .plus-section .soft-tool-list{
-    gap:8px;
-  }
-
-  .plus-section .soft-tool-list > div{
-    width:auto;
-    min-width:0;
-    height:36px;
-    padding:0 14px;
+    grid-template-columns:1fr;
   }
 }
 
