@@ -577,10 +577,14 @@ body.dark-mode .about-board-section{
   letter-spacing:-.04em;
 }
 
-.board-list{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
+.board-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 50px;
+}
+
+.license-column p {
+  margin: 0 0 14px;
 }
 
 .board-list p{
