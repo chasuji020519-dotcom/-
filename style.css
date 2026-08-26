@@ -751,20 +751,17 @@ body.dark-mode .soft-tool-list > div{
    TOOLS / PLUS+
 ========================= */
 
-/* Tools + Plus 카드 2열 */
 .tool-plus-wrap{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:14px;
 }
 
-/* 카드 내부 */
 .tool-plus-wrap .about-board-section{
   display:block;
   padding:24px 28px;
 }
 
-/* 제목 */
 .tool-plus-wrap .board-title{
   margin-bottom:18px;
 }
@@ -774,22 +771,20 @@ body.dark-mode .soft-tool-list > div{
    TOOLS
 ========================= */
 
-.tool-plus-wrap .tools-section .soft-tool-list{
+.tools-section .soft-tool-list{
   width:100%;
   display:grid;
   grid-template-columns:repeat(5,1fr);
   gap:9px;
 }
 
-
-/* Tools 아이콘 */
 .tools-section .soft-tool-list > div{
   position:relative;
 
   width:100%;
+  min-width:0;
   height:auto;
   aspect-ratio:1 / 1;
-  min-width:0;
 
   display:flex;
   align-items:center;
@@ -804,36 +799,12 @@ body.dark-mode .soft-tool-list > div{
   box-shadow:
     0 8px 22px rgba(0,0,0,.045),
     inset 0 1px 1px rgba(255,255,255,.82);
-
-  cursor:default;
 }
 
-.tools-section .soft-tool-list{
-
-  display:grid !important;
-
-  grid-template-columns:repeat(5,1fr) !important;
-
-  gap:9px;
-
-}
-
-.tools-section .soft-tool-list > div{
-
-  width:100% !important;
-
-  min-width:0 !important;
-
-  aspect-ratio:1 / 1;
-
-}
-
-/* Tools 약자 */
 .tools-section .soft-tool-list > div b{
   position:relative;
   z-index:2;
 
-  display:block;
   width:100%;
 
   color:var(--text);
@@ -843,15 +814,8 @@ body.dark-mode .soft-tool-list > div{
   letter-spacing:-.04em;
 
   text-align:center;
-
-  transition:
-    opacity .3s ease,
-    filter .3s ease,
-    transform .3s ease;
 }
 
-
-/* Tools 마우스오버 배경 */
 .tools-section .soft-tool-list > div::before{
   content:"";
 
@@ -865,12 +829,9 @@ body.dark-mode .soft-tool-list > div{
   -webkit-backdrop-filter:blur(7px);
 
   opacity:0;
-
   transition:opacity .35s ease;
 }
 
-
-/* Tools 상세 이름 */
 .tools-section .soft-tool-list > div::after{
   content:attr(data-full);
 
@@ -891,7 +852,6 @@ body.dark-mode .soft-tool-list > div{
   white-space:normal;
   text-align:center;
   word-break:keep-all;
-  overflow-wrap:break-word;
 
   opacity:0;
   filter:blur(4px);
@@ -902,8 +862,6 @@ body.dark-mode .soft-tool-list > div{
     transform .35s ease;
 }
 
-
-/* Tools hover */
 .tools-section .soft-tool-list > div:hover::before{
   opacity:1;
 }
@@ -911,12 +869,9 @@ body.dark-mode .soft-tool-list > div{
 .tools-section .soft-tool-list > div:hover::after{
   opacity:1;
   filter:blur(0);
-
   transform:translate(-50%,-50%);
 }
 
-
-/* Tools 다크모드 */
 body.dark-mode .tools-section .soft-tool-list > div{
   background:rgba(255,255,255,.07);
   border-color:rgba(255,255,255,.09);
@@ -925,113 +880,76 @@ body.dark-mode .tools-section .soft-tool-list > div{
 
 /* =========================
    PLUS+
-   소개 키워드와 동일한 디자인
 ========================= */
 
-/* Plus 카드 자체를 조금 더 가볍게 */
-
 .plus-section{
-
   background:rgba(255,255,255,.18);
-
   border:1px dashed rgba(0,0,0,.10);
-
   box-shadow:none;
-
 }
-
-/* Plus 태그 영역 */
 
 .plus-section .soft-tool-list{
-
   display:flex;
-
   flex-wrap:wrap;
-
+  align-items:flex-start;
   align-content:flex-start;
-
   gap:10px;
-
 }
 
-/* Plus 태그 */
-
 .plus-section .soft-tool-list > div{
-
-  width:auto !important;
-
-  height:38px !important;
-
-  min-width:0 !important;
-
-  aspect-ratio:auto !important;
+  width:auto;
+  min-width:0;
+  height:38px;
+  aspect-ratio:auto;
 
   padding:0 16px;
 
-  background:rgba(255,255,255,.68);
-
-  border:1px solid rgba(0,0,0,.08);
-
-  border-radius:999px;
-
-  box-shadow:
-
-    0 4px 12px rgba(0,0,0,.035);
-
   display:flex;
-
   align-items:center;
-
   justify-content:center;
 
+  background:rgba(255,255,255,.68);
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:999px;
+
+  box-shadow:0 4px 12px rgba(0,0,0,.035);
+
+  transition:
+    transform .25s ease,
+    background .25s ease,
+    border-color .25s ease;
 }
 
-/* Plus 글자 */
-
 .plus-section .soft-tool-list > div b{
-
   width:auto;
 
   color:var(--muted);
-
   font-size:12px;
-
   font-weight:750;
-
   line-height:1;
 
   white-space:nowrap;
-
 }
 
-/* Plus hover 살짝 */
+.plus-section .soft-tool-list > div::before,
+.plus-section .soft-tool-list > div::after{
+  display:none;
+}
 
 .plus-section .soft-tool-list > div:hover{
-
   transform:translateY(-2px);
-
   background:rgba(255,255,255,.9);
-
   border-color:rgba(0,0,0,.14);
-
 }
 
-/* 다크모드 */
-
 body.dark-mode .plus-section{
-
   background:rgba(255,255,255,.025);
-
   border-color:rgba(255,255,255,.10);
-
 }
 
 body.dark-mode .plus-section .soft-tool-list > div{
-
   background:rgba(255,255,255,.08);
-
   border-color:rgba(255,255,255,.10);
-
 }
 
 
@@ -1046,13 +964,10 @@ body.dark-mode .plus-section .soft-tool-list > div{
   }
 
   .tool-plus-wrap .about-board-section{
-    display:block;
     padding:22px;
   }
 
-
-  /* Tools */
-  .tool-plus-wrap .tools-section .soft-tool-list{
+  .tools-section .soft-tool-list{
     grid-template-columns:repeat(5,1fr);
   }
 
@@ -1062,24 +977,15 @@ body.dark-mode .plus-section .soft-tool-list > div{
     aspect-ratio:1 / 1;
   }
 
-
-  /* Plus */
   .plus-section .soft-tool-list{
     gap:8px;
   }
 
   .plus-section .soft-tool-list > div{
     width:auto;
-    height:auto;
     min-width:0;
-
-    padding:9px 14px;
-
-    border-radius:999px;
-  }
-
-  .plus-section .soft-tool-list > div b{
-    font-size:12px;
+    height:36px;
+    padding:0 14px;
   }
 }
 
