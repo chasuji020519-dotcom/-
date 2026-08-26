@@ -780,6 +780,37 @@ body.dark-mode .soft-tool-list > div{
   min-width:0;
 }
 
+.plus-section .soft-tool-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.plus-section .soft-tool-list > div{
+  width:auto;
+  height:auto;
+  min-width:70px;
+  padding:10px 20px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border:1px solid rgba(255,255,255,.75);
+  border-radius:999px;
+  background:rgba(255,255,255,.18);
+
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+
+.plus-section .soft-tool-list > div b{
+  font-size:12px;
+  line-height:1.2;
+  text-align:center;
+  color:var(--text);
+}
+
 /* 모바일 */
 @media(max-width:768px){
   .tool-plus-wrap{
