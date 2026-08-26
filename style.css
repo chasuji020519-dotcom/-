@@ -572,29 +572,45 @@ body.dark-mode .about-board-section{
 }
 
 .board-title h4{
+
   font-size:18px;
+
   line-height:1;
+
   letter-spacing:-.04em;
+
 }
 
-.board-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 50px;
-}
+.board-list{
 
-.license-column p {
-  margin: 0 0 14px;
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  column-gap:50px;
+
+  row-gap:12px;
+
 }
 
 .board-list p{
+
   display:grid;
+
   grid-template-columns:92px 1fr;
+
   gap:18px;
+
   color:var(--muted);
+
   font-size:13.5px;
+
   line-height:1.6;
+
   word-break:keep-all;
+
+  margin:0;
+
 }
 
 .board-list strong{
