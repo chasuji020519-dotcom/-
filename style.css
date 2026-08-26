@@ -690,10 +690,16 @@ body.dark-mode .about-board-section{
   opacity:1;
 }
 
-.soft-tool-list > div:hover b{
-  opacity:0;
-  filter:blur(3px);
-  transform:scale(.9);
+.soft-tool-list b{
+  display:block;
+  width:100%;
+
+  font-size:17px;
+  line-height:1;
+  font-weight:820;
+  letter-spacing:-.04em;
+
+  text-align:center;
 }
 
 .soft-tool-list > div::after{
