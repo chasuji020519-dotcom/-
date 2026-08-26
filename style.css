@@ -788,18 +788,18 @@ body.dark-mode .soft-tool-list > div{
 
 .plus-section .soft-tool-list > div{
   width:auto;
-  height:auto;
-  min-width:70px;
-  padding:10px 20px;
+  height:42px;
+  min-width:95px;
+  padding:0 20px;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
   border:1px solid rgba(255,255,255,.75);
-  border-radius:999px;
-  background:rgba(255,255,255,.18);
+  border-radius:22px;
 
+  background:rgba(255,255,255,.18);
   backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);
 }
