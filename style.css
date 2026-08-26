@@ -797,7 +797,19 @@ body.dark-mode .soft-tool-list > div{
     0 14px 30px rgba(0,0,0,.10),
     inset 0 1px 1px rgba(255,255,255,.82);
 }
+/* TOOLS 아이콘도 마우스 올리면 살짝 위로 */
+.tool-plus-wrap .about-board-section:first-child .soft-tool-list > div{
+  transition:
+    transform .3s var(--ease),
+    box-shadow .3s ease;
+}
 
+.tool-plus-wrap .about-board-section:first-child .soft-tool-list > div:hover{
+  transform:translateY(-6px);
+  box-shadow:
+    0 14px 30px rgba(0,0,0,.10),
+    inset 0 1px 1px rgba(255,255,255,.82);
+}
 /* 모바일 */
 @media(max-width:768px){
   .tool-plus-wrap{
