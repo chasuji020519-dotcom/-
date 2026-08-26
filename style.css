@@ -779,6 +779,24 @@ body.dark-mode .soft-tool-list > div{
   aspect-ratio:1 / 1;
   min-width:0;
 }
+/* PLUS 아이콘 호버 - 어두워짐 제거 + 위로 살짝 이동 */
+.tool-plus-wrap .about-board-section:last-child .soft-tool-list > div{
+  transition:
+    transform .3s var(--ease),
+    box-shadow .3s ease;
+}
+
+.tool-plus-wrap .about-board-section:last-child .soft-tool-list > div::before,
+.tool-plus-wrap .about-board-section:last-child .soft-tool-list > div::after{
+  display:none;
+}
+
+.tool-plus-wrap .about-board-section:last-child .soft-tool-list > div:hover{
+  transform:translateY(-6px);
+  box-shadow:
+    0 14px 30px rgba(0,0,0,.10),
+    inset 0 1px 1px rgba(255,255,255,.82);
+}
 
 /* 모바일 */
 @media(max-width:768px){
