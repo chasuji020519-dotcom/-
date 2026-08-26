@@ -712,28 +712,31 @@ body.dark-mode .soft-tool-list > div{
   gap:14px;
 }
 
+/* Tools / Plus 카드 */
 .tool-plus-wrap .about-board-section{
   display:block;
   padding:24px 28px;
 }
 
+/* 제목은 위에 */
 .tool-plus-wrap .board-title{
   margin-bottom:18px;
 }
 
+/* 아이콘 영역 */
 .tool-plus-wrap .soft-tool-list{
-  display:flex;
-  flex-direction:row;
-  flex-wrap:nowrap;
+  display:grid;
+  grid-template-columns:repeat(5, 1fr);
   gap:9px;
   width:100%;
 }
 
+/* 아이콘 1:1 정사각형 */
 .tool-plus-wrap .soft-tool-list > div{
-  flex:1 1 0;
-  width:auto;
+  width:100%;
+  height:auto;
+  aspect-ratio:1 / 1;
   min-width:0;
-  height:72px;
 }
 
 /* 모바일 */
