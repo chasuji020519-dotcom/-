@@ -698,7 +698,12 @@ body.dark-mode .about-board-section{
 
 .soft-tool-list > div::after{
   content:attr(data-full);
+  width:100%;
 
+  text-align:center;
+
+  line-height:1.25;
+  
   position:absolute;
   left:50%;
   top:50%;
