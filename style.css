@@ -698,18 +698,17 @@ body.dark-mode .about-board-section{
 
 .soft-tool-list > div::after{
   content:attr(data-full);
-  width:100%;
 
-  text-align:center;
-
-  line-height:1.25;
-  
   position:absolute;
   left:50%;
   top:50%;
   z-index:3;
 
   width:calc(100% - 10px);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
   transform:translate(-50%, -40%);
 
@@ -718,7 +717,6 @@ body.dark-mode .about-board-section{
   line-height:1.25;
   font-weight:700;
 
-  /* 핵심 */
   white-space:normal;
   text-align:center;
   word-break:keep-all;
