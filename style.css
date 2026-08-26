@@ -713,8 +713,27 @@ body.dark-mode .soft-tool-list > div{
 }
 
 .tool-plus-wrap .about-board-section{
-  grid-template-columns:170px 1fr;
+  display:block;
+  padding:24px 28px;
+}
+
+.tool-plus-wrap .board-title{
+  margin-bottom:18px;
+}
+
+.tool-plus-wrap .soft-tool-list{
+  display:flex;
+  flex-direction:row;
+  flex-wrap:nowrap;
+  gap:9px;
+  width:100%;
+}
+
+.tool-plus-wrap .soft-tool-list > div{
+  flex:1 1 0;
+  width:auto;
   min-width:0;
+  height:72px;
 }
 
 /* 모바일 */
