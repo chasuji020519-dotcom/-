@@ -686,6 +686,16 @@ body.dark-mode .about-board-section{
     transform .35s ease;
 }
 
+.soft-tool-list > div:hover::before{
+  opacity:1;
+}
+
+.soft-tool-list > div:hover b{
+  opacity:0;
+  filter:blur(3px);
+  transform:scale(.9);
+}
+
 .soft-tool-list > div::after{
   content:attr(data-full);
 
