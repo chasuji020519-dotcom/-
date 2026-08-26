@@ -706,6 +706,27 @@ body.dark-mode .soft-tool-list > div{
   background:rgba(255,255,255,.07);
   border-color:rgba(255,255,255,.09);
 }
+.tool-plus-wrap{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.tool-plus-wrap .about-board-section{
+  grid-template-columns:170px 1fr;
+  min-width:0;
+}
+
+/* 모바일 */
+@media(max-width:768px){
+  .tool-plus-wrap{
+    grid-template-columns:1fr;
+  }
+
+  .tool-plus-wrap .about-board-section{
+    grid-template-columns:1fr;
+  }
+}
 
 /* responsive */
 @media(max-width:1100px){
