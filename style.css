@@ -605,12 +605,13 @@ body.dark-mode .about-board-section{
 }
 
 /* tools mini */
+/* tools mini */
 .soft-tool-list{
-  position:relative;
   display:flex;
   flex-wrap:wrap;
   gap:9px;
 }
+
 .soft-tool-list div{
   width:68px;
   height:68px;
@@ -631,11 +632,15 @@ body.dark-mode .about-board-section{
     0 8px 22px rgba(0,0,0,.045),
     inset 0 1px 1px rgba(255,255,255,.82);
 
-  transition:.35s var(--ease);
-
-  /* 글자가 길어져도 잘 보이게 */
   overflow:hidden;
   cursor:default;
+
+  transition:
+    width .4s var(--ease),
+    background .3s ease,
+    border-color .3s ease,
+    transform .3s var(--ease),
+    box-shadow .3s ease;
 }
 
 .soft-tool-list b{
@@ -643,11 +648,10 @@ body.dark-mode .about-board-section{
   line-height:1;
   font-weight:820;
   letter-spacing:-.04em;
-  transition:.2s ease;
+  transition:opacity .15s ease;
 }
 
-
-/* 마우스 올렸을 때 */
+/* hover */
 .soft-tool-list div:hover{
   width:130px;
   transform:translateY(-4px);
@@ -658,14 +662,10 @@ body.dark-mode .about-board-section{
   box-shadow:0 12px 28px rgba(0,0,0,.16);
 }
 
-
-/* 기존 약자 숨기기 */
 .soft-tool-list div:hover b{
   display:none;
 }
 
-
-/* 전체 프로그램명 표시 */
 .soft-tool-list div:hover::after{
   content:attr(data-full);
 
@@ -676,24 +676,20 @@ body.dark-mode .about-board-section{
   letter-spacing:-.02em;
 }
 
-.soft-tool-list b{
-  display:block;
-  font-size:17px;
-  line-height:1;
-  font-weight:820;
-  letter-spacing:-.04em;
+/* 다크모드 */
+body.dark-mode .soft-tool-list div{
+  background:rgba(255,255,255,.07);
+  border-color:rgba(255,255,255,.09);
 }
 
-.soft-tool-list span{
-  display:block;
-  margin-top:7px;
-  color:var(--sub);
-  font-size:7.5px;
-  line-height:1;
-  font-weight:850;
-  letter-spacing:.06em;
+body.dark-mode .soft-tool-list div:hover{
+  background:#f2f2f2;
+  border-color:#f2f2f2;
 }
 
+body.dark-mode .soft-tool-list div:hover::after{
+  color:#111;
+}
 /* responsive */
 @media(max-width:1100px){
   .about-editorial{
