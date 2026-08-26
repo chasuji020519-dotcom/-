@@ -686,20 +686,42 @@ body.dark-mode .about-board-section{
     transform .35s ease;
 }
 
-.soft-tool-list > div:hover::before{
-  opacity:1;
-}
-
 .soft-tool-list > div::after{
   content:attr(data-full);
-  white-space:pre-line;
+
+  position:absolute;
+  left:50%;
+  top:50%;
+  z-index:3;
+
+  width:calc(100% - 10px);
+
+  transform:translate(-50%, -40%);
+
+  color:#fff;
+  font-size:11px;
+  line-height:1.25;
+  font-weight:700;
+
+  /* 핵심 */
+  white-space:normal;
   text-align:center;
+  word-break:keep-all;
+  overflow-wrap:break-word;
+
+  opacity:0;
+  filter:blur(4px);
+
+  transition:
+    opacity .3s ease,
+    filter .3s ease,
+    transform .35s ease;
 }
 
 .soft-tool-list > div:hover::after{
   opacity:1;
   filter:blur(0);
-  transform:translate(-50%,-50%);
+  transform:translate(-50%, -50%);
 }
 
 body.dark-mode .soft-tool-list > div{
