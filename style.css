@@ -611,14 +611,12 @@ body.dark-mode .about-board-section{
   flex-wrap:wrap;
   gap:9px;
 }
-
 .soft-tool-list div{
   width:68px;
   height:68px;
   padding:9px 8px;
 
   display:flex;
-  flex-direction:column;
   align-items:center;
   justify-content:center;
 
@@ -633,109 +631,67 @@ body.dark-mode .about-board-section{
     0 8px 22px rgba(0,0,0,.045),
     inset 0 1px 1px rgba(255,255,255,.82);
 
-  transition:.32s var(--ease);
+  transition:.35s var(--ease);
+
+  /* 글자가 길어져도 잘 보이게 */
+  overflow:hidden;
+  cursor:default;
 }
 
+.soft-tool-list b{
+  font-size:17px;
+  line-height:1;
+  font-weight:820;
+  letter-spacing:-.04em;
+  transition:.2s ease;
+}
+
+
+/* 마우스 올렸을 때 */
 .soft-tool-list div:hover{
+  width:130px;
   transform:translateY(-4px);
-}.soft-tool-list div{
-  position:relative;
 
-  width:68px;
-  height:68px;
-  padding:9px 8px;
+  background:#191919;
+  border-color:#191919;
 
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-
-  background:rgba(255,255,255,.46);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-
-  border:1px solid rgba(255,255,255,.66);
-  border-radius:10px;
-
-  box-shadow:
-    0 8px 22px rgba(0,0,0,.045),
-    inset 0 1px 1px rgba(255,255,255,.82);
-
-  transition:.32s var(--ease);
+  box-shadow:0 12px 28px rgba(0,0,0,.16);
 }
 
 
-/* 툴 이름 */
-.soft-tool-list div::after{
-  content:attr(data-name);
+/* 기존 약자 숨기기 */
+.soft-tool-list div:hover b{
+  display:none;
+}
 
-  position:absolute;
-  left:50%;
-  bottom:-34px;
-  transform:translateX(-50%) translateY(-4px);
 
-  padding:6px 9px;
-  border-radius:7px;
+/* 전체 프로그램명 표시 */
+.soft-tool-list div:hover::after{
+  content:attr(data-full);
 
-  background:var(--text);
-  color:var(--bg);
-
-  font-size:10px;
+  color:#fff;
+  font-size:12px;
   font-weight:700;
   white-space:nowrap;
-
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-
-  transition:.25s var(--ease);
+  letter-spacing:-.02em;
 }
 
-
-/* 작은 화살표 */
-.soft-tool-list div::before{
-  content:"";
-
-  position:absolute;
-  left:50%;
-  bottom:-10px;
-
-  width:7px;
-  height:7px;
-
-  background:var(--text);
-
-  transform:
-    translateX(-50%)
-    translateY(-3px)
-    rotate(45deg);
-
-  opacity:0;
-  visibility:hidden;
-
-  transition:.25s var(--ease);
+.soft-tool-list b{
+  display:block;
+  font-size:17px;
+  line-height:1;
+  font-weight:820;
+  letter-spacing:-.04em;
 }
 
-
-.soft-tool-list div:hover{
-  transform:translateY(-4px);
-}
-
-
-.soft-tool-list div:hover::after,
-.soft-tool-list div:hover::before{
-  opacity:1;
-  visibility:visible;
-  transform:translateX(-50%) translateY(0);
-}
-
-
-/* 화살표는 회전 유지 */
-.soft-tool-list div:hover::before{
-  transform:
-    translateX(-50%)
-    translateY(0)
-    rotate(45deg);
+.soft-tool-list span{
+  display:block;
+  margin-top:7px;
+  color:var(--sub);
+  font-size:7.5px;
+  line-height:1;
+  font-weight:850;
+  letter-spacing:.06em;
 }
 
 /* responsive */
